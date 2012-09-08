@@ -21,6 +21,10 @@ int main(int argc, char* argv[]) {
 	else { // argc >= 3, se aplica a uno o mas archivos
 		opcion = check_param(argv[1]);
 		
+		//Se puede unificar esto con el manejo del stdin 
+		//hay que hacer la lectura por fread con el buffer variable
+		//pero despues hay que convertirlo todo a ints par evitar
+		//el error de "FFFFFF"
 			
 		
 		// verificar archivo, etc...
