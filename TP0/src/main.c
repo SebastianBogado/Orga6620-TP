@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define ERROR 	-1
 #define HELP	0
@@ -11,12 +12,17 @@ int check_param(char* param);
 int main(int argc, char* argv[]) {
 	int opcion;
 	
-	if (argc == 1 || argc > 3)
+	if (argc == 1 )
 		opcion = HELP;
-	else if (argc == 2)
+	else if (argc == 2){ //no se reciben archivos, leer stdin
 		opcion = check_param(argv[1]);
-	else { // argc == 3, se aplica a un archivo
+		printf("Leer buffer de stdin... @todo\n");
+	}
+	else { // argc >= 3, se aplica a uno o mas archivos
 		opcion = check_param(argv[1]);
+		
+			
+		
 		// verificar archivo, etc...
 	}
 	
@@ -32,9 +38,17 @@ int main(int argc, char* argv[]) {
 
 
 int check_param(char* param) {
-	printf("check_param(char* ) @todo\n");	
 
-	return HELP;
+	if (strcmp(param, "-q\n"))
+		return QUICK;
+	else 
+	if (strcmp(param, "-s\n"))
+		return STOOGE;
+	else
+	if (strcmp(param, "-v\n"))
+		return VERSION;
+	else
+		return HELP;
 }
 
 /** main de un TP que leía entradas "infinitas" de stdin
