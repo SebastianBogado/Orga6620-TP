@@ -8,13 +8,15 @@
 #define STOOGE	3
 
 int check_param(char* param);
+void print_help();
+void print_version();
 
 int main(int argc, char* argv[]) {
 	int opcion;
 	
 	if (argc == 1 )
 		opcion = HELP;
-	else if (argc == 2){ //no se reciben archivos, leer stdin
+	else if (argc == 2) { //no se reciben archivos, leer stdin
 		opcion = check_param(argv[1]);
 		printf("Leer buffer de stdin... @todo\n");
 	}
@@ -31,7 +33,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 	switch(opcion) {
-		case HELP: printf("Mostrar ayuda... @todo\n"); break;
+		case HELP: print_help(); break;
 		case VERSION: printf("Mostrar versión... @todo\n"); break;
 		case QUICK: printf("Ordenar con quicksort... @todo\n"); break;
 		case STOOGE: printf("Ordenar con stoogesort... @todo\n"); break;
@@ -43,18 +45,28 @@ int main(int argc, char* argv[]) {
 
 int check_param(char* param) {
 
-	if (strcmp(param, "-q\n"))
+	if (!strcmp(param, "-q") || !strcmp(param, "--quick"))
 		return QUICK;
 	else 
-	if (strcmp(param, "-s\n"))
+	if (!strcmp(param, "-s") || !strcmp(param, "--stooge"))
 		return STOOGE;
 	else
-	if (strcmp(param, "-v\n"))
+	// en el enunciado dice v mayúscula, importará?
+	if (!strcmp(param, "-v") || !strcmp(param, "--version"))
 		return VERSION;
 	else
 		return HELP;
 }
 
+void print_help() {
+	printf(
+	"tp0 [OPTIONS] [file...]\n"
+	"-h, --help\t""display this help and exit.\n"
+	"-v, --version\t""display version information and exit.\n"
+	"-q, --quick\t""use the quicksort algorithm.\n"
+	"-s, --stooge\t""use the stoogesort algorithm.\n"
+	);
+}
 /** main de un TP que leía entradas "infinitas" de stdin
 #include <string.h>
 #include <stdio.h>
