@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define ERROR 	-1
@@ -10,6 +11,10 @@
 int check_param(char* param);
 void print_help();
 void print_version();
+int** parseLineas(FILE* stream);
+unsigned int crearBuffer(char*buffer, FILE* stream);
+
+
 
 int main(int argc, char* argv[]) {
 	int opcion;
@@ -20,13 +25,26 @@ int main(int argc, char* argv[]) {
 	else if (argc == 2) { //no se reciben archivos, leer stdin
 		opcion = check_param(argv[1]);
 		inStream = stdin;
+
+		int** lineas = parseLineas(inStream);
+
+		printf("%d \n", (*lineas[0]));
 		printf("Leer buffer de stdin... @todo\n");
+
+		free (lineas[0]);
+		free (lineas);
 	}
 	else { // argc >= 3, se aplica a uno o mas archivos
 		opcion = check_param(argv[1]);
 		
-				
+	 	inStream = fopen(argv[2], "rb");
+					
+		int** lineas = parseLineas(inStream);
 
+		printf("%d \n", (*lineas[0]));
+	
+		free(lineas[0]);
+		free(lineas);	
 		//Se puede unificar esto con el manejo del stdin 
 		//hay que hacer la lectura por fread con el buffer variable
 		//pero despues hay que convertirlo todo a ints par evitar
@@ -82,51 +100,21 @@ void print_version() {
 
 int** parseLineas(FILE* stream){
 	
-	len_buffer = 128;
-	tam_buffer = len_buffer +1;
-	
 	char* buffer = NULL;
 
-	int* pLinea[]= NULL;
+	int** pLinea= NULL;
 	unsigned lineas = 0;
 	
-	// la siguiente variable cuenta la cantidad de veces que fue necesario
-	// realocar el buffer + 1 (entonces la capacidad es bufferInc*len_buffer+1)
-	unsigned int bufferInc;
-	unsigned int bufferCapac;
 	unsigned int bufferLen;
 
-	char* resultadoFGetS;
-
-	while (!feof(stream) {
-		bufferInc = 0;
+	while (!feof(stream)) {
 		lineas++;
 		
 		pLinea = (int**)realloc(pLinea, lineas*sizeof(int*));		
 		pLinea[lineas-1] = NULL;	
 
-		do {
-			bufferInc++;
-			bufferCapac = bufferInc*len_buffer + 1;
-			buffer = (char*)realloc(buffer, bufferCapac*sizeof(char));
-			// buffer + bufferCapac - (tam_buffer) pone al puntero en la
-			// posición inicial de la porción nueva de memoria
-			resultadoFGetS = fgets(buffer + bufferCapac - (tam_buffer),
-								   tam_buffer, stream);
-			bufferLen = strlen(buffer);
-			// Mientras que fgets no devuelva un puntero nulo y
-			// que el último char no sea un fin de línea, repetir
-		}while (resultadoFGetS &&
-				buffer[bufferLen-1] != '\n');
-
-		if (resultadoFGetS) {
-			// chomp, con la seguridad de que hay un '\n' en esa posición
-			buffer[bufferLen - 1] = '\0';
-			
-			//el buffer contiene una linea del stream de bufferLen bytes
-
-			pLinea[lineas-1] = (int*)realloc(pLinea[lineas-1], bufferLen);
-		}
+		bufferLen = crearBuffer(buffer, stream);
+		pLinea[lineas-1] = (int*)realloc(pLinea[lineas-1], bufferLen);
 	}
 
 	free(buffer);
@@ -136,7 +124,44 @@ int** parseLineas(FILE* stream){
 }
 
 
+unsigned crearBuffer(char* buffer, FILE* stream){
 
+	int len_buffer = 128;
+	int tam_buffer = len_buffer +1;
+	
+	buffer = NULL;
+
+	// la siguiente variable cuenta la cantidad de veces que fue necesario
+	// realocar el buffer + 1 (entonces la capacidad es bufferInc*len_buffer+1)
+	unsigned int bufferInc;
+	unsigned int bufferCapac;
+	unsigned int bufferLen;
+
+	char* resultadoFGetS;
+
+	bufferInc = 0;
+		
+	do {
+		bufferInc++;
+		bufferCapac = bufferInc*len_buffer + 1;
+		buffer = (char*)realloc(buffer, bufferCapac*sizeof(char));
+		// buffer + bufferCapac - (tam_buffer) pone al puntero en la
+		// posición inicial de la porción nueva de memoria
+		resultadoFGetS = fgets(buffer + bufferCapac - (tam_buffer),
+							   tam_buffer, stream);
+		bufferLen = strlen(buffer);
+		// Mientras que fgets no devuelva un puntero nulo y
+		// que el último char no sea un fin de línea, repetir
+	}while (resultadoFGetS &&
+			buffer[bufferLen-1] != '\n');
+
+	if (resultadoFGetS) {
+		// chomp, con la seguridad de que hay un '\n' en esa posición
+		buffer[bufferLen - 1] = '\0';
+	}
+	
+	return bufferLen;
+}
 
 
 /** main de un TP que leía entradas "infinitas" de stdin
