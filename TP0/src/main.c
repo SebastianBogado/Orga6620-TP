@@ -11,7 +11,7 @@
 int check_param(char* param);
 void print_help();
 void print_version();
-int** parseLineas(FILE* stream);
+char** parseLineas(FILE* stream);
 unsigned int crearBuffer(char*buffer, FILE* stream);
 
 
@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 		opcion = check_param(argv[1]);
 		inStream = stdin;
 
-		int** lineas = parseLineas(inStream);
+		char** lineas = parseLineas(inStream);
 
 		printf("%d \n", (*lineas[0]));
 		printf("Leer buffer de stdin... @todo\n");
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 		
 	 	inStream = fopen(argv[2], "rb");
 					
-		int** lineas = parseLineas(inStream);
+		char** lineas = parseLineas(inStream);
 
 		printf("%d \n", (*lineas[0]));
 	
@@ -98,11 +98,11 @@ void print_version() {
 }
 
 
-int** parseLineas(FILE* stream){
+char** parseLineas(FILE* stream){
 	
 	char* buffer = NULL;
 
-	int** pLinea= NULL;
+	char** pLinea= NULL;
 	unsigned lineas = 0;
 	
 	unsigned int bufferLen;
@@ -110,11 +110,23 @@ int** parseLineas(FILE* stream){
 	while (!feof(stream)) {
 		lineas++;
 		
-		pLinea = (int**)realloc(pLinea, lineas*sizeof(int*));		
+		pLinea = (char**)realloc(pLinea, lineas * sizeof(char*));		
 		pLinea[lineas-1] = NULL;	
 
 		bufferLen = crearBuffer(buffer, stream);
-		pLinea[lineas-1] = (int*)realloc(pLinea[lineas-1], bufferLen);
+		pLinea[lineas-1] = (char*)realloc(pLinea[lineas-1], bufferLen);
+
+		//memcpy(pLinea[lineas-1], buffer, bufferLen-1);
+
+puts("lineas");
+printf("%d \n",lineas);
+puts("bufferLen");
+printf("%d \n", bufferLen);
+
+printf("Linea %d \n",lineas-1);
+puts(pLinea[lineas-1]);
+
+
 	}
 
 	free(buffer);
@@ -159,7 +171,10 @@ unsigned crearBuffer(char* buffer, FILE* stream){
 		// chomp, con la seguridad de que hay un '\n' en esa posición
 		buffer[bufferLen - 1] = '\0';
 	}
+
 	
+puts("buffer\n");
+puts(buffer);	
 	return bufferLen;
 }
 
