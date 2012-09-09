@@ -13,13 +13,13 @@ void print_version();
 
 int main(int argc, char* argv[]) {
 	int opcion;
-	FILE* fd;
+//	FILE* fd;
 	
 	if (argc == 1 )
 		opcion = HELP;
 	else if (argc == 2) { //no se reciben archivos, leer stdin
 		opcion = check_param(argv[1]);
-		fd = stdin;
+//		fd = stdin;
 		printf("Leer buffer de stdin... @todo\n");
 	}
 	else { // argc >= 3, se aplica a uno o mas archivos
