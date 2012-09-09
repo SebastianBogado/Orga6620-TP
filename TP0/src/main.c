@@ -45,7 +45,7 @@ int check_param(char* param) {
 #include "./BaseDeDatos.h"
 
 #define LEN_BUFFER 128
-#define TAM_BUFFER LEN_BUFFER+1
+#define TAM_BUFFER (LEN_BUFFER+1)
 
 int main(int argc, char* argv[]) {
 	if (argc > 1)
@@ -65,9 +65,9 @@ int main(int argc, char* argv[]) {
 			bufferInc++;
 			bufferCapac = bufferInc*LEN_BUFFER + 1;
 			buffer = (char*)realloc(buffer, bufferCapac*sizeof(char));
-			// buffer + bufferCapac - (TAM_BUFFER) pone al puntero en la
+			// buffer + bufferCapac - TAM_BUFFER pone al puntero en la
 			// posición inicial de la porción nueva de memoria
-			resultadoFGetS = fgets(buffer + bufferCapac - (TAM_BUFFER),
+			resultadoFGetS = fgets(buffer + bufferCapac - TAM_BUFFER,
 								   TAM_BUFFER, stdin);
 			bufferLen = strlen(buffer);
 			// Mientras que fgets no devuelva un puntero nulo y
