@@ -12,7 +12,7 @@ int check_param(char* param);
 void print_help();
 void print_version();
 char** parseLineas(FILE* stream);
-unsigned int crearBuffer(char*buffer, FILE* stream);
+unsigned int crearBuffer(char** buffer, FILE* stream);
 
 
 
@@ -28,11 +28,11 @@ int main(int argc, char* argv[]) {
 
 		char** lineas = parseLineas(inStream);
 
-		printf("%d \n", (*lineas[0]));
-		printf("Leer buffer de stdin... @todo\n");
+printf("%s",lineas[0]);
+printf("Leer buffer de stdin... @todo\n");
 
-		free (lineas[0]);
-		free (lineas);
+free (lineas[0]);
+free (lineas);
 	}
 	else { // argc >= 3, se aplica a uno o mas archivos
 		opcion = check_param(argv[1]);
@@ -41,19 +41,10 @@ int main(int argc, char* argv[]) {
 					
 		char** lineas = parseLineas(inStream);
 
-		printf("%d \n", (*lineas[0]));
+printf("%s",lineas[0]);
 	
-		free(lineas[0]);
-		free(lineas);	
-		//Se puede unificar esto con el manejo del stdin 
-		//hay que hacer la lectura por fread con el buffer variable
-		//pero despues hay que convertirlo todo a ints par evitar
-		//el error de "FFFFFF"
-
-		// Para unificar, podemos usar una variable FILE* que apunte al 
-		// file descriptor siendo ordenado (tanto stdin como archivos físicos)
-			
-		
+free(lineas[0]);
+free(lineas);	
 		// verificar archivos, etc...
 	}
 	
@@ -113,22 +104,12 @@ char** parseLineas(FILE* stream){
 		pLinea = (char**)realloc(pLinea, lineas * sizeof(char*));		
 		pLinea[lineas-1] = NULL;	
 
-		bufferLen = crearBuffer(buffer, stream);
+		bufferLen = crearBuffer(&buffer, stream);
 		pLinea[lineas-1] = (char*)realloc(pLinea[lineas-1], bufferLen);
 
-		//memcpy(pLinea[lineas-1], buffer, bufferLen-1);
-
-puts("lineas");
-printf("%d \n",lineas);
-puts("bufferLen");
-printf("%d \n", bufferLen);
-
-printf("Linea %d \n",lineas-1);
-puts(pLinea[lineas-1]);
-
+		memcpy(pLinea[lineas-1], buffer, bufferLen);
 
 	}
-
 	free(buffer);
 
 	return pLinea; 
@@ -136,12 +117,11 @@ puts(pLinea[lineas-1]);
 }
 
 
-unsigned crearBuffer(char* buffer, FILE* stream){
+unsigned crearBuffer(char** buffer, FILE* stream){
 
 	int len_buffer = 128;
 	int tam_buffer = len_buffer +1;
 	
-	buffer = NULL;
 
 	// la siguiente variable cuenta la cantidad de veces que fue necesario
 	// realocar el buffer + 1 (entonces la capacidad es bufferInc*len_buffer+1)
@@ -156,25 +136,26 @@ unsigned crearBuffer(char* buffer, FILE* stream){
 	do {
 		bufferInc++;
 		bufferCapac = bufferInc*len_buffer + 1;
-		buffer = (char*)realloc(buffer, bufferCapac*sizeof(char));
+		(*buffer) = (char*)realloc((*buffer), bufferCapac*sizeof(char));
 		// buffer + bufferCapac - (tam_buffer) pone al puntero en la
 		// posición inicial de la porción nueva de memoria
-		resultadoFGetS = fgets(buffer + bufferCapac - (tam_buffer),
-							   tam_buffer, stream);
-		bufferLen = strlen(buffer);
+		resultadoFGetS = fgets((*buffer) + bufferCapac - (tam_buffer),
+							  tam_buffer, stream);
+		bufferLen = strlen(*buffer);
 		// Mientras que fgets no devuelva un puntero nulo y
 		// que el último char no sea un fin de línea, repetir
 	}while (resultadoFGetS &&
-			buffer[bufferLen-1] != '\n');
+			(*buffer)[bufferLen-1] != '\n');
 
 	if (resultadoFGetS) {
+	
+//Comentado el \0 porque tiraba segFault
+
 		// chomp, con la seguridad de que hay un '\n' en esa posición
-		buffer[bufferLen - 1] = '\0';
+		//buffer[bufferLen - 1] = '\0';
 	}
 
 	
-puts("buffer\n");
-puts(buffer);	
 	return bufferLen;
 }
 
