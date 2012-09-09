@@ -13,11 +13,13 @@ void print_version();
 
 int main(int argc, char* argv[]) {
 	int opcion;
+	FILE* fd;
 	
 	if (argc == 1 )
 		opcion = HELP;
 	else if (argc == 2) { //no se reciben archivos, leer stdin
 		opcion = check_param(argv[1]);
+		fd = stdin;
 		printf("Leer buffer de stdin... @todo\n");
 	}
 	else { // argc >= 3, se aplica a uno o mas archivos
@@ -27,16 +29,19 @@ int main(int argc, char* argv[]) {
 		//hay que hacer la lectura por fread con el buffer variable
 		//pero despues hay que convertirlo todo a ints par evitar
 		//el error de "FFFFFF"
+
+		// Para unificar, podemos usar una variable FILE* que apunte al 
+		// file descriptor siendo ordenado (tanto stdin como archivos físicos)
 			
 		
-		// verificar archivo, etc...
+		// verificar archivos, etc...
 	}
 	
 	switch(opcion) {
-		case HELP: print_help(); break;
-		case VERSION: printf("Mostrar versión... @todo\n"); break;
-		case QUICK: printf("Ordenar con quicksort... @todo\n"); break;
-		case STOOGE: printf("Ordenar con stoogesort... @todo\n"); break;
+		case HELP:		print_help(); break;
+		case VERSION:	print_version(); break;
+		case QUICK: 	printf("Ordenar con quicksort... @todo\n"); break;
+		case STOOGE: 	printf("Ordenar con stoogesort... @todo\n"); break;
 		default: break;		
 	}
 	return 0;
@@ -67,6 +72,11 @@ void print_help() {
 	"-s, --stooge\t""use the stoogesort algorithm.\n"
 	);
 }
+
+void print_version() {
+	printf("Mostrar versión... @todo\n");
+}
+
 /** main de un TP que leía entradas "infinitas" de stdin
 #include <string.h>
 #include <stdio.h>
