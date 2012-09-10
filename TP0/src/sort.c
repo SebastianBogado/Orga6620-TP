@@ -2,10 +2,10 @@
 #include <stdio.h>
 
 static void sort_file(FILE* inStream, char** (*sort_func)(char**, unsigned )) {	
-	printf("Armando buffer... @todo");
-	printf("Ordenando... @todo");
-	printf("Imprimiendo salida... @todo");
-	printf("Liberando memoria del buffer... @todo");
+	printf("Armando buffer... @todo\n");
+	printf("Ordenando... @todo\n");
+	printf("Imprimiendo salida... @todo\n");
+	printf("Liberando memoria del buffer... @todo\n");
 }
 
 void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
