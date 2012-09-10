@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "./sort.h"
+#include "./quicksort.h"
+#include "./stoogesort.h"
+
 
 #define ERROR 	-1
 #define HELP	0
@@ -18,13 +22,13 @@ unsigned int crearBuffer(char*buffer, FILE* stream);
 
 int main(int argc, char* argv[]) {
 	int opcion;
-	FILE* inStream;
 	
 	if (argc == 1 )
 		opcion = HELP;
-	else if (argc == 2) { //no se reciben archivos, leer stdin
+	else 
 		opcion = check_param(argv[1]);
-		inStream = stdin;
+/*	
+	inStream = stdin;
 
 		char** lineas = parseLineas(inStream);
 
@@ -56,12 +60,12 @@ int main(int argc, char* argv[]) {
 		
 		// verificar archivos, etc...
 	}
-	
+*/	
 	switch(opcion) {
-		case HELP:	print_help(); break;
+		case HELP:		print_help(); break;
 		case VERSION:	print_version(); break;
-		case QUICK: 	printf("Ordenar con quicksort... @todo\n"); break;
-		case STOOGE: 	printf("Ordenar con stoogesort... @todo\n"); break;
+		case QUICK: 	sort(argc - 2, argv + 2, quicksort); break;
+		case STOOGE: 	sort(argc - 2, argv + 2, stoogesort); break;
 		default: break;		
 	}
 	return 0;
