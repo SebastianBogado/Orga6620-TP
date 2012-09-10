@@ -55,8 +55,8 @@ free(lineas);
 	switch(opcion) {
 		case HELP:		print_help(); break;
 		case VERSION:	print_version(); break;
-		case QUICK: 	sort(argc - 2, argv + 2, quicksort); break;
-		case STOOGE: 	sort(argc - 2, argv + 2, stoogesort); break;
+		case QUICK: 	sort(argc - 2, argv + 2, quick_sort); break;
+		case STOOGE: 	sort(argc - 2, argv + 2, stooge_sort); break;
 		default: break;		
 	}
 	return 0;

@@ -8,6 +8,6 @@
 * @return el vector ordenado, NULL en caso de error. 
 */
 
-char** quicksort (char** array, unsigned size);
+char** quick_sort (char** array, unsigned size);
 
 #endif // __QUICK_SORT_H__

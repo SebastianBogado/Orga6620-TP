@@ -1,4 +1,5 @@
 #include "./sort.h"
+#include <stdio.h>
 
 static void sort_file(FILE* inStream, char** (*sort_func)(char**, unsigned )) {	
 	printf("Armando buffer... @todo");
