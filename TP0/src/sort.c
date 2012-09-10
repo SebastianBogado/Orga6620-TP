@@ -17,7 +17,7 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 				sort_file(inStream, sort_func);
 				fclose(inStream);
 			} else
-				printf("error %s @todo completar con perror\n", files[i]);
+				perror(files[i]);
 		}
 	} else
 		sort_file(stdin, sort_func);
