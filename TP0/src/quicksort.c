@@ -28,7 +28,7 @@ int particionar (char** array, int izq, int der, int pivotIndex){
 	return prevIndex;
 }
 
-char** quickSort_r (char** array, unsigned izq, unsigned der){
+char** quickSort_r (char** array, int izq, int der){
 
 	if(array && (izq<der)){
 		int pivot = (izq + der)/2;
