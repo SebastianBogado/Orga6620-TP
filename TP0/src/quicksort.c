@@ -1,22 +1,25 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
-void swap(int* array, int a, int b){
-	int aux = array[a]; 
+void swap(char** array, int a, int b){
+	char* aux = array[a]; 
 	array[a] = array[b];
 	array[b] = aux;
 
 }
 
 
-int particionar (int* array, int izq, int der, int pivotIndex){
+int particionar (char** array, int izq, int der, int pivotIndex){
 
-	int pivot = array[pivotIndex];
+	char* pivot = array[pivotIndex];
 	int prevIndex = izq; 
 	swap(array, pivotIndex, der);
 	int i = 0;
+
 	for(i = izq; i<der; i++){
-		if(array[i] < pivot){
+
+		if(strcmp(array[i] ,pivot) < 0){
 			swap(array, i, prevIndex);
 			prevIndex ++;
 		}
@@ -25,16 +28,21 @@ int particionar (int* array, int izq, int der, int pivotIndex){
 	return prevIndex;
 }
 
-int quickSort (int* array, unsigned izq, unsigned der){
+char** quickSort_r (char** array, unsigned izq, unsigned der){
 
 	if(array && (izq<der)){
 		int pivot = (izq + der)/2;
 		int nuevoPivot = particionar(array, izq, der, pivot);
 		
-		quickSort(array, izq, nuevoPivot -1);
-		quickSort(array, nuevoPivot +1, der);
+		quickSort_r(array, izq, nuevoPivot -1);
+		quickSort_r(array, nuevoPivot +1, der);
 		
-		return 0;	
+		return array;	
 	}
-	return -1;
+	return NULL;
 }	
+
+char** quick_sort(char** array, unsigned size){
+
+	return quickSort_r(array, 0, size-1);
+}
