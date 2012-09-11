@@ -5,7 +5,6 @@
 #include "./quicksort.h"
 #include "./stoogesort.h"
 
-#define ERROR 	-1
 #define HELP	0
 #define VERSION	1
 #define QUICK	2
@@ -44,8 +43,7 @@ int check_param(char* param) {
 	if (!strcmp(param, "-s") || !strcmp(param, "--stooge"))
 		return STOOGE;
 	else
-	// en el enunciado dice v mayúscula, importará?
-	if (!strcmp(param, "-v") || !strcmp(param, "--version"))
+	if (!strcmp(param, "-V") || !strcmp(param, "--version"))
 		return VERSION;
 	else
 		return HELP;
@@ -55,7 +53,7 @@ void print_help() {
 	printf(
 	"tp0 [OPTIONS] [file...]\n"
 	"-h, --help\t""display this help and exit.\n"
-	"-v, --version\t""display version information and exit.\n"
+	"-V, --version\t""display version information and exit.\n"
 	"-q, --quick\t""use the quicksort algorithm.\n"
 	"-s, --stooge\t""use the stoogesort algorithm.\n"
 	);

@@ -1,5 +1,3 @@
-# Ale, agregá los fuentes o targets que necesites
-
 CFLAGS=-std=c99 -Werror -Wall
 SOURCES=stoogesort.c quicksort.c sort.c parseManager.c
 
