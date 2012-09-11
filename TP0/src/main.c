@@ -24,9 +24,9 @@ int main(int argc, char* argv[]) {
 		opcion = check_param(argv[1]);
 	
 	switch(opcion) {
-		case HELP:		print_help(); break;
+		case HELP:	print_help(); break;
 		case VERSION:	print_version(); break;
-		case QUICK:		sort(argc - 2, argv + 2, quick_sort); break;
+		case QUICK:	sort(argc - 2, argv + 2, quick_sort); break;
 		case STOOGE: 	sort(argc - 2, argv + 2, stooge_sort); break;
 		default: break;		
 	}
@@ -60,58 +60,9 @@ void print_help() {
 }
 
 void print_version() {
-	printf("Mostrar versión... @todo\n");
+	printf("Organizacion de Computadoras [6620] - TP0 \n");	
+	printf("Version: 1.0");
+	printf("Alumnos: Bogado, Sebastian \n");
+	printf("         Garcia Marra, Alejandro\n");
 }
 
-
-
-/** main de un TP que leía entradas "infinitas" de stdin
-#include <string.h>
-#include <stdio.h>
-#include <malloc.h>
-#include "./Parser.h"
-#include "./BaseDeDatos.h"
-
-#define LEN_BUFFER 128
-#define TAM_BUFFER (LEN_BUFFER+1)
-
-int main(int argc, char* argv[]) {
-	if (argc > 1)
-		return 1;
-
-	char* buffer = NULL;
-	// la siguiente variable cuenta la cantidad de veces que fue necesario
-	// realocar el buffer + 1 (entonces la capacidad es bufferInc*LEN_BUFFER+1)
-	unsigned int bufferInc;
-	unsigned int bufferCapac;
-	unsigned int bufferLen;
-	char* resultadoFGetS;
-
-	while (!feof(stdin)) {
-		bufferInc = 0;
-		do {
-			bufferInc++;
-			bufferCapac = bufferInc*LEN_BUFFER + 1;
-			buffer = (char*)realloc(buffer, bufferCapac*sizeof(char));
-			// buffer + bufferCapac - TAM_BUFFER pone al puntero en la
-			// posición inicial de la porción nueva de memoria
-			resultadoFGetS = fgets(buffer + bufferCapac - TAM_BUFFER,
-								   TAM_BUFFER, stdin);
-			bufferLen = strlen(buffer);
-			// Mientras que fgets no devuelva un puntero nulo y
-			// que el último char no sea un fin de línea, repetir
-		}while (resultadoFGetS &&
-				buffer[bufferLen-1] != '\n');
-
-		if (resultadoFGetS) {
-			// chomp, con la seguridad de que hay un '\n' en esa posición
-			buffer[bufferLen - 1] = '\0';
-			parsear(buffer, bufferLen-1);
-		}
-	}
-
-	free(buffer);
-	eliminarBaseDeDatos();
-	return 0;
-}
-*/
