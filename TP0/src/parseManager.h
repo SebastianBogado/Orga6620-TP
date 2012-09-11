@@ -15,8 +15,6 @@
  */
 unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream);
 
-unsigned cargarBuffer(char* *buffer, FILE* stream);
-
 
 #endif // __PARSE_MANAGER_H___
 

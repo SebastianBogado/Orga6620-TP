@@ -7,5 +7,11 @@ all:
 	$(CC) $(CFLAGS) main.c $(SOURCES) -o tp0
 test:
 	$(CC) $(CFLAGS) test.c $(SOURCES) -o test
+debug:
+	$(CC) $(CFLAGS) -g main.c $(SOURCES) -o tp0
+asm:
+	$(CC) $(CFLAGS) -S main.c $(SOURCES)	
+gprof:
+	$(CC) $(CFLAGS) -pg main.c $(SOURCES) -o tp0
 clean:
-	rm *.o tp0 test
+	rm *.s *.o tp0 test

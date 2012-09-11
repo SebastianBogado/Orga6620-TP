@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 	switch(opcion) {
 		case HELP:		print_help(); break;
 		case VERSION:	print_version(); break;
-		case QUICK: sort(argc - 2, argv + 2, quick_sort); break;
+		case QUICK:		sort(argc - 2, argv + 2, quick_sort); break;
 		case STOOGE: 	sort(argc - 2, argv + 2, stooge_sort); break;
 		default: break;		
 	}
