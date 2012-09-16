@@ -5,18 +5,11 @@
 void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 	char** pLinea = NULL;
 	unsigned lineas = 0;
-	unsigned int size = 0;
 
-	
 	if (n) {
 		FILE* inStream;
 		for (unsigned i = 0; i < n; ++i) {
 			inStream = fopen(files[i], "rb");
-			
-	
-			fseek(inStream, 0, SEEK_END);
-			size=ftell(inStream);
-			fseek(inStream, 0, SEEK_SET);	
 			
 			if (inStream) {
 				lineas =+ parseLineas(&pLinea, lineas, inStream);
