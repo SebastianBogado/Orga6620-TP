@@ -12,16 +12,19 @@ unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
 	unsigned int bufferLen;
 
 	while (!feof(stream)) {
+printf("--- Línea %d\n", lineas); 
 		lineas++;
 		
 		(*pLinea) = (char**)realloc((*pLinea), lineas * sizeof(char*));		
 		(*pLinea)[lineas-1] = NULL;	
-
 		bufferLen = cargarBuffer(&buffer, stream);
 		(*pLinea)[lineas-1] = (char*)realloc((*pLinea)[lineas-1], bufferLen);
+printf("bufferLen = %d\n", bufferLen);
+	
+printf("Buffer: %s", buffer);
+		strcpy((*pLinea)[lineas-1], buffer);
 
-		memcpy((*pLinea)[lineas-1], buffer, bufferLen);
-
+printf("Línea:  %s", (*pLinea)[lineas-1]);
 	}
 	free(buffer);
 
@@ -32,8 +35,8 @@ unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
 
 unsigned cargarBuffer(char* *buffer, FILE* stream){
 
-	int len_buffer = 128;
-	int tam_buffer = len_buffer +1;
+	const int len_buffer = 1024;
+	const int tam_buffer = len_buffer +1;
 	
 
 	// la siguiente variable cuenta la cantidad de veces que fue necesario
@@ -57,6 +60,7 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 		resultadoFGetS = fgets((*buffer) + bufferCapac - (tam_buffer),
 							  tam_buffer, stream);
 		bufferLen = strlen(*buffer);
+printf("fgets return = %d, bufferLen = %d\n", (int)resultadoFGetS, bufferLen);
 		// Mientras que fgets no devuelva un puntero nulo y
 		// que el último char no sea un fin de línea, repetir
 	}while (resultadoFGetS &&

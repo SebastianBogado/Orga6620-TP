@@ -18,13 +18,15 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 		}
 	} else
 		lineas =+ parseLineas(&pLinea, lineas, stdin);
-
+/*	for (int i = 0; i < lineas; ++i)
+		printf("%s", pLinea[i]);
+	
 	pLinea = sort_func(pLinea, lineas);
 
 //print salida
 	for (int i = 0; i < lineas; ++i)
 		printf("%s", pLinea[i]);
-	
+*/	
 // liberación
 
 	for (int i = 0; i < lineas; ++i)
