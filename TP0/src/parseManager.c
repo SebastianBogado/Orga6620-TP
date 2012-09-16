@@ -10,7 +10,7 @@ unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
 	char* buffer = NULL;
 
 	unsigned int bufferLen;
-
+	
 	while (!feof(stream)) {
 printf("--- Línea %d\n", lineas); 
 		lineas++;
@@ -49,6 +49,11 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 
 	bufferInc = 0;
 		
+/* Si el último caracter es un '\n', el fgets no setea el EOF en el archivo,
+porque leyó hasta ahí, pero todavía no encontró el final.
+Entonces, se llama una vez más a este loop, haciendo que lea una línea de más.
+Se verifica que no hay nada para leer porque el puntero que retorna fgets es NULL
+*/
 	do {
 		bufferInc++;
 		bufferCapac = bufferInc*len_buffer + 1;
