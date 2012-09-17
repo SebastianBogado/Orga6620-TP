@@ -13,19 +13,20 @@ unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
 	
 	while (!feof(stream)) {
 //printf("--- Línea %d\n", lineas); 
-		lineas++;
-		
 		bufferLen = cargarBuffer(&buffer, stream);
 
-		(*pLinea) = (char**)realloc((*pLinea), lineas * sizeof(char*));		
-		(*pLinea)[lineas-1] = NULL;	
-		(*pLinea)[lineas-1] = (char*)realloc((*pLinea)[lineas-1], bufferLen+1);
+		if (bufferLen) {
+			++lineas;
+			(*pLinea) = (char**)realloc((*pLinea), lineas * sizeof(char*));		
+			(*pLinea)[lineas-1] = NULL;	
+			(*pLinea)[lineas-1] = (char*)realloc((*pLinea)[lineas-1], bufferLen+1);
 //printf("bufferLen = %d\n", bufferLen);
 	
 //printf("Buffer: %s", buffer);
-		strcpy((*pLinea)[lineas-1], buffer);
+			strcpy((*pLinea)[lineas-1], buffer);
 
 //printf("Línea:  %s", (*pLinea)[lineas-1]);
+		}
 	}
 	free(buffer);
 
@@ -49,11 +50,6 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 
 	bufferInc = 0;
 		
-/* Si el último caracter es un '\n', el fgets no setea el EOF en el archivo,
-porque leyó hasta ahí, pero todavía no encontró el final.
-Entonces, se llama una vez más a este loop, haciendo que lea una línea de más.
-Se verifica que no hay nada para leer porque el puntero que retorna fgets es NULL
-*/
 	do {
 		bufferInc++;
 		bufferCapac = bufferInc*len_buffer + 1;
@@ -71,6 +67,9 @@ Se verifica que no hay nada para leer porque el puntero que retorna fgets es NUL
 	
 	}while (resultadoFGetS &&
 			((*buffer)[bufferLen-1] != '\n'));
+
+	if (!resultadoFGetS)
+		bufferLen = 0;
 
 	return bufferLen;
 }
