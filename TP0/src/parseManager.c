@@ -8,13 +8,17 @@ unsigned cargarBuffer(char* *buffer, FILE* stream);
 unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
 	
 	char* buffer = NULL;
-
+	int quedanLineas;
 	unsigned int bufferLen;
 
 	while (!feof(stream)) {
-		bufferLen = cargarBuffer(&buffer, stream);
+		quedanLineas = cargarBuffer(&buffer, stream);
 
-		if (bufferLen) {
+		//Si no quedan mas lineas, y la ultima leída es valida, la escribe
+		if (quedanLineas ||
+		    (strcmp(buffer, (*pLinea)[lineas-1]) != 0)) {
+			
+			bufferLen = strlen(buffer);
 			++lineas;
 			(*pLinea) = (char**)realloc((*pLinea), lineas * sizeof(char*));		
 			(*pLinea)[lineas-1] = NULL;	
@@ -25,12 +29,7 @@ unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
 	}
 	free(buffer);
 	
-	
-//PARCHE para la lectura extra al final del archivo
-
-
 	return lineas; 
-
 }
 
 
@@ -66,7 +65,7 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 
 	if (!resultadoFGetS)
 		bufferLen = 0;
-
+		
 	return bufferLen;
 }
 
