@@ -5,11 +5,12 @@
 void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 	char** pLinea = NULL;
 	unsigned lineas = 0;
-	
+
 	if (n) {
 		FILE* inStream;
 		for (unsigned i = 0; i < n; ++i) {
 			inStream = fopen(files[i], "rb");
+			
 			if (inStream) {
 				lineas =+ parseLineas(&pLinea, lineas, inStream);
 				fclose(inStream);
@@ -18,7 +19,7 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 		}
 	} else
 		lineas =+ parseLineas(&pLinea, lineas, stdin);
-
+	
 	pLinea = sort_func(pLinea, lineas);
 
 //print salida
@@ -31,5 +32,7 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 		free(pLinea[i]);
 
 	free(pLinea);
+
+//	printf("%d", size);
 	
 }
