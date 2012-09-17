@@ -39,7 +39,7 @@ char** quickSort_r (char** array, int izq, int der){
 		
 		return array;	
 	}
-	return NULL;
+	return array;
 }	
 
 char** quick_sort(char** array, unsigned size){
