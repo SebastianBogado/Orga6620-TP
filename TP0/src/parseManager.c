@@ -72,9 +72,11 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 	if (!resultadoFGetS){
 		// si el archivo no termina con un salto de linea
 		// se lo agrega para normalizar todas las lineas
-		if((*buffer)[bufferLen-1] != '\n')
-			(*buffer)[bufferLen-1] = '\n';
-
+		if((*buffer)[bufferLen-1] != '\n'){
+			(*buffer)[bufferLen] = '\n';
+			
+			(*buffer)[bufferLen+1] = '\0';
+		}
 		//Indica fin del archivo, no hay mas lineas
 		bufferLen = 0;
 	}
