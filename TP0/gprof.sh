@@ -1,5 +1,5 @@
 cd src
 make gprof
-echo "Compilado para gprof"
-echo "@todo medir con gprof la muestra más conveniente"
+./tp0 -q tests/16kb_rand.test
+gprof ./tp0 -q tests/16kb_rand.test > qsort_.out
 
