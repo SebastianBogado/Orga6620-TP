@@ -19,7 +19,7 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 		}
 	} else
 		lineas =+ parseLineas(&pLinea, lineas, stdin);
-	
+
 	pLinea = sort_func(pLinea, lineas);
 
 //print salida
@@ -32,7 +32,5 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 		free(pLinea[i]);
 
 	free(pLinea);
-
-//	printf("%d", size);
 	
 }
