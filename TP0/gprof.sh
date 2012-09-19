@@ -1,5 +1,5 @@
 cd src
 make gprof
-./tp0 -q tests/16kb_rand.test
-gprof tp0 > qsort_gprof.out
+./tp0 -s tests/1mb.txt
+gprof tp0 > ssort_gprof.out
 

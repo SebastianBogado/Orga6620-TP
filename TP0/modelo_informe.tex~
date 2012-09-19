@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definición del tipo de documento.                                           %
+% Posibles tipos de papel: a4paper, letterpaper, legalpapper                  %
+% Posibles tamaños de letra: 10pt, 11pt, 12pt                                 %
+% Posibles clases de documentos: article, report, book, slides                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,10pt]{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Los paquetes permiten ampliar las capacidades de LaTeX.                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Paquete para inclusión de gráficos.
+\usepackage{graphicx}
+
+% Paquete para definir la codificación del conjunto de caracteres usado
+% (latin1 es ISO 8859-1).
+\usepackage[latin1]{inputenc}
+
+% Paquete para definir el idioma usado.
+\usepackage[spanish]{babel}
+
+\usepackage{multirow} 
+
+%\usepackage{multicolumn} 
+
+% Título principal del documento.
+\title{		\textbf{Un Modelo de Referencia para la Generación de Informes}}
+
+% Información sobre los autores.
+\author{	Alejandro García Marra, \textit{Padrón Nro. 91.516}                     \\
+            \texttt{ alemarra@gmail.com }                                              \\
+            Sebastián Javier Bogado, \textit{Padrón Nro. 91.707}                     \\
+            \texttt{ sebastian.j.bogado@gmail.com }                                              \\
+            \normalsize{Grupo Nro. 0 - 2do. Cuatrimestre de 2012}                       \\
+            \normalsize{66.20 Organización de Computadoras}                             \\
+            \normalsize{Facultad de Ingeniería, Universidad de Buenos Aires}            \\
+       }
+\date{}
+
+
+
+\begin{document}
+
+% Inserta el título.
+\maketitle
+
+% Quita el número en la primer página.
+\thispagestyle{empty}
+
+% Resumen
+\begin{abstract}
+
+El presente trabajo busca crear un programa que permita el ordenamiento de archivos a través de dos implementaciones distinta, una utilizando el algoritmo Quicksort y la otra el algoritmo Stooge sort.\\
+Sobre este programa, luego, se realizarán una serie de mediciones con el fin de determinar los desempeños relativos de cada implementación y las posibles mejoras a realizar. 
+Para esto haremos uso de los programas \bf{time} y \bf{gprof}.
+
+\end{abstract}
+
+
+\section{Introducción}
+
+Este artículo es un modelo que proporciona a los alumnos las instrucciones necesarias para preparar sus informes para la asignatura \textit{66.20 Organización de Computadoras}.
+Además de la estructura presentada, el informe podría contener otras secciones y subsecciones, a continuación de la introducción. 
+Podrá  incluir (se recomienda) gráficos ilustrativos y/o tablas. 
+El informe finaliza con una sección de conclusiones, y las citas bibliográficas consultadas siguiendo, rigurosamente, el formato presentado al final de este modelo.
+También se recomienda respectar el estilo tipográfico mostrado aquí (fuente Times Roman de 10 puntos, u otras similares)
+
+
+\section{Este es el Título de una Sección}
+
+En la tabla~\ref{tab001} se muestra un ejemplo de cómo se insertan las mismas en un documento \TeX{} / \LaTeX{}.
+
+% Inclusión de una tabla de 3x3.
+\begin{table}[!htp]
+\begin{center}
+\begin{tabular}{cc|c|c|c|c|c|c|} 
+\cline{3-8}
+& & \multicolumn{3}{ c|}{Quicksort} & \multicolumn{3}{c|}{Stooge sort}\\ \cline{3-8}
+&   & Ordenado & Invertido & Aleatorio & Ordenado & Invertido & Aleatorio \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{1kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{8kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.02 & 0.02 & 0.01 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.01 & 0.01 & 0.01 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{16kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.00 & 0.02 & 0.02 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.00 & 0.01 & 0.02 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{32kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.17 & 0.17 & 0.17 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.17 & 0.17 & 0.17 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{64kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 1.44 & 1.44 & 1.44 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 1.44 & 1.43 & 1.44 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{1024kb}} &
+\multicolumn{1}{|c|}{real} & 0.04 & 0.03 &0.03 & $>$600 & $>$600 & $>$600 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.03 & 0.02 &0.03 & - & - & - \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & - & - & - \\ \cline{1-8}
+\end{tabular}
+\caption{Resultados comando Time } \label{tab001}
+\end{center}
+\end{table}
+
+\subsection{Este es el Título de una Subsección}
+
+Texto de la subsección...
+
+
+\section{Este es el Título de Otra Sección}
+
+Texto de la otra sección. En la figura~\ref{fig001} se muestra un ejemplo de cómo presentar las ilustraciones del informe.
+
+% Inclusión de una imagen en formato EPS (Encapsulated Postscript).
+\begin{figure}[!htp]
+\begin{center}
+%\includegraphics[width=0.5\textwidth]{fig001.eps}
+\end{center}
+\caption{Facultad de Ingeniería $-$ Universidad de Buenos Aires.} \label{fig001}
+\end{figure}
+
+
+\section{Conclusiones}
+
+Se presentó un modelo para que los alumnos puedan tomar como referencia en la redacción de sus informes de trabajos prácticos.
+
+
+% Citas bibliográficas.
+\begin{thebibliography}{99}
+
+\bibitem{INT06} Intel Technology \& Research, ``Hyper-Threading Technology,'' 2006, http://www.intel.com/technology/hyperthread/.
+
+\bibitem{HEN00} J. L. Hennessy and D. A. Patterson, ``Computer Architecture. A Quantitative
+Approach,'' 3ra Edición, Morgan Kaufmann Publishers, 2000.
+
+\bibitem{LAR92} J. Larus and T. Ball, ``Rewriting Executable Files to Mesure Program Behavior,'' Tech. Report 1083, Univ. of Wisconsin, 1992.
+
+\end{thebibliography}
+
+\end{document}

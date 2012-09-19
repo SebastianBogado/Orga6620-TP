@@ -21,6 +21,9 @@
 % Paquete para definir el idioma usado.
 \usepackage[spanish]{babel}
 
+\usepackage{multirow} 
+
+%\usepackage{multicolumn} 
 
 % Título principal del documento.
 \title{		\textbf{Un Modelo de Referencia para la Generación de Informes}}
@@ -48,13 +51,21 @@
 
 % Resumen
 \begin{abstract}
-Este artículo es un modelo que proporciona a los alumnos las instrucciones necesarias para preparar sus informes para la asignatura \textit{66.20 Organización de Computadoras}. El informe deberá contener un resumen de no más de 150 palabras. La primera página del artículo deberá seguir el formato que se ilustra en el presente modelo y deberá contener el título, los nombres de los autores, sus números de padrón, sus direcciones de e-mail, número de grupo y el resumen. La primera página del informe no debe ser numerada.
+
+El presente trabajo busca crear un programa que permita el ordenamiento de archivos a través de dos implementaciones distinta, una utilizando el algoritmo Quicksort y la otra el algoritmo Stooge sort.\\
+Sobre este programa, luego, se realizarán una serie de mediciones con el fin de determinar los desempeños relativos de cada implementación y las posibles mejoras a realizar. 
+Para esto haremos uso de los programas \bf{time} y \bf{gprof}.
+
 \end{abstract}
 
 
 \section{Introducción}
 
-Este artículo es un modelo que proporciona a los alumnos las instrucciones necesarias para preparar sus informes para la asignatura \textit{66.20 Organización de Computadoras}. Además de la estructura presentada, el informe podría contener otras secciones y subsecciones, a continuación de la introducción. Podrá  incluir (se recomienda) gráficos ilustrativos y/o tablas. El informe finaliza con una sección de conclusiones, y las citas bibliográficas consultadas siguiendo, rigurosamente, el formato presentado al final de este modelo. También se recomienda respectar el estilo tipográfico mostrado aquí (fuente Times Roman de 10 puntos, u otras similares)
+Este artículo es un modelo que proporciona a los alumnos las instrucciones necesarias para preparar sus informes para la asignatura \textit{66.20 Organización de Computadoras}.
+Además de la estructura presentada, el informe podría contener otras secciones y subsecciones, a continuación de la introducción. 
+Podrá  incluir (se recomienda) gráficos ilustrativos y/o tablas. 
+El informe finaliza con una sección de conclusiones, y las citas bibliográficas consultadas siguiendo, rigurosamente, el formato presentado al final de este modelo.
+También se recomienda respectar el estilo tipográfico mostrado aquí (fuente Times Roman de 10 puntos, u otras similares)
 
 
 \section{Este es el Título de una Sección}
@@ -64,19 +75,50 @@ En la tabla~\ref{tab001} se muestra un ejemplo de cómo se insertan las mismas en
 % Inclusión de una tabla de 3x3.
 \begin{table}[!htp]
 \begin{center}
-\begin{tabular}{|r|r|r|}
-\hline
- Columna 1 &  Columna 2 &  Columna 3 \\
-\hline
-           &            &            \\
-\hline
-           &            &            \\
-\hline
+\begin{tabular}{cc|c|c|c|c|c|c|} 
+\cline{3-8}
+& & \multicolumn{3}{ c|}{Quicksort} & \multicolumn{3}{c|}{Stooge sort}\\ \cline{3-8}
+&   & Ordenado & Invertido & Aleatorio & Ordenado & Invertido & Aleatorio \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{1kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{8kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.02 & 0.02 & 0.01 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.01 & 0.01 & 0.01 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{16kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.00 & 0.02 & 0.02 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.00 & 0.01 & 0.02 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{32kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.17 & 0.17 & 0.17 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.17 & 0.17 & 0.17 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{64kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 1.44 & 1.44 & 1.44 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 1.44 & 1.43 & 1.44 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c}{\multirow{3}{*}{1024kb}} &
+\multicolumn{1}{|c|}{real} & 0.04 & 0.03 &0.03 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.03 & 0.02 &0.03 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \end{tabular}
-\caption{Ejemplo de tabla.} \label{tab001}
+\caption{Resultados comando Time } \label{tab001}
 \end{center}
 \end{table}
-
 
 \subsection{Este es el Título de una Subsección}
 
@@ -90,7 +132,7 @@ Texto de la otra sección. En la figura~\ref{fig001} se muestra un ejemplo de cóm
 % Inclusión de una imagen en formato EPS (Encapsulated Postscript).
 \begin{figure}[!htp]
 \begin{center}
-\includegraphics[width=0.5\textwidth]{fig001.eps}
+%\includegraphics[width=0.5\textwidth]{fig001.eps}
 \end{center}
 \caption{Facultad de Ingeniería $-$ Universidad de Buenos Aires.} \label{fig001}
 \end{figure}
