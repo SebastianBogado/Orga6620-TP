@@ -58,27 +58,28 @@ Para esto haremos uso de los programas \textbf{time} y \textbf{gprof}.
 
 \end{abstract}
 
-\newpage
+
 \section{Introducción}
 
 Muchas veces tanto para programas recién terminados, como para aquellos que llevan un tiempo en funcionamiento, se desconoce realmente qué partes del programa insumen la mayor cantidad de recursos, sean estos de tiempo, carga de cpu, etc.
 Poseer esta información se torna en algo crítico cuando se busca realizar una mejora de performance en dicho programa. Sería poco útil intentar optimizar a ciegas, por no decir inútil.\\
+
 Haremos uso entonces de dos herramientas distintas, el profiling del código (por medio de \textit{gprof}) y la medición de los tiempos de ejecución (por medio de \textit{time}). 
 
 \begin{itemize}
- \item \textbf{Profiling}: El profiling permite aprender donde el programa pasa la mayor parte de su tiempo, y cuales funciones llaman a otras mientras se ejecuta.\\
- 			   Esta informacion puede mostrar qué piezas del programa son mas lentas de lo esperado, convirtiéndolas en candidatas para su reescritura en la etapa de optimización.\\
- 			   También puede ayudarnos a descubrir cuales funciones son llamadas más o menos veces delo esperado, pudiendo así encontrar nuevos bugs (aunque el descubrimiento de bugs no es el fin principal de esta etapa)
- 			   
-			   El profiler utiliza información recolectada en tiempo de ejecución, por lo que puede ser utilizado en programas demasiado grandes o complejos, donde un análisis por lectura de fuentes sería impracticable.\\
-			   Como consecuencia del análisis durante la ejecución, los datos con los que se corra el programa afectaran el resultado del profiler. 
-			   Es decir, distintos datos de entrada pueden provocar distintas ramas de ejecución, dando po resultado que, por ejemplo, no se llamen algunas funciones.
-			   
-\item \textbf{Medición de Tiempos}: Permite conocer con precisión los tiempos de ejecución de un programa, discriminados entre tiempos de systema, de usario, tiempos totales, etc., así como también conocer los porcentajes para cada parte del programa, cantidad de entradas, y muchas otras opciones.\\
-				     La combinación con una herramienta de profiling permite exactitud a la hora de conocer la forma en que se ejecuta el programa bajo estudio, permitiendo optimizar únicamente las partes críticas del ciclo de ejecución.
+ \item \textbf{Profiling}: El profiling permite aprender donde el programa pasa la mayor parte de su tiempo, y cuales funciones llaman a otras mientras se ejecuta. 
+ 
+			    Esta informacion puede mostrar qué piezas del programa son mas lentas de lo esperado, convirtiéndolas en candidatas para su reescritura en la etapa de optimización.
 \end{itemize}
 
 
+Profiling allows you to learn where your program spent its time and which functions called which other functions while it was executing.
+This information can show you which pieces of your program are slower than you expected, and might be candidates for rewriting to make your program execute faster. 
+It can also tell you which functions are being called more or less often than you expected. This may help you spot bugs that had otherwise been unnoticed.
+
+Since the profiler uses information collected during the actual execution of your program, it can be used on programs that are too large or too complex to analyze by reading the source. 
+However, how your program is run will affect the information that shows up in the profile data. 
+If you don't use some feature of your program while it is being profiled, no profile information will be generated for that feature.
 \newpage
 
 \section{Mediciones}
@@ -186,43 +187,21 @@ En la figura~\ref{fig003} se muestra un ejemplo de cómo presentar las ilustracio
 \caption{Facultad de Ingeniería $-$ Universidad de Buenos Aires.} \label{fig003}
 \end{figure}
 
-\newpage
-
-\section{Comandos de ejecución y corridas de prueba}
-
-Comandos de Compilación:
-
-\begin{itemize}
- \item make all:
- \item make test:
- \item make debug:
- \item make asm:	    
- \item make gprof:
- \item make clean:
-\end{itemize}
-
-Comandos de Ejecución:
-
-\begin{itemize}
- \item tp0 [OPTIONS] [file...]
- \item $<$stdout$>$ $|$ tp0 [OPTIONS]
- \item -h, --help
- \item -V, --version
- \item -q, --quicksort
- \item -s, --stoogesort
-\end{itemize}
-
-
 
 \section{Conclusiones}
 
+Se presentó un modelo para que los alumnos puedan tomar como referencia en la redacción de sus informes de trabajos prácticos.
 
 
 % Citas bibliográficas.
 \begin{thebibliography}{99}
 
+\bibitem{INT06} Intel Technology \& Research, ``Hyper-Threading Technology,'' 2006, http://www.intel.com/technology/hyperthread/.
+
 \bibitem{HEN00} J. L. Hennessy and D. A. Patterson, ``Computer Architecture. A Quantitative
 Approach,'' 3ra Edición, Morgan Kaufmann Publishers, 2000.
+
+\bibitem{LAR92} J. Larus and T. Ball, ``Rewriting Executable Files to Mesure Program Behavior,'' Tech. Report 1083, Univ. of Wisconsin, 1992.
 
 \end{thebibliography}
 

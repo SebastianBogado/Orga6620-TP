@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.6.22)  20 SEP 2012 14:20
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.6.22)  20 SEP 2012 15:21
 entering extended mode
  %&-line parsing enabled.
 **modelo_informe.tex
@@ -114,45 +114,45 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 47.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
 
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 78.
+(Font)              <7> on input line 94.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 78.
+(Font)              <5> on input line 94.
 
-Overfull \hbox (49.45903pt too wide) in paragraph at lines 78--119
+Overfull \hbox (49.45903pt too wide) in paragraph at lines 94--135
  [] 
  []
 
-[2] <quicksort.png, id=18, 525.46312pt x 304.88907pt>
+[3] <quicksort.png, id=22, 525.46312pt x 304.88907pt>
 File: quicksort.png Graphic file (type png)
  <use quicksort.png>
-<stoogesort.png, id=20, 589.4522pt x 280.04625pt>
+<stoogesort.png, id=24, 589.4522pt x 280.04625pt>
 File: stoogesort.png Graphic file (type png)
  <use stoogesort.png>
-Overfull \hbox (34.5021pt too wide) in paragraph at lines 149--150
+Overfull \hbox (34.5021pt too wide) in paragraph at lines 165--166
  [] 
  []
 
-[3 <./quicksort.png> <./stoogesort.png>]
-Underfull \hbox (badness 1888) in paragraph at lines 182--183
+[4 <./quicksort.png> <./stoogesort.png>] [5]
+Underfull \hbox (badness 1888) in paragraph at lines 225--226
 []\OT1/cmr/m/n/10 Intel Te-ch-no-logy & Re-search, ``Hyper-Threading Te-ch-no-l
 ogy,'' 2006,
  []
 
-[4] (./modelo_informe.aux) ) 
+[6] (./modelo_informe.aux) ) 
 Here is how much of TeX's memory you used:
- 1602 strings out of 494999
- 20027 string characters out of 1180816
+ 1605 strings out of 494999
+ 20056 string characters out of 1180816
  89664 words of memory out of 3000000
- 4809 multiletter control sequences out of 15000+50000
- 9325 words of font info for 33 fonts, out of 3000000 for 9000
+ 4811 multiletter control sequences out of 15000+50000
+ 9671 words of font info for 34 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 25i,9n,27p,271b,269s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,9n,27p,337b,269s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx1
 2.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/
@@ -161,11 +161,12 @@ share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf
 ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/pub
 lic/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
 cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pf
-b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on modelo_informe.pdf (4 pages, 163244 bytes).
+b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on modelo_informe.pdf (6 pages, 180845 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
+ 74 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
