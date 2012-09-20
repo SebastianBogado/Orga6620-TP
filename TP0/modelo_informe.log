@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.6.22)  19 SEP 2012 12:20
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.6.22)  20 SEP 2012 01:34
 entering extended mode
  %&-line parsing enabled.
 **modelo_informe.tex
@@ -112,45 +112,56 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 47.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 47.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 73.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 73.
+ [1
 
-Overfull \hbox (44.8618pt too wide) in paragraph at lines 78--119
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (16.18124pt too wide) in paragraph at lines 76--77
+[]\OT1/cmr/m/n/10 En la ta-bla 1[] BLA-BLALFSD-FASD-FASD-FASD-FASD-FASD-FASD-FA
+SD-FAMFG-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--77
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 83.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 83.
+
+Overfull \hbox (49.45903pt too wide) in paragraph at lines 83--124
  [] 
  []
 
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 1888) in paragraph at lines 149--150
+[2]
+Underfull \hbox (badness 1888) in paragraph at lines 164--165
 []\OT1/cmr/m/n/10 Intel Te-ch-no-logy & Re-search, ``Hyper-Threading Te-ch-no-l
 ogy,'' 2006,
  []
 
-[2] (./modelo_informe.aux) ) 
+[3] (./modelo_informe.aux) ) 
 Here is how much of TeX's memory you used:
- 1588 strings out of 494999
- 19829 string characters out of 1180816
- 91664 words of memory out of 3000000
- 4798 multiletter control sequences out of 15000+50000
+ 1589 strings out of 494999
+ 19834 string characters out of 1180816
+ 88664 words of memory out of 3000000
+ 4799 multiletter control sequences out of 15000+50000
  9363 words of font info for 33 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 25i,9n,27p,232b,271s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,9n,27p,232b,269s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfon
 ts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9
 .pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
 share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-
 texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb
-></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/shar
-e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on modelo_informe.pdf (2 pages, 134334 bytes).
+s/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pf
+b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on modelo_informe.pdf (3 pages, 135745 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
+ 56 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -67,10 +67,15 @@ Podrá  incluir (se recomienda) gráficos ilustrativos y/o tablas.
 El informe finaliza con una sección de conclusiones, y las citas bibliográficas consultadas siguiendo, rigurosamente, el formato presentado al final de este modelo.
 También se recomienda respectar el estilo tipográfico mostrado aquí (fuente Times Roman de 10 puntos, u otras similares)
 
+\newpage
 
-\section{Este es el Título de una Sección}
+\section{Mediciones}
 
-En la tabla~\ref{tab001} se muestra un ejemplo de cómo se insertan las mismas en un documento \TeX{} / \LaTeX{}.
+\subsection{Valores Obtenidos}
+
+En la tabla~\ref{tab001} {BLABLALFSDFASDFASDFASDFASDFASDFASDFASDFAMFGMADFKG}.\\
+
+Además de los archivos indicados en el enunciado, se realizaron mediciones sobre archivos con tamaños arbitrarios, con el fin de mostrar de mejor manera las mediciones realizadas.
 
 % Inclusión de una tabla de 3x3.
 \begin{table}[!htp]
@@ -80,11 +85,11 @@ En la tabla~\ref{tab001} se muestra un ejemplo de cómo se insertan las mismas en
 & & \multicolumn{3}{ c|}{Quicksort} & \multicolumn{3}{c|}{Stooge sort}\\ \cline{3-8}
 &   & Ordenado & Invertido & Aleatorio & Ordenado & Invertido & Aleatorio \\ \cline{1-8}
 \multicolumn{1}{|c}{\multirow{3}{*}{1kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
+\multicolumn{1}{|c|}{real$^{*}$} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
+\multicolumn{1}{|c|}{user$^{*}$} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c|}{sys$^{*}$} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \multicolumn{1}{|c}{\multirow{3}{*}{8kb}} &
 \multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.02 & 0.02 & 0.01 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
@@ -110,22 +115,31 @@ En la tabla~\ref{tab001} se muestra un ejemplo de cómo se insertan las mismas en
 \multicolumn{1}{|c}{}                        &
 \multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \multicolumn{1}{|c}{\multirow{3}{*}{1024kb}} &
-\multicolumn{1}{|c|}{real} & 0.04 & 0.03 &0.03 & $>$600 & $>$600 & $>$600 \\ \cline{2-8}
+\multicolumn{1}{|c|}{real} & 0.04 & 0.03 &0.03 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.03 & 0.02 &0.03 & - & - & - \\ \cline{2-8}
+\multicolumn{1}{|c|}{user} & 0.03 & 0.02 &0.03 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & - & - & - \\ \cline{1-8}
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \end{tabular}
 \caption{Resultados comando Time } \label{tab001}
 \end{center}
 \end{table}
 
-\subsection{Este es el Título de una Subsección}
+$^{*}$ Referencia: 
+\begin{itemize}
+ \item real: \%e, tiempo total real usado por el proceso.
+ \item user: \%U, total de segundos-CPU usados por el proceso directamente.
+ \item sys : \%S, total de segundos-CPU utilizados por el systema en nombre del proceso.
+\end{itemize}
+
+
+
+\subsection{Análisis de los datos}
 
 Texto de la subsección...
 
 
-\section{Este es el Título de Otra Sección}
+\section{Profiling}
 
 Texto de la otra sección. En la figura~\ref{fig001} se muestra un ejemplo de cómo presentar las ilustraciones del informe.
 
