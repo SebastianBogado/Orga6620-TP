@@ -26,7 +26,7 @@
 %\usepackage{multicolumn} 
 
 % Título principal del documento.
-\title{		\textbf{Un Modelo de Referencia para la Generación de Informes}}
+\title{		\textbf{Trabajo práctico 0: Infraestructura básica}}
 
 % Información sobre los autores.
 \author{	Alejandro García Marra, \textit{Padrón Nro. 91.516}                     \\
@@ -52,7 +52,7 @@
 % Resumen
 \begin{abstract}
 
-El presente trabajo busca crear un programa que permita el ordenamiento de archivos a través de dos implementaciones distinta, una utilizando el algoritmo Quicksort y la otra el algoritmo Stooge sort.\\
+El presente trabajo busca crear un programa que permita el ordenamiento de archivos a través de dos implementaciones distintas, una utilizando el algoritmo Quicksort y la otra el algoritmo Stooge sort.\\
 Sobre este programa, luego, se realizarán una serie de mediciones con el fin de determinar los desempeños relativos de cada implementación y las posibles mejoras a realizar. 
 Para esto haremos uso de los programas \bf{time} y \bf{gprof}.
 
@@ -61,11 +61,7 @@ Para esto haremos uso de los programas \bf{time} y \bf{gprof}.
 
 \section{Introducción}
 
-Este artículo es un modelo que proporciona a los alumnos las instrucciones necesarias para preparar sus informes para la asignatura \textit{66.20 Organización de Computadoras}.
-Además de la estructura presentada, el informe podría contener otras secciones y subsecciones, a continuación de la introducción. 
-Podrá  incluir (se recomienda) gráficos ilustrativos y/o tablas. 
-El informe finaliza con una sección de conclusiones, y las citas bibliográficas consultadas siguiendo, rigurosamente, el formato presentado al final de este modelo.
-También se recomienda respectar el estilo tipográfico mostrado aquí (fuente Times Roman de 10 puntos, u otras similares)
+Algo sobre profiling?
 
 \newpage
 
@@ -73,9 +69,9 @@ También se recomienda respectar el estilo tipográfico mostrado aquí (fuente Time
 
 \subsection{Valores Obtenidos}
 
-En la tabla~\ref{tab001} {BLABLALFSDFASDFASDFASDFASDFASDFASDFASDFAMFGMADFKG}.\\
+En la tabla~\ref{tab001} se presentan las mediciones realizadas con \bf{time} sobre ambos algoritmos de ordenamiento y con archivos de distintos tamaños.\\
 
-Además de los archivos indicados en el enunciado, se realizaron mediciones sobre archivos con tamaños arbitrarios, con el fin de mostrar de mejor manera las mediciones realizadas.
+Además de los archivos indicados en el enunciado, fueron agregadas mediciones sobre archivos con tamaños arbitrarios, mayores, con el fin de mostrar de mejor manera las diferencias entre algoritmos.
 
 % Inclusión de una tabla de 3x3.
 \begin{table}[!htp]
@@ -136,20 +132,43 @@ $^{*}$ Referencia:
 
 \subsection{Análisis de los datos}
 
-Texto de la subsección...
+La marcada diferencia entre la complejidad de los algoritmos se refleja en muestras tan chicas como la de 8kb. 
+A partir de ahí, el Stooge sort ya hace suficiente uso del procesador como para ser notado por \bf{time}, mientras que el Quicksort hace lo propio recién en la muestra más grande, de 1024kb. En este caso, el Stooge sort se tornó intolerable.
+
+En la figura~\ref{fig001} se muestra el gráfico del tiempo insumido por el Quicksort para las distintas muestras.\\
+En la figura~\ref{fig002} se muestra el gráfico del tiempo insumido por el Stooge sort para las distintas muestras, a excepción de la de 1024kb, porque demanda una escala que haría inapreciable la situación de las otras muestras.
+
+\begin{figure}[!htp]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{quicksort.png}
+\end{center}
+\caption{Tiempo tomado para distintas muestras del Quicksort.} \label{fig001}
+\end{figure}
+
+\begin{figure}[!htp]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{stoogesort.png}
+\end{center}
+\caption{Tiempo tomado para distintas muestras del Stooge sort.} \label{fig002}
+\end{figure}
+
+
+
+Gráfico de speedup, quick vs stooge
 
 \newpage
 
 \section{Profiling}
 
-Texto de la otra sección. En la figura~\ref{fig001} se muestra un ejemplo de cómo presentar las ilustraciones del informe.
+Para realizar el profiling tomamos una muestra suficientemente grande como para que las funciones mismas de \bf{gprof} tuvieran una incidencia despreciable en la prueba. 
+En la figura~\ref{fig003} se muestra un ejemplo de cómo presentar las ilustraciones del informe.
 
 % Inclusión de una imagen en formato EPS (Encapsulated Postscript).
 \begin{figure}[!htp]
 \begin{center}
 %\includegraphics[width=0.5\textwidth]{fig001.eps}
 \end{center}
-\caption{Facultad de Ingeniería $-$ Universidad de Buenos Aires.} \label{fig001}
+\caption{Facultad de Ingeniería $-$ Universidad de Buenos Aires.} \label{fig003}
 \end{figure}
 
 

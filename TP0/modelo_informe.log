@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.6.22)  20 SEP 2012 01:34
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.9.20)  20 SEP 2012 13:34
 entering extended mode
  %&-line parsing enabled.
 **modelo_informe.tex
 (./modelo_informe.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, spanish, galician, catalan, loaded.
+yphenation, loaded.
 (/usr/share/texmf-texlive/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texmf-texlive/tex/latex/base/size10.clo
@@ -67,6 +67,12 @@ File: babel.def 2008/07/06 v3.8l Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen105
 )
+
+Package babel Warning: No hyphenation patterns were loaded for
+(babel)                the language `Spanish'
+(babel)                I will use the patterns loaded for \language=0 instead.
+
+\l@spanish = a dialect from \language0
 \es@datefmt=\count89
 \es@quottoks=\toks17
 \es@quotdepth=\count90
@@ -75,93 +81,29 @@ Package babel Info: Making . an active character on input line 585.
 Package babel Info: Making < an active character on input line 630.
 Package babel Info: Making > an active character on input line 630.
 ))
-(/usr/share/texmf-texlive/tex/latex/multirow/multirow.sty
-\bigstrutjot=\dimen106
-)
-(./modelo_informe.aux)
-\openout1 = `modelo_informe.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
- (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count91
-\scratchdimen=\dimen107
-\scratchbox=\box26
-\nofMPsegments=\count92
-\nofMParguments=\count93
-\everyMPshowfont=\toks18
-\MPscratchCnt=\count94
-\MPscratchDim=\dimen108
-\MPnumerator=\count95
-\everyMPtoPDFconversion=\toks19
-)
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 47.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 47.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 47.
- [1
+! LaTeX Error: File `multirow.sty' not found.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (16.18124pt too wide) in paragraph at lines 76--77
-[]\OT1/cmr/m/n/10 En la ta-bla 1[] BLA-BLALFSD-FASD-FASD-FASD-FASD-FASD-FASD-FA
-SD-FAMFG-
- []
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
 
+Enter file name: X
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
-
- []
-
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 83.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 83.
-
-Overfull \hbox (49.45903pt too wide) in paragraph at lines 83--124
- [] 
- []
-
-[2]
-Underfull \hbox (badness 1888) in paragraph at lines 164--165
-[]\OT1/cmr/m/n/10 Intel Te-ch-no-logy & Re-search, ``Hyper-Threading Te-ch-no-l
-ogy,'' 2006,
- []
-
-[3] (./modelo_informe.aux) ) 
+ )
+(\end occurred when \ifx on line 25 was incomplete)
+(\end occurred when \ifx on line 25 was incomplete) 
 Here is how much of TeX's memory you used:
- 1589 strings out of 494999
- 19834 string characters out of 1180816
- 88664 words of memory out of 3000000
- 4799 multiletter control sequences out of 15000+50000
- 9363 words of font info for 33 fonts, out of 3000000 for 9000
- 54 hyphenation exceptions out of 8191
- 25i,9n,27p,232b,269s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9
-.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pf
-b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on modelo_informe.pdf (3 pages, 135745 bytes).
+ 1170 strings out of 495061
+ 14627 string characters out of 1182621
+ 72610 words of memory out of 3000000
+ 4401 multiletter control sequences out of 15000+50000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 25i,1n,27p,191b,36s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+No pages of output.
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
+ 0 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
