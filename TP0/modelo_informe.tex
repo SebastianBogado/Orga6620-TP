@@ -23,6 +23,10 @@
 
 \usepackage{multirow} 
 
+% Paquete para fórmulas matemáticas
+%\usepackage{amsmath}
+%\newcommand{\BigO}[1]{\ensuremath{\operatorname{O}\bigl(#1\bigr)}}
+
 %\usepackage{multicolumn} 
 
 % Título principal del documento.
@@ -168,24 +172,53 @@ En la figura~\ref{fig002} se muestra el gráfico del tiempo insumido por el Stoog
 \end{figure}
 
 
+Al momento de calcular el speedup de Quicksort contra Stooge sort, con la razón entre los tiempos de cada uno, las cifras obtenidas no lo permiten. El primero no arroja resultados apreciables por \textbf{time} en ninguna instancia sin contar la última, donde el Stooge sort es inmanejable.\\
+Finalmente, el speedup entre ambos tiene a infinito exponencialmente, según crece el tamaño de la muestra.
+%Esto es porque la complejidad del Quicksort es, en promedio, \BigO{n \log(n)}, mientras que el Stooge sort es de \BigO{n^{2,7}}. Entonces, el speedup entre ambos algoritmos tiende a infinito exponencialmente, según crece el tamaño de la muestra.
 
-Gráfico de speedup, quick vs stooge
 
 \newpage
 
 \section{Profiling}
 
-Para realizar el profiling tomamos una muestra suficientemente grande como para que las funciones mismas de \textbf{gprof} tuvieran una incidencia despreciable en la prueba. 
-En la figura~\ref{fig003} se muestra un ejemplo de cómo presentar las ilustraciones del informe.
+Para realizar el profiling tomamos una muestra suficientemente grande como para que las funciones mismas de \textbf{gprof} tuvieran una incidencia despreciable en la prueba.\\
+La tabla~\ref{tab002} es la salida del \textbf{gprof}, en particular aquella conocida como "flat profile". Muestra el uso de las funciones invocadas, ordenadas de mayor a menor según el porcentaje de tiempo de ejecución de cada una.
 
-% Inclusión de una imagen en formato EPS (Encapsulated Postscript).
-\begin{figure}[!htp]
+\begin{table}[!htp]
 \begin{center}
-%\includegraphics[width=0.5\textwidth]{fig001.eps}
+\begin{tabular}{|r|r|r|r|r|r|r|}
+\hline
+	\%		&	cumulative  &	self	&			&	self	&	total \\
+\hline          
+	time	&	seconds		&	seconds	&	calls	&	s/call	&	s/call	&	name \\    
+\hline
+ 	91.87	&	1.53		&	1.53	&	448399	&	0.00	&	 0.00	&	particionar \\
+\hline
+	2.40	&	1.57		&	0.04	&	448801	&	0.00	&	0.00	&	cargarBuffer \\
+\hline
+	1.80	&	1.60		&	0.03	&	3565398	&	0.00	&	0.00	&	swap \\
+\hline
+	1.80	&	1.63		&	0.03	&	1		&	0.03	&	0.07	&	parseLineas \\
+\hline
+	1.80	&	1.66		&	0.03	&	1		&	0.03	&	1.67	&	sort \\
+\hline
+	0.60	&	1.67		&	0.01	&	1		&	0.01	&	1.57	&	quickSort\_r \\
+\hline
+	0.00	&	1.67		&	0.00	&	1		&	0.00	&	0.00	&	check\_param \\
+\hline
+	0.00	&	1.67		&	0.00	&	1		&	0.00	&	1.57	&	quick\_sort \\
+\hline
+\end{tabular}
+\caption{Ejemplo de tabla.} \label{tab002}
 \end{center}
-\caption{Facultad de Ingeniería $-$ Universidad de Buenos Aires.} \label{fig003}
-\end{figure}
-
+\end{table}
+ 
+Se aprecia en la tabla que la función particionar ocupa el 91,87\% del tiempo de ejecución de programa, convirtiéndola en la candidata para mejorar.
+Si ésta fuera arbitrariamente mejorable, el speedup máximo es 12,3.
+% La fórmula es la de
+% speedup total = 1/(1-f + f/SM)
+% f = 0,9187; SM tiende a infinito por ser arbitrariamente mejorable
+% speedup máximo = 1/0,0813 = 12,3
 \newpage
 
 \section{Comandos de ejecución y corridas de prueba}
@@ -193,12 +226,12 @@ En la figura~\ref{fig003} se muestra un ejemplo de cómo presentar las ilustracio
 Comandos de Compilación:
 
 \begin{itemize}
- \item make all:
- \item make test:
- \item make debug:
- \item make asm:	    
- \item make gprof:
- \item make clean:
+ \item make all: genera el programa, modo "release"
+ \item make test: genera un programa de prueba
+ \item make debug: genera el programa con flags para debugging
+ \item make asm: genera los archivos Assemblies, sin generar el programa
+ \item make gprof: genera el programa con flags para \textbf{gprof}
+ \item make clean: remueve los archivos generados
 \end{itemize}
 
 Comandos de Ejecución:
@@ -216,7 +249,9 @@ Comandos de Ejecución:
 
 \section{Conclusiones}
 
+El presente trabajo, a modo de introducción, nos inicializó en las herramientas que usaremos en los trabajos siguientes. % sinonimia cero
 
+Pudimos manejar la máquina virtual MIPS e interpretar un archivo de profiling, como si estuviésemos optimizando un programa real.
 
 % Citas bibliográficas.
 \begin{thebibliography}{99}
