@@ -3,8 +3,6 @@ SOURCES=stoogesort.c quicksort.c sort.c parseManager.c
 
 all:
 	$(CC) $(CFLAGS) main.c $(SOURCES) -o tp0
-test:
-	$(CC) $(CFLAGS) test.c $(SOURCES) -o test
 debug:
 	$(CC) $(CFLAGS) -g main.c $(SOURCES) -o tp0
 asm:
