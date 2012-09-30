@@ -2,8 +2,8 @@
 #include "./sort.h"
 #include <stdio.h>
 
-void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
-	char** pLinea = NULL;
+void sort(unsigned n, char* files[], line** (*sort_func)(line** , unsigned )) {
+	line** pLinea = NULL;
 	unsigned lineas = 0;
 
 	if (n) {
@@ -25,12 +25,11 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 
 	//print salida
 	for (int i = 0; i < lineas; ++i)
-		printf("%s", pLinea[i]);
+		printLine(pLinea[i]);
 
 	//Liberación
 	for (int i = 0; i < lineas; ++i)
-		free(pLinea[i]);
+		freeLine(&pLinea[i]);
 
 	free(pLinea);
-
 }

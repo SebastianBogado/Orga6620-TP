@@ -31,15 +31,20 @@ line* createLine(char* buf, size_t size);
 			 0 si *a = *b
 			>0 si *a > *b
  */
-int linecmp(line* a, line* b);
+int linecmp(const line* a, const line* b);
 
+/**
+ * función que imprime por salida estándar la línea
+ * @param l	línea a imprimir
+ */
+void printLine(const line* l);
 
 /**
  * función que intercambia la posición entre dos líneas dentro de un vector
  * @param array	puntero al array de líneas
  * @param a, b		posiciones a intercambiar
  */
-void swap(line** array, int a, int b);
+void swapLine(line** array, int a, int b);
 
 /**
  * libera toda la memoria asociada a la línea, y pone al puntero *l en NULL

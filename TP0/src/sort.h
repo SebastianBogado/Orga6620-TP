@@ -9,6 +9,6 @@
  *
  * Si n == 0, se toma como entrada stdin.
  */
-void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned ));
+void sort(unsigned n, char* files[], line** (*sort_func)(line** , unsigned ));
 
 #endif  // __SORT__
