@@ -1,11 +1,10 @@
 #include "./parseManager.h"
 #include<stdio.h>
 #include<stdlib.h>
-
 unsigned cargarBuffer(char* *buffer, FILE* stream);
 
 
-unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
+unsigned parseLineas(line** *pLinea, unsigned lineas, FILE* stream){
 	
 	char* buffer = NULL;
 //	int quedanLineas;
@@ -39,16 +38,16 @@ unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
 		lineSize++;
 		if (buffer[i] == '\n'){
 			char* lineBuff = (char*) malloc(lineSize*sizeof(char));
-			//reallocar espacio para una nueva linea en pLinea
 			
+			++lineas;
 			memcpy(lineBuff, buffer, lineSize);
 			
-//			pLinea[lineas-1] = createLine(lineBuff, lineSize);
+			(*pLinea) = (line**)realloc((*pLinea), lineas * sizeof(char*));		
+			(*pLinea)[lineas-1] = createLine(lineBuff, lineSize);
 			
 			lineSize = 0;
 		}
 	}
-//	}
 	
 	free(buffer);
 	
@@ -126,11 +125,11 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 		// se lo agrega para normalizar todas las lineas
 		if((*buffer)[bufferLen-1] != '\n'){
 			(*buffer)[bufferLen] = '\n';
-			
 			(*buffer)[bufferLen+1] = '\0';
 		}	
 	}	
 	
 	return bufferLen;
 }
+
 
