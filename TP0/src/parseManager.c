@@ -56,7 +56,7 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 		bufferInc++;
 		bufferCapac = bufferInc*len_buffer + 1;
 		(*buffer) = (char*)realloc((*buffer), bufferCapac*sizeof(char));
-
+	printf("INC BUFFER, SIZE: %lu , BUFFER CAP: %u \n",  bufferCapac*sizeof(char), bufferCapac);
 		// buffer + bufferCapac - (tam_buffer) pone al puntero en la
 		// posición inicial de la porción nueva de memoria
 

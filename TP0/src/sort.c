@@ -14,6 +14,10 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 			if (inStream) {
 				lineas =+ parseLineas(&pLinea, lineas, inStream);
 				fclose(inStream);
+
+			printf("LINEAS %d \n", lineas);
+
+
 			} else
 				perror(files[i]);
 		}
