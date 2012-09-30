@@ -10,7 +10,7 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 		FILE* inStream;
 		for (unsigned i = 0; i < n; ++i) {
 			inStream = fopen(files[i], "rb");
-			
+
 			if (inStream) {
 				lineas =+ parseLineas(&pLinea, lineas, inStream);
 				fclose(inStream);
@@ -26,11 +26,11 @@ void sort(unsigned n, char* files[], char** (*sort_func)(char** , unsigned )) {
 	//print salida
 	for (int i = 0; i < lineas; ++i)
 		printf("%s", pLinea[i]);
-	
+
 	//Liberación
 	for (int i = 0; i < lineas; ++i)
 		free(pLinea[i]);
 
 	free(pLinea);
-	
+
 }
