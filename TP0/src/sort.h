@@ -1,6 +1,8 @@
 #ifndef __SORT__
 #define __SORT__
 
+#include "line.h"
+
 /**
  * Ordena las líneas de los archivos en orden ascendente e imprime por pantalla.
  * @param n la cantidad de archivos

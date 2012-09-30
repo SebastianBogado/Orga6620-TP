@@ -1,6 +1,6 @@
 #include "line.h"
 #include <malloc.h>
-#includ <stdio.h>
+#include <stdio.h>
 
 struct line {
 	char* str;

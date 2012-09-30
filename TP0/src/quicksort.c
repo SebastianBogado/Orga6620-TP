@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<string.h>
 
+#include "quicksort.h"
+
 int particionar (line** array, int izq, int der, int pivotIndex){
 
 	line* pivot = array[pivotIndex];
