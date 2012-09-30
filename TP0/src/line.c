@@ -22,7 +22,7 @@ line* createLine(char* buf, size_t size) {
 	if (i < size) {
 
 	}*/
-	line* l = (line* )malloc(sizeof line);
+	line* l = (line* )malloc(sizeof(line));
 	l->str = buf;
 	l->size = size;
 	return l;

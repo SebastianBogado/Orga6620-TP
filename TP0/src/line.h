@@ -1,6 +1,8 @@
 #ifndef __LINE_H__
 #define __LINE_H__
 
+#include <malloc.h>
+
 /**
  * TDA línea. Encapsula el manejo de líneas, armado, comparaciones, etc.
  * @example
@@ -13,14 +15,10 @@
 typedef struct line line;
 
 /**
- * inicializa una línea a partir de un manojo de chars
+ * inicializa una línea a partir de un manojo de chars que termina en '\n'
  * @param buf		puntero a chars conteniendo la línea
  * @param size		tamaño del buffer
  * @return puntero a line válido
- *
- * Si se llega al final del buffer sin encontrar un fin de línea, se considera
- * ese como el fin, y se agrega el caracter '\n'
- * size tiene que ser la cantidad de bytes disponibles de memoria alocada.
  */
 line* createLine(char* buf, size_t size);
 
