@@ -31,7 +31,7 @@ int linecmp(const line* a, const line* b) {
 }
 
 void printLine(const line* l) {
-	printf("printLine: @todo\n");
+	fwrite(l->str, sizeof(char), l->size, stdout);
 }
 
 void swapLine(line** array, int a, int b) {
