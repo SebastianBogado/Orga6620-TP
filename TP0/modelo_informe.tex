@@ -85,6 +85,30 @@ Haremos uso entonces de dos herramientas distintas, el profiling del código (por
 
 \newpage
 
+\section{Métodos de ordenamiento}
+\subsection{Quicksort}
+El Quicksort es un algoritmo re pulenta
+
+\subsection{Stooge sort}
+El Stooge sort es un algoritmo de ordenamiento recursivo muy ineficiente, de complejidad \BigO{n^{\log{3}/\log{1,5}}}.\\
+Realiza el intercambio entre el primer y último de los elementos si es el primero es mayor (en ordenamiento ascendente). Luego, si el conjunto está compuesto por al menos tres valores, entonces aplica Stooge sort a los primeros dos tercios, luego a los dos últimos tercios, y finalmente repite con los primeros dos tercios. 
+
+
+\section{Flujo del programa}
+
+El programa comienza verificando el primer parámetro recibido. Si no existe o no es reconocido, sucede el comportamiento por defecto, que es el mensaje de ayuda, información sobre el uso. Con esto, termina la ejecución. Otro camino rápido en la aplicación es al solicitar la versión, con el parámetro \texttt{-V} o \texttt{--version}.\\
+
+Si el primer parámetro solicitó un algoritmo de ordenamiento (\texttt{-q} o \texttt{--quick} para Quicksort y \texttt{-s} o \texttt{--stooge} para el Stooge sort), entra en el corazón del programa: la función\\
+\texttt{void sort(unsigned n,\\
+		char* files[],\\
+		line** (*sort\_func)(line** , unsigned ))}\\
+
+
+Mañana sigo, Ale. Fijate si podés hacer que queden identados los parámetros (que todos empiecen a la misma altura). La idea es explicar cada parámetro, y después contar que acá se arma el vector con las líneas de todos los archivos y, si n es cero, se toma de stdin con la misma llamada: parseLineas, para finalmente ordenarlos según la función recibida por parámetro.
+Después, explicar un toque parseLineas, y por qué tuvimos que hacer la struct line. Y el diagrama de flujo. FIN!
+
+
+
 \section{Mediciones}
 
 \subsection{Valores Obtenidos}
@@ -173,7 +197,7 @@ En la figura~\ref{fig002} se muestra el gráfico del tiempo insumido por el Stoog
 
 
 Al momento de calcular el speedup de Quicksort contra Stooge sort, con la razón entre los tiempos de cada uno, las cifras obtenidas no lo permiten. El primero no arroja resultados apreciables por \textbf{time} en ninguna instancia sin contar la última, donde el Stooge sort es inmanejable.\\
-%Finalmente, el speedup entre ambos tiene a infinito exponencialmente, según crece el tamaño de la muestra.
+
 Esto es porque la complejidad del Quicksort es, en promedio, \BigO{n \log(n)}, mientras que el Stooge sort es de \BigO{n^{2,7}}. Entonces, el speedup entre ambos algoritmos tiende a infinito exponencialmente, según crece el tamaño de la muestra.
 
 

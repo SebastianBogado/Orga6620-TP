@@ -23,6 +23,10 @@
 
 \usepackage{multirow} 
 
+% Paquete para fórmulas matemáticas
+\usepackage{amsmath}
+\newcommand{\BigO}[1]{\ensuremath{\operatorname{O}\bigl(#1\bigr)}}
+
 %\usepackage{multicolumn} 
 
 % Título principal del documento.
@@ -80,6 +84,32 @@ Haremos uso entonces de dos herramientas distintas, el profiling del código (por
 
 
 \newpage
+
+\section{Métodos de ordenamiento}
+\subsection{Quicksort}
+El Quicksort es un algoritmo re pulenta
+
+\subsection{Stooge sort}
+El Stooge sort es un algoritmo de ordenamiento recursivo muy ineficiente, de complejidad \BigO{n^{\log{3}/\log{1,5}}}.\\
+Realiza el intercambio entre el primer y último de los elementos si es el primero es mayor (en ordenamiento ascendente). Luego, si el conjunto está compuesto por al menos tres valores, entonces aplica Stooge sort a los primeros dos tercios, luego a los dos últimos tercios, y finalmente repite con los primeros dos tercios. 
+
+
+\section{Flujo del programa}
+
+El programa comienza verificando el primer parámetro recibido. Si no existe o no es reconocido, sucede el comportamiento por defecto, que es el mensaje de ayuda, información sobre el uso. Con esto, termina la ejecución. Otro camino rápido en la aplicación es al solicitar la versión, con el parámetro \texttt{-V} o \texttt{--version}.\\
+
+Si el primer parámetro solicitó un algoritmo de ordenamiento (\texttt{-q} o \texttt{--quick} para Quicksort y \texttt{-s} o \texttt{--stooge} para el Stooge sort), entra en el corazón del programa: la función\\
+
+\texttt{void sort(unsigned n,\\
+    char* files[],\\
+		line** (*sort\_func)(line** , unsigned ))}\\
+
+
+Mañana sigo, Ale.
+
+
+
+
 
 \section{Mediciones}
 
@@ -168,23 +198,65 @@ En la figura~\ref{fig002} se muestra el gráfico del tiempo insumido por el Stoog
 \end{figure}
 
 
+Al momento de calcular el speedup de Quicksort contra Stooge sort, con la razón entre los tiempos de cada uno, las cifras obtenidas no lo permiten. El primero no arroja resultados apreciables por \textbf{time} en ninguna instancia sin contar la última, donde el Stooge sort es inmanejable.\\
 
-Gráfico de speedup, quick vs stooge
+Esto es porque la complejidad del Quicksort es, en promedio, \BigO{n \log(n)}, mientras que el Stooge sort es de \BigO{n^{2,7}}. Entonces, el speedup entre ambos algoritmos tiende a infinito exponencialmente, según crece el tamaño de la muestra.
 
-\newpage
 
 \section{Profiling}
 
-Para realizar el profiling tomamos una muestra suficientemente grande como para que las funciones mismas de \textbf{gprof} tuvieran una incidencia despreciable en la prueba. 
-En la figura~\ref{fig003} se muestra un ejemplo de cómo presentar las ilustraciones del informe.
+Como se pudo apreciar en la tabla de tiempos de la página anterior, el algoritmo de quicksort resulta extremadamente veloz para tamaños de archivos relativamente grandes. Decidimos, entonces, forzar un poco más al programa y hacer el profiling sobre un archivo desordenado de 32mb. Además, para que las funciones mismas de \textbf{gprof} tuvieran una incidencia despreciable en la prueba.\\
+Realizar esta misma prueba sobre el algoritmo Stooge sort, serí­a impracticable, ya que los tiempos demandados serían demasiado grandes.
 
-% Inclusión de una imagen en formato EPS (Encapsulated Postscript).
-\begin{figure}[!htp]
+Un punto interesante a destacar son llamadas a métodos de ordenamiento: como era de esperarse, no se realizan llamadas al método stoogesort, lo cual confirma que el algoritmo no es utilizado.
+										
+										   Por otra parte, para el método quicksort\_r que implementa dicho algoritmo, tenemos cientos de miles de llamados. Esto era de esperarse debido a las dimensiones del archivo y la naturaleza recursiva del algoritmo utilizado.
+
+La tabla~\ref{tab002} es la salida del \textbf{gprof}, en particular aquella conocida como "flat profile". Muestra el uso de las funciones invocadas, ordenadas de mayor a menor según el porcentaje de tiempo de ejecución de cada una.
+
+\begin{table}[!htp]
 \begin{center}
-%\includegraphics[width=0.5\textwidth]{fig001.eps}
+\begin{tabular}{|r|r|r|r|r|r|r|}
+\hline
+	\%		&	cumulative  &	self	&			&	self	&	total	& \\
+\hline          
+	time	&	seconds		&	seconds	&	calls	&	s/call	&	s/call	&	name \\    
+\hline
+ 	91.87	&	1.53		&	1.53	&	448399	&	0.00	&	 0.00	&	particionar \\
+\hline
+	2.40	&	1.57		&	0.04	&	448801	&	0.00	&	0.00	&	cargarBuffer \\
+\hline
+	1.80	&	1.60		&	0.03	&	3565398	&	0.00	&	0.00	&	swap \\
+\hline
+	1.80	&	1.63		&	0.03	&	1		&	0.03	&	0.07	&	parseLineas \\
+\hline
+	1.80	&	1.66		&	0.03	&	1		&	0.03	&	1.67	&	sort \\
+\hline
+	0.60	&	1.67		&	0.01	&	1		&	0.01	&	1.57	&	quickSort\_r \\
+\hline
+	0.00	&	1.67		&	0.00	&	1		&	0.00	&	0.00	&	check\_param \\
+\hline
+	0.00	&	1.67		&	0.00	&	1		&	0.00	&	1.57	&	quick\_sort \\
+\hline
+\end{tabular}
+\caption{Ejemplo de tabla.} \label{tab002}
 \end{center}
-\caption{Facultad de Ingeniería $-$ Universidad de Buenos Aires.} \label{fig003}
-\end{figure}
+\end{table}
+ 
+Se aprecia en la tabla que la función particionar ocupa el 91,87\% del tiempo de ejecución de programa, convirtiéndola en la candidata para mejorar.\par
+\medskip
+Para calcular el speedup máximo, usamos la fórmula:
+
+\begin{center}
+$ speedup total = 1/(1-f + f/SM)$\\
+\vspace{0.5cm}
+$ f = 0,9187 $; SM tiende a infinito por ser arbitrariamente mejorable\\
+
+\vspace{0.5cm}
+
+$ Speedup maximo = 1/0,08123 = 12,3$
+\end{center}
+
 
 \newpage
 
@@ -193,12 +265,11 @@ En la figura~\ref{fig003} se muestra un ejemplo de cómo presentar las ilustracio
 Comandos de Compilación:
 
 \begin{itemize}
- \item make all:
- \item make test:
- \item make debug:
- \item make asm:	    
- \item make gprof:
- \item make clean:
+ \item make all: genera el programa, modo "release"
+ \item make debug: genera el programa con flags para debugging
+ \item make asm: genera los archivos Assemblies, sin generar el programa
+ \item make gprof: genera el programa con flags para \textbf{gprof}
+ \item make clean: remueve los archivos generados
 \end{itemize}
 
 Comandos de Ejecución:
@@ -216,18 +287,16 @@ Comandos de Ejecución:
 
 \section{Conclusiones}
 
-Se presentó un modelo para que los alumnos puedan tomar como referencia en la redacción de sus informes de trabajos prácticos.
+El presente trabajo, a modo de introducción, nos inicializó en las herramientas que usaremos en los trabajos siguientes. % sinonimia cero
 
+Pudimos manejar la máquina virtual MIPS e interpretar un archivo de profiling, como si estuviésemos optimizando un programa real.
 
+Respecto de las velocidades observadas, podemos confirmar lo esperado a partir del análsis teórico. El algoritmo quicksort fue varios ordenes de magnitud más veloz que el stoogesort, al punto de poder procesar archivos que con el segundo no serían viables.
 % Citas bibliográficas.
 \begin{thebibliography}{99}
 
-\bibitem{INT06} Intel Technology \& Research, ``Hyper-Threading Technology,'' 2006, http://www.intel.com/technology/hyperthread/.
-
 \bibitem{HEN00} J. L. Hennessy and D. A. Patterson, ``Computer Architecture. A Quantitative
 Approach,'' 3ra Edición, Morgan Kaufmann Publishers, 2000.
-
-\bibitem{LAR92} J. Larus and T. Ball, ``Rewriting Executable Files to Mesure Program Behavior,'' Tech. Report 1083, Univ. of Wisconsin, 1992.
 
 \end{thebibliography}
 
