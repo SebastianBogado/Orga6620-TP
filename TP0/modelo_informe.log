@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.9.20)  30 SEP 2012 23:41
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.9.20)  2 OCT 2012 00:00
 entering extended mode
  %&-line parsing enabled.
 **modelo_informe.tex
@@ -175,49 +175,54 @@ Underfull \hbox (badness 10000) in paragraph at lines 99--100
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--102
+Underfull \hbox (badness 10000) in paragraph at lines 110--111
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
+Underfull \hbox (badness 10000) in paragraph at lines 112--113
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
 
  []
 
 
-Overfull \hbox (49.45903pt too wide) in paragraph at lines 124--165
+Overfull \hbox (49.45903pt too wide) in paragraph at lines 140--181
  [] 
  []
 
-[3] <quicksort.png, id=26, 525.46312pt x 304.88907pt>
+[4] <quicksort.png, id=29, 525.46312pt x 304.88907pt>
 File: quicksort.png Graphic file (type png)
  <use quicksort.png>
-<stoogesort.png, id=28, 589.4522pt x 280.04625pt>
+<stoogesort.png, id=31, 589.4522pt x 280.04625pt>
 File: stoogesort.png Graphic file (type png)
  <use stoogesort.png>
-Overfull \hbox (34.5021pt too wide) in paragraph at lines 195--196
+Overfull \hbox (34.5021pt too wide) in paragraph at lines 211--212
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--202
+Underfull \hbox (badness 10000) in paragraph at lines 217--218
 
  []
 
-[4] [5 <./quicksort.png> <./stoogesort.png>] [6] [7] (./modelo_informe.aux) ) 
+[5 <./quicksort.png>] [6 <./stoogesort.png>] [7] [8] (./modelo_informe.aux) ) 
 Here is how much of TeX's memory you used:
- 2209 strings out of 495061
- 26829 string characters out of 1182621
- 101263 words of memory out of 3000000
- 5388 multiletter control sequences out of 15000+50000
+ 2217 strings out of 495061
+ 26940 string characters out of 1182621
+ 99263 words of memory out of 3000000
+ 5396 multiletter control sequences out of 15000+50000
  10967 words of font info for 40 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,9n,27p,427b,273s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,9n,27p,472b,273s stack positions out of 5000i,500n,10000p,200000b,50000s
 </
 usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/t
 exmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texliv
@@ -233,9 +238,9 @@ s/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.
 pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/s
 hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-
 texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on modelo_informe.pdf (7 pages, 228811 bytes).
+Output written on modelo_informe.pdf (8 pages, 233075 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
+ 98 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
