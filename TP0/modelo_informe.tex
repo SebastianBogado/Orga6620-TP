@@ -85,6 +85,48 @@ Haremos uso entonces de dos herramientas distintas, el profiling del código (por
 
 \newpage
 
+\section{Métodos de ordenamiento}
+\subsection{Quicksort}
+El Quicksort es un algoritmo re pulenta
+
+\subsection{Stooge sort}
+El Stooge sort es un algoritmo de ordenamiento recursivo muy ineficiente, de complejidad \BigO{n^{\log{3}/\log{1,5}}}.\\
+Realiza el intercambio entre el primer y último de los elementos si es el primero es mayor (en ordenamiento ascendente). Luego, si el conjunto está compuesto por al menos tres valores, entonces aplica Stooge sort a los primeros dos tercios, luego a los dos últimos tercios, y finalmente repite con los primeros dos tercios. 
+
+
+\section{Flujo del programa}
+
+El programa comienza verificando el primer parámetro recibido. Si no existe o no es reconocido, sucede el comportamiento por defecto, que es el mensaje de ayuda, información sobre el uso. Con esto, termina la ejecución. Otro camino rápido en la aplicación es al solicitar la versión, con el parámetro \texttt{-V} o \texttt{--version}.\\
+
+Si el primer parámetro solicitó un algoritmo de ordenamiento (\texttt{-q} o \texttt{--quick} para Quicksort y \texttt{-s} o \texttt{--stooge} para el Stooge sort), entra en el corazón del programa: la función
+\texttt{void sort(unsigned n, char* files[], \\line** (*sort\_func)(line** , unsigned ))}:
+
+\begin{itemize}
+ \item \texttt{n}: la cantidad de archivos sobre los que se aplicará el ordenamiento. Si es cero, se tomará la entrada estándar.
+ \item \texttt{files}: los nombres de los archivos
+ \item \texttt{sort\_func}: puntero a la función de ordenamiento seleccionada anteriormente con el primer parámetro
+\end{itemize}
+
+En el archivo \texttt{line.h} se encuentra definido el tipo homónimo, desde \texttt{typedef struct line line}. Esto fue necesario porque en un archivo podría aparecer un byte nulo antes de el byte 10, aquél tomado como fin de línea. Como las cadenas en C terminan en un byte nulo, todas las funciones estándar de la librería \texttt{<string.h>} resultaron inservibles porque necesitábamos que fuera otro el indicador de fin.\\
+
+Volviendo a la función \texttt{sort}, se arma el conjunto de líneas a ser reordeanadas recolectándolas de a un archivo por vez. Si no hubiera archivos, se trabaja con la entrada estándar con la misma función (\texttt{parseLineas}, que se detallará en breve).\\
+
+Armado el conjunto, se llama a la función de ordenamiento desde su puntero pasándole como parámetros el vector de líneas y la cantidad de elementos. Luego se imprimen por salda estándar y se libera la memoria reservada, todo esto con funciones propias para el tipo \texttt{line}.\\
+
+La lectura de cada archivo sucede en la función
+\texttt{unsigned parseLineas(\\line** *pLinea, unsigned lineas, FILE* stream)}:
+
+\begin{itemize}
+ \item \texttt{pLinea}: puntero a un arreglo de punteros a \texttt{line}
+ \item \texttt{lineas}: cantidad de elementos del arreglo
+ \item \texttt{stream}: archivo desde donde se llevarán a cabo las lecturas
+ \item \texttt{return}: cantidad de elementos en el arreglo después del proceso
+\end{itemize}
+
+Esta función carga en un buffer el archivo y lo recorre en busca del caracter de fin de línea. Por cada uno encontrado, se aloca espacio para un \texttt{line}, mediante sus métodos dedicados, y se agrega al vector. Si el archivo no termina naturalmente como una línea, se agrega al final el \texttt{EOL}. Retorna con la cantidad de líneas cargadas (las acumuladas y las nuevas del archivo actual).
+
+
+
 \section{Mediciones}
 
 \subsection{Valores Obtenidos}
@@ -173,7 +215,7 @@ En la figura~\ref{fig002} se muestra el gráfico del tiempo insumido por el Stoog
 
 
 Al momento de calcular el speedup de Quicksort contra Stooge sort, con la razón entre los tiempos de cada uno, las cifras obtenidas no lo permiten. El primero no arroja resultados apreciables por \textbf{time} en ninguna instancia sin contar la última, donde el Stooge sort es inmanejable.\\
-%Finalmente, el speedup entre ambos tiene a infinito exponencialmente, según crece el tamaño de la muestra.
+
 Esto es porque la complejidad del Quicksort es, en promedio, \BigO{n \log(n)}, mientras que el Stooge sort es de \BigO{n^{2,7}}. Entonces, el speedup entre ambos algoritmos tiende a infinito exponencialmente, según crece el tamaño de la muestra.
 
 
