@@ -15,12 +15,11 @@ unsigned parseLineas(line** *pLinea, unsigned lineas, FILE* stream){
 	for (int i=0; i<=bufferLen; i++){
 
 		lineSize++;
-
+if((i == bufferLen) && (buffer[bufferLen] == '\n')) printf("\n NO ENTIENDO \n");
 		if (buffer[i] == '\n') {
-
+	printf("%d, ", i);
 			char* lineBuff = (char*) malloc(lineSize*sizeof(char));
 			memcpy(lineBuff, buffer + i + 1 - lineSize, lineSize);
-
 			++lineas;
 			(*pLinea) = (line**)realloc((*pLinea), lineas * sizeof(char*));
 			(*pLinea)[lineas-1] = createLine(lineBuff, lineSize);
@@ -63,6 +62,7 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 			(*buffer)[bufferLen] = '\n';
 			(*buffer)[bufferLen+1] = '\0';
 		}
+
 	}
 	return bufferLen;
 }
