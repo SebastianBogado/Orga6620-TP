@@ -7,6 +7,8 @@ struct line {
 	size_t size;
 };
 
+unsigned getSize(line* l) {return l->size;}
+
 line* createLine(char* buf, size_t size) {
 	line* l = (line* )malloc(sizeof(line));
 	l->str = buf;

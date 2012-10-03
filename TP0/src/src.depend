@@ -1,0 +1,52 @@
+# depslib dependency file v1.0
+1349222639 source:/home/alemarra/workspace/Orga6620-TP/TP0/src/line.c
+	"line.h"
+	<malloc.h>
+	<stdio.h>
+
+1349222282 /home/alemarra/workspace/Orga6620-TP/TP0/src/line.h
+	<malloc.h>
+
+1349057700 source:/home/alemarra/workspace/Orga6620-TP/TP0/src/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"./sort.h"
+	"./quicksort.h"
+	"./stoogesort.h"
+
+1349057710 /home/alemarra/workspace/Orga6620-TP/TP0/src/sort.h
+	"line.h"
+
+1349057710 /home/alemarra/workspace/Orga6620-TP/TP0/src/quicksort.h
+	"line.h"
+
+1349057710 /home/alemarra/workspace/Orga6620-TP/TP0/src/stoogesort.h
+	"line.h"
+
+1349226652 source:/home/alemarra/workspace/Orga6620-TP/TP0/src/parseManager.c
+	"./parseManager.h"
+	<stdio.h>
+	<stdlib.h>
+
+1349057710 /home/alemarra/workspace/Orga6620-TP/TP0/src/parseManager.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"./line.h"
+
+1349057710 source:/home/alemarra/workspace/Orga6620-TP/TP0/src/quicksort.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"quicksort.h"
+
+1349200354 source:/home/alemarra/workspace/Orga6620-TP/TP0/src/sort.c
+	"./parseManager.h"
+	"./sort.h"
+	<stdio.h>
+
+1349057710 source:/home/alemarra/workspace/Orga6620-TP/TP0/src/stoogesort.c
+	"./stoogesort.h"
+	<string.h>
+

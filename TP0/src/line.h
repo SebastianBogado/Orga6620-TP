@@ -11,9 +11,9 @@
 	freeLine(&l);
  */
 
-
 typedef struct line line;
 
+unsigned getSize(line* l);
 /**
  * inicializa una línea a partir de un manojo de chars que termina en '\n'
  * @param buf		puntero a chars conteniendo la línea
