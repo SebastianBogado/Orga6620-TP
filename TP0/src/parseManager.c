@@ -12,12 +12,10 @@ unsigned parseLineas(line** *pLinea, unsigned lineas, FILE* stream){
 
 	bufferLen = cargarBuffer(&buffer, stream);
 
-	for (int i=0; i<=bufferLen; i++){
+	for (int i=0; i<bufferLen; i++){
 
 		lineSize++;
-if((i == bufferLen) && (buffer[bufferLen] == '\n')) printf("\n NO ENTIENDO \n");
 		if (buffer[i] == '\n') {
-	printf("%d, ", i);
 			char* lineBuff = (char*) malloc(lineSize*sizeof(char));
 			memcpy(lineBuff, buffer + i + 1 - lineSize, lineSize);
 			++lineas;
@@ -48,21 +46,21 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 		(*buffer) = (char*)realloc((*buffer), bufferCap*sizeof(char));
 		readBytes = (unsigned)fread(
 				((*buffer) + bufferCap - (bufferSize +1)),
-				 1, (bufferSize +1),
+				 1, (bufferSize ),
 				 stream);
 
 		bufferLen += readBytes;
 
-	}while(	(readBytes == (bufferSize+1)) && !feof(stream) );
+	}while(	!feof(stream) );
 
-	if(feof(stream)){
+//	if(feof(stream)){
 		// si el archivo no termina con un salto de linea
 		// se lo agrega para normalizar todas las lineas
-		if((*buffer)[bufferLen-1] != '\n'){
-			(*buffer)[bufferLen] = '\n';
-			(*buffer)[bufferLen+1] = '\0';
-		}
-
-	}
+		if((*buffer)[bufferLen-1] != '\n')
+			(*buffer)[bufferLen++] = '\n';
+//			(*buffer)[bufferLen+1] = '\0';
+//		}
+//
+//	}
 	return bufferLen;
 }
