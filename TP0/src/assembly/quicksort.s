@@ -4,52 +4,6 @@
 	.abicalls
 	.text
 	.align	2
-	.globl	swap
-	.ent	swap
-swap:
-	.frame	$fp,24,$31		# vars= 8, regs= 2/0, args= 0, extra= 8
-	.mask	0x50000000,-4
-	.fmask	0x00000000,0
-	.set	noreorder
-	.cpload	$25
-	.set	reorder
-	subu	$sp,$sp,24
-	.cprestore 0
-	sw	$fp,20($sp)
-	sw	$28,16($sp)
-	move	$fp,$sp
-	sw	$4,24($fp)
-	sw	$5,28($fp)
-	sw	$6,32($fp)
-	lw	$2,28($fp)
-	sll	$3,$2,2
-	lw	$2,24($fp)
-	addu	$2,$3,$2
-	lw	$2,0($2)
-	sw	$2,8($fp)
-	lw	$2,28($fp)
-	sll	$3,$2,2
-	lw	$2,24($fp)
-	addu	$4,$3,$2
-	lw	$2,32($fp)
-	sll	$3,$2,2
-	lw	$2,24($fp)
-	addu	$2,$3,$2
-	lw	$2,0($2)
-	sw	$2,0($4)
-	lw	$2,32($fp)
-	sll	$3,$2,2
-	lw	$2,24($fp)
-	addu	$3,$3,$2
-	lw	$2,8($fp)
-	sw	$2,0($3)
-	move	$sp,$fp
-	lw	$fp,20($sp)
-	addu	$sp,$sp,24
-	j	$31
-	.end	swap
-	.size	swap, .-swap
-	.align	2
 	.globl	particionar
 	.ent	particionar
 particionar:
@@ -80,45 +34,45 @@ particionar:
 	lw	$4,56($fp)
 	lw	$5,68($fp)
 	lw	$6,64($fp)
-	la	$25,swap
+	la	$25,swapLine
 	jal	$31,$25
 	sw	$0,32($fp)
 	lw	$2,60($fp)
 	sw	$2,32($fp)
-$L19:
+$L18:
 	lw	$2,32($fp)
 	lw	$3,64($fp)
 	slt	$2,$2,$3
-	bne	$2,$0,$L22
-	b	$L20
-$L22:
+	bne	$2,$0,$L21
+	b	$L19
+$L21:
 	lw	$2,32($fp)
 	sll	$3,$2,2
 	lw	$2,56($fp)
 	addu	$2,$3,$2
 	lw	$4,0($2)
 	lw	$5,24($fp)
-	la	$25,strcmp
+	la	$25,linecmp
 	jal	$31,$25
-	bgez	$2,$L21
+	bgez	$2,$L20
 	lw	$4,56($fp)
 	lw	$5,32($fp)
 	lw	$6,28($fp)
-	la	$25,swap
+	la	$25,swapLine
 	jal	$31,$25
 	lw	$2,28($fp)
 	addu	$2,$2,1
 	sw	$2,28($fp)
-$L21:
+$L20:
 	lw	$2,32($fp)
 	addu	$2,$2,1
 	sw	$2,32($fp)
-	b	$L19
-$L20:
+	b	$L18
+$L19:
 	lw	$4,56($fp)
 	lw	$5,28($fp)
 	lw	$6,64($fp)
-	la	$25,swap
+	la	$25,swapLine
 	jal	$31,$25
 	lw	$2,28($fp)
 	move	$sp,$fp
@@ -148,11 +102,11 @@ quickSort_r:
 	sw	$5,60($fp)
 	sw	$6,64($fp)
 	lw	$2,56($fp)
-	beq	$2,$0,$L25
+	beq	$2,$0,$L24
 	lw	$2,60($fp)
 	lw	$3,64($fp)
 	slt	$2,$2,$3
-	beq	$2,$0,$L25
+	beq	$2,$0,$L24
 	lw	$3,60($fp)
 	lw	$2,64($fp)
 	addu	$3,$3,$2
@@ -184,11 +138,11 @@ quickSort_r:
 	jal	$31,$25
 	lw	$2,56($fp)
 	sw	$2,32($fp)
-	b	$L24
-$L25:
+	b	$L23
+$L24:
 	lw	$2,56($fp)
 	sw	$2,32($fp)
-$L24:
+$L23:
 	lw	$2,32($fp)
 	move	$sp,$fp
 	lw	$31,48($sp)

@@ -4,38 +4,6 @@
 	.abicalls
 	.text
 	.align	2
-	.ent	swap
-swap:
-	.frame	$fp,24,$31		# vars= 8, regs= 2/0, args= 0, extra= 8
-	.mask	0x50000000,-4
-	.fmask	0x00000000,0
-	.set	noreorder
-	.cpload	$25
-	.set	reorder
-	subu	$sp,$sp,24
-	.cprestore 0
-	sw	$fp,20($sp)
-	sw	$28,16($sp)
-	move	$fp,$sp
-	sw	$4,24($fp)
-	sw	$5,28($fp)
-	lw	$2,24($fp)
-	lw	$2,0($2)
-	sw	$2,8($fp)
-	lw	$3,24($fp)
-	lw	$2,28($fp)
-	lw	$2,0($2)
-	sw	$2,0($3)
-	lw	$3,28($fp)
-	lw	$2,8($fp)
-	sw	$2,0($3)
-	move	$sp,$fp
-	lw	$fp,20($sp)
-	addu	$sp,$sp,24
-	j	$31
-	.end	swap
-	.size	swap, .-swap
-	.align	2
 	.globl	stooge_sort
 	.ent	stooge_sort
 stooge_sort:
@@ -61,22 +29,20 @@ stooge_sort:
 	addu	$2,$2,-4
 	lw	$4,0($4)
 	lw	$5,0($2)
-	la	$25,strcmp
+	la	$25,linecmp
 	jal	$31,$25
-	blez	$2,$L3
+	blez	$2,$L14
 	lw	$2,52($fp)
-	sll	$3,$2,2
-	lw	$2,48($fp)
-	addu	$2,$3,$2
-	addu	$2,$2,-4
+	addu	$2,$2,-1
 	lw	$4,48($fp)
-	move	$5,$2
-	la	$25,swap
+	move	$5,$0
+	move	$6,$2
+	la	$25,swapLine
 	jal	$31,$25
-$L3:
+$L14:
 	lw	$2,52($fp)
 	sltu	$2,$2,3
-	bne	$2,$0,$L4
+	bne	$2,$0,$L15
 	lw	$3,52($fp)
 	li	$2,-1431699456			# 0xffffffffaaaa0000
 	ori	$2,$2,0xaaab
@@ -108,7 +74,7 @@ $L3:
 	move	$5,$2
 	la	$25,stooge_sort
 	jal	$31,$25
-$L4:
+$L15:
 	lw	$2,48($fp)
 	move	$sp,$fp
 	lw	$31,40($sp)

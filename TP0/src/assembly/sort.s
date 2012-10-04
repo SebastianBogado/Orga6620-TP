@@ -6,9 +6,6 @@
 	.align	2
 $LC0:
 	.ascii	"rb\000"
-	.align	2
-$LC1:
-	.ascii	"%s\000"
 	.text
 	.align	2
 	.globl	sort
@@ -101,9 +98,8 @@ $L29:
 	sll	$3,$2,2
 	lw	$2,24($fp)
 	addu	$2,$3,$2
-	la	$4,$LC1
-	lw	$5,0($2)
-	la	$25,printf
+	lw	$4,0($2)
+	la	$25,printLine
 	jal	$31,$25
 	lw	$2,36($fp)
 	addu	$2,$2,1
@@ -122,8 +118,8 @@ $L33:
 	sll	$3,$2,2
 	lw	$2,24($fp)
 	addu	$2,$3,$2
-	lw	$4,0($2)
-	la	$25,free
+	move	$4,$2
+	la	$25,freeLine
 	jal	$31,$25
 	lw	$2,36($fp)
 	addu	$2,$2,1
