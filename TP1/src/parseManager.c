@@ -5,33 +5,34 @@ unsigned cargarBuffer(char* *buffer, FILE* stream);
 
 
 unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
-
 	char* buffer = NULL;
+	int quedanLineas;
 	unsigned bufferLen;
-	unsigned lineSize = 0;
 
-	bufferLen = cargarBuffer(&buffer, stream);
+	while (!feof(stream)) {
+		quedanLineas = cargarBuffer(&buffer, stream);
 
-	for (int i=0; i<=bufferLen; i++){
+		// si no quedan mas lineas, y la ultima leída es valida, la escribe
+		if (quedanLineas ||
+		    (strcmp(buffer, (*pLinea)[lineas-1]) != 0)) {
 
-		lineSize++;
-
-		if (buffer[i] == '\n') {
-
-			char* lineBuff = (char*) malloc(lineSize*sizeof(char));
-			memcpy(lineBuff, buffer + i + 1 - lineSize, lineSize);
+			bufferLen = strlen(buffer);
 
 			++lineas;
-			(*pLinea) = (line**)realloc((*pLinea), lineas * sizeof(char*));
-			(*pLinea)[lineas-1] = createLine(lineBuff, lineSize);
-			lineSize = 0;
+			// reserva espacio para una nueva linea
+			(*pLinea) = (char**)realloc((*pLinea), lineas * sizeof(char*));
+			(*pLinea)[lineas-1] = NULL;
+			// reserva espacio para almacenar la linea guardada en el buffer
+			(*pLinea)[lineas-1] = (char*)realloc((*pLinea)[lineas-1], bufferLen+1);
+
+			strcpy((*pLinea)[lineas-1], buffer);
 		}
 	}
 
-    free(buffer);
+	free(buffer);
+
 	return lineas;
 }
-
 
 unsigned cargarBuffer(char* *buffer, FILE* stream){
 	const int len_buffer = 1024;
@@ -58,7 +59,7 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 		bufferLen = strlen(*buffer);
 		// Mientras que fgets no devuelva un puntero nulo y
 		// que el último char no sea un fin de línea, repetir
-	} while( !feof(stream) );
+	} while( resultadoFGetS && (*buffer)[bufferLen-1] != '\n' );
 
 	// si el archivo NO vacio
 	// no termina con un salto de linea

@@ -1,5 +1,6 @@
 #include "./parseManager.h"
 #include "./sort.h"
+#include "./stoogesort.h"
 #include <stdio.h>
 
 void sort(unsigned n, char* files[]) {
@@ -21,7 +22,7 @@ void sort(unsigned n, char* files[]) {
 	//No hay archivos por argumento
 		lineas =+ parseLineas(&pLinea, lineas, stdin);
 
-	pLinea = stoogesort(pLinea, 0, lineas);
+	stooge_sort(pLinea, 0, lineas);
 
 	//print salida
 	for (int i = 0; i < lineas; ++i)
