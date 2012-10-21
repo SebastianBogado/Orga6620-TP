@@ -13,8 +13,7 @@ unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream){
 		quedanLineas = cargarBuffer(&buffer, stream);
 
 		// si no quedan mas lineas, y la ultima leída es valida, la escribe
-		if (quedanLineas ||
-		    (strcmp(buffer, (*pLinea)[lineas-1]) != 0)) {
+		if (quedanLineas) {
 
 			bufferLen = strlen(buffer);
 
@@ -64,9 +63,14 @@ unsigned cargarBuffer(char* *buffer, FILE* stream){
 	// si el archivo NO vacio
 	// no termina con un salto de linea
 	// se lo agrega para normalizar todas las lineas
-	if (bufferLen > 0)
-    	if((*buffer)[bufferLen-1] != '\n')
-        	(*buffer)[bufferLen] = '\n';
+	if (!resultadoFGetS)
+		bufferLen = 0;
+	else
+		if (bufferLen > 0)
+			if ((*buffer)[bufferLen-1] != '\n') {
+				(*buffer)[bufferLen] = '\n';
+				(*buffer)[bufferLen+1] = '\0';
+			}
 
 	return bufferLen;
 }

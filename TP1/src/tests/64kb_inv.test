@@ -1,0 +1,926 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    A blob object is the content of a file. Blob objects have no file name, time stamps, or other metadata.
+    Aborting operations or backing out changes will leave useless dangling objects in the database. These are generally a small fraction of the continuously growing history of wanted objects. Git will automatically perform garbage collection when enough loose objects have been created in the repository. Garbage collection can be called explicitly using git gc --prune.[30]
+    A commit object links tree objects together into a history. It contains the name of a tree object (of the top-level source directory), a time stamp, a log message, and the names of zero or more parent commit objects.
+Another property of Git is that it snapshots directory trees of files. The earliest systems for tracking versions of source code, SCCS and RCS, worked on individual files and emphasized the space savings to be gained from interleaved deltas (SCCS) or delta encoding (RCS) the (mostly similar) versions. Later revision control systems maintained this notion of a file having an identity across multiple revisions of a project. However, Torvalds rejected this concept.[31] Consequently, Git does not explicitly record file revision relationships at any level below the source code tree.
+    As part of its toolkit design, Git has a well-defined model of an incomplete merge, and it has multiple algorithms for completing it, culminating in telling the user that it is unable to complete the merge automatically and manual editing is required.
+    A tag object is a container that contains reference to another object and can hold additional meta-data related to another object. Most commonly, it is used to store a digital signature of a commit object corresponding to a particular release of the data being tracked by Git.
+    A tree object is the equivalent of a directory. It contains a list of file names, each with some type bits and the name of a blob or tree object that is that file, symbolic link, or directory's contents. This object describes a snapshot of the source tree.
+        BitKeeper was not only the first source control system that I ever felt was worth using at all, it was also the source control system that taught me why there's a point to them, and how you actually can do things. So Git in many ways, even though from a technical angle it is very very different from BitKeeper (which was another design goal, because I wanted to make it clear that it wasn't a BitKeeper clone), a lot of the flows we use with Git come directly from the flows we learned from BitKeeper.[10]
+Characteristics
+Compatibility with existing systems/protocols
+Cryptographic authentication of history
+Data structures
+Distributed development
+Each object is identified by a SHA-1 hash of its contents. Git computes the hash, and uses this value for the object's name. The object is put into a directory mat
+Efficient handling of large projects
+        For the first 10 years of kernel maintenance, we literally used tarballs and patches, which is a much superior source control management system than CVS is, but I did end up using CVS for 7 years at a commercial company [Transmeta[9]] and I hate it with a passion. When I say I hate CVS with a passion, I have to also say that if there are any SVN [Subversion] users in the audience, you might want to leave. Because my hatred of CVS has meant that I see Subversion as being the most pointless project ever started. The slogan of Subversion for a while was "CVS done right", or something like that, and if you start with that kind of slogan, there's nowhere you can go. There is no way to do CVS right.[10]
+From this initial design approach, Git has developed the full set of features expected of a traditional SCM,[22] with features mostly being created as needed, then refined and extended over time.
+Garbage accumulates unless collected
+Git development began after many Linux kernel developers chose to give up access to BitKeeper, a proprietary SCM system that had previously been used to maintain the project.[7] The copyright holder of BitKeeper, Larry McVoy, had withdrawn free use of the product after he claimed that Andrew Tridgell had reverse-engineered the BitKeeper protocols.
+Git has two data structures: a mutable index that caches information about the working directory and the next revision to be committed; and an immutable, append-only object database.
+Git implements several merging strategies; a non-default can be selected at merge time:[37]
+Git's design is a synthesis of Torvalds's experience with Linux in maintaining a large distributed development project, along with his intimate knowledge of file system performance gained from the same project and the urgent need to produce a working system in short order. These influences led to the following implementation choices:
+Git's design was inspired by BitKeeper and Monotone.[20][21] Git was originally designed as a low-level version control system engine on top of which others could write front ends, such as Cogito or StGIT.[21] However, the core Git project has since become a complete revision control system that is usable directly.[22]
+Git (software)
+Git's primitives are not inherently a source code management (SCM) system. Torvalds explains,[39]
+    Git stores each newly created object as a separate file. Although individually compressed, this takes a great deal of space and is inefficient. This is solved by the use of "packs" that store a large number of objects in a single file (or network byte stream) called "packfile", delta-compressed among themselves. Packs are compressed using the heuristic that files with the same name are probably similar, but do not depend on it for correctness. A corresponding index file is created for each packfile, telling the offset of each object in the packfile. Newly created objects (newly added history) are still stored singly, and periodic repacking is required to maintain space efficiency. The process of packing the repository can be very computationally expensive. By allowing objects to exist in the repository in a loose, but quickly generated format, git allows the expensive pack operation to be deferred until later when time does not matter (e.g. the end of the work day). Git does periodic repacking automatically but manual repacking is also possible with the git gc command. For data integrity, both packfile and its index have SHA-1 checksum inside, and also the file name of packfile contains a SHA-1 checksum. To check integrity, run the git fsck command.
+    Git supports rapid branching and merging, and includes specific tools for visualizing and navigating a non-linear development history. A core assumption in Git is that a change will be merged more often than it is written, as it is passed around various reviewers. Branches in git are very lightweight: A branch in git is only a reference to a single commit. With its parental commits, the full branch structure can be constructed.
+    Git was designed as a set of programs written in C, and a number of shell scripts that provide wrappers around those programs.[28] Although most of those scripts have since been rewritten in C for speed and portability, the design remains, and it is easy to chain the components together.[29]
+History
+    However, the SCMs I've looked at make this hard. One of the things (the main thing, in fact) I've been working at is to make that process really efficient. If it takes half a minute to apply a patch and remember the changeset boundary etc. (and quite frankly, that's fast for most SCMs around for a project the size of Linux), then a series of 250 emails (which is not unheard of at all when I sync with Andrew, for example) takes two hours. If one of the patches in the middle doesn't apply, things are bad bad bad.
+    (If a patch apply takes three seconds, even a big series of patches is not a problem: if I get notified within a minute or two that it failed half-way, that's fine, I can then just fix it up manually. That's why latency is critical—if I'd have to do things effectively "offline", I'd by definition not be able to fix it up when problems happen).
+ign
+Implicit revision relationships have some significant consequences:
+    In many ways you can just see git as a filesystem — it's content-addressable, and it has a notion of versioning, but I really really designed it coming at the problem from the viewpoint of a filesystem person (hey, kernels is what I do), and I actually have absolutely zero interest in creating a traditional SCM system.
+In software development, Git (/ɡɪt/) is a distributed revision control and source code management (SCM) system with an emphasis on speed.[3] Git was initially designed and developed by Linus Torvalds for Linux kernel development; it has since been adopted by many other projects. Every Git working directory is a full-fledged repository with complete history and full revision tracking capabilities, not dependent on network access or a central server. Git is free software distributed under the terms of the GNU General Public License version 2.
+    It is slightly more expensive to examine the change history of a single file than the whole project.[32] To obtain a history of changes affecting a given file, Git must walk the global history and then determine whether each change modified that file. This method of examining history does, however, let Git produce with equal efficiency a single history showing the changes to an arbitrary set of files. For example, a subdirectory of the source tree plus an associated global header file is a very common case.
+    Like Darcs, BitKeeper, Mercurial, SVK, Bazaar and Monotone, Git gives each developer a local copy of the entire development history, and changes are copied from one such repository to another. These changes are imported as additional development branches, and can be merged in the same way as a locally developed branch.
+Linus Torvalds has quipped about the name "git", which is English slang for a stupid or unpleasant person. Torvalds said: "I'm an egotistical bastard, and I name all my projects after myself. First 'Linux', now 'git'."[4][5] The man page describes git as "the stupid content tracker".[6]
+Name
+    Now, BK wasn't a speed demon either (actually, compared to everything else, BK is a speed demon, often by one or two orders of magnitude), and took about 10–15 seconds per email when I merged with Andrew. HOWEVER, with BK that wasn't as big of an issue, since the BK<->BK merges were so easy, so I never had the slow email merges with any of the other main developers. So a patch-application-based SCM "merger" actually would need to be faster than BK is. Which is really really really hard.
+    octopus: This is the default when merging more than two heads.
+Periodic explicit object packing
+Pluggable merge strategies
+    recursive: This is the default when pulling or merging one branch, and is a variant of the three-way merge algorithm. "When there are more than one common ancestors that can be used for three-way merge, it creates a merged tree of the common ancestors and uses that as the reference tree for the three-way merge. This has been reported to result in fewer merge conflicts without causing mis-merges by tests done on actual merge commits taken from Linux 2.6 kernel development history. Additionally this can detect and handle merges involving renames."[38]
+    Renames are handled implicitly rather than explicitly. A common complaint with CVS is that it uses the name of a file to identify its revision history, so moving or renaming a file is not possible without either interrupting its history, or renaming the history and thereby making the history inaccurate. Most post-CVS revision control systems solve this by giving a file a unique long-lived name (a sort of inode number) that survives renaming. Git does not record such an identifier, and this is claimed as an advantage.[33][34] Source code files are sometimes split or merged as well as simply renamed,[35] and recording this as a simple rename would freeze an inaccurate description of what happened in the (immutable) history. Git addresses the issue by detecting renames while browsing the history of snapshots rather than recording it when making the snapshot.[36] (Briefly, given a file in revision N, a file of the same name in revision N−1 is its default ancestor. However, when there is no like-named file in revision N−1, Git searches for a file that existed only in revision N−1 and is very similar to the new file.) However, it does require more CPU-intensive work every time history is reviewed, and a number of options to adjust the heuristics.
+    Repositories can be published via HTTP, FTP, rsync, or a Git protocol over either a plain socket or ssh. Git also has a CVS server emulation, which enables the use of existing CVS clients and IDE plugins to access Git repositories. Subversion and svk repositories can be used directly with git-svn.
+    resolve: the traditional three-way merge algorithm.
+    So I'm writing some scripts to try to track things a whole lot faster. Initial indications are that I should be able to do it almost as quickly as I can just apply the patch, but quite frankly, I'm at most half done, and if I hit a snag maybe that's not true at all. Anyway, the reason I can do it quickly is that my scripts will not be an SCM, they'll be a very specific "log Linus' state" kind of thing. That will make the linear patch merge a lot more time-efficient, and thus possible.
+Some data flows and storage levels in the Git revision control system.
+Strong support for non-linear development
+    Support a distributed, BitKeeper-like workflow:
+    Take CVS as an example of what not to do; if in doubt, make the exact opposite decision. To quote Torvalds, speaking somewhat tongue-in-cheek:
+The development of Git began on 3 April 2005.[12] The project was announced on 6 April,[13] and became self-hosting as of 7 April.[12] The first merge of multiple branches was done on 18 April.[14] Torvalds achieved his performance goals; on 29 April, the nascent Git was benchmarked recording patches to the Linux kernel tree at the rate of 6.7 per second.[15] On 16 June, the kernel 2.6.12 release was managed by Git.[16]
+The first three criteria eliminated every pre-existing version control system, except for Monotone, and the fourth excluded everything.[10] So, immediately after the 2.6.12-rc2 Linux kernel development release,[10] he set out to write his own.[10]
+    The Git history is stored in such a way that the id of a particular revision (a "commit" in Git terms) depends upon the complete development history leading up to that commit. Once it is published, it is not possible to change the old versions without it being noticed. The structure is similar to a hash tree, but with additional data at the nodes as well as the leaves.[27] (Mercurial and Monotone also have this property.)
+The index serves as connection point between the object database and the working tree.
+The object database contains four types of objects:
+Toolkit-based design
+Torvalds had several design criteria:
+    Torvalds has described Git as being very fast and scalable,[23] and performance tests done by Mozilla showed it was an order of magnitude faster than some revision control systems, and fetching revision history from a locally stored repository can be one hundred times faster than fetching it from the remote server.[24][25] In particular, Git does not get slower as the project history grows larger.[26]
+Torvalds wanted a distributed system that he could use like BitKeeper, but none of the available free systems met his needs, particularly his performance needs. From an email he wrote on 7 April 2005 while writing the first prototype:[8]
+    Very high performance.
+    Very strong safeguards against corruption, either accidental or malicious.[10][11]
+While strongly influenced by BitKeeper, Torvalds deliberately attempted to avoid conventional approaches, leading to a unique design.[17] He developed the system until it was usable by technical users, then turned over maintenance on 26 July 2005 to Junio Hamano, a major contributor to the project.[18] Hamano was responsible for the 1.0 release on 21 December 2005,[19] and remains the project's maintainer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   1. ^ Hamano, Junio (2012-08-20). "[ANNOUNCE] Git 1.7.12". kernel mailing list. Retrieved 2012-08-20.
+   2. ^ "git/git.git/tree". git.kernel.org. Retrieved 2009-06-15.
+   3. ^ Linus Torvalds (2005-04-07). "Re: Kernel SCM saga..". linux-kernel mailing list. "So I'm writing some scripts to try to track things a whole lot f
+        a branch is a special mobile tag that is updated whenever a commit is made to that branch.
+            a branch is thus really a label that is always on the commit that most SCMs would call the branch/HEAD version.
+Adoption
+After the first "git clone" or "git init" operation, git sets the "current branch" to be "master" and will make sure that the working tree reflects the commit to which the "master" branch points. Each commit will have its parent set to the commit currently marked "master", and "master" will be moved to that new commit, ready for the next one.
+A Git repository — data and metadata — is completely contained within its directory, so a normal system-level copy (or rename, or delete) of an entire Git repository is a safe operation. The resulting copy is both independent of and unaware of the original.
+        a tag marks a particular commit and is only ever moved manually; other SCMs might call it a label.
+    BerliOS
+    Bitbucket
+Branches and tags
+    Branches and tags are very cheap and almost identical — they can be made whenever one wants to remember a particular point in development.
+            branches from other repositories are maintained in .git/refs/remotes
+ching the first two characters of its hash. The rest of the hash is used as the file name for that object.
+    CodePlex[54]
+            collectively, all the commits form a tree-like structure based on the parent relationship, whence the concept of branches derives.
+Commits
+    commits, representing checked-in versions of files and directories live in .git/objects
+    Comparison of open source software hosting facilities
+    Comparison of revision control software
+Configuration
+            creating a commit does not affect the working tree.
+        creating a commit (with "git commit") copies the staged changes into a new commit and then clears the index
+Data
+    Distributed revision control
+During a normal work session, one can choose to ask Git to note for later some or all of the differences between how the files are now and how Git's permanent repository remembers them. The place it remembers them is called "the staging area" (or index) and remembering them is called "staging". One can also remove or exclude selected changes from staging if it suits. Staging diffs is easy, and is similar in concept to creating a patch file. Staging is the precursor to committing those changes as a permanent record in the Git repository.
+        each commit has a reference to its parent commit(s).
+        each commit is uniquely identified to Git commands by a 40-character identifier, but it's usually sufficiently unique to provide only the first seven characters of it.
+        each commit represents a snapshot of the full tree of files current at the point the commit was created.
+        file changes explicitly added to the index are termed "staged changes".
+        file changes made but not (or not yet) added to the index are termed "unstaged changes".
+    Gerrit (software)
+    GitHub
+.gitignore
+Git is primarily developed on GNU/Linux, although it also supports most major operating systems including BSD, Solaris, OS X, and Microsoft Windows.[41]
+    Gitorious
+        .git/refs/heads/master contains a 40 character identifier for the commit that is the master branch. Much Git metadata is in plain text files.
+Git servers typically listen on TCP port 9418.[40]
+Git stores each revision of a file as a unique blob object. The relationships between the blobs can be found through examining the tree and commit objects. Newly added objects are stored in their entirety using zlib compression. This can consume a large amount of disk space quickly, so objects can be combined into packs, which use delta compression to save space, storing blobs as their changes relative to other blobs.
+            git will complain if a shortened identifier is ambiguous.
+Global settings
+    GNU Savannah
+    Google Code
+Hooks
+    hooks are within the .git directory and not therefore under source control, i.e., not cloned from remote repositories.
+Index (stage)
+    information about which remote repositories this repository can talk to, how local branches relate to remote branches, etc., lives in .git/config, in plain text.
+    it can refer to itself, to exclude itself from source control
+    it is outside the .git directory with the "normal" files, in order to keep it under source control: everyone in a project typically needs the same exclusions.
+    JavaForge (with pull requests to control source code contribution)
+    List of revision control software
+            local branches live in .git/refs/heads
+Metadata
+Portability
+Portal icon 	Free software portal
+References
+    Repo (script)
+See also
+See also: Comparison of open source software hosting facilities
+Source code hosting
+    SourceForge
+    special scripts that run for various source-control events to enforce policy.
+        staged and unstaged changes coexist harmlessly (and can be seen with "git status").
+Stash
+Terminology and structure
+The "behind the scenes" source control elements live within the .git/ directory at the root of the repository.
+The Dulwich implementation of Git is a pure Python software component for Python 2.[43]
+The Eclipse Foundation reported in its annual community survey that as of May 2012 Git is the primary source control system used by over 27% of professional software developers, an increase from 12.8% in 2011.[47] Open source directory Ohloh reports a similar uptake among open source projects.[48]
+The files and directories — the things typically considered to be "under source control, but checked out" that the user changes in an editor or otherwise — live under the top repository directory, but outside of its .git/ directory.
+The following Web sites provide free source code hosting for Git repositories:[53]
+    the index — a set of file changes being collected (with "git add") to create in the repository as a single commit (version)
+        the index can even be told to stage selected "hunks" (patches/blocks of change) within a file, while leaving other hunks within the very same file unstaged.
+The JGit implementation of Git is a pure Java software library, designed to be embedded in any Java application.[42]
+The libgit2 implementation of Git is an ANSI C software library, which can be built on multiple platforms including Microsoft Windows, Linux, Mac OS X, and BSD.[44] It is used as the basis for Git libraries for the Ruby and Python programming languages.[45][46]
+            the new commit becomes the current commit and incorporates the staged changes, so they no longer show up as differences between the commit and the working tree.
+    these are ways to refer to particular commits, and they live in .git/refs and .git/packed-refs
+    the stash ("git stash") is a special list of commits used to hold temporary changes.
+The UK IT jobs website itjobswatch.co.uk reports that as of July 2012, approximately 7% of UK permanent software development job openings list Git as a requirement,[49] compared to 19.9% for Subversion,[50] 9.1% for Microsoft Team Foundation Server,[51] and 2.6% for Visual SourceSafe.[52]
+The working environment looks much like it would as if Git wasn't around: the working tree is a normal directory with only the subtle presence of a .git directory to suggest otherwise.
+This is a plain text configuration file which contains filename patterns that git should consider invisible for the purposes of source control — e.g., *.o, *.class, bin/
+            unstaged changes thus continue to show as differences, until added to the index (or reverted).
+User preferences — real name, email address, preferences, command aliases, etc. — are held in a user's home directory in a file called ~/.gitconfig.
+Working environment
+Working tree
+La administración tal y como la conocemos hoy, es el resultado histórico integrado de
+la contribución acumulada de numerosos pioneros, algunos filósofos, otros físicos,
+economistas, estadistas y otros, entre los que se incluyen empresarios que con el transcurso
+del tiempo fueron desarrollando y divulgando obras y teorías en su campo de actividad.
+En toda su larga historia y hasta los inicios del Siglo XX, la administración se desarrolló
+con una lentitud impresionante. Sólo a partir de este siglo atravesó etapas de desarrollo de
+notable pujanza e innovación. En la actualidad la sociedad de la mayor parte de los países
+desarrollados en una sociedad pluralista de organizaciones, donde a mayoría de las
+obligaciones sociales (como la producción, a prestación de servicios especializados de
+educación o de atención hospitalaria, la garantía de la defensa nacional o la preservación del
+medioambiente), es confiada a organizaciones que son administradas por grupos directivos
+propios para poder ser más eficaces.
+A diferencia de lo anterior, a finales del siglo pasado la sociedad funcionaba de manera
+completamente diferente, a pesar de que en la historia de la humanidad siempre existió el
+trabajo, la historia de las organizaciones y de su administración, es un capítulo que comenzó
+en épocas recientes.
+En el transcurso de la historia de la humanidad siempre existió alguna forma
+rudimentaria de administrar las organizaciones, desde las más simples hasta las más
+complejas. La Revolución Industrial dio lugar al contexto industrial, tecnológico, social, político
+y económico de las situaciones. Problemas y variables a partir de los cuales se iniciaría la
+teoría clásica de la administración.
+La influencia de los pioneros y de los empresarios fue fundamental para la creación de
+las condiciones básicas que motivaron el surgimiento de las teorías administrativas.
+
+La administración tal y como la conocemos hoy, es el resultado histórico integrado de
+la contribución acumulada de numerosos pioneros, algunos filósofos, otros físicos,
+economistas, estadistas y otros, entre los que se incluyen empresarios que con el transcurso
+del tiempo fueron desarrollando y divulgando obras y teorías en su campo de actividad.
+En toda su larga historia y hasta los inicios del Siglo XX, la administración se desarrolló
+con una lentitud impresionante. Sólo a partir de este siglo atravesó etapas de desarrollo de
+notable pujanza e innovación. En la actualidad la sociedad de la mayor parte de los países
+desarrollados en una sociedad pluralista de organizaciones, donde a mayoría de las
+obligaciones sociales (como la producción, a prestación de servicios especializados de
+educación o de atención hospitalaria, la garantía de la defensa nacional o la preservación del
+medioambiente), es confiada a organizaciones que son administradas por grupos directivos
+propios para poder ser más eficaces.
+A diferencia de lo anterior, a finales del siglo pasado la sociedad funcionaba de manera
+completamente diferente, a pesar de que en la historia de la humanidad siempre existió el
+trabajo, la historia de las organizaciones y de su administración, es un capítulo que comenzó
+en épocas recientes.
+En el transcurso de la historia de la humanidad siempre existió alguna forma
+rudimentaria de administrar las organizaciones, desde las más simples hasta las más
+complejas. La Revolución Industrial dio lugar al contexto industrial, tecnológico, social, político
+y económico de las situaciones. Problemas y variables a partir de los cuales se iniciaría la
+teoría clásica de la administración.
+La influencia de los pioneros y de los empresarios fue fundamental para la creación de
+las condiciones básicas que motivaron el surgimiento de las teorías administrativas.
+EVOLUCIÓN DE LA TEORÍA ADMINISTRATIVA.
+ESCUELA CLÁSICA
+La Escuela Clásica es la que se ocupa del aumento de la eficiencia de la empresa a
+través de su organización y de la aplicación de principios científicos generales de la
+administración.
+A comienzos del presente siglo, dos ingenieros desarrollaron los trabajos pioneros de la
+administración. Uno es el estadounidense Frederick Winslow Taylor, quien desarrollo la
+llamada escuela de la administración científica, escuela que se preocupa por aumentar la
+eficiencia e la industria a través, inicialmente, de la racionalización el trabajo del obrero. El otro
+es el europeo Henri Fayol, quien desarrollo la llamada teoría clásica. Aunque los dos autores
+no se comunicaron entre sí y partieron de puntos de vistas diferentes y aun opuestos, lo cierto
+es que sus ideas constituyen las bases del llamado enfoque clásico o tradicional de la
+administración cuyos postulados dominaron casi las cuatro primeras décadas de este siglo en
+el panorama administrativo de las organizaciones.
+De este modo, en general, el enfoque clásico de la administración se constituyo por:
+1.
+De una parte, la escuela de administración científica desarrollada en los Estados
+Unidos a partir de los trabajos de Taylor. Esta escuela estaba constituida
+principalmente por ingenieros, como Frederick Winslow Taylor (1856–1915), Henry
+Lawrence Gantt (1861–1919), Frank Bunker Gilbreth (1868–1924), Harrington Emerson
+(1853–1931), y otros. Se suele incluir entre ellos a Henry Ford (1863–1947), por haber
+aplicado los principio de esta teoría en sus negocios.
+La preocupación básica era aumentar la productividad e la empresa mediante el
+aumento de la eficiencia en el nivel operacional, esto es, en el nivel de los obreros. De
+allí, el énfasis en el análisis y la división del trabajo del obrero u operario, toda vez que
+las tareas del cargo y e quien lo desempeñase, constituyen la unidad fundamental de la
+organización. En este sentido la administración científica desarrolla un enfoque de
+abajo hacia arriba (del obrero hacia el supervisor y el gerente) y de las partes (obreros
+y sus cargos) hacia el todo (organización empresarial). La atención se centra en el
+trabajo, en los movimiento necesarios para la ejecución de las tareas, en el tiempo
+estándar determinado para su la ejecución.
+2.
+De otro lado, la corriente de los anatomistas y fisiologistas de la organización,
+desarrollada en Francia con los trabajos pioneros de Fayol. Esta escuela esta formada
+principalmente por ejecutivos de la época principal por: Henri Fayol (1841-1925),
+James J Moooney, Lyndall f, Urwick (n. 1891), Luther Gulick y otros. Esta corriente
+cuya preocupación básica es aumentar la eficiencia de la empresa, a través de la forma
+y disposición de los órganos competentes de la organización (departamentos) y de sus
+interrelaciones estructurales se denomina teoría clásica. De allí, el énfasis en la
+anatomía (estructura) y en la fisiología (funcionamiento) de la organización. En este
+sentido, desarrolla un enfoque inverso a la administración científica: de arriba hacia
+abajo (de la dirección hacia la ejecución), del todo (organización) hacia sus partes
+componentes (departamentos). En síntesis y en visión global permitía una mejor
+manera de subdividir la empresa, centralizando la dirección en un jefe principal. Fue
+una corriente eminentemente teórica.
+Si la administración científica se caracterizaba por el énfasis en la tarea que realiza el
+obrero, la teoría clásica se caracteriza por el énfasis en la estructura que una organización
+debe tener para lograr la eficiencia. En realidad el objetivo de ambas teorías era el mismo: la
+búsqueda de la eficiencia de las organizaciones. Según la administración científica, esa
+eficiencia se alcanza a través de la racionalización del trabajo de obrero y de la sumatoria de la
+eficiencia individual.
+En la teoría clásica por el contrario se parte de un todo organizacional y de su
+estructura para garantizar la eficiencia en todas las partes involucradas, sean ellas órganos
+(secciones, departamentos, etc)., o personas (ocupantes de cargos o ejecutores de tareas). El
+microenfoque individual de cada obrero con relación a la tarea se amplia enormemente en la
+DESVENTAJAS.
+Las criticas a la escuela clásica son, numerosa contundentes y generalizadas, a
+continuación algunas de las principales desventajas:
+1.
+2.
+3.
+4.
+5.
+6.
+Enfoque simplificado de la organización formal.
+Ausencia de trabajos experimentales.
+El Ultrarracionalismo en la concepción de la administración.
+Teoría de la máquina.
+Enfoque incompleto de la organización.
+enfoque de sistema cerrado.
+Sin embargo, las críticas hechas a la teoría clásica no llegan a empañar el hecho de
+que ha ella de debemos las bases de la teoría administrativa moderna.
+ESCUELA DE LA CIENCIA DEL COMPORTAMIENTO.
+El enfoque del comportamiento se origino en la ciencia de la conducta, en especial la
+psicología organizacional. Con el enfoque del comportamiento la preocupación por la
+estructuran se desplaza hacia una preocupación por los procesos y la dinámica organizacional.
+En este enfoque predomina aún el énfasis en las personas, introducido por la teoría de las
+relaciones humanas, pero dentro de un contexto organizacional.
+La psicología individual se orientó posteriormente, con la teoría de las relaciones
+humanas y los trabajos de Kurt Lewin, hacia la denominada sicología social, la cual evoluciono
+hacia la psicología organizacional centrada más en el comportamiento organizacional – en el
+sentido amplio de la palabra- que el comportamiento humano propiamente dicho o en el
+comportamiento de pequeños grupos sociales, así éstos se dejan de lado. La psicología
+organizacional es la que más influye en esta teoría administrativa, surgió en 1947 en los
+Estados Unidos, con una fundamentación eminentemente democrática y humanista.
+En la administración la teoría del comportamiento tiene su mayor exponente en Herbert
+Alexander Simon, curiosamente ganador del premio Nobel de economía en 1978. Chester
+Barnard, Doglas McGregor, Rensis Likert y Chris Argyris son autores importantísimos en el
+desarrollo de esta teoría. En el campo estricto de la motivación humana se destacan Abraham
+Maslow, Frederick herzberg y David McClelland.
+APORTES A LA ADMINISTRACIÓN.
+Se han hecho notables e importantes contribuciones por esta escuela marca una
+profunda influencia de las ciencias del comportamiento en la administración, haciendo énfasis
+en el uso de la participación y las formas de manejar los conflictos que se originan en
+marcadas diferencias de opinión dentro de la organización. Así mismo esta escuela reconoce la
+influencia vital del ambiente y las restricciones sobre el comportamiento. Esto ha conducido a
+fructíferos descubrimientos respecto a las necesidades y motivaciones de los individuos en el
+trabajo, el uso de la autoridad, la importancia de lo irracional en el comportamiento de las
+personas y las relaciones informales dentro de un ambiente de trabajo
+IMPORTANCIA.
+El enfoque del comportamiento marca el más fuerte énfasis de las ciencias del
+comportamiento en la teoría administrativa y en la búsqueda de soluciones democráticas
+flexibles a los problemas organizacionales. Mientras la sociología influyo profundamente en el
+estructuralismo – y más específicamente la sociología organizacional -, el enfoque del
+comportamiento se origino en la ciencia de la conducta, en especial la psicología
+organizacional. Se considera al individuo como un ser sociopsicológico, y las tareas a que se
+enfrenta el gerente van desde comprender y conseguir los mejores esfuerzos de parte de un
+empleado al satisfacer sus necesidades psicológicas, hasta entender que representan la
+totalidad de la administración.
+VENTAJAS.
+v Demuestra la variedad de estilos de liderazgo a disposición del administrador.
+v Hace hincapiés en la en la existencia e importancia del sistema informal de conducta y de
+  relaciones, el cual no se consideraba en el enfoque clásico de la estructura
+  organizacional.
+v Concibe la administración como un sistema de decisiones, donde todo individuo es un
+  agente decisorio que se basa en informaciones que se recibe de su ambiente.
+v Presenta una serie de modelo y proposiciones para evitar conflictos entre los objetivos
+ individuales y los objetivos organizacionales.
+v
+La reciprocidad entre el individuo y organización y sus relaciones de intercambio son
+importantes para el estudio de las organizaciones.
+DESVENTAJAS.
+La contribución de la teoría del comportamiento a la teoría general de la administración
+es, sin duda alguna, definitiva e indiscutible. Sin embargo, en algunos aspectos la teoría del
+comportamiento presentó debilidades, puntos críticos y aspectos bien característicos; entre
+ellos podemos citar:
+1.
+2.
+3.
+4.
+Énfasis en las personas
+Enfoque más descriptivo que prescriptivo
+Profunda reformulación en la filosofía administrativa
+Dimensiones bipolares de la teoría del comportamiento.
+a.
+b.
+c.
+d.
+5.
+6.
+7.
+8.
+Análisis teórico vs. Análisis empírico
+Análisis macro vs. Análisis micro
+Organización formal vs. Organización informal
+Análisis cognitivo vs. Análisis afectivo
+Relatividad de las teorías de la motivación.
+Profunda influencia de las ciencias del comportamiento sobre la administración
+La administración como sistema de decisiones
+El análisis organizacional a partir del comportamiento
+ESCUELA CUANTITATIVA.
+La Escuela Cuantitativa surge con la concepción de la investigación de operaciones
+durante la Segunda Guerra Mundial. La preocupación de aplicar el método científico de
+investigación y experimentación en el mejoramiento de los armamentos y técnicas militares,
+llevó a Los Aliados a extender sus investigaciones de laboratorio al ámbito de las propias
+operaciones de guerra. Después de 1954, pasó gradualmente a utilizarse en empresas
+públicas norteamericanas, y posteriormente en empresas privadas, habida cuenta de su éxito
+en las operaciones militares.
+La Escuela Cuantitativa hace énfasis en el proceso (el proceso decisorio es la
+secuencia de pasos que conforman una decisión) decisorio bajo la forma de modelos
+matemáticos capaces de proporcionar soluciones a los problemas empresariales ya se en el
+área de recursos humanos, producción, comercialización, finanzas, o en la misma área de
+administración general. Buena parte de las decisiones administrativas pueden tomarse con
+base en las soluciones sustentadas en ecuaciones matemáticas que simulan situaciones
+reales que obedecen a determinadas leyes o regularidades.
+La teoría matemática de la Escuela Cuantitativa se preocupa por construir modelos
+matemáticos capaces de simular situaciones reales de la empresa. Se orienta principalmente
+hacia la solución de problemas en la toma de decisiones. A través de ella se reproduce la
+realidad, se usa generalmente para simular situaciones futuras y para evaluar la probabilidad
+de su ocurrencia. El modelo busca delimitar el área de acción de manera tal que indique hasta
+dónde puede llegar una situación futura dentro de ciertos límites razonables de ocurrencia.
+APORTES A LA ADMINISTRACIÓN.
+La Escuela Cuantitativa ha contribuido en todos los campos de la administración. Ha
+permitido nuevas técnicas de planeación y control en el empleo de los recursos materiales,
+financieros, humanos, etc. Y sobretodo, ha representado un formidable apoyo en la toma de
+decisiones en el sentido de optimizar la realización del trabajo, así como en el de disminuir los
+riesgos involucrados en todos los planes que afecten el futuro a corto o a largo plazo.
+IMPORTANCIA
+Dentro de los próximos años deberá presentarse una total revolución en las técnicas
+para tomar decisiones. El análisis matemático, la investigación de operaciones, el
+procesamiento electrónico de datos, el análisis de sistema y la simulación por computadoras,
+son técnicas utilizadas en operaciones programadas que antes eran ejecutadas por personal
+de oficina.
+Gradualmente, otros elementos no programados vienen siendo operacionalizados
+mediante estas técnicas (planeación, control de la producción, inventario, control de tráfico,
+materiales, etc.). La automatización y la racionalización de decisiones permitirá en sistemas
+bien estructurados el que en vez de tratar con personas imprevisibles y variables, (que deben
+ser persuadidas, estimuladas y recompensadas), el administrador diagnosticará problemas en
+forma analítica y objetiva. En esto reside la importancia del enfoque cuantitativo de la
+administración.
+VENTAJAS
+Permite manipular mediante la simulación situaciones reales, complejas y difíciles a
+través de la simplificación de la realidad, sean matemáticas o comportamentales, los modelos
+proporcionan un valioso instrumento de trabajo para que la administración pueda tratar sus
+problemas.
+DESVENTAJAS
+Desde el punto de vista de la teoría administrativa, la
+enormes limitaciones.
+1.
+2.
+3.
+4.
+5.
+6.
+Escuela Cuantitativa presenta
+El énfasis en modelos. Hay representación lógica de un problema. Claro está, los
+problemas pueden ser simples o complejos.
+El énfasis en los objetivos de un área-problema y el desarrollo de medidas de
+eficiencia, con el fin de determinar si una solución promete lograr el objetivo.
+El intento de incorporar en un solo análisis todas las variables de un problema, o al
+menos aquellas que parecen ser importantes para su solución.
+Es sólo una herramienta capaz de auxiliar a quien toma decisiones.
+Ella por sí sola no es la que toma las decisiones. Muchos problemas no pueden
+expresarse en términos cuantitativos, haciendo que la aplicación de la investigación de
+operaciones no sea viable.
+Muchos problemas son demasiado amplios para ser resueltos a través de técnicas
+analíticas, ni siquiera con la ayuda del computador.
+ESCUELA DE ENFOQUE DE SISTEMAS.
+Esta escuela destaca la interacción que se produce entre los diferentes elementos de
+una organización, las personas, la estructura, la tecnología y el medio. Surgio de los trabajos
+del biólogo alemán Ludwig Von Bertalanffy, publicados entre 1950 y 1968.
+La teoría general de sistemas afirma que las propiedades de los sistemas no pueden
+describirse significativamente en términos de sus elementos separados. La comprensión de los
+sistemas sólo ocurre cuando se estudian globalmente involucrando todas las
+interdependencias de sus partes.
+La teoría general de los sistemas se fundamenta en tres premisas básicas:
+a)
+Los sistemas existen dentro de sistemas
+b) Los sistema son abiertos. Esta premisa es consecuencia de la anterior. Cada
+  sistema que se examine, recibe y descarga algo en los otros sistemas,
+ generalmente en aquellos que le son contiguos. Los sistemas abiertos se
+caracterizan por un proceso de intercambio infinito con su ambiente, que son los
+otros sistemas.
+c) Las funciones de un sistema dependen de su estructura.
+  biológicos y mecánicos esta afirmación es intuitiva.
+Para los sistemas
+APORTES A LA ADMINISTRACIÓN.
+El pensar en términos de sistemas simplifica hasta cierto grado el entendimiento de las
+múltiples actividades con las cuales debe trabajar un gerente, y además lo capacita para
+considerar mejor la naturaleza de los complejos problemas que debe resolver, debido a que
+cada sistema tiene un insumo, un proceso y un producto, y es una unidad autónoma. También
+está relacionado a otro sistema de un orden más amplio y superior, así como con sus propios
+subsistemas, que representan la integración de un sistema de orden inferior.
+IMPORTANCIA
+El análisis sistemático de las organizaciones vivas permite revelar “lo general en lo
+particular”, y muestra las propiedades generales de las especies que son capaces de
+adaptarse y de sobrevivir en su ambiente característico. En ese sentido, las propiedades
+“gestálticas” de las organizaciones vivas no son reveladas por los demás métodos ordinarios
+del análisis científico. Los sistemas vivos, sean individuos u organizaciones, se analizan como
+sistemas abiertos que mantienen un continuo intercambio de materia/energía/información con
+el ambiente. La teoría de sistemas permite reconceptualizar los fenómenos dentro de un
+enfoque global para lograr la interrelación e integración de aspectos que son la mayoría de las
+veces de naturaleza completamente diferente.
+VENTAJAS.
+La teoría de los sistemas hace una clasificación de sistemas abiertos sistemas
+cerrados. El sistema abierto es el que mejor permite una análisis al mismo tiempo profundo y
+amplio de las organizaciones, puesto que las organizaciones se consideran sistemas abiertos,
+ya que su comportamiento es probabilístico y no determinístico. Ellos hacen parte de una
+sociedad mayor y están constituidos por partes menores que guardan una interdependencia
+entre sí. La organización necesita alcanzar una homeostasis o estado de equilibrio. Las
+organizaciones tienen fronteras o límites más o menos definidos, formulan objetivos y se
+caracterizan por la morfogénesis.
+DESVENTAJAS.
+De todas las teorías presentadas hasta ahora, la teoría de sistemas es la menos
+criticada, tal vez por el hecho de que aún no ha transcurrido suficiente tiempo para un análisis
+más profundo. Sin embargo, una evaluación crítica de la teoría de sistemas conduce a los
+siguientes aspectos:
+1. Confrontación entre teorías de sistemas abiertos y de sistemas cerrados.
+2. Características básicas del análisis sistémico.
+3. Carácter integrativo y abstracto de la teoría de sistemas.
+4. El efecto sinérgico de las organizaciones como sistema abierto.
+5. El hombre funcional.
+6. Un nuevo enfoque organizacional.
+ESCUELA DE ENFOQUE DE CONTINGENCIAS
+La teoría contingencial enfatiza en que no hay nada absoluto en las organizaciones ni
+en la teoría administrativa: todo es relativo y siempre depende algún factor. El enfoque
+contingencial explica que hay una relación funcional entre las condiciones del ambiente y las
+técnicas administrativa apropiadas para alcanzar eficazmente los objetivos de la organización.
+En esta relación funcional, las variables ambientales se consideran variables independientes en
+tanto que las técnicas administrativas se toman como variables dependientes. En realidad no
+existe causalidad directa entre estas variables pendientes e independientes ya que el ambiente
+no genera las técnicas administrativas. En vez de la relación causa-efecto, entre las variables
+independientes ambiente y las variables administrativas dependientes, existe una relación
+funcional del tipo “si... entonces”, mediante la cual es posible alcanzar los objetivos de la
+organización.
+La relación funcional entre las variables independientes y dependientes -implica que
+haya una relación de causa-efecto, pues la administración es activa y no depende pasivamente
+del ambiente cuando se aplica la administración contigencial. Ante todo se buscan relaciones
+funcionales entre el ambiente independiente y las técnicas administrativas dependientes que
+mejoren la eficacia de la práctica la administración contingencial. En el enfoque contingencial
+hay un aspecto pro-activo y no meramente reactivo; en este sentido, puede denominarse
+enfoque “si-entonces”. El reconocimiento, el diagnóstico y hi adaptación a la situación muy
+importantes para el enfoque contingencial; sin embargo, no son suficientes. Las relaciones
+funcionales entre las condiciones ambientales y las prácticas administrativas deben
+identificarse y especificarse constantemente.
+APORTES A LA ADMINISTRACIÓN.
+Algunos creen que el desarrollo del enfoque de contingencias con su énfasis
+situacional y la integración del entorno en la teoría y práctica administrativa, animará al gerente
+a utilizar las varias escuelas de administración en su trabajo. Dicho de otra manera, una mayor
+consideración acerca de los aspectos ambientales y situacionales de un problema dado,
+sugerirán un mayor uso de las diferentes escuelas en la solución de ese problema. Las
+contribuciones pertinentes de las varias escuelas de administración proporcionan así un
+método amplio, moderno y práctico para el estudio y la práctica de la administración.
+IMPORTANCIA
+La Escuela de contingencia busca comprender y explicar el modo como funcionaban
+las empresas en diferentes condiciones, que varían de acuerdo con el ambiente o contexto que
+la empresa escogió para operar. Esto significa que estas condiciones son dictadas “desde
+afuera” de la empresa; es decir, desde su ambiente. Tales contingencias externas pueden
+considerarse como oportunidades o como imperativos o restricciones que influyen sobre la
+estructura y los procesos internos de la organización.
+VENTAJAS
+Permite verificar que mucho de lo que ocurre en las organizaciones es consecuencia de
+lo que ocurre fuera de ellas, en el ambiente externo.
+Permite estudiar los ambientes y la interdependencia entre la organización y el ambiente.
+Las organizaciones escogen sus ambientes y después son condicionadas por ellos.
+DESVENTAJAS
+El conocimiento del ambiente se volvió vital para la comprensión de los mecanismo
+organizacionales.
+organización como un todo, con respecto a su estructura organizacional. Fayol, un ingeniero
+francés, fundador de la teoría clásica de la administración parte de un enfoque sintético, global
+y universal de la empresa, iniciando así una concepción anatómica y estructural que
+rápidamente desplazo la visión analítica y concreta de Taylor.
+Henri Fayol, pionero de la teoría clásica, es considerado, junto con Taylor, uno de los
+fundadores de la administración moderna.
+APORTES DE LA ESCUELA CLÁSICA
+La Escuela Clásica permitió definir funciones básicas de la empresa, el concepto de
+administración (prever, organizar, dirigir, coordinar y controlar) y los llamados principios
+generales de la administración como procedimiento universal aplicables en cualquier tipo de
+organización y empresa.
+IMPORTANCIA.
+El énfasis en la estructura lleva a que la organización sea entendida como una
+disposición de las partes (órganos) que constituyen, su forma y la interrelación entre dichas
+partes. Esta teoría de la organización se suscribe exclusivamente a la organización formal.
+Para tratar racionalmente la organización, esta debe caracterizarse por una división del trabajo
+y la correspondiente especialización de las partes (órganos) que la constituyen. La división del
+trabajo puede darse vertical (niveles de autoridad) y horizontalmente (departamentalización). El
+enfoque normativo y prescriptivo de la teoría clásica, se visualiza a través de los principios de
+administración que permite entender la estructura de la organización como un todo
+constituyente, además de las interrelaciones entre esas partes.
+VENTAJAS.
+v
+v
+v
+v
+v
+v
+En la teoría clásica se parte de un todo organizacional de su estructura para garantizar la
+eficiencia en todas las partes involucradas.
+Centraliza la dirección en un jefe principal.
+Aplica los principios científicos generales de la administración.
+Se señala el concepto amplio y comprensible de la administración como un conjunto de
+procesos estrechamente relacionados y unificados.
+Determina cuáles elementos de la administración (funciones del administrador) y cuáles
+principios generales debe seguir el administrador en su actividad.
+El enfoque normativo y prescriptivo de la teoría clásica se visualiza a través de los
+principios de administración.
+El análisis ambiental es bastante precario aún, y se requiere mucha investigación en el
+futuro.
+La teoría contingencial es eminentemente ecléctica e integradora, pero al mismo tiempo,
+relativista y situacional.
+En algunos aspectos parece que está teoría es mucho más una manera relativa de ver el
+mundo, que una teoría administrativa propiamente dicha.
+CONCLUSIÓN
+Cada una de las teorías administrativas aquí comentadas presenta un enfoque
+diferente para la administración de las organizaciones. Cada una de ellas refleja los fenómenos
+históricos, sociales, culturales y económicos de su época, así como los problemas que
+preocupaban a sus autores. Cada teoría presenta la solución o soluciones encontradas para
+determinadas circunstancias, teniendo en cuenta las variables identificadas y los temas más
+relevantes. Decir que una teoría es más acertada que otra no es correcto. Sería mejor decir
+que cada teoría presenta la solución dentro del enfoque escogido, conforme a las variables
+seleccionadas dentro o fuera de las organizaciones. El administrador puede intentar resolver un
+determinado problema administrativo dentro del enfoque clásico cuando la solución clásica
+parezca ser la más apropiada de acuerdo con las circunstancias o contingencias. También
+puede intentar resolverlo dentro del enfoque del comportamiento o estructuralista, si las
+circunstancias o contingencias así lo aconsejan. En esto reside el encanto de la Teoría General
+de la Administración: mostrar una variedad de opciones que están a disposición del
+administrador. A él corresponde diagnosticar la situación y aplicar el enfoque más indicado
+para el caso.
+El concepto de "gerente real" es fácil
+de comprender para cualquier persona
+que trabaje en organizaciones. Gerente
+real es aquel a quien el empleado
+siente espontáneamente que debe
+recurrir cuando enfrenta un problema
+que lo supera. Es quien de hecho
+determina el trabajo que hace el
+subordinado, y quien también de hecho
+lo evalúa. Este es un sentimiento muy
+vívido de la gente que trabaja. Gerente
+real es aquel que por su capacidad de
+comprensión y de decisión está en
+condiciones de agregar genuino valor
+al trabajo del subordinado.
+Se debe distinguir al gerente real del
+gerente formal. Ocurre con frecuencia
+que la gente tiene gerentes designados
+formalmente por el organigrama, pero
+que no son sus gerentes reales. Esta
+función es cumplida en muchos casos
+por el gerente indirecto. El "gerente
+real" y el "gerente formal" pueden
+coincidir o no en el mismo puesto. Para
+adelantar algo sobre el efecto de la
+organización sobre la gente, que
+trataremos abajo, el primer caso es
+"requerido", y el segundo "anti-
+requerido".
+El descubrimiento inesperado consiste
+en lo siguiente: al combinar ambos
+datos (el nivel de trabajo del puesto y el
+reconocimiento del gerente real) se
+detecta una curiosa regularidad: para
+que alguien sea reconocido como jefe
+real debe superar un cierto umbral
+definido de ID por encima del puesto
+del subordinado (ver figura). Estos
+umbrales se ubican en valores fijos en
+todas las organizaciones jerárquicas: 3
+meses, 1 año, 2 años, 5 años, etc. Por
+ejemplo, en la figura S1, S2 y S3
+reconocen como gerente real a G1,
+cruzando la línea de ID de tres meses,
+mientras que S3 y S4 reconocen a G2,
+cruzando la de cinco años.
+Dice Jaques que esta investigación se
+repitió más de cien veces en distintas
+organizaciones en países diversos, y
+que se encontró siempre la misma
+regularidad.2 Estos resultados apuntan
+al descubrimiento de una característica
+universal del trabajo humano: la
+existencia de estratos de trabajo
+discontinuos. Jaques utilizó el término
+"estratos" como un modo de subrayar
+el carácter fáctico, y no convencional,
+de estos niveles diferenciados.
+Para comprender la importancia de
+este descubrimiento, es necesario
+entender el significado humano de
+"gerente real". Esta figura designa a la
+persona con la que se puede trabajar
+en una relación de gerente-
+subordinado sin dañarse mutuamente
+en la necesidad de aplicar la propia
+capacidad a pleno. Cada uno de los
+2
+Jaques, Elliott, “A general theory of
+bureaucracy”, Heineman, 1986, página 134.
+dos "depende" del otro para hacer bien
+su trabajo, y cada uno tiene un margen
+pleno de decisión. Cada uno de los dos
+puede confiar en que el otro hará lo
+necesario para el éxito de ambos.
+Desde el punto de vista del diseño de
+organizaciones, este descubrimiento
+arroja indicaciones de la mayor
+importancia:
+Para cualquier organización dada,
+existe una y sólo una cantidad
+requerida de niveles orgánicos.
+Todos los puestos en relaciones
+gerente-subordinado deben
+diseñarse de modo tal que el
+primero quede en el estrato
+inmediato superior al segundo.
+Se había descubierto una propiedad
+inherente y esencial del trabajo
+humano. Había algo en la naturaleza
+humana que originaba este patrón
+repetido. ¿Qué era? La respuesta
+tardaría casi treinta años en llegar.
+
+El intervalo de discreción
+El nacimiento de la teoría de la
+Organización Natural está marcado por
+la preocupación por mantener la
+equidad en una organización laboral. El
+problema en cuestión era cómo
+remunerar equitativamente a gente que
+trabajaba en puestos con distintos
+niveles de responsabilidad. Es fácil
+aceptar que a mayor nivel de
+responsabilidad corresponde una
+mayor remuneración; sin embargo,
+cómo evaluar estos niveles
+diferenciados siempre ha sido un
+problema crítico para la satisfacción
+laboral, y sumamente difícil de resolver.
+Este problema fue enfrentado por Elliott
+Jaques en Glacier Metal Company,
+fabricante de rodamientos, con el activo
+patrocinio y participación de Wilfred
+Brown, CEO de la empresa. Esto
+ocurrió en Inglaterra, en la década de
+1950.
+Jaques trabajaba en estrecha
+colaboración con los representantes
+sindicales de la empresa, con quienes
+a lo largo de mucho tiempo mantuvo
+vínculos de colaboración y de amistad
+personal. El primer paso consistió en
+revisar los sistemas para evaluar
+puestos de trabajo en uso en la época,
+esencialmente basados en la
+evaluación por factores. Estas
+personas, conocedores directos del
+trabajo de producción en esta fábrica,
+se mostraron desencantados tanto con
+el método como con los resultados de
+estos sistemas. Según Jaques, decían:
+“Doc, esto no se refiere realmente al
+trabajo. Por ejemplo, lo que el ocupante
+del puesto tiene que saber hacer es
+algo propio de la persona, no del
+trabajo en sí.”
+Pasó un tiempo durante el cual no
+encontraron una solución satisfactoria a
+este problema, hasta que una tarde,
+según contaba Jaques en un pub,
+estos delegados le dijeron “Doc, el
+tiempo tiene algo que ver con esto.
+¿Porqué es que a los operarios se les
+paga por quincena, a los gerentes
+medios por mes y a los directores por
+año?”
+Esta intuición inicial, por la cual Jaques
+siempre dio crédito a estos delegados,
+llevó con el tiempo a lo que llamaría “El
+descubrimiento más grande de mi vida:
+que aquello que llamamos el intervalo
+de discreción arroja una medida simple,
+directa y objetiva del tamaño de un
+puesto.” 1
+Lo que dice la teoría del intervalo de
+discreción (ID) es en realidad simple:
+que existe una correlación fuerte y
+universal entre el peso sentido de
+responsabilidad de un puesto (es decir,
+el registro intuitivo que todos tenemos
+sobre los diferentes niveles de
+responsabilidad de distintos puestos), y
+la tarea o secuencia de tareas más
+larga durante la cual un gerente debe
+descansar en el buen criterio (la
+discreción) que emplea su subordinado
+para trabajar. Y este tiempo de
+completamiento de las tareas puede
+ser medido.
+El primer descubrimiento: la
+estratificación natural del trabajo
+humano
+Suele ocurrir en la historia de las
+ciencias que un descubrimiento lleva a
+otros. Esto fue lo que ocurrió con el ID.
+Hacia fines de la misma década
+emergió otro gran descubrimiento: la
+estratificación natural del trabajo
+humano.
+1
+Jaques, Elliott, “Social power and the CEO”,
+página 54 (traducción de H.S. “intervalo de
+discreción” es la traducción aceptada de “time-
+span of discretion”)
+Este es un pilar central de la Teoría de
+la Organización Natural. Tal es su
+importancia que en un tiempo se llamó
+Teoría de los sistemas estratificados.
+En el curso de investigaciones
+realizadas con otros fines, surgió este
+trascendental descubrimiento gracias al
+cruce de dos variables:
+El ID de una cantidad de puestos
+en distintas organizaciones, y
+El reconocimiento intuitivo del
+“gerente real.”
+El concepto de "gerente real" es fácil
+de comprender para cualquier persona
+que trabaje en organizaciones. Gerente
+El segundo descubrimiento: la
+paga sentida como justa
+Este es otro descubrimiento posibilitado
+por el ID. Sucintamente, consiste en lo
+siguiente. Contando con la información
+del nivel de trabajo de puestos, se
+pregunta a sus ocupantes en
+condiciones de confidencialidad cuál
+estiman que es una remuneración justa
+para las tareas que están realizando.
+Los resultados son llamativos. El valor
+monetario dado como respuesta no
+mantiene correlación significativa con:
+El tipo de ocupación, ni con
+el valor del puesto en el mercado,
+ni con
+la remuneración actual del sujeto
+interrogado.
+Pero sí mantiene una correlación
+significativa con el nivel de trabajo
+medido con el instrumento del
+intervalo de discreción.
+Estos valores son consistentes dentro
+de una misma zona económica. Es
+decir, las personas que tienen puestos
+de igual nivel de trabajo dentro de tal
+zona dan respuestas con márgenes
+pequeños de variación.
+Otra constatación valiosa es que los
+diferenciales de remuneración entre
+estratos se mantienen constantes en
+cualquier zona económica, sea pobre o
+rica. Los valores absolutos cambian de
+una zona a otra, pero los diferenciales
+se mantienen constantes.
+Desde un punto de vista práctico, este
+descubrimiento significa que es posible
+para una organización construir un
+sistema de remuneraciones que sea
+sentido como justo por las personas
+que trabajan en ella.
+Si, por ejemplo, en una zona Cada persona tiene un proceso mental
+económica la paga sentida como justa de máxima complejidad que puede
+ en la base del estrato III (ver figura) utilizar para resolver los problemas que
+ fuera de $ 5.000, la base del estrato IV le plantea el entorno. Este proceso
+ sería $ 10.000, la del estrato II $ 2.750, arroja la medida del potencial
+  y así sucesivamente. individual, o capacidad potencial actual.
+Este descubrimiento señala la Con fines de investigación, Jaques
+ existencia de un sentido innato de desarrolló un método llamado “análisis
+ equidad en la gente. Es el fundamento del discurso.” Para aplicarlo, se coloca
+ del sistema de compensaciones al sujeto cuyo proceso se quiere
+ propuesto por la Organización Natural, determinar en la situación de argüir tan
+  que se basa en sólo dos variables: el bien como puede para sostener una
+   nivel de trabajo del puesto y la afirmación sobre un tema que lo
+   evaluación del desempeño de sus compromete personalmente. El
+     ocupantes. Toda vez que un sistema discurso se graba y luego se transcribe,
+     de este tipo se ha puesto en práctica, y un especialista entrenado lo analiza.
+      ha originado una notable sensación de El resultado es la determinación del
+       equidad y de confianza mutua. proceso de mayor complejidad que
+                                    emplea la persona, lo cual a su vez
+“procesos mentales”
+Durante un largo tiempo s
+individual deben estar en el estrato
+inmediato superior.
+Elliott Jaques y Kathryn Cason
+realizaron dos experiencias
+rigurosamente controladas sobre la
+evaluación del potencial mediante dos
+métodos distintos. Estas
+investigaciones están publicadas en su
+obra “Human capability” (La capacidad
+humana.3) El primero se basa sobre los
+juicios intuitivos expresados sobre la
+capacidad potencial actual de una
+muestra de personas, solicitadas a sus
+gerentes directos, a los gerentes
+indirectos (jefes de sus jefes) y a los
+3
+Cason Hall & Co. Publishers Ltd., 1994
+

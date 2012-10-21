@@ -22,7 +22,8 @@ void sort(unsigned n, char* files[]) {
 	//No hay archivos por argumento
 		lineas =+ parseLineas(&pLinea, lineas, stdin);
 
-	stooge_sort(pLinea, 0, lineas);
+	if (lineas)
+		stooge_sort(pLinea, 0, lineas);
 
 	//print salida
 	for (int i = 0; i < lineas; ++i)
