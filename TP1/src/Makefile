@@ -9,5 +9,7 @@ asm:
 	$(CC) $(CFLAGS) -S main.c $(SOURCES)	
 gprof:
 	$(CC) $(CFLAGS) -pg main.c $(SOURCES) -o tp1
+test:
+	$(CC) $(CFLAGS) strcmp.S strcmpTest.c -o strcmpTest
 clean:
 	rm *.s *.o tp1 
