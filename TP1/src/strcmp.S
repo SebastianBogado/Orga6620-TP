@@ -5,7 +5,7 @@
 	.text
 	.align 2
 	.globl strcmp
-	.ent strcmp
+	.ent strcmp # <= no se para que es
 strcmp:
 	.frame $fp, 32, ra  # Reservar 32 bytes desde return address?
 	.set noreorder # ni 
@@ -36,7 +36,7 @@ loop:
 	addu $t1, $t1, $t3  # arr2 = arr2 + 4xi	
 	
 	# if arr1+4i != null
-    la $t4, 0(t0) 		# t4 = address arr1+4i
+ 	la $t4, 0(t0) 		# t4 = address arr1+4i
 	la $t5, 0(t1) 		# t4 = address arr2+4i
 	beqz $t4, break 	# if t4 == null 
 	beqz $t5, break 	# if t4 == null
@@ -69,12 +69,16 @@ lower:
 
 equals:
 	addiu $v0, zero, zero
+	b return
 
+exitErro:
+	addiu $v0, zero, -2	
+	
 return:
 	move sp, $fp
 	lw $ra, 28(sp)
-    lw $fp, 24(sp)
-    lw $gp, 20(sp)
-    addu $sp, $sp, 32
+	lw $fp, 24(sp)
+	lw $gp, 20(sp)
+	addu $sp, $sp, 32
     
 	jr $ra		
