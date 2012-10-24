@@ -1,4 +1,4 @@
-CFLAGS=-std=c99 -Werror -Wall
+CFLAGS=-std=c99  -Wall
 SOURCES=stoogesort.c sort.c parseManager.c
 
 all:

@@ -31,10 +31,9 @@ stoogesort:
 	
 	bleu $t2, $t1, exitError # End <= Begin
 	
-	lw $t3,0(t0) 	# t3 = array[0] 
-
-
-
+	sll $t1, $t1, 2 # beg x 4
+	sll $t2, $t2, 2 # end x 4
+	
 
 	lw $t3, zero		# t3 = 0
 	subu $t3, $t2, $t1 	# t3 = end - begin 
