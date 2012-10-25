@@ -74,7 +74,6 @@ errorExit:
 	addiu v0, zero, -2	
 	
 return:
-	move sp, $fp
 	lw ra, 28(sp)
 	lw $fp, 24(sp)
 	lw gp, 20(sp)
