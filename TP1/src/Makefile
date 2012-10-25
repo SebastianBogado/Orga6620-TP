@@ -10,6 +10,6 @@ asm:
 gprof:
 	$(CC) $(CFLAGS) -pg main.c $(SOURCES) -o tp1
 test:
-	$(CC) $(CFLAGS) strcmp.S strcmpTest.c -o strcmpTest
+	$(CC) $(CFLAGS) -g strcmp.S strcmpTest.c -o strcmpTest
 clean:
-	rm *.s *.o tp1 
+	rm *.o tp1 

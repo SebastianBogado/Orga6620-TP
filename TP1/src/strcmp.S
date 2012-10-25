@@ -20,15 +20,15 @@ strcmp:
 	sw a0, 16(sp) 		# Array 1
 	sw a1, 12(sp) 		# Array 2
 
-	ld t0, 16(sp) 		# arr1
-	ld t1, 12(sp) 		# arr2
+	lw t0, 16(sp) 		# arr1
+	lw t1, 12(sp) 		# arr2
 
 	beqz t0, errorExit
 	beqz t1, errorExit
 	
 	sw zero, 8(sp)
-	ld t2, 8(sp)  		# i = 0
-	
+	lw t2, 8(sp)  		# i = 0
+
 loop:
 	addu t0, t0, t3  # arr1 = arr1 + i	
 	addu t1, t1, t3  # arr2 = arr2 + i	
@@ -74,7 +74,6 @@ errorExit:
 	addiu v0, zero, -2	
 	
 return:
-	move sp, $fp
 	lw ra, 28(sp)
 	lw $fp, 24(sp)
 	lw gp, 20(sp)
