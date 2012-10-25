@@ -11,6 +11,7 @@ strcmp:
 	.cpload t9	   # idea 
 	.set reorder   # si van
 	subu sp, sp, 32
+	.cprestore 20
 	sw ra, 28(sp)
 	sw $fp, 24(sp)
 	sw gp, 20(sp)
@@ -29,28 +30,33 @@ strcmp:
 	ld t2, 8(sp)  		# i = 0
 	
 loop:
-	sll t3, t2, 2     # t3 = 4xi
-	addu t0, t0, t3  # arr1 = arr1 + 4xi	
-	addu t1, t1, t3  # arr2 = arr2 + 4xi	
+	addu t0, t0, t3  # arr1 = arr1 + i	
+	addu t1, t1, t3  # arr2 = arr2 + i	
 	
- 	la t4, 0(t0) 		# t4 = address arr1+4i
-	la t5, 0(t1) 		# t4 = address arr2+4i
-	beqz t4, break 	# if t4 == null 
-	beqz t5, break 	# if t4 == null
+ 	la t4, 0(t0) 		# t4 = address arr1+i
+	la t5, 0(t1) 		# t4 = address arr2+i
+	
+	srl t4, t4, 24		# conservo solo el primer byte
+	srl t5, t5, 24		# conservo solo el primer byte
+	
+	beqz t4, break 		# if t4 == null => el byte es null
+	beqz t5, break 		# if t4 == null => el byte es null
 
-	lw t4, 0(t0) 		# t4 = arr1[i]
+	lw t4, 0(t0) #ERROR ERROR ERROR		# t4 = arr1[i]
+	srl t4, t4, 24		# solo el primer caracter leido
 	lw t5, 0(t1) 		# t5 = arr2[i]
+	srl t5, t5, 24		# solo el primer caracter leido
 
 	bgt t4, t5, greater
 	blt t4, t5, lower
 	addiu t2, t2, 1 	# i = i++
-	b loop
+	b loop	
 
 break:	
 	beq t4, t5, equals	# both null	
-	beqz t4, lower			# arr1+4i == null, arr2+4i != null
-	beqz t5, greater		# arr1+4i != null, arr2+4i == null	
-	b errorExit				# misplaced breaki
+	beqz t4, lower		# arr1+4i == null, arr2+4i != null
+	beqz t5, greater	# arr1+4i != null, arr2+4i == null	
+	b errorExit		# misplaced breaki
 
 greater: 
 	addiu v0, zero, 1
