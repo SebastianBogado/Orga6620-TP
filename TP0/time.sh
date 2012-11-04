@@ -100,7 +100,7 @@ echo "ordenado" >> $OUT
 echo "orden invertido" >> $OUT
 #/usr/bin/time -p -a -o $OUT ./tp0 -s tests/128kb_inv.test > a.out
 echo "aleatorio" >> $OUT
-/usr/bin/time -p -a -o $OUT ./tp0 -s tests/1024kb_sorted.test > a.out
+#/usr/bin/time -p -a -o $OUT ./tp0 -s tests/1024kb_sorted.test > a.out
 
 
 rm a.out

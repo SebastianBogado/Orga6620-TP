@@ -17,10 +17,9 @@ line* createLine(char* buf, size_t size) {
 int linecmp(const line* a, const line* b) {
 	size_t idx_a = 0, idx_b = 0;
 	int res = 0;
-
 	// mientras cada char sea igual, y los índices no vayan más allá del tamaño
 	// sin contemplar el último char, que es el EOL
-	while (!res && idx_a < a->size-1 && idx_b < b->size-1)
+	while (!res && idx_a < a->size-1 && idx_b < b->size-1 )
 		res = *(a->str + idx_a++) - *(b->str + idx_b++);
 
 	// si todos los char son iguales, es menor la línea de menor tamaño

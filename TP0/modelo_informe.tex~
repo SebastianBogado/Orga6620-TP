@@ -87,8 +87,13 @@ Haremos uso entonces de dos herramientas distintas, el profiling del código (por
 
 \section{Métodos de ordenamiento}
 \subsection{Quicksort}
-El Quicksort es un algoritmo re pulenta
+*******AGREGAR todas las tildes, NO LO HICE para no romper la compilacion entre linux y windows****
 
+El Quicksort es un algoritmo recursivo del tipo divide y venceras, que consiste en dos etapas, una de particion del problema y otra de reordenamiento.
+
+Las etapas se intercalan de la siguiente forma: se elige arbitrariamente un elemento denominado \textbf{pivot}, y se reordena la particion de forma tal que los elementos mayores esten en la mitad superior al pivot, y los menores en la mitad inferior de la particion.
+Luego, se quita al pivot del problema y se opera recursivamente sobre las dos sub particiones generadas (aquella con los elemenos mayores y otra con los elementos menores al pivot).
+Una vez terminado el ordenamiento, a medida que retorna la funcion, se genera la particion ordenada.
 \subsection{Stooge sort}
 El Stooge sort es un algoritmo de ordenamiento recursivo muy ineficiente, de complejidad \BigO{n^{\log{3}/\log{1,5}}}.\\
 Realiza el intercambio entre el primer y último de los elementos si es el primero es mayor (en ordenamiento ascendente). Luego, si el conjunto está compuesto por al menos tres valores, entonces aplica Stooge sort a los primeros dos tercios, luego a los dos últimos tercios, y finalmente repite con los primeros dos tercios. 
@@ -99,7 +104,7 @@ Realiza el intercambio entre el primer y último de los elementos si es el primer
 El programa comienza verificando el primer parámetro recibido. Si no existe o no es reconocido, sucede el comportamiento por defecto, que es el mensaje de ayuda, información sobre el uso. Con esto, termina la ejecución. Otro camino rápido en la aplicación es al solicitar la versión, con el parámetro \texttt{-V} o \texttt{--version}.\\
 
 Si el primer parámetro solicitó un algoritmo de ordenamiento (\texttt{-q} o \texttt{--quick} para Quicksort y \texttt{-s} o \texttt{--stooge} para el Stooge sort), entra en el corazón del programa: la función
-\texttt{void sort(unsigned n, char* files[], line** (*sort\_func)(line** , unsigned ))}:
+\texttt{void sort(unsigned n, char* files[], \\line** (*sort\_func)(line** , unsigned ))}:
 
 \begin{itemize}
  \item \texttt{n}: la cantidad de archivos sobre los que se aplicará el ordenamiento. Si es cero, se tomará la entrada estándar.
@@ -142,41 +147,41 @@ Además de los archivos indicados en el enunciado, fueron agregadas mediciones so
 & & \multicolumn{3}{ c|}{Quicksort} & \multicolumn{3}{c|}{Stooge sort}\\ \cline{3-8}
 &   & Ordenado & Invertido & Aleatorio & Ordenado & Invertido & Aleatorio \\ \cline{1-8}
 \multicolumn{1}{|c}{\multirow{3}{*}{1kb}} &
-\multicolumn{1}{|c|}{real$^{*}$} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
+\multicolumn{1}{|c|}{real$^{*}$} &	 0.02 &	0.00 &	0.00 &	0.00 &	0.00 &	0.00 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user$^{*}$} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
+\multicolumn{1}{|c|}{user$^{*}$} &	0.00 &	0.00 &	0.00 &	0.00 &	0.00 &	0.00 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
 \multicolumn{1}{|c|}{sys$^{*}$} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \multicolumn{1}{|c}{\multirow{3}{*}{8kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.02 & 0.02 & 0.01 \\ \cline{2-8}
+\multicolumn{1}{|c|}{real} & 0.01 & 0.00 &0.00 & 0.02 & 0.02 & 0.02 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.01 & 0.01 & 0.01 \\ \cline{2-8}
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.02 & 0.02 & 0.02 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
 \multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \multicolumn{1}{|c}{\multirow{3}{*}{16kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.00 & 0.02 & 0.02 \\ \cline{2-8}
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.02 & 0.02 & 0.01 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.00 & 0.01 & 0.02 \\ \cline{2-8}
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.02 & 0.02 & 0.01 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
 \multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \multicolumn{1}{|c}{\multirow{3}{*}{32kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.17 & 0.17 & 0.17 \\ \cline{2-8}
+\multicolumn{1}{|c|}{real} & 0.01 & 0.01 &0.00 & 0.37 & 0.38 & 0.37 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.17 & 0.17 & 0.17 \\ \cline{2-8}
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.37 & 0.38 & 0.36 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
 \multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \multicolumn{1}{|c}{\multirow{3}{*}{64kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 1.44 & 1.44 & 1.44 \\ \cline{2-8}
+\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 3.77 & 3.77 & 3.78 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 1.44 & 1.43 & 1.44 \\ \cline{2-8}
+\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 3.76 & 3.76 & 3.78 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
 \multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \multicolumn{1}{|c}{\multirow{3}{*}{1024kb}} &
-\multicolumn{1}{|c|}{real} & 0.04 & 0.03 &0.03 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
+\multicolumn{1}{|c|}{real} & 0.17 & 0.17 &0.18 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.03 & 0.02 &0.03 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
+\multicolumn{1}{|c|}{user} & 0.15 & 0.14 &0.14 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.01 &0.01 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
 \end{tabular}
 \caption{Resultados comando Time } \label{tab001}
 \end{center}
@@ -199,20 +204,21 @@ A partir de ahí, el Stooge sort ya hace suficiente uso del procesador como para 
 En la figura~\ref{fig001} se muestra el gráfico del tiempo insumido por el Quicksort para las distintas muestras.\\
 En la figura~\ref{fig002} se muestra el gráfico del tiempo insumido por el Stooge sort para las distintas muestras, a excepción de la de 1024kb, porque demanda una escala que haría inapreciable la situación de las otras muestras.
 
-\begin{figure}[!htp]
-\begin{center}
-\includegraphics[width=1\textwidth]{quicksort.png}
-\end{center}
-\caption{Tiempo tomado para distintas muestras del Quicksort.} \label{fig001}
-\end{figure}
+%
+%	\begin{figure}[!htp]
+%	\begin{center}
+%	\includegraphics[width=1\textwidth]{}
+%	\end{center}
+%	\caption{Tiempo tomado para distintas muestras del Quicksort.} \label{fig001}
+%	\end{figure}
 
-\begin{figure}[!htp]
-\begin{center}
-\includegraphics[width=1.1\textwidth]{stoogesort.png}
-\end{center}
-\caption{Tiempo tomado para distintas muestras del Stooge sort.} \label{fig002}
-\end{figure}
-
+%	\begin{figure}[!htp]
+%	\begin{center}
+%	\includegraphics[width=1.1\textwidth]{}
+%	\end{center}
+%	\caption{Tiempo tomado para distintas muestras del Stooge sort.} \label{fig002}
+%	\end{figure}
+%
 
 Al momento de calcular el speedup de Quicksort contra Stooge sort, con la razón entre los tiempos de cada uno, las cifras obtenidas no lo permiten. El primero no arroja resultados apreciables por \textbf{time} en ninguna instancia sin contar la última, donde el Stooge sort es inmanejable.\\
 
@@ -238,35 +244,44 @@ La tabla~\ref{tab002} es la salida del \textbf{gprof}, en particular aquella con
 \hline          
 	time	&	seconds		&	seconds	&	calls	&	s/call	&	s/call	&	name \\    
 \hline
- 	91.87	&	1.53		&	1.53	&	448399	&	0.00	&	 0.00	&	particionar \\
+  98.46 	&  126.49  		& 126.49 	& 359372904 &   0.00    & 	0.00  	& linecmp 		\\
 \hline
-	2.40	&	1.57		&	0.04	&	448801	&	0.00	&	0.00	&	cargarBuffer \\
+  1.35  	&  128.23  		&   1.73  	& 448399    & 	0.00    & 	0.00  	& particionar	\\
 \hline
-	1.80	&	1.60		&	0.03	&	3565398	&	0.00	&	0.00	&	swap \\
+  0.16 		&  128.44  		&   0.21  	&      1    & 	0.21    & 	0.27  	& parseLineas 	\\
 \hline
-	1.80	&	1.63		&	0.03	&	1		&	0.03	&	0.07	&	parseLineas \\
+  0.11  	&  128.58  		&   0.14   	& 448800    & 	0.00    & 	0.00  	& printLine 	\\
 \hline
-	1.80	&	1.66		&	0.03	&	1		&	0.03	&	1.67	&	sort \\
+  0.06  	&  128.66  		&   0.08   	& 448800    & 	0.00    & 	0.00  	& freeLine 		\\
 \hline
-	0.60	&	1.67		&	0.01	&	1		&	0.01	&	1.57	&	quickSort\_r \\
+  0.04  	&  128.71  		&   0.06   	& 448800    & 	0.00    & 	0.00  	& createLine	\\
 \hline
-	0.00	&	1.67		&	0.00	&	1		&	0.00	&	0.00	&	check\_param \\
+  0.04  	&  128.76  		&   0.05  	& 3428822   & 	0.00    & 	0.00  	& swapLine 		\\
 \hline
-	0.00	&	1.67		&	0.00	&	1		&	0.00	&	1.57	&	quick\_sort \\
+  0.02  	&  128.78  		&   0.02    &    1     	& 	0.02   	& 	128.30  & quickSort\_r  \\
+\hline
+  0.02  	&  128.80  		&   0.02    &    1     	& 	0.02   	& 	128.80  & sort 			\\
+\hline
+  0.00  	&  128.80  		&   0.00    &    1     	& 	0.00    & 	0.00  	& cargarBuffer  \\
+\hline
+  0.00  	&  128.80  		&   0.00    &    1     	& 	0.00    & 	0.00  	& check\_param  \\
+\hline
+  0.00  	&  128.80  		&   0.00    &    1     	& 	0.00   	& 	128.30 	& quick\_sort   \\
 \hline
 \end{tabular}
 \caption{Ejemplo de tabla.} \label{tab002}
 \end{center}
 \end{table}
  
-Se aprecia en la tabla que la función particionar ocupa el 91,87\% del tiempo de ejecución de programa, convirtiéndola en la candidata para mejorar.\par
+
+Se aprecia en la tabla que la función de comparación de lineas implementada ocupa el 98.46\% del tiempo de ejecución de programa, convirtiéndola en la candidata para mejorar. Dicha función se convierte en una parte crítica del programa pues es invocada en cada decisión de intercambio de lineas. \par
 \medskip
 Para calcular el speedup máximo, usamos la fórmula:
 
 \begin{center}
 $ speedup total = 1/(1-f + f/SM)$\\
 \vspace{0.5cm}
-$ f = 0,9187 $; SM tiende a infinito por ser arbitrariamente mejorable\\
+$ f = 0,9846 $; SM tiende a infinito por ser arbitrariamente mejorable\\
 
 \vspace{0.5cm}
 
