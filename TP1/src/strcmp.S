@@ -34,14 +34,9 @@ strcmp:
 	beqz t0, errorExit
 	beqz t1, errorExit
 
-	move t2, zero	 	# t2 = i
-	
 loop:
-	addu t0, t0, t2  	# arr1 = arr1 + i	
-	addu t1, t1, t2 	# arr2 = arr2 + i	
-	
- 	lb t4, 0(t0) 		# t4 = arr1[i]
-	lb t5, 0(t1) 		# t5 = arr2[i]
+	lbu t4, 0(t0)
+	lbu t5, 0(t1)
 	
 	beqz t4, break 		# if t4 == null => byte 'i' is null (\0)
 	beqz t5, break 		# if t5 == null => byte 'i' is null (\0)	
@@ -49,7 +44,9 @@ loop:
 	bgt t4, t5, greater	# arr1[i] > arr2[i]
 	blt t4, t5, lower	# arr1[i] < arr2[i]
 	
-	addiu t2, t2, 1 	# i = i++
+	addiu t0, t0, 1  	# arr1 = arr1 + 1	
+	addiu t1, t1, 1 	# arr2 = arr2 + 1	
+	
 	b loop	
 
 break:	

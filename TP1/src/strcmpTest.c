@@ -15,8 +15,8 @@ int main(int argc, char* argv[]) {
 	char b3[10] = "aaa";
 	printf("strcmp(%s, %s) = %d\n", a3, b3, strcmp(a3, b3));
 	
-	char a4[10] = "aaaaa";
-	char b4[10] = "aaaab";
+	char a4[10] = "abcdd";
+	char b4[10] = "abcde";
 	printf("strcmp(%s, %s) = %d\n", a4, b4, strcmp(a4, b4));
 	
 	char a5[10] = "a";
