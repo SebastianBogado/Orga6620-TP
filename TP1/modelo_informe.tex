@@ -1,0 +1,273 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definición del tipo de documento.                                           %
+% Posibles tipos de papel: a4paper, letterpaper, legalpapper                  %
+% Posibles tamaños de letra: 10pt, 11pt, 12pt                                 %
+% Posibles clases de documentos: article, report, book, slides                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,10pt]{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Los paquetes permiten ampliar las capacidades de LaTeX.                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Paquete para inclusión de gráficos.
+\usepackage{graphicx}
+
+% Paquete para definir la codificación del conjunto de caracteres usado
+% (latin1 es ISO 8859-1).
+\usepackage[latin1]{inputenc}
+
+% Paquete para definir el idioma usado.
+\usepackage[spanish]{babel}
+
+\usepackage{multirow} 
+
+% Paquete para fórmulas matemáticas
+\usepackage{amsmath}
+\newcommand{\BigO}[1]{\ensuremath{\operatorname{1}\bigl(#1\bigr)}}
+
+%\usepackage{multicolumn} 
+
+% Título principal del documento.
+\title{		\textbf{Trabajo práctico 0: Infraestructura básica}}
+
+% Información sobre los autores.
+\author{	Alejandro García Marra, \textit{Padrón Nro. 91.516}                     \\
+            \texttt{ alemarra@gmail.com }                                              \\
+            Sebastián Javier Bogado, \textit{Padrón Nro. 91.707}                     \\
+            \texttt{ sebastian.j.bogado@gmail.com }                                              \\
+            \normalsize{Grupo Nro. 0 - 2do. Cuatrimestre de 2012}                       \\
+            \normalsize{66.20 Organización de Computadoras}                             \\
+            \normalsize{Facultad de Ingeniería, Universidad de Buenos Aires}            \\
+       }
+\date{}
+
+
+
+\begin{document}
+
+% Inserta el título.
+\maketitle
+
+% Quita el número en la primer página.
+\thispagestyle{empty}
+
+% Resumen
+\begin{abstract}
+
+El presente trabajo busca crear un programa que permita el ordenamiento de archivos a través del algoritmo Stooge sort, aproximando a un comportamiento minimalista del comando \textit{sort}.\\
+
+
+\textbf{ESTO VA????:}\\
+Sobre este programa, luego, se realizarán una serie de mediciones con el fin de determinar los desempeños relativos de cada implementación y las posibles mejoras a realizar. 
+Para esto haremos uso de los programas \textbf{time} y \textbf{gprof}.
+
+\end{abstract}
+
+\newpage
+\section{Introducción}
+
+Muchas veces tanto para programas recién terminados, como para aquellos que llevan un tiempo en funcionamiento, se desconoce realmente qué partes del programa insumen la mayor cantidad de recursos, sean estos de tiempo, carga de cpu, etc.
+Poseer esta información se torna en algo crítico cuando se busca realizar una mejora de performance en dicho programa. Sería poco útil intentar optimizar a ciegas, por no decir inútil.\\
+Haremos uso entonces de dos herramientas distintas, el profiling del código (por medio de \textit{gprof}) y la medición de los tiempos de ejecución (por medio de \textit{time}). 
+
+\subsection{Stooge sort}
+El Stooge sort es un algoritmo de ordenamiento recursivo muy ineficiente, de complejidad \BigO{n^{\log{3}/\log{1,5}}}.\\
+Realiza el intercambio entre el primer y último de los elementos si es el primero es mayor (en ordenamiento ascendente). Luego, si el conjunto está compuesto por al menos tres valores, entonces aplica Stooge sort a los primeros dos tercios, luego a los dos últimos tercios, y finalmente repite con los primeros dos tercios. 
+
+
+\section{Flujo del programa}
+
+El programa comienza verificando el primer parámetro recibido. Si no existe o no es reconocido, sucede el comportamiento por defecto, que es el mensaje de ayuda, información sobre el uso. Con esto, termina la ejecución. 
+Otro camino rápido en la aplicación es al solicitar la versión, con el parámetro \texttt{-V} o \texttt{--version}.\\
+
+En una ejecución normal, el primer parámetro comienza la lista de archivos a procesar.
+
+
+Una vez en la función \texttt{sort}, se arma el conjunto de líneas a ser reordeanadas recolectándolas de a un archivo por vez. Si no hubiera archivos, se trabaja con la entrada estándar con la misma función (\texttt{parseLineas}, que se detallará en breve).\\
+
+Armado el conjunto, se llama a la función stoogesort pasándole como parámetros el vector de líneas y la cantidad de elementos. Luego se imprimen por salda estándar y se libera la memoria reservada.\\
+
+
+La lectura de cada archivo sucede en la función \\
+\texttt{unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* stream)}:
+
+\begin{itemize}
+ \item \texttt{pLinea}: puntero a un arreglo de punteros a char
+ \item \texttt{lineas}: cantidad de elementos del arreglo
+ \item \texttt{stream}: archivo desde donde se llevarán a cabo las lecturas
+ \item \texttt{return}: cantidad de elementos en el arreglo después del proceso
+\end{itemize}
+
+Esta función carga en un buffer el archivo y lo recorre en busca del caracter de fin de línea. Por cada uno encontrado, se aloca espacio para un string, y se agrega al vector. Si el archivo no termina naturalmente como una línea, se agrega al final el \texttt{EOL}. Retorna con la cantidad de líneas cargadas (las acumuladas y las nuevas del archivo actual).
+
+
+\section{Mediciones}
+
+\subsection{Valores Obtenidos}
+
+En la tabla~\ref{tab001} se presentan las mediciones realizadas con \textbf{time} sobre ambos algoritmos de ordenamiento y con archivos de distintos tamaños.\\
+
+Además de los archivos indicados en el enunciado, fueron agregadas mediciones sobre archivos con tamaños arbitrarios, mayores, con el fin de mostrar de mejor manera las diferencias entre algoritmos.
+
+\begin{table}[!htp]
+\begin{center}
+\begin{tabular}{cc|c|c|c|} 
+\cline{3-5}
+& &\multicolumn{3}{c|}{Stooge sort}	\\ \cline{3-5}
+&   &Ordenado & Invertido & Aleatorio \\ \cline{1-5}
+\multicolumn{1}{|c}{\multirow{3}{*}{1kb}} &
+\multicolumn{1}{|c|}{real$^{*}$} & 0.00 & 0.00 & 0.00 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user$^{*}$} & 0.00 & 0.00 & 0.00 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys$^{*}$} &  0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c}{\multirow{3}{*}{8kb}} &
+\multicolumn{1}{|c|}{real} & 0.02 & 0.02 & 0.01 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.01 & 0.01 & 0.01 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c}{\multirow{3}{*}{16kb}} &
+\multicolumn{1}{|c|}{real} & 0.00 & 0.02 & 0.02 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.00 & 0.01 & 0.02 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c}{\multirow{3}{*}{32kb}} &
+\multicolumn{1}{|c|}{real} & 0.17 & 0.17 & 0.17 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 0.17 & 0.17 & 0.17 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c}{\multirow{3}{*}{64kb}} &
+\multicolumn{1}{|c|}{real} & 1.44 & 1.44 & 1.44 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & 1.44 & 1.43 & 1.44 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c}{\multirow{3}{*}{1024kb}} &
+\multicolumn{1}{|c|}{real} & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{user} & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-5}
+\multicolumn{1}{|c}{}                        &
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\end{tabular}
+\caption{Resultados comando Time } \label{tab001}
+\end{center}
+\end{table}
+
+$^{*}$ Referencia: 
+\begin{itemize}
+ \item real: \%e, tiempo total real usado por el proceso.
+ \item user: \%U, total de segundos-CPU usados por el proceso directamente.
+ \item sys : \%S, total de segundos-CPU utilizados por el systema en nombre del proceso.
+\end{itemize}
+
+
+
+\subsection{Análisis de los datos}
+
+La marcada diferencia entre la complejidad de los algoritmos se refleja en muestras tan chicas como la de 8kb. 
+A partir de ahí, el Stooge sort ya hace suficiente uso del procesador como para ser notado por time, mientras que el Quicksort hace lo propio recién en la muestra más grande, de 1024kb. En este caso, el Stooge sort se tornó intolerable.
+
+En la figura~\ref{fig001} se muestra el gráfico del tiempo insumido por el Quicksort para las distintas muestras.\\
+En la figura~\ref{fig002} se muestra el gráfico del tiempo insumido por el Stooge sort para las distintas muestras, a excepción de la de 1024kb, porque demanda una escala que haría inapreciable la situación de las otras muestras.
+
+
+\begin{figure}[!htp]
+\begin{center}
+%\includegraphics[width=1.1\textwidth]{stoogesort.png}
+\end{center}
+\caption{Tiempo tomado para distintas muestras del Stooge sort.} \label{fig002}
+\end{figure}
+
+
+BLASFJASGAJDFKGSDFGKSDFGADFg
+Al momento de calcular el speedup de Quicksort contra Stooge sort, con la razón entre los tiempos de cada uno, las cifras obtenidas no lo permiten. El primero no arroja resultados apreciables por \textbf{time} en ninguna instancia sin contar la última, donde el Stooge sort es inmanejable.\\
+
+Esto es porque la complejidad del Quicksort es, en promedio, \BigO{n \log(n)}, mientras que el Stooge sort es de \BigO{n^{2,7}}. Entonces, el speedup entre ambos algoritmos tiende a infinito exponencialmente, según crece el tamaño de la muestra.
+ÁSDFJAKSGLADMGKMASDFGKADFGADFG
+
+
+\section{Profiling}
+
+Como se pudo apreciar en la tabla de tiempos de la página anterior, el algoritmo de quicksort resulta extremadamente veloz para tamaños de archivos relativamente grandes. Decidimos, entonces, forzar un poco más al programa y hacer el profiling sobre un archivo desordenado de 32mb. Además, para que las funciones mismas de \textbf{gprof} tuvieran una incidencia despreciable en la prueba.\\
+Realizar esta misma prueba sobre el algoritmo Stooge sort, serí­a impracticable, ya que los tiempos demandados serían demasiado grandes.
+
+Un punto interesante a destacar son llamadas a métodos de ordenamiento: como era de esperarse, no se realizan llamadas al método stoogesort, lo cual confirma que el algoritmo no es utilizado.
+										
+										   Por otra parte, para el método quicksort\_r que implementa dicho algoritmo, tenemos cientos de miles de llamados. Esto era de esperarse debido a las dimensiones del archivo y la naturaleza recursiva del algoritmo utilizado.
+
+La tabla~\ref{tab002} es la salida del \textbf{gprof}, en particular aquella conocida como "flat profile". Muestra el uso de las funciones invocadas, ordenadas de mayor a menor según el porcentaje de tiempo de ejecución de cada una.
+
+\begin{table}[!htp]
+\begin{center}
+\begin{tabular}{|r|r|r|r|r|r|r|}
+\hline
+	\%		&	cumulative  &	self	&			&	self	&	total	& \\
+\hline          
+	time	&	seconds		&	seconds	&	calls	&	s/call	&	s/call	&	name \\    
+\hline
+\end{tabular}
+\caption{dfasdfasdfasdfasdfasdfasdfasdfasdfasfasdfasdfasdfasdfasdfasergaerg} \label{tab002}
+\end{center}
+\end{table}
+ 
+Se aprecia en la tabla que la función particionar ocupa el del tiempo de ejecución de programa, convirtiéndola en la candidata para mejorar.\par
+\medskip
+Para calcular el speedup máximo, usamos la fórmula:
+
+\begin{center}
+$ speedup total = 1/(1-f + f/SM)$\\
+\vspace{0.5cm}
+$ f = 0,$; SM tiende a infinito por ser arbitrariamente mejorable\\
+
+\vspace{0.5cm}
+
+$ Speedup maximo = 1/0 = 0$
+\end{center}
+
+
+\newpage
+
+\section{Comandos de ejecución y corridas de prueba}
+
+Comandos de Compilación:
+
+\begin{itemize}
+ \item make all: genera el programa, modo "release"
+ \item make debug: genera el programa con flags para debugging
+ \item make asm: genera los archivos Assemblies, sin generar el programa
+ \item make gprof: genera el programa con flags para \textbf{gprof}
+ \item make clean: remueve los archivos generados
+\end{itemize}
+
+Comandos de Ejecución:
+
+\begin{itemize}
+ \item tp1 [OPTIONS] [file...]
+ \item $<$stdout$>$ $|$ tp1 [OPTIONS]
+ \item -h, --help
+ \item -V, --version
+\end{itemize}
+
+
+
+\section{Conclusiones}
+
+El presente trabajo, a modo de introducción, nos inicializó en las herramientas que usaremos en los trabajos siguientes. % sinonimia cero
+
+Pudimos manejar la máquina virtual MIPS e interpretar un archivo de profiling, como si estuviésemos optimizando un programa real.
+
+Respecto de las velocidades observadas, podemos confirmar lo esperado a partir del análsis teórico. El algoritmo quicksort fue varios ordenes de magnitud más veloz que el stoogesort, al punto de poder procesar archivos que con el segundo no serían viables.
+% Citas bibliográficas.
+\begin{thebibliography}{99}
+
+\bibitem{HEN00} J. L. Hennessy and D. A. Patterson, ``Computer Architecture. A Quantitative
+Approach,'' 3ra Edición, Morgan Kaufmann Publishers, 2000.
+
+\end{thebibliography}
+
+\end{document}

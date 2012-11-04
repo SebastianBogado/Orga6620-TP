@@ -20,7 +20,6 @@ void sort(unsigned n, char* files[], line** (*sort_func)(line** , unsigned )) {
 	} else
 	//No hay archivos por argumento
 		lineas =+ parseLineas(&pLinea, lineas, stdin);
-
 	pLinea = sort_func(pLinea, lineas);
 
 	//print salida
