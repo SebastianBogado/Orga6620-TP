@@ -13,10 +13,11 @@ void stooge_sort(void* array, unsigned int i, unsigned int j) {
     if (strcmp(v[i], v[j-1]) > 0)
         swap(v, i, j-1);
 
-    if ( j >= 3 ) {
-        unsigned tercio = j / 3;
-        stooge_sort(v, 0, j - tercio);
-        stooge_sort(v + tercio, 0, j - tercio);
-        stooge_sort(v, 0, j - tercio);
+	unsigned n = j - i;
+    if ( n >= 3 ) {
+        unsigned tercio = n / 3;
+        stooge_sort(v, i, j - tercio);
+        stooge_sort(v, i + tercio, j);
+        stooge_sort(v, i, j - tercio);
     }
 }
