@@ -20,7 +20,7 @@ strcmp:
 	.cpload t9 
 	.set reorder   
 	subu sp, sp, TSF
-	.cprestore 20
+	.cprestore D_GP 
 	sw fp, D_FP(sp)
 	sw gp, D_GP(sp)
 	move fp, sp

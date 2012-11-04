@@ -3,21 +3,21 @@
 #define fp $fp
 #endif
 
-#define TSF		40
+#define TSF		56
 #define D_SRA	((TSF) - 4)
 #define D_RA	(D_SRA)
-#define D_FP	((D_SRA - 4)
-#define D_GP	((D_SRA - 8)
-#define D_S6	((D_SRA - 12)
-#define D_S5	((D_SRA - 16)
-#define D_S4	((D_SRA - 20)
-#define D_S3	((D_SRA - 24)
-#define D_S2	((D_SRA - 28)
-#define D_S1	((D_SRA - 32)
-#define D_S0	((D_SRA - 36)
+#define D_FP	((D_SRA) - 4)
+#define D_GP	((D_SRA) - 8)
+#define D_S6	((D_SRA) - 12)
+#define D_S5	((D_SRA) - 16)
+#define D_S4	((D_SRA) - 20)
+#define D_S3	((D_SRA) - 24)
+#define D_S2	((D_SRA) - 28)
+#define D_S1	((D_SRA) - 32)
+#define D_S0	((D_SRA) - 36)
 #define D_ARG0	(TSF)
 #define D_ARG1	((TSF) + 4)
-#define D_ARG1	((TSF) + 8)
+#define D_ARG2	((TSF) + 8)
 
 	.text
 	.align 2
@@ -32,6 +32,7 @@ stoogesort:
 	.set reorder
 
 	subu sp, sp, TSF
+	.cprestore D_S6
 	sw ra, D_RA(sp)
 	sw fp, D_FP(sp)
 	sw gp, D_GP(sp)
@@ -67,8 +68,8 @@ stoogesort:
 	jal strcmp
 	li t0, 1
 	blt v0, t0, no_swap		# no hay intercambio si strcmp retornó menor a 1
-	sw s3, s5				# array[begin] = array[end - 1]
-	sw s4, s6				# array[end - 1] = array[begin]
+	sw s3, 0(s5)				# array[begin] = array[end - 1]
+	sw s4, 0(s6)				# array[end - 1] = array[begin]
 	
 no_swap:	
 	subu t0, s2, s1			# t0 = end - begin = size 

@@ -1,5 +1,5 @@
 CFLAGS=-std=c99  -Wall
-SOURCES=stoogesort.c sort.c parseManager.c
+SOURCES=stoogesort.S sort.c parseManager.c
 
 all:
 	$(CC) $(CFLAGS) main.c $(SOURCES) -o tp1

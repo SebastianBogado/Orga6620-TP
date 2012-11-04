@@ -7,6 +7,6 @@
  * @param i		 primer elemento
  * @param j		 útlimo elemento
  */
-void stooge_sort(void* array, unsigned int i, unsigned int j);
+void stoogesort(void* array, unsigned int i, unsigned int j);
 
 #endif  // __STOOGE_SORT_H__

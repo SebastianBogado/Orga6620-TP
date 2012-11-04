@@ -7,7 +7,7 @@ void swap(char** array, int a, int b){
 	array[b] = aux;
 }
 
-void stooge_sort(void* array, unsigned int i, unsigned int j) {
+void stoogesort(void* array, unsigned int i, unsigned int j) {
 	char** v = (char**) array;
     // si el primero es mayor al último, intercambiar
     if (strcmp(v[i], v[j-1]) > 0)
@@ -16,8 +16,8 @@ void stooge_sort(void* array, unsigned int i, unsigned int j) {
 	unsigned n = j - i;
     if ( n >= 3 ) {
         unsigned tercio = n / 3;
-        stooge_sort(v, i, j - tercio);
-        stooge_sort(v, i + tercio, j);
-        stooge_sort(v, i, j - tercio);
+        stoogesort(v, i, j - tercio);
+        stoogesort(v, i + tercio, j);
+        stoogesort(v, i, j - tercio);
     }
 }
