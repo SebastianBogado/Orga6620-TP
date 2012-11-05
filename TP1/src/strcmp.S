@@ -28,15 +28,12 @@ strcmp:
 	sw a0, D_ARG0(sp) 	# Array 1
 	sw a1, D_ARG1(sp) 	# Array 2
 
-	move t0, a0		# t0 = arg0
-	move t1, a1		# t1 = arg1
-
-	beqz t0, errorExit
-	beqz t1, errorExit
+	beqz a0, errorExit
+	beqz a1, errorExit
 
 loop:
-	lbu t4, 0(t0)
-	lbu t5, 0(t1)
+	lbu t4, 0(a0)
+	lbu t5, 0(a1)
 	
 	beqz t4, break 		# if t4 == null => byte 'i' is null (\0)
 	beqz t5, break 		# if t5 == null => byte 'i' is null (\0)	
@@ -44,8 +41,8 @@ loop:
 	bgt t4, t5, greater	# arr1[i] > arr2[i]
 	blt t4, t5, lower	# arr1[i] < arr2[i]
 	
-	addiu t0, t0, 1  	# arr1 = arr1 + 1	
-	addiu t1, t1, 1 	# arr2 = arr2 + 1	
+	addiu a0, a0, 1  	# arr1 = arr1 + 1	
+	addiu a1, a1, 1 	# arr2 = arr2 + 1	
 	
 	b loop	
 
@@ -73,8 +70,6 @@ errorExit:
 return:
 	lw fp, D_FP(sp)
 	lw gp, D_GP(sp)
-	lw a0, D_ARG0(sp)
-	lw a1, D_ARG1(sp)
 	addu sp, sp, TSF
 	move sp, fp    
 

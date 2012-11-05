@@ -32,7 +32,7 @@ stoogesort:
 	.set reorder
 
 	subu sp, sp, TSF
-	.cprestore D_S6
+	.cprestore D_GP
 	sw ra, D_RA(sp)
 	sw fp, D_FP(sp)
 	sw gp, D_GP(sp)
