@@ -72,7 +72,9 @@ stoogesort:
 	
 	li t0, 1
 	blt v0, t0, no_swap		# strcmp return <1 => no swap
-	
+	sw s6, 0(s3)			# array[begin] = array[end - 1]
+	sw s5, 0(s4)			# array[end - 1] = array[begin]
+
 no_swap:	
 	subu t0, s2, s1			# t0 = end - begin = size 
 	li t1, 3
