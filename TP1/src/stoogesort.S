@@ -37,17 +37,17 @@ stoogesort:
 	sw fp, D_FP(sp)
 	sw gp, D_GP(sp)
 	move fp, sp
-	sw s0, D_S0(sp)
-	sw s1, D_S1(sp)
-	sw s2, D_S2(sp)
-	sw s3, D_S3(sp)
-	sw s4, D_S4(sp)
-	sw s5, D_S5(sp)
-	sw s6, D_S6(sp)
+	sw s0, D_S0(fp)
+	sw s1, D_S1(fp)
+	sw s2, D_S2(fp)
+	sw s3, D_S3(fp)
+	sw s4, D_S4(fp)
+	sw s5, D_S5(fp)
+	sw s6, D_S6(fp)
 	
-	sw a0, D_ARG0(sp) 		# array address
-	sw a1, D_ARG1(sp)  		# begin position
-	sw a2, D_ARG2(sp) 		# end position
+	sw a0, D_ARG0(fp) 		# array address
+	sw a1, D_ARG1(fp)  		# begin position
+	sw a2, D_ARG2(fp) 		# end position
 	
 	move s0, a0				# s0 = array
 	move s1, a1				# s1 = begin
@@ -67,13 +67,11 @@ stoogesort:
 	move a1, s6				# a1 = array[end - 1]
 	la t9,strcmp
 	nop
-	no
+	nop
 	jalr t9
 	
 	li t0, 1
 	blt v0, t0, no_swap		# strcmp return <1 => no swap
-	sw s3, 0(s5)			# array[begin] = array[end - 1]
-	sw s4, 0(s6)			# array[end - 1] = array[begin]
 	
 no_swap:	
 	subu t0, s2, s1			# t0 = end - begin = size 
@@ -113,32 +111,19 @@ no_swap:
 	jalr t9
 	
 return:
+	lw s0, D_S0(fp)
+	lw s1, D_S1(fp)
+	lw s2, D_S2(fp)
+	lw s3, D_S3(fp)
+	lw s4, D_S4(fp)
+	lw s5, D_S5(fp)
+	lw s6, D_S6(fp)
+	move sp, fp
 	lw ra, D_RA(sp)
 	lw fp, D_FP(sp)
 	lw gp, D_GP(sp)
-	move sp, fp
-	lw s0, D_S0(sp)
-	lw s1, D_S1(sp)
-	lw s2, D_S2(sp)
-	lw s3, D_S3(sp)
-	lw s4, D_S4(sp)
-	lw s5, D_S5(sp)
-	lw s6, D_S6(sp)
 	addiu sp, sp, TSF
 	
 	jr ra
 	.end stoogesort
 	
-	
-	
-
-
-
-
-
-
-
-
-
-
-

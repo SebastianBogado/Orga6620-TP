@@ -2,6 +2,9 @@
 #include "./sort.h"
 #include <stdio.h>
 
+void stoogesort(char** , unsigned int, unsigned int);
+
+
 void sort(unsigned n, char* files[]) {
 	char** pLinea = NULL;
 	unsigned lineas = 0;
