@@ -53,7 +53,7 @@ stoogesort:
 	move s1, a1				# s1 = begin
 	move s2, a2				# s2 = end
 	
-	ble t2, t1, return		# End <= Begin
+	ble s2, s1, return		# End <= Begin
 	
 	sll t0, s1, 2			# t0 = begin x 4
 	sub t1, s2, 1			# t1 = end - 1
@@ -65,11 +65,15 @@ stoogesort:
 	
 	move a0, s5				# a0 = array[begin]
 	move a1, s6				# a1 = array[end - 1]
-	jal strcmp
+	la t9,strcmp
+	nop
+	no
+	jalr t9
+	
 	li t0, 1
-	blt v0, t0, no_swap		# no hay intercambio si strcmp retornó menor a 1
-	sw s3, 0(s5)				# array[begin] = array[end - 1]
-	sw s4, 0(s6)				# array[end - 1] = array[begin]
+	blt v0, t0, no_swap		# strcmp return <1 => no swap
+	sw s3, 0(s5)			# array[begin] = array[end - 1]
+	sw s4, 0(s6)			# array[end - 1] = array[begin]
 	
 no_swap:	
 	subu t0, s2, s1			# t0 = end - begin = size 
@@ -81,17 +85,32 @@ no_swap:
 	move a0, s0				# a0 = array
 	move a1, s1				# a1 = begin
 	move a2, s3				# a2 = end - n/3
-	jal stoogesort			# stoogesort(array, begin, end - tercio)
+	
+	la t9,stoogesort
+	nop
+	nop
+	nop
+	jalr t9
 	
 	move a0, s0				# a0 = array
 	addu a1, s1, t2			# a1 = begin + n/3
 	move a2, s2				# a2 = end
-	jal stoogesort			# stoogesort(array, begin + tercio, end)
+
+	la t9,stoogesort
+	nop
+	nop
+	nop
+	jalr t9
 	
 	move a0, s0				# a0 = array
 	move a1, s1				# a1 = begin
 	move a2, s3				# a2 = end - n/3
-	jal stoogesort			# stoogesort(array, begin, end - tercio)
+
+	la t9,stoogesort
+	nop
+	nop
+	nop
+	jalr t9
 	
 return:
 	lw ra, D_RA(sp)
