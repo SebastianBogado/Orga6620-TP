@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.6.22)  24 OCT 2012 14:56
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.8)  8 NOV 2012 11:05
 entering extended mode
  %&-line parsing enabled.
 **modelo_informe.tex
 (./modelo_informe.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, spanish, galician, catalan, loaded.
+yphenation, loaded.
 (/usr/share/texmf-texlive/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texmf-texlive/tex/latex/base/size10.clo
@@ -67,6 +67,12 @@ File: babel.def 2008/07/06 v3.8l Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen105
 )
+
+Package babel Warning: No hyphenation patterns were loaded for
+(babel)                the language `Spanish'
+(babel)                I will use the patterns loaded for \language=0 instead.
+
+\l@spanish = a dialect from \language0
 \es@datefmt=\count89
 \es@quottoks=\toks17
 \es@quotdepth=\count90
@@ -75,9 +81,13 @@ Package babel Info: Making . an active character on input line 585.
 Package babel Info: Making < an active character on input line 630.
 Package babel Info: Making > an active character on input line 630.
 ))
-(/usr/share/texmf-texlive/tex/latex/multirow/multirow.sty
-\bigstrutjot=\dimen106
-)
+
+! LaTeX Error: File `multirow.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
 (/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip43
@@ -89,11 +99,11 @@ Package: amstext 2000/06/29 v2.01
 (/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks18
-\ex@=\dimen107
+\ex@=\dimen106
 ))
 (/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
-\pmbraise@=\dimen108
+\pmbraise@=\dimen107
 )
 (/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
@@ -110,7 +120,7 @@ LaTeX Info: Redefining \dots on input line 382.
 LaTeX Info: Redefining \cdots on input line 467.
 \Mathstrutbox@=\box26
 \strutbox@=\box27
-\big@size=\dimen109
+\big@size=\dimen108
 LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 \macc@depth=\count96
@@ -123,12 +133,12 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 \column@=\count101
 \maxfields@=\count102
 \andhelp@=\toks20
-\eqnshift@=\dimen110
-\alignsep@=\dimen111
-\tagshift@=\dimen112
-\tagwidth@=\dimen113
-\totwidth@=\dimen114
-\lineht@=\dimen115
+\eqnshift@=\dimen109
+\alignsep@=\dimen110
+\tagshift@=\dimen111
+\tagwidth@=\dimen112
+\totwidth@=\dimen113
+\lineht@=\dimen114
 \@envbody=\toks21
 \multlinegap=\skip44
 \multlinetaggap=\skip45
@@ -153,13 +163,13 @@ LaTeX Font Info:    ... okay on input line 48.
 (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count103
-\scratchdimen=\dimen116
+\scratchdimen=\dimen115
 \scratchbox=\box28
 \nofMPsegments=\count104
 \nofMParguments=\count105
 \everyMPshowfont=\toks23
 \MPscratchCnt=\count106
-\MPscratchDim=\dimen117
+\MPscratchDim=\dimen116
 \MPnumerator=\count107
 \everyMPtoPDFconversion=\toks24
 )
@@ -180,6 +190,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--89
  []
 
 
+Overfull \hbox (3.91843pt too wide) in paragraph at lines 90--91
+[]\OT1/cmr/m/n/10 Armado el con-jun-to, se lla-ma a la fun-ci^^Son stooge-sort 
+pas^^Sandole co-mo par^^Samet-
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 90--91
 
  []
@@ -190,17 +206,58 @@ Overfull \hbox (9.52472pt too wide) in paragraph at lines 93--95
 ream)\OT1/cmr/m/n/10 : 
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
+
+Underfull \hbox (badness 10000) in paragraph at lines 110--112
 
  []
 
+[2]
+! Undefined control sequence.
+\@sharp ->\multirow 
+                    {3}{*}{1kb}
+l.119 \multicolumn{1}{|c}{\multirow{3}{*}{1kb}}
+                                                &
+? 
+! Undefined control sequence.
+\@sharp ->\multirow 
+                    {3}{*}{8kb}
+l.125 \multicolumn{1}{|c}{\multirow{3}{*}{8kb}}
+                                                &
+? 
+! Undefined control sequence.
+\@sharp ->\multirow 
+                    {3}{*}{16kb}
+l.131 \multicolumn{1}{|c}{\multirow{3}{*}{16kb}}
+                                                 &
+? 
+! Undefined control sequence.
+\@sharp ->\multirow 
+                    {3}{*}{32kb}
+l.137 \multicolumn{1}{|c}{\multirow{3}{*}{32kb}}
+                                                 &
+? 
+! Undefined control sequence.
+\@sharp ->\multirow 
+                    {3}{*}{64kb}
+l.143 \multicolumn{1}{|c}{\multirow{3}{*}{64kb}}
+                                                 &
+? 
+! Undefined control sequence.
+\@sharp ->\multirow 
+                    {3}{*}{1024kb}
+l.149 \multicolumn{1}{|c}{\multirow{3}{*}{1024kb}}
+                                                   &
+? 
+
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
+
+ []
+
+
+LaTeX Warning: Reference `fig001' on page 3 undefined on input line 177.
+
 [3]
-
-LaTeX Warning: Reference `fig001' on page 4 undefined on input line 175.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 187--189
+Underfull \hbox (badness 10000) in paragraph at lines 188--191
 
  []
 
@@ -210,31 +267,32 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2199 strings out of 494999
- 26653 string characters out of 1180816
- 95281 words of memory out of 3000000
- 5388 multiletter control sequences out of 15000+50000
- 11312 words of font info for 41 fonts, out of 3000000 for 9000
- 54 hyphenation exceptions out of 8191
- 27i,9n,27p,427b,273s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 2199 strings out of 495061
+ 26553 string characters out of 1182621
+ 95066 words of memory out of 3000000
+ 5382 multiletter control sequences out of 15000+50000
+ 11622 words of font info for 42 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 27i,9n,27p,427b,256s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
-/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texliv
-e/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
-fonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmt
-i10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></u
-sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on modelo_informe.pdf (6 pages, 203628 bytes).
+xlive/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
+/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cms
+y7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
+r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/tex
+mf-texlive/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmtt12.pfb>
+Output written on modelo_informe.pdf (6 pages, 218164 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
+ 93 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
