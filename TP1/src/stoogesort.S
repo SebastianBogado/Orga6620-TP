@@ -79,8 +79,8 @@ no_swap:
 	subu t0, s2, s1			# t0 = end - begin = size 
 	li t1, 3
 	blt t0, t1, return		# if size < 3, return
-	div t2, t0, t1			# t2 = size/3
-	sub s3, s2, t2			# s3 = end - t2 = end - n/3
+	div s6, t0, t1			# s6 = size/3
+	sub s3, s2, s6			# s3 = end - s6 = end - n/3
 	
 	move a0, s0				# a0 = array
 	move a1, s1				# a1 = begin
@@ -93,7 +93,7 @@ no_swap:
 	jalr t9
 	
 	move a0, s0				# a0 = array
-	addu a1, s1, t2			# a1 = begin + n/3
+	addu a1, s1, s6			# a1 = begin + n/3
 	move a2, s2				# a2 = end
 
 	la t9,stoogesort
