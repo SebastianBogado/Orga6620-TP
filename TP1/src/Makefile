@@ -8,11 +8,7 @@ cdebug:
 	$(CC) $(CFLAGS) -g main.c $(CSOURCES) -o tp1_c
 debug:
 	$(CC) $(CFLAGS) -g main.c $(SOURCES) -o tp1
-asm:
-	$(CC) $(CFLAGS) -S main.c $(SOURCES)	
 gprof:
 	$(CC) $(CFLAGS) -pg main.c $(SOURCES) -o tp1
-test:
-	$(CC) $(CFLAGS) -g strcmp.S strcmpTest.c -o strcmpTest
 clean:
-	rm *.o tp1 
+	rm *.o tp1 tp1_c 
