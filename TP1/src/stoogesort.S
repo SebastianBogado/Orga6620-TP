@@ -1,4 +1,5 @@
 #include <mips/regdef.h>
+
 #ifndef fp
 #define fp $fp
 #endif
@@ -15,8 +16,10 @@
 #define D_S2	((D_SRA) - 28)
 #define D_S1	((D_SRA) - 32)
 #define D_S0	((D_SRA) - 36)
+
 #define D_ARG0	(TSF)
 #define D_ARG1	((TSF) + 4)
+
 #define D_ARG2	((TSF) + 8)
 
 	.text
@@ -32,26 +35,36 @@ stoogesort:
 	.set reorder
 
 	subu sp, sp, TSF
-	.cprestore D_GP
+	.cprestore D_GP   #NO LO TIENE
 	sw ra, D_RA(sp)
 	sw fp, D_FP(sp)
 	sw gp, D_GP(sp)
 	move fp, sp
+
 	sw s0, D_S0(fp)
 	sw s1, D_S1(fp)
 	sw s2, D_S2(fp)
 	sw s3, D_S3(fp)
 	sw s4, D_S4(fp)
 	sw s5, D_S5(fp)
-	sw s6, D_S6(fp)
+	sw s6, D_S6(fp)			# Guardados para el return
 	
 	sw a0, D_ARG0(fp) 		# array address
 	sw a1, D_ARG1(fp)  		# begin position
 	sw a2, D_ARG2(fp) 		# end position
 	
-	move s0, a0				# s0 = array
-	move s1, a1				# s1 = begin
-	move s2, a2				# s2 = end
+	move s0, zero			# Inicializo para evitar basura
+	move s1, zero	
+	move s2, zero	
+	move s3, zero	
+	move s4, zero	
+	move s5, zero	
+	move s6, zero	
+	
+	
+	move s0, a0			# s0 = array
+	move s1, a1			# s1 = begin
+	move s2, a2			# s2 = end
 	
 	ble s2, s1, return		# End <= Begin
 	
@@ -63,8 +76,9 @@ stoogesort:
 	lw s5, 0(s3)			# s5 = array[begin]
 	lw s6, 0(s4)			# s6 = array[end - 1]
 	
-	move a0, s5				# a0 = array[begin]
-	move a1, s6				# a1 = array[end - 1]
+	move a0, s5			# a0 = array[begin]
+	move a1, s6			# a1 = array[end - 1]
+	
 	la t9,strcmp
 	nop
 	nop
@@ -79,35 +93,32 @@ no_swap:
 	subu t0, s2, s1			# t0 = end - begin = size 
 	li t1, 3
 	blt t0, t1, return		# if size < 3, return
-	div t2, t0, t1			# t2 = size/3
-	sub s3, s2, t2			# s3 = end - t2 = end - n/3
+	div s6, t0, t1			# t2 = size/3
+	sub s3, s2, s6			# s3 = end - t2 = end - n/3
 	
-	move a0, s0				# a0 = array
-	move a1, s1				# a1 = begin
-	move a2, s3				# a2 = end - n/3
+	move a0, s0			# a0 = array
+	move a1, s1			# a1 = begin
+	move a2, s3			# a2 = end - n/3
 	
 	la t9,stoogesort
-	nop
 	nop
 	nop
 	jalr t9
 	
-	move a0, s0				# a0 = array
-	addu a1, s1, t2			# a1 = begin + n/3
-	move a2, s2				# a2 = end
+	move a0, s0			# a0 = array
+	addu a1, s1, s6			# a1 = begin + n/3
+	move a2, s2			# a2 = end
 
 	la t9,stoogesort
-	nop
 	nop
 	nop
 	jalr t9
 	
-	move a0, s0				# a0 = array
-	move a1, s1				# a1 = begin
-	move a2, s3				# a2 = end - n/3
+	move a0, s0			# a0 = array
+	move a1, s1			# a1 = begin
+	move a2, s3			# a2 = end - n/3
 
 	la t9,stoogesort
-	nop
 	nop
 	nop
 	jalr t9
@@ -126,6 +137,6 @@ return:
 	lw gp, D_GP(sp)
 	addiu sp, sp, TSF
 	
-	jr ra
+	j ra
 	.end stoogesort
 	

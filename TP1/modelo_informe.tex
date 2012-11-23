@@ -56,12 +56,7 @@
 % Resumen
 \begin{abstract}
 
-El presente trabajo busca crear un programa que permita el ordenamiento de archivos a través del algoritmo Stooge sort, aproximando a un comportamiento minimalista del comando \textit{sort}.\\
-
-
-\textbf{ESTO VA????:}\\
-Sobre este programa, luego, se realizarán una serie de mediciones con el fin de determinar los desempeños relativos de cada implementación y las posibles mejoras a realizar. 
-Para esto haremos uso de los programas \textbf{time} y \textbf{gprof}.
+El presente trabajo busca crear un programa que permita el ordenamiento de archivos a través del algoritmo Stooge sort, aproximando a un comportamiento minimalista del comando \textit{sort}. Se comparar\'a la versi\'on implementada en C contra la misma funci\'on escrita en assembly\\
 
 \end{abstract}
 
@@ -73,7 +68,7 @@ Poseer esta información se torna en algo crítico cuando se busca realizar una me
 Haremos uso entonces de dos herramientas distintas, el profiling del código (por medio de \textit{gprof}) y la medición de los tiempos de ejecución (por medio de \textit{time}). 
 
 \subsection{Stooge sort}
-El Stooge sort es un algoritmo de ordenamiento recursivo muy ineficiente, de complejidad \BigO{n^{\log{3}/\log{1,5}}}.\\
+El Stooge sort es un algoritmo de ordenamiento recursivo muy ineficiente, de complejidad \BigO {n^{\log{3}/\log{1,5}}}.\\
 Realiza el intercambio entre el primer y último de los elementos si es el primero es mayor (en ordenamiento ascendente). Luego, si el conjunto está compuesto por al menos tres valores, entonces aplica Stooge sort a los primeros dos tercios, luego a los dos últimos tercios, y finalmente repite con los primeros dos tercios. 
 
 
@@ -113,136 +108,130 @@ Además de los archivos indicados en el enunciado, fueron agregadas mediciones so
 
 \begin{table}[!htp]
 \begin{center}
-\begin{tabular}{cc|c|c|c|} 
-\cline{3-5}
-& &\multicolumn{3}{c|}{Stooge sort}	\\ \cline{3-5}
-&   &Ordenado & Invertido & Aleatorio \\ \cline{1-5}
+\begin{tabular}{cc|c|c|c|c|c|c|} 
+\cline{3-8}
+& & \multicolumn{3}{ c|}{Stoogesort.c$^{*}$} & \multicolumn{3}{c|}{Stoogesort.S}\\ \cline{3-8}
+&   & Ordenado & Invertido & Aleatorio & Ordenado & Invertido & Aleatorio \\ \cline{1-8}
+
 \multicolumn{1}{|c}{\multirow{3}{*}{1kb}} &
-\multicolumn{1}{|c|}{real$^{*}$} & 0.00 & 0.00 & 0.00 \\ \cline{2-5}
+\multicolumn{1}{|c|}{real$^{*}$} & 0.03 & 0.01 &0.03 		& 0.03 	& 0.01 		& 0.01 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user$^{*}$} & 0.00 & 0.00 & 0.00 \\ \cline{2-5}
+\multicolumn{1}{|c|}{user$^{*}$} & 0.04 & 0.02 &0.05		 & 0.05	& 0.00 		& 0.00 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys$^{*}$} &  0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c|}{sys$^{*}$} & 0.00 & 0.00 &0.00 		&  0.00 	& 0.03 		& 0.02 \\ \cline{1-8}
+
 \multicolumn{1}{|c}{\multirow{3}{*}{8kb}} &
-\multicolumn{1}{|c|}{real} & 0.02 & 0.02 & 0.01 \\ \cline{2-5}
+\multicolumn{1}{|c|}{real} & 0.38 & 0.38 &0.40 		& 0.38 	& 0.36 		& 0.38 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.01 & 0.01 & 0.01 \\ \cline{2-5}
+\multicolumn{1}{|c|}{user} & 0.38 & 0.39 &0.40		 & 0.36 	& 0.38 		& 0.38 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.01 		& 0.01 	& 0.00 		& 0.01 \\ \cline{1-8}
+
 \multicolumn{1}{|c}{\multirow{3}{*}{16kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.02 & 0.02 \\ \cline{2-5}
+\multicolumn{1}{|c|}{real} & 0.35 & 0.34 &0.34 		& 0.33 	& 0.34 		& 0.33 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.01 & 0.02 \\ \cline{2-5}
+\multicolumn{1}{|c|}{user} & 0.33 & 0.36 &0.35 		& 0.32	 & 0.34 	& 0.34 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c|}{sys} & 0.01 & 0.00 &0.00 		& 0.02 	& 0.00 		& 0.00 \\ \cline{1-8}
+
 \multicolumn{1}{|c}{\multirow{3}{*}{32kb}} &
-\multicolumn{1}{|c|}{real} & 0.17 & 0.17 & 0.17 \\ \cline{2-5}
+\multicolumn{1}{|c|}{real} & 10.26 & 10.26 &10.21 		& 9.89 	& 9.86 		& 9.88 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.17 & 0.17 & 0.17 \\ \cline{2-5}
+\multicolumn{1}{|c|}{user} & 10.26 & 10.23 &10.22			 & 9.89 	& 9.88 		& 9.86 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c|}{sys} & 0.00 & 0.05 &0.00		 & 0.01 	& 0.00 		& 0.01 \\ \cline{1-8}
+
 \multicolumn{1}{|c}{\multirow{3}{*}{64kb}} &
-\multicolumn{1}{|c|}{real} & 1.44 & 1.44 & 1.44 \\ \cline{2-5}
+\multicolumn{1}{|c|}{real} & 96.89 & 97.09 &96.66		 & 93.24 	& 93.34		& 93.29 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 1.44 & 1.43 & 1.44 \\ \cline{2-5}
+\multicolumn{1}{|c|}{user} & 96.88 & 97.00 &96.63		& 93.24 	& 93.31		& 93.29 \\ \cline{2-8}
 \multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
-\multicolumn{1}{|c}{\multirow{3}{*}{1024kb}} &
-\multicolumn{1}{|c|}{real} & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-5}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-5}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 & 0.00 \\ \cline{1-5}
+\multicolumn{1}{|c|}{sys} & 0.01 & 0.03 &0.02		& 0.00 	& 0.00 		& 0.00 \\ \cline{1-8}
 \end{tabular}
 \caption{Resultados comando Time } \label{tab001}
 \end{center}
 \end{table}
 
-$^{*}$ Referencia: 
+$^{*}$ Referencias: 
+
+Ambos fuentes utilizan la versi\'on hecha en assembly del comparador de lineas, \textit{strcmp.S}
 \begin{itemize}
  \item real: \%e, tiempo total real usado por el proceso.
  \item user: \%U, total de segundos-CPU usados por el proceso directamente.
  \item sys : \%S, total de segundos-CPU utilizados por el systema en nombre del proceso.
 \end{itemize}
 
-
+\newpage
 
 \subsection{Análisis de los datos}
 
-La marcada diferencia entre la complejidad de los algoritmos se refleja en muestras tan chicas como la de 8kb. 
-A partir de ahí, el Stooge sort ya hace suficiente uso del procesador como para ser notado por time, mientras que el Quicksort hace lo propio recién en la muestra más grande, de 1024kb. En este caso, el Stooge sort se tornó intolerable.
-
-En la figura~\ref{fig001} se muestra el gráfico del tiempo insumido por el Quicksort para las distintas muestras.\\
-En la figura~\ref{fig002} se muestra el gráfico del tiempo insumido por el Stooge sort para las distintas muestras, a excepción de la de 1024kb, porque demanda una escala que haría inapreciable la situación de las otras muestras.
+Como era de esperarse, se aprecia una leve mejora en los tiempos de ejecuci\'on para la rutina implementada en assembly. La diferencia no es notoria ni importante, as\'i como tampoco se logran los tiempos m\'inimos necesarios
+para que estos algoritmos puedan usarse en forma cotidiana y confiable (la naturaleza poco eficiente del algoritmo es un defecto insalvable).
 
 
-\begin{figure}[!htp]
-\begin{center}
-%\includegraphics[width=1.1\textwidth]{stoogesort.png}
-\end{center}
-\caption{Tiempo tomado para distintas muestras del Stooge sort.} \label{fig002}
-\end{figure}
+\subsection{Diagramas de Stack}
 
+Para las funciones:
+\begin{itemize}
+ \item {void stoogesort(void* array, unsigned int i, unsigned int j);}{
+ 
+  Realiza llamados recursivos, as\'i como tambi\'en llamados a strcmp.}
+  
+ \item {int strcmp(char** array1, char** array2);}{
+ 
+ Funci\'on hoja}
+\end{itemize}
 
-BLASFJASGAJDFKGSDFGKSDFGADFg
-Al momento de calcular el speedup de Quicksort contra Stooge sort, con la razón entre los tiempos de cada uno, las cifras obtenidas no lo permiten. El primero no arroja resultados apreciables por \textbf{time} en ninguna instancia sin contar la última, donde el Stooge sort es inmanejable.\\
-
-Esto es porque la complejidad del Quicksort es, en promedio, \BigO{n \log(n)}, mientras que el Stooge sort es de \BigO{n^{2,7}}. Entonces, el speedup entre ambos algoritmos tiende a infinito exponencialmente, según crece el tamaño de la muestra.
-ÁSDFJAKSGLADMGKMASDFGKADFGADFG
-
-
-\section{Profiling}
-
-Como se pudo apreciar en la tabla de tiempos de la página anterior, el algoritmo de quicksort resulta extremadamente veloz para tamaños de archivos relativamente grandes. Decidimos, entonces, forzar un poco más al programa y hacer el profiling sobre un archivo desordenado de 32mb. Además, para que las funciones mismas de \textbf{gprof} tuvieran una incidencia despreciable en la prueba.\\
-Realizar esta misma prueba sobre el algoritmo Stooge sort, serí­a impracticable, ya que los tiempos demandados serían demasiado grandes.
-
-Un punto interesante a destacar son llamadas a métodos de ordenamiento: como era de esperarse, no se realizan llamadas al método stoogesort, lo cual confirma que el algoritmo no es utilizado.
-										
-										   Por otra parte, para el método quicksort\_r que implementa dicho algoritmo, tenemos cientos de miles de llamados. Esto era de esperarse debido a las dimensiones del archivo y la naturaleza recursiva del algoritmo utilizado.
-
-La tabla~\ref{tab002} es la salida del \textbf{gprof}, en particular aquella conocida como "flat profile". Muestra el uso de las funciones invocadas, ordenadas de mayor a menor según el porcentaje de tiempo de ejecución de cada una.
 
 \begin{table}[!htp]
 \begin{center}
-\begin{tabular}{|r|r|r|r|r|r|r|}
+\begin{tabular}{|c|c|} 
 \hline
-	\%		&	cumulative  &	self	&			&	self	&	total	& \\
-\hline          
-	time	&	seconds		&	seconds	&	calls	&	s/call	&	s/call	&	name \\    
-\hline
+ Funci\'on & Stack \\ \hline
+
+ \multirow{14}{*}{Stoogesort}
+        & 	\$ra    \\ \cline{2-2}
+	&	\$fp	\\ \cline{2-2}
+	&	\$gp	\\ \cline{2-2}
+	&	\$s6	\\ \cline{2-2}
+	&	\$s5	\\ \cline{2-2}
+	&	\$s4	\\ \cline{2-2}
+	&	\$s3	\\ \cline{2-2}
+	&	\$s2	\\ \cline{2-2}
+	&	\$s1	\\ \cline{2-2}
+	&	\$s0	\\ \cline{2-2}
+ 	&	\small{padding}	\\ \cline{2-2}
+	&	Argumento 2	\\ \cline{2-2}
+	&	Argumento 1	\\ \cline{2-2}
+	&	Argumento 0	\\ \cline{1-2}
+\multirow{2}{*}{strcmp}
+        &  	\$fp 	\\ \cline{2-2}
+	&	\$gp	\\ \cline{1-2}
 \end{tabular}
-\caption{dfasdfasdfasdfasdfasdfasdfasdfasdfasfasdfasdfasdfasdfasdfasergaerg} \label{tab002}
+\caption{Resultados comando Time } \label{tab001}
 \end{center}
 \end{table}
- 
-Se aprecia en la tabla que la función particionar ocupa el del tiempo de ejecución de programa, convirtiéndola en la candidata para mejorar.\par
-\medskip
-Para calcular el speedup máximo, usamos la fórmula:
-
-\begin{center}
-$ speedup total = 1/(1-f + f/SM)$\\
-\vspace{0.5cm}
-$ f = 0,$; SM tiende a infinito por ser arbitrariamente mejorable\\
-
-\vspace{0.5cm}
-
-$ Speedup maximo = 1/0 = 0$
-\end{center}
 
 
 \newpage
 
 \section{Comandos de ejecución y corridas de prueba}
 
+ A menos que se indique lo contrario, siempre se compilan los fuentes *.S directamente.
+
 Comandos de Compilación:
 
 \begin{itemize}
  \item make all: genera el programa, modo "release"
  \item make debug: genera el programa con flags para debugging
+ \item make cdebug: idem, pero con el fuente stoogesort.c (Ejecutable tp1\_c)
  \item make asm: genera los archivos Assemblies, sin generar el programa
  \item make gprof: genera el programa con flags para \textbf{gprof}
  \item make clean: remueve los archivos generados
 \end{itemize}
+
+\bigskip
+
 
 Comandos de Ejecución:
 
@@ -254,20 +243,58 @@ Comandos de Ejecución:
 \end{itemize}
 
 
+\bigskip
+
+Archivos de prueba presentes en el cd:
+
+  \begin{itemize}
+   \item 1kb ordenado, invertido, random
+   \item 8kb ordenado, invertido, random
+   \item 16kb ordenado, invertido, random
+   \item 32kb ordenado, invertido, random
+   \item 64kb ordenado, invertido, random
+  \end{itemize}
+  
+\bigskip
+
+Archivos de fuente presentes en el cd (ver Anexo I):
+
+  \begin{itemize}
+   \item Makefile
+   \item main.c
+   \item parseManager.c
+   \item parseManager.h
+   \item sort.c
+   \item sort.h
+   \item stoogesort.S
+   \item stoogesort.c
+   \item stoogesort.h
+   \item strcmp.S
+  \end{itemize}
+
+
+
 
 \section{Conclusiones}
 
-El presente trabajo, a modo de introducción, nos inicializó en las herramientas que usaremos en los trabajos siguientes. % sinonimia cero
+Con la realización de este tp, pudimos interiorizarnos en parte del trabajo realizado por el compilador, al reemplazar el código assembly (.s) generado por este a partir de un fuente (.c) por código propio.
 
-Pudimos manejar la máquina virtual MIPS e interpretar un archivo de profiling, como si estuviésemos optimizando un programa real.
 
-Respecto de las velocidades observadas, podemos confirmar lo esperado a partir del análsis teórico. El algoritmo quicksort fue varios ordenes de magnitud más veloz que el stoogesort, al punto de poder procesar archivos que con el segundo no serían viables.
-% Citas bibliográficas.
+
+Uno de los objetivos era obtener una mejor performance de la rutina, ya que el código generado por el compilador en muchos casos no es el más eficiente posible, agregando instrucciones innecesarias en la traducción. 
+Este objetivo se vió completado, como muestran las mediciones, pero sin lograr un impacto importante sobre el tiempo de ejecución real de la rutina. Esto se debe a varias razones, incluidas la impericia de los programadores,
+pero principalmente se ve afectado por la naturaleza poco eficiente del algoritmo. No importa cuanto se optimice, el stoogesort nunca será un algoritmo veloz.
+
+
+
+%citas bibliográficas
 \begin{thebibliography}{99}
 
 \bibitem{HEN00} J. L. Hennessy and D. A. Patterson, ``Computer Architecture. A Quantitative
 Approach,'' 3ra Edición, Morgan Kaufmann Publishers, 2000.
 
+\bibitem{?MIPS ABI: Function Calling Convention,? Organizaci ?n de computadoras - 66.20
+}
 \end{thebibliography}
 
 \end{document}

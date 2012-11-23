@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.6.22)  24 OCT 2012 14:56
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.6.22)  8 NOV 2012 14:51
 entering extended mode
  %&-line parsing enabled.
 **modelo_informe.tex
@@ -135,7 +135,11 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 \mathdisplay@stack=\toks22
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
-) (./modelo_informe.aux)
+) (./modelo_informe.aux
+
+LaTeX Warning: Label `tab001' multiply defined.
+
+)
 \openout1 = `modelo_informe.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
@@ -150,7 +154,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
 LaTeX Font Info:    ... okay on input line 48.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
 LaTeX Font Info:    ... okay on input line 48.
-(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+ (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count103
 \scratchdimen=\dimen116
@@ -170,53 +174,49 @@ Underfull \hbox (badness 10000) in paragraph at lines 59--60
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 82--84
+Underfull \hbox (badness 10000) in paragraph at lines 77--79
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
 
  []
 
 
-Overfull \hbox (9.52472pt too wide) in paragraph at lines 93--95
+Overfull \hbox (9.52472pt too wide) in paragraph at lines 88--90
 \OT1/cmtt/m/n/10 unsigned parseLineas(char** *pLinea, unsigned lineas, FILE* st
 ream)\OT1/cmr/m/n/10 : 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
 
  []
 
-[3]
 
-LaTeX Warning: Reference `fig001' on page 4 undefined on input line 175.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 187--189
-
+Overfull \hbox (39.459pt too wide) in paragraph at lines 111--151
+ [] 
  []
 
-[4] [5] [6] (./modelo_informe.aux)
+[3] [4] [5] [6] (./modelo_informe.aux)
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2199 strings out of 494999
- 26653 string characters out of 1180816
- 95281 words of memory out of 3000000
- 5388 multiletter control sequences out of 15000+50000
+ 2194 strings out of 494999
+ 26672 string characters out of 1180816
+ 96308 words of memory out of 3000000
+ 5383 multiletter control sequences out of 15000+50000
  11312 words of font info for 41 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 27i,9n,27p,427b,273s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,9n,27p,395b,273s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
 xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
@@ -232,7 +232,7 @@ i10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></u
 sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/tex
 mf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-texlive/
 fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on modelo_informe.pdf (6 pages, 203628 bytes).
+Output written on modelo_informe.pdf (6 pages, 195831 bytes).
 PDF statistics:
  89 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
