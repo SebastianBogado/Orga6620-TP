@@ -4,7 +4,4 @@
 	 NO cambiar el orden de fila-columna, C almacena por bloques de filas, y los for están hecho aprovechando esto.
 	cambiar el moveall, sacar el factor "todo", y reemplazar 2 for por 1 solo.
 
-4)  
-	Borrar comentarios al pedo
-	Borrar los todo's al pedo en animal
 
