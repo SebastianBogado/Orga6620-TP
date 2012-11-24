@@ -14,7 +14,6 @@ struct animal {
 	char kind;      	/* SHARK o FISH */
 	unsigned char age;      /* Edad del animal. */
 	unsigned char hunger;   /* Turnos que lleva sin comer un tiburón */
-	char todo;     		/* ? */
 }animal;
 
 #define MAXI 32
@@ -71,7 +70,6 @@ void new_animal (int i, int j, char kind)
 	t->kind = kind;
 	t->age = 0;
 	t->hunger = 0;
-	t->todo = 0;
 	newcount++;
 }
 
@@ -244,24 +242,6 @@ void init_wator (int maxi, int maxj, int hbrut, int fbrut, int fasten)
 void moveall ()
 {
 	int i, j;
-/*
-	for (i=0; i<MAXI; ++i) {
-		for (j=0; j<MAXJ; ++j) {
-			if (wator[i][j].kind !=EMPTY) {
-				wator[i][j].todo = 1;
-			}
-		}
-	}
-	for (i=0; i<MAXI; ++i) {
-		for (j=0; j<MAXJ; ++j) {
-			if ((wator[i][j].kind !=EMPTY) && (wator[i][j].todo)) {
-				wator[i][j].todo = 0;
-				move (i, j);
-			}
-		}
-	}
-*/
-
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
 			if (wator[i][j].kind !=EMPTY) {
@@ -295,9 +275,6 @@ int main (int argc, char * argv[])
 	for (i=0;i<1000;i++) {
 		moveall ();
 		show_wator ();
-/*		ch = getchar ();
-		if (ch < 0)
-			break; */
 	}
 	return 0;
 }
