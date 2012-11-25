@@ -3,5 +3,6 @@
 3)
 	 NO cambiar el orden de fila-columna, C almacena por bloques de filas, y los for están hecho aprovechando esto.
 	cambiar el moveall, sacar el factor "todo", y reemplazar 2 for por 1 solo.
-
+	NO poner todas las variables 'register': subió el MR 3% (promedio de 40 corridas)
+	Removidos bloques de códigos comentados porque molestaban
 
