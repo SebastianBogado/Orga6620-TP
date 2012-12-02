@@ -1,0 +1,162 @@
+wator
+ Corrida 0
+    D   refs:      173,039,388  (120,627,036 rd   + 52,412,352 wr)
+    D1  misses:     29,002,838  ( 24,078,319 rd   +  4,924,519 wr)
+    D1  miss rate:        16.7% (       19.9%     +        9.3%  )
+ Fin simulacion: 1000 67 543 
+ Corrida 1
+    D   refs:      166,261,567  (116,206,077 rd   + 50,055,490 wr)
+    D1  misses:     28,336,323  ( 23,613,069 rd   +  4,723,254 wr)
+    D1  miss rate:        17.0% (       20.3%     +        9.4%  )
+ Fin simulacion: 1000 143 423 
+ Corrida 2
+    D   refs:      166,500,384  (116,372,359 rd   + 50,128,025 wr)
+    D1  misses:     28,413,368  ( 23,679,578 rd   +  4,733,790 wr)
+    D1  miss rate:        17.0% (       20.3%     +        9.4%  )
+ Fin simulacion: 1000 100 273 
+ Corrida 3
+    D   refs:      226,310,399  (153,722,045 rd   + 72,588,354 wr)
+    D1  misses:     27,348,767  ( 21,853,240 rd   +  5,495,527 wr)
+    D1  miss rate:        12.0% (       14.2%     +        7.5%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 4
+    D   refs:      223,578,296  (151,999,887 rd   + 71,578,409 wr)
+    D1  misses:     27,336,959  ( 21,885,181 rd   +  5,451,778 wr)
+    D1  miss rate:        12.2% (       14.3%     +        7.6%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 5
+    D   refs:      170,411,858  (118,913,455 rd   + 51,498,403 wr)
+    D1  misses:     28,735,877  ( 23,890,398 rd   +  4,845,479 wr)
+    D1  miss rate:        16.8% (       20.0%     +        9.4%  )
+ Fin simulacion: 1000 151 375 
+ Corrida 6
+    D   refs:      170,522,152  (118,940,493 rd   + 51,581,659 wr)
+    D1  misses:     28,569,673  ( 23,747,588 rd   +  4,822,085 wr)
+    D1  miss rate:        16.7% (       19.9%     +        9.3%  )
+ Fin simulacion: 1000 44 926 
+ Corrida 7
+    D   refs:      165,769,539  (115,887,636 rd   + 49,881,903 wr)
+    D1  misses:     28,318,748  ( 23,608,343 rd   +  4,710,405 wr)
+    D1  miss rate:        17.0% (       20.3%     +        9.4%  )
+ Fin simulacion: 1000 121 348 
+ Corrida 8
+    D   refs:      169,201,583  (118,149,730 rd   + 51,051,853 wr)
+    D1  misses:     28,701,263  ( 23,879,637 rd   +  4,821,626 wr)
+    D1  miss rate:        16.9% (       20.2%     +        9.4%  )
+ Fin simulacion: 1000 51 668 
+ Corrida 9
+    D   refs:      164,067,344  (114,810,531 rd   + 49,256,813 wr)
+    D1  misses:     28,288,728  ( 23,612,151 rd   +  4,676,577 wr)
+    D1  miss rate:        17.2% (       20.5%     +        9.4%  )
+ Fin simulacion: 1000 185 454 
+ Promedio: 15.95 
+
+
+3wator
+ Corrida 0
+    D   refs:      216,148,454  (145,052,364 rd   + 71,096,090 wr)
+    D1  misses:     27,689,528  ( 22,314,357 rd   +  5,375,171 wr)
+    D1  miss rate:        12.8% (       15.3%     +        7.5%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 1
+    D   refs:      216,027,862  (144,976,916 rd   + 71,050,946 wr)
+    D1  misses:     27,696,229  ( 22,318,282 rd   +  5,377,947 wr)
+    D1  miss rate:        12.8% (       15.3%     +        7.5%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 2
+    D   refs:      191,622,808  (130,892,209 rd   + 60,730,599 wr)
+    D1  misses:     32,306,361  ( 26,490,310 rd   +  5,816,051 wr)
+    D1  miss rate:        16.8% (       20.2%     +        9.5%  )
+ Fin simulacion: 1000 131 451 
+ Corrida 3
+    D   refs:      192,374,054  (131,415,967 rd   + 60,958,087 wr)
+    D1  misses:     32,497,929  ( 26,645,460 rd   +  5,852,469 wr)
+    D1  miss rate:        16.8% (       20.2%     +        9.6%  )
+ Fin simulacion: 1000 87 558 
+ Corrida 4
+    D   refs:      194,988,860  (132,788,148 rd   + 62,200,712 wr)
+    D1  misses:     31,493,661  ( 25,764,861 rd   +  5,728,800 wr)
+    D1  miss rate:        16.1% (       19.4%     +        9.2%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 5
+    D   refs:      192,424,041  (131,374,345 rd   + 61,049,696 wr)
+    D1  misses:     32,248,449  ( 26,423,735 rd   +  5,824,714 wr)
+    D1  miss rate:        16.7% (       20.1%     +        9.5%  )
+ Fin simulacion: 1000 132 506 
+ Corrida 6
+    D   refs:      192,210,323  (131,235,521 rd   + 60,974,802 wr)
+    D1  misses:     32,200,414  ( 26,396,842 rd   +  5,803,572 wr)
+    D1  miss rate:        16.7% (       20.1%     +        9.5%  )
+ Fin simulacion: 1000 103 356 
+ Corrida 7
+    D   refs:      218,312,612  (146,322,323 rd   + 71,990,289 wr)
+    D1  misses:     27,366,161  ( 22,011,959 rd   +  5,354,202 wr)
+    D1  miss rate:        12.5% (       15.0%     +        7.4%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 8
+    D   refs:      197,561,895  (134,260,282 rd   + 63,301,613 wr)
+    D1  misses:     30,941,201  ( 25,275,380 rd   +  5,665,821 wr)
+    D1  miss rate:        15.6% (       18.8%     +        8.9%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 9
+    D   refs:      216,869,377  (145,486,117 rd   + 71,383,260 wr)
+    D1  misses:     27,628,080  ( 22,249,291 rd   +  5,378,789 wr)
+    D1  miss rate:        12.7% (       15.2%     +        7.5%  )
+ Fin simulacion: 1000 0 1024 
+ Promedio: 14.95 
+
+
+4wator
+ Corrida 0
+    D   refs:      196,912,155  (130,667,099 rd   + 66,245,056 wr)
+    D1  misses:     28,716,744  ( 23,241,017 rd   +  5,475,727 wr)
+    D1  miss rate:        14.5% (       17.7%     +        8.2%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 1
+    D   refs:      185,681,502  (124,894,694 rd   + 60,786,808 wr)
+    D1  misses:     31,596,531  ( 25,852,065 rd   +  5,744,466 wr)
+    D1  miss rate:        17.0% (       20.6%     +        9.4%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 2
+    D   refs:      184,709,305  (124,385,612 rd   + 60,323,693 wr)
+    D1  misses:     31,803,665  ( 26,043,198 rd   +  5,760,467 wr)
+    D1  miss rate:        17.2% (       20.9%     +        9.5%  )
+ Fin simulacion: 1000 108 668 
+ Corrida 3
+    D   refs:      184,433,288  (124,291,821 rd   + 60,141,467 wr)
+    D1  misses:     32,019,356  ( 26,232,788 rd   +  5,786,568 wr)
+    D1  miss rate:        17.3% (       21.1%     +        9.6%  )
+ Fin simulacion: 1000 80 584 
+ Corrida 4
+    D   refs:      185,627,028  (125,072,374 rd   + 60,554,654 wr)
+    D1  misses:     32,191,324  ( 26,355,698 rd   +  5,835,626 wr)
+    D1  miss rate:        17.3% (       21.0%     +        9.6%  )
+ Fin simulacion: 1000 56 591 
+ Corrida 5
+    D   refs:      207,998,381  (136,680,594 rd   + 71,317,787 wr)
+    D1  misses:     26,791,103  ( 21,439,290 rd   +  5,351,813 wr)
+    D1  miss rate:        12.8% (       15.6%     +        7.5%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 6
+    D   refs:      185,432,943  (124,990,987 rd   + 60,441,956 wr)
+    D1  misses:     32,305,797  ( 26,448,124 rd   +  5,857,673 wr)
+    D1  miss rate:        17.4% (       21.1%     +        9.6%  )
+ Fin simulacion: 1000 113 431 
+ Corrida 7
+    D   refs:      202,864,636  (133,929,559 rd   + 68,935,077 wr)
+    D1  misses:     27,786,272  ( 22,362,469 rd   +  5,423,803 wr)
+    D1  miss rate:        13.6% (       16.6%     +        7.8%  )
+ Fin simulacion: 1000 0 1024 
+ Corrida 8
+    D   refs:      184,953,879  (124,678,943 rd   + 60,274,936 wr)
+    D1  misses:     32,231,140  ( 26,397,565 rd   +  5,833,575 wr)
+    D1  miss rate:        17.4% (       21.1%     +        9.6%  )
+ Fin simulacion: 1000 209 221 
+ Corrida 9
+    D   refs:      184,387,457  (124,271,512 rd   + 60,115,945 wr)
+    D1  misses:     32,040,564  ( 26,246,165 rd   +  5,794,399 wr)
+    D1  miss rate:        17.3% (       21.1%     +        9.6%  )
+ Fin simulacion: 1000 130 416 
+ Promedio: 16.18 
+
+

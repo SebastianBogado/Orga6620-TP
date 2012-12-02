@@ -1,0 +1,48 @@
+wator.c  
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 28.63      0.04     0.04     1000    40.08   125.21  moveall
+ 14.31      0.06     0.02  2455134     0.01     0.01  nj
+ 10.74      0.08     0.02  2455134     0.01     0.01  ni
+  7.16      0.09     0.01   458367     0.02     0.10  choose_empty
+  7.16      0.10     0.01   458367     0.02     0.12  move_to_empty
+  7.16      0.11     0.01   264370     0.04     0.04  myrand
+  7.16      0.12     0.01    89580     0.11     0.19  choose_fish
+  7.16      0.13     0.01    89580     0.11     0.31  move_to_fish
+  7.16      0.14     0.01     1001    10.01    10.01  show_wator
+  3.58      0.14     0.01                             frame_dummy
+  0.00      0.14     0.00   528714     0.00     0.16  move
+  0.00      0.14     0.00    70966     0.00     0.00  new_animal
+  0.00      0.14     0.00        1     0.00    38.81  init_wator
+3wator.c  
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 28.64      0.04     0.04     1001    40.05    40.05  show_wator
+ 21.48      0.07     0.03   656509     0.05     0.09  choose
+ 21.48      0.10     0.03     1000    30.07   100.22  moveall
+ 14.32      0.12     0.02  3046945     0.01     0.01  nj
+  7.16      0.13     0.01  3046945     0.00     0.00  ni
+  7.16      0.14     0.01   623717     0.02     0.11  move
+  0.00      0.14     0.00   513768     0.00     0.09  move_to_empty
+  0.00      0.14     0.00   421933     0.00     0.00  myrand
+  0.00      0.14     0.00   142741     0.00     0.09  move_to_fish
+  0.00      0.14     0.00   110815     0.00     0.00  new_animal
+  0.00      0.14     0.00        1     0.00     0.00  init_wator
+
+ %         the percentage of the total running time of the
+4wator.c  
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 50.09      0.06     0.06   524187     0.11     0.17  choose_empty
+ 16.70      0.08     0.02  3050112     0.01     0.01  ni
+ 16.70      0.10     0.02  3050112     0.01     0.01  nj
+ 16.70      0.12     0.02   524187     0.04     0.21  move_to_empty
+  0.00      0.12     0.00   630206     0.00     0.19  move
+  0.00      0.12     0.00   405088     0.00     0.00  myrand
+  0.00      0.12     0.00   137325     0.00     0.05  choose_fish
+  0.00      0.12     0.00   137325     0.00     0.06  move_to_fish
+  0.00      0.12     0.00   106502     0.00     0.00  new_animal
+  0.00      0.12     0.00     1001     0.00     0.00  show_wator
+  0.00      0.12     0.00     1000     0.00   120.22  moveall
+  0.00      0.12     0.00        1     0.00     0.00  init_wator
+

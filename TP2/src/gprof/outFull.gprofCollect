@@ -1,0 +1,647 @@
+wator.c
+
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 28.63      0.04     0.04     1000    40.08   125.21  moveall
+ 14.31      0.06     0.02  2455134     0.01     0.01  nj
+ 10.74      0.08     0.02  2455134     0.01     0.01  ni
+  7.16      0.09     0.01   458367     0.02     0.10  choose_empty
+  7.16      0.10     0.01   458367     0.02     0.12  move_to_empty
+  7.16      0.11     0.01   264370     0.04     0.04  myrand
+  7.16      0.12     0.01    89580     0.11     0.19  choose_fish
+  7.16      0.13     0.01    89580     0.11     0.31  move_to_fish
+  7.16      0.14     0.01     1001    10.01    10.01  show_wator
+  3.58      0.14     0.01                             frame_dummy
+  0.00      0.14     0.00   528714     0.00     0.16  move
+  0.00      0.14     0.00    70966     0.00     0.00  new_animal
+  0.00      0.14     0.00        1     0.00    38.81  init_wator
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 7.13% of 0.14 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     96.4    0.00    0.14                 main [1]
+                0.04    0.09    1000/1000        moveall [2]
+                0.01    0.00    1001/1001        show_wator [11]
+                0.00    0.00       1/1           init_wator [13]
+-----------------------------------------------
+                0.04    0.09    1000/1000        main [1]
+[2]     89.3    0.04    0.09    1000         moveall [2]
+                0.00    0.09  528714/528714      move [3]
+-----------------------------------------------
+                0.00    0.09  528714/528714      moveall [2]
+[3]     60.7    0.00    0.09  528714         move [3]
+                0.01    0.05  458367/458367      move_to_empty [4]
+                0.01    0.02   89580/89580       move_to_fish [6]
+-----------------------------------------------
+                0.01    0.05  458367/458367      move [3]
+[4]     40.7    0.01    0.05  458367         move_to_empty [4]
+                0.01    0.03  458367/458367      choose_empty [5]
+                0.00    0.00  208695/2455134     nj [7]
+                0.00    0.00  208695/2455134     ni [9]
+                0.00    0.00   57672/70966       new_animal [14]
+-----------------------------------------------
+                0.01    0.03  458367/458367      move_to_empty [4]
+[5]     31.5    0.01    0.03  458367         choose_empty [5]
+                0.01    0.00 1833468/2455134     nj [7]
+                0.01    0.00 1833468/2455134     ni [9]
+                0.01    0.00  208695/264370      myrand [10]
+-----------------------------------------------
+                0.01    0.02   89580/89580       move [3]
+[6]     20.0    0.01    0.02   89580         move_to_fish [6]
+                0.01    0.01   89580/89580       choose_fish [8]
+                0.00    0.00   54651/2455134     nj [7]
+                0.00    0.00   54651/2455134     ni [9]
+                0.00    0.00   12867/70966       new_animal [14]
+-----------------------------------------------
+                0.00    0.00   54651/2455134     move_to_fish [6]
+                0.00    0.00  208695/2455134     move_to_empty [4]
+                0.00    0.00  358320/2455134     choose_fish [8]
+                0.01    0.00 1833468/2455134     choose_empty [5]
+[7]     14.3    0.02    0.00 2455134         nj [7]
+-----------------------------------------------
+                0.01    0.01   89580/89580       move_to_fish [6]
+[8]     12.3    0.01    0.01   89580         choose_fish [8]
+                0.00    0.00  358320/2455134     nj [7]
+                0.00    0.00  358320/2455134     ni [9]
+                0.00    0.00   54651/264370      myrand [10]
+-----------------------------------------------
+                0.00    0.00   54651/2455134     move_to_fish [6]
+                0.00    0.00  208695/2455134     move_to_empty [4]
+                0.00    0.00  358320/2455134     choose_fish [8]
+                0.01    0.00 1833468/2455134     choose_empty [5]
+[9]     10.7    0.02    0.00 2455134         ni [9]
+-----------------------------------------------
+                0.00    0.00    1024/264370      init_wator [13]
+                0.00    0.00   54651/264370      choose_fish [8]
+                0.01    0.00  208695/264370      choose_empty [5]
+[10]     7.1    0.01    0.00  264370         myrand [10]
+-----------------------------------------------
+                0.01    0.00    1001/1001        main [1]
+[11]     7.1    0.01    0.00    1001         show_wator [11]
+-----------------------------------------------
+                                                 <spontaneous>
+[12]     3.6    0.01    0.00                 frame_dummy [12]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[13]     0.0    0.00    0.00       1         init_wator [13]
+                0.00    0.00    1024/264370      myrand [10]
+                0.00    0.00     427/70966       new_animal [14]
+-----------------------------------------------
+                0.00    0.00     427/70966       init_wator [13]
+                0.00    0.00   12867/70966       move_to_fish [6]
+                0.00    0.00   57672/70966       move_to_empty [4]
+[14]     0.0    0.00    0.00   70966         new_animal [14]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+
+Index by function name
+
+   [5] choose_empty            [4] move_to_empty           [9] ni
+   [8] choose_fish             [6] move_to_fish            [7] nj
+  [12] frame_dummy             [2] moveall                [11] show_wator
+  [13] init_wator             [10] myrand
+   [3] move                   [14] new_animal
+
+
+Fin simulacion: 1000 110 509 
+3wator.c
+
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 28.64      0.04     0.04     1001    40.05    40.05  show_wator
+ 21.48      0.07     0.03   656509     0.05     0.09  choose
+ 21.48      0.10     0.03     1000    30.07   100.22  moveall
+ 14.32      0.12     0.02  3046945     0.01     0.01  nj
+  7.16      0.13     0.01  3046945     0.00     0.00  ni
+  7.16      0.14     0.01   623717     0.02     0.11  move
+  0.00      0.14     0.00   513768     0.00     0.09  move_to_empty
+  0.00      0.14     0.00   421933     0.00     0.00  myrand
+  0.00      0.14     0.00   142741     0.00     0.09  move_to_fish
+  0.00      0.14     0.00   110815     0.00     0.00  new_animal
+  0.00      0.14     0.00        1     0.00     0.00  init_wator
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 7.13% of 0.14 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.14                 main [1]
+                0.03    0.07    1000/1000        moveall [2]
+                0.04    0.00    1001/1001        show_wator [6]
+                0.00    0.00       1/1           init_wator [12]
+-----------------------------------------------
+                0.03    0.07    1000/1000        main [1]
+[2]     71.4    0.03    0.07    1000         moveall [2]
+                0.01    0.06  623717/623717      move [3]
+-----------------------------------------------
+                0.01    0.06  623717/623717      moveall [2]
+[3]     50.0    0.01    0.06  623717         move [3]
+                0.00    0.05  513768/513768      move_to_empty [5]
+                0.00    0.01  142741/142741      move_to_fish [8]
+-----------------------------------------------
+                0.01    0.01  142741/656509      move_to_fish [8]
+                0.02    0.02  513768/656509      move_to_empty [5]
+[4]     39.9    0.03    0.03  656509         choose [4]
+                0.02    0.00 2626036/3046945     nj [7]
+                0.01    0.00 2626036/3046945     ni [9]
+                0.00    0.00  420909/421933      myrand [10]
+-----------------------------------------------
+                0.00    0.05  513768/513768      move [3]
+[5]     33.6    0.00    0.05  513768         move_to_empty [5]
+                0.02    0.02  513768/656509      choose [4]
+                0.00    0.00  337656/3046945     nj [7]
+                0.00    0.00  337656/3046945     ni [9]
+                0.00    0.00   88069/110815      new_animal [11]
+-----------------------------------------------
+                0.04    0.00    1001/1001        main [1]
+[6]     28.6    0.04    0.00    1001         show_wator [6]
+-----------------------------------------------
+                0.00    0.00   83253/3046945     move_to_fish [8]
+                0.00    0.00  337656/3046945     move_to_empty [5]
+                0.02    0.00 2626036/3046945     choose [4]
+[7]     14.3    0.02    0.00 3046945         nj [7]
+-----------------------------------------------
+                0.00    0.01  142741/142741      move [3]
+[8]      9.3    0.00    0.01  142741         move_to_fish [8]
+                0.01    0.01  142741/656509      choose [4]
+                0.00    0.00   83253/3046945     nj [7]
+                0.00    0.00   83253/3046945     ni [9]
+                0.00    0.00   22319/110815      new_animal [11]
+-----------------------------------------------
+                0.00    0.00   83253/3046945     move_to_fish [8]
+                0.00    0.00  337656/3046945     move_to_empty [5]
+                0.01    0.00 2626036/3046945     choose [4]
+[9]      7.1    0.01    0.00 3046945         ni [9]
+-----------------------------------------------
+                0.00    0.00    1024/421933      init_wator [12]
+                0.00    0.00  420909/421933      choose [4]
+[10]     0.0    0.00    0.00  421933         myrand [10]
+-----------------------------------------------
+                0.00    0.00     427/110815      init_wator [12]
+                0.00    0.00   22319/110815      move_to_fish [8]
+                0.00    0.00   88069/110815      move_to_empty [5]
+[11]     0.0    0.00    0.00  110815         new_animal [11]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[12]     0.0    0.00    0.00       1         init_wator [12]
+                0.00    0.00    1024/421933      myrand [10]
+                0.00    0.00     427/110815      new_animal [11]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+
+Index by function name
+
+   [4] choose                  [8] move_to_fish            [9] ni
+  [12] init_wator              [2] moveall                 [7] nj
+   [3] move                   [10] myrand                  [6] show_wator
+   [5] move_to_empty          [11] new_animal
+
+
+Fin simulacion: 1000 129 737 
+4wator.c
+
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 50.09      0.06     0.06   524187     0.11     0.17  choose_empty
+ 16.70      0.08     0.02  3050112     0.01     0.01  ni
+ 16.70      0.10     0.02  3050112     0.01     0.01  nj
+ 16.70      0.12     0.02   524187     0.04     0.21  move_to_empty
+  0.00      0.12     0.00   630206     0.00     0.19  move
+  0.00      0.12     0.00   405088     0.00     0.00  myrand
+  0.00      0.12     0.00   137325     0.00     0.05  choose_fish
+  0.00      0.12     0.00   137325     0.00     0.06  move_to_fish
+  0.00      0.12     0.00   106502     0.00     0.00  new_animal
+  0.00      0.12     0.00     1001     0.00     0.00  show_wator
+  0.00      0.12     0.00     1000     0.00   120.22  moveall
+  0.00      0.12     0.00        1     0.00     0.00  init_wator
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 8.32% of 0.12 seconds
+
+index % time    self  children    called     name
+                0.00    0.12  630206/630206      moveall [2]
+[1]    100.0    0.00    0.12  630206         move [1]
+                0.02    0.09  524187/524187      move_to_empty [4]
+                0.00    0.01  137325/137325      move_to_fish [8]
+-----------------------------------------------
+                0.00    0.12    1000/1000        main [3]
+[2]    100.0    0.00    0.12    1000         moveall [2]
+                0.00    0.12  630206/630206      move [1]
+-----------------------------------------------
+                                                 <spontaneous>
+[3]    100.0    0.00    0.12                 main [3]
+                0.00    0.12    1000/1000        moveall [2]
+                0.00    0.00    1001/1001        show_wator [12]
+                0.00    0.00       1/1           init_wator [13]
+-----------------------------------------------
+                0.02    0.09  524187/524187      move [1]
+[4]     93.1    0.02    0.09  524187         move_to_empty [4]
+                0.06    0.03  524187/524187      choose_empty [5]
+                0.00    0.00  323822/3050112     ni [6]
+                0.00    0.00  323822/3050112     nj [7]
+                0.00    0.00   84626/106502      new_animal [11]
+-----------------------------------------------
+                0.06    0.03  524187/524187      move_to_empty [4]
+[5]     72.9    0.06    0.03  524187         choose_empty [5]
+                0.01    0.00 2096748/3050112     ni [6]
+                0.01    0.00 2096748/3050112     nj [7]
+                0.00    0.00  323822/405088      myrand [10]
+-----------------------------------------------
+                0.00    0.00   80242/3050112     move_to_fish [8]
+                0.00    0.00  323822/3050112     move_to_empty [4]
+                0.00    0.00  549300/3050112     choose_fish [9]
+                0.01    0.00 2096748/3050112     choose_empty [5]
+[6]     16.7    0.02    0.00 3050112         ni [6]
+-----------------------------------------------
+                0.00    0.00   80242/3050112     move_to_fish [8]
+                0.00    0.00  323822/3050112     move_to_empty [4]
+                0.00    0.00  549300/3050112     choose_fish [9]
+                0.01    0.00 2096748/3050112     choose_empty [5]
+[7]     16.7    0.02    0.00 3050112         nj [7]
+-----------------------------------------------
+                0.00    0.01  137325/137325      move [1]
+[8]      6.9    0.00    0.01  137325         move_to_fish [8]
+                0.00    0.01  137325/137325      choose_fish [9]
+                0.00    0.00   80242/3050112     ni [6]
+                0.00    0.00   80242/3050112     nj [7]
+                0.00    0.00   21463/106502      new_animal [11]
+-----------------------------------------------
+                0.00    0.01  137325/137325      move_to_fish [8]
+[9]      6.0    0.00    0.01  137325         choose_fish [9]
+                0.00    0.00  549300/3050112     ni [6]
+                0.00    0.00  549300/3050112     nj [7]
+                0.00    0.00   80242/405088      myrand [10]
+-----------------------------------------------
+                0.00    0.00    1024/405088      init_wator [13]
+                0.00    0.00   80242/405088      choose_fish [9]
+                0.00    0.00  323822/405088      choose_empty [5]
+[10]     0.0    0.00    0.00  405088         myrand [10]
+-----------------------------------------------
+                0.00    0.00     413/106502      init_wator [13]
+                0.00    0.00   21463/106502      move_to_fish [8]
+                0.00    0.00   84626/106502      move_to_empty [4]
+[11]     0.0    0.00    0.00  106502         new_animal [11]
+-----------------------------------------------
+                0.00    0.00    1001/1001        main [3]
+[12]     0.0    0.00    0.00    1001         show_wator [12]
+-----------------------------------------------
+                0.00    0.00       1/1           main [3]
+[13]     0.0    0.00    0.00       1         init_wator [13]
+                0.00    0.00    1024/405088      myrand [10]
+                0.00    0.00     413/106502      new_animal [11]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+
+Index by function name
+
+   [5] choose_empty            [4] move_to_empty          [11] new_animal
+   [9] choose_fish             [8] move_to_fish            [6] ni
+  [13] init_wator              [2] moveall                 [7] nj
+   [1] move                   [10] myrand                 [12] show_wator
+
+
+Fin simulacion: 1000 37 446 
