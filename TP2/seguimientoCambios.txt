@@ -3,5 +3,10 @@
 3)
 	 NO cambiar el orden de fila-columna, C almacena por bloques de filas, y los for están hecho aprovechando esto.
 	cambiar el moveall, sacar el factor "todo", y reemplazar 2 for por 1 solo.
+4)
+	Unroll del for en choose.
+	vuelvo para atras el cambio de refactorizar choose, las MACRO EMPTY y FISH son mas rapidas que leer el parametro kind. El laburo lo ahce el compilador y no la ejecucion... my bad
 
+
+Hay un tradeoff entre el tamaño del .o, que puede exceder el cache y la velocidad del programa. Cuando hacemos un unroll del for, quizas este pasando eso.
 
