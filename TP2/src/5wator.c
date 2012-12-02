@@ -9,7 +9,6 @@
 #define EMPTY 0
 #define SHARK 1
 #define FISH  2
-
 struct animal {
 	char kind;      	/* SHARK o FISH */
 	unsigned char age;      /* Edad del animal. */
@@ -22,9 +21,6 @@ struct animal {
 int HBRUT, FBRUT, FASTEN;
 
 struct animal wator[MAXI][MAXJ] ;
-//struct animal emptyCells[MAXI*MAXJ];
-
-
 #define REST -1
 #define NORTH 0
 #define SOUTH 1
@@ -88,32 +84,37 @@ int choose_fish (int i, int j)
 	int dir = 0;
 	int dirs[4];
 	
-	//primer ciclo
-	struct animal * t = &wator[ni (i, dir)][nj (j, dir)];
+	//primer ciclo, dir = 0 => NORTH
+	struct animal * t = &wator[((i+MAXI-1) % MAXI)][j];
+//struct animal * t = &wator[ni (i, dir)][nj (j, dir)];
 	if (t->kind - FISH == 0)
 		dirs[k++] = dir;
 
-	//segundo ciclo
+	//segundo ciclo, dir = 1 => SOUTH
 	++dir;
-	t = &wator[ni (i, dir)][nj (j, dir)];
+//         t = &wator[ni (i, dir)][nj (j, dir)];
+ t = &wator[((i+1) % MAXI)][j];
 	if (t->kind - FISH == 0) 
 		dirs[k++] = dir;
 
-	//tercer ciclo
+	//tercer ciclo, dir = 2 => EAST
 	++dir;
-	t = &wator[ni (i, dir)][nj (j, dir)];
+//         t = &wator[ni (i, dir)][nj (j, dir)];
+	t = &wator[i][((j+MAXJ-1) % MAXJ)];
 	if (t->kind - FISH == 0) 
 		dirs[k++] = dir;
 
-	//cuarto ciclo
+	//cuarto ciclo, dir = 3 => WEST
 	++dir;
-	t = &wator[ni (i, dir)][nj (j, dir)];
+//        t = &wator[ni (i, dir)][nj (j, dir)];
+	t = &wator[i][((j+1) % MAXJ)];
 	if (t->kind - FISH == 0) 
 		dirs[k++] = dir;
 			
 	if (k == 0)
 		return REST;
 	return dirs[myrand (k)];
+	
 }
 
 int choose_empty (int i, int j)
@@ -122,27 +123,31 @@ int choose_empty (int i, int j)
 	int dir = 0;
 	int dirs[4];
 	
-	//primer ciclo
-	struct animal * t = &wator[ni (i, dir)][nj (j, dir)];
+	//primer ciclo, dir = 0 => NORTH
+struct animal * t = &wator[((i+MAXI-1) % MAXI)][j];
+//         struct animal * t = &wator[ni (i, dir)][nj (j, dir)];
 	if (t->kind - EMPTY == 0)
 		dirs[k++] = dir;
 
 
-	//segundo ciclo
+	//segundo ciclo, dir = 1 => SOUTH
 	++dir;
-	t = &wator[ni (i, dir)][nj (j, dir)];
+//         t = &wator[ni (i, dir)][nj (j, dir)];
+t = &wator[((i+1) % MAXI)][j];
 	if (t->kind - EMPTY == 0)
 		dirs[k++] = dir;
 
-	//tercer ciclo
+	//tercer ciclo, dir = 2 => EAST
 	++dir;
-	t = &wator[ni (i, dir)][nj (j, dir)];
+//         t = &wator[ni (i, dir)][nj (j, dir)];
+t = &wator[i][((j+MAXJ-1) % MAXJ)];
 	if (t->kind - EMPTY == 0)
 		dirs[k++] = dir;
 
-	//cuarto ciclo
+	//cuarto ciclo, dir = 3 => WEST
 	++dir;
-	t = &wator[ni (i, dir)][nj (j, dir)];
+//         t = &wator[ni (i, dir)][nj (j, dir)];
+t = &wator[i][((j+1) % MAXJ)];
 	if (t->kind - EMPTY == 0)
 		dirs[k++] = dir;
 
@@ -165,7 +170,7 @@ int move_to_fish (int i, int j)
 	if (dir - REST == 0)
 		return 0;
 
-    s = &wator[ ni(i, dir) ][ nj(j, dir) ];
+        s = &wator[ ni(i, dir) ][ nj(j, dir) ];
 	assert (s->kind - FISH == 0);
 	++freecount;
 	
@@ -192,7 +197,7 @@ int move_to_empty (int i, int j)
 	if (dir - REST == 0)
 		return 0;
 	
-    s = &wator[ ni(i, dir) ][ nj(j, dir) ];
+	s = &wator[ ni(i, dir) ][ nj(j, dir) ];
 
 	assert (s->kind - EMPTY == 0);
 	memcpy(s, t, sizeof(animal));
@@ -234,12 +239,16 @@ int fd = -1;
 
 void show_wator ()
 {
-	int i, j;
+	int i, j, kind, row = 0;
 	int shark = 0, fish = 0;
+	
+	register struct animal *v = &(wator[0][0]);
+	
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
-			if (wator[i][j].kind - EMPTY) {  // kind != EMPTY
-				if (wator[i][j].kind - SHARK == 0) {  // kind == SHARK
+			kind = (v+row+j)->kind;
+			if (kind - EMPTY) {  // kind != EMPTY
+				if (kind - SHARK == 0) {  // kind == SHARK
 					printf ("X");
 					++shark;
 				} else {
@@ -251,6 +260,8 @@ void show_wator ()
 			}
 		}
 		printf ("\n");
+		
+		row += MAXI; //avance del vector en filas
 	}
 	printf ("SHARKS: %d, FISH: %d NEW: %d, FREE: %d\n\n", shark, fish, newcount, freecount);
 	if (fd >= 0) {
@@ -270,15 +281,18 @@ void show_wator ()
 
 void init_wator (int maxi, int maxj, int hbrut, int fbrut, int fasten)
 {
-	int i, j;
+	int i, j, res, row=0;
+	register struct animal *v = &(wator[0][0]);
+
 	HBRUT = hbrut;
 	FBRUT = fbrut;
 	FASTEN = fasten;
 	assert (hbrut - FASTEN> 0);
+
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
-			int res = myrand (30);
-			wator[i][j].kind = EMPTY;
+			res = myrand (30);
+			(v+row+j)->kind = EMPTY;
 			switch (res) {
 			case 0:
 				new_animal (i, j, SHARK);
@@ -288,19 +302,22 @@ void init_wator (int maxi, int maxj, int hbrut, int fbrut, int fasten)
 				break;
 			}
 		}
+		row += MAXI;
 	}
 }
 
 void moveall ()
 {
-	int i, j;
+	int i, j, row=0;
+	struct animal * v = &(wator[0][0]);
 
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
-			if (wator[i][j].kind !=EMPTY) {
+			if ( (v+row+j)->kind - EMPTY) {  // kind != EMPTY
 				move (i,j);
 			}
 		}
+		row += MAXI;
 	}
 }
 

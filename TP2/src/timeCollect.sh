@@ -21,17 +21,17 @@ temp="temp.timeCollect"
 `>$outSmall`
 `> $temp`
 
-echo -n "Procesando:"
+#echo -n "Procesando:"
 
 for file in $@
 do
-	echo -ne "\n $file "
+#	echo -ne "\n $file "
 	echo "$file" > $temp
 	i=0
 	
 	while [ $i -lt $corridas ] 
 	do
-		echo -n "."
+#		echo -n "."
 		echo " Corrida $i" >> $temp
 
 		(time "./$file" WatorOut.txt) 2>&1 | grep "real.*" >> $temp

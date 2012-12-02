@@ -15,14 +15,14 @@ temp="temp.gprofCollect"
 `> $temp`
 
 
-echo -n "Procesando:"
+#echo -n "Procesando:"
 
 for file in $@
 do
-	echo -ne "\n $file "
+#	echo -ne "\n $file "
 
-	exe="${file/'.c'}_gprof"
-	`gcc -pg "$file" -o "$exe"`
+	exe="${file}_gprof"
+	`gcc -pg "$file.c" -o "$exe"`
 
 	echo "$file" > $temp
 	echo "" >> $temp
@@ -38,11 +38,12 @@ do
 	echo -ne "$file  \n" >> $outSmall
 	tail -n +6 $temp | head -n 15  >> $outSmall	
 	echo -e "\n"
+	echo -ne "\n\nFin simulacion: $(tail -n 1 WatorOut.txt) \n" >>$outSmall 
 done
 
 rm $temp
 rm *_gprof
-clear
+#clear
 
 cat $outSmall
 

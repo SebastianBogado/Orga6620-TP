@@ -20,3 +20,5 @@ Hay un tradeoff entre el tamaño del .o, que puede exceder el cache y la velocid
         Funciones move_to_empty y move_to_fish
             -removidas las variables npi y npj y agregada un struct animal* para evitar las varias llamadas a wator[npi][npj]
 
+5) show_wator, init_wator, move_all:
+	cambio de acceso por wator[][] a puntero+i*fila+j, sin multiplicar (acumulador)
