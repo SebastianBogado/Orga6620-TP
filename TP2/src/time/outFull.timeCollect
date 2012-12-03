@@ -1,34 +1,304 @@
 8wator
  Corrida 0
-real	0m0.073s
+real	0m0.079s
  Fin simulacion: 1000 0 1024 
  Corrida 1
-real	0m0.080s
+real	0m0.079s
  Fin simulacion: 1000 0 1024 
  Corrida 2
-real	0m0.080s
+real	0m0.071s
  Fin simulacion: 1000 0 1024 
  Corrida 3
-real	0m0.080s
+real	0m0.077s
  Fin simulacion: 1000 0 1024 
  Corrida 4
-real	0m0.080s
+real	0m0.079s
  Fin simulacion: 1000 0 1024 
  Corrida 5
-real	0m0.079s
+real	0m0.080s
  Fin simulacion: 1000 0 1024 
  Corrida 6
 real	0m0.080s
  Fin simulacion: 1000 0 1024 
  Corrida 7
-real	0m0.080s
+real	0m0.081s
  Fin simulacion: 1000 0 1024 
  Corrida 8
 real	0m0.079s
  Fin simulacion: 1000 0 1024 
  Corrida 9
-real	0m0.080s
+real	0m0.071s
  Fin simulacion: 1000 0 1024 
- Promedio real time: .0791 
+ Corrida 10
+real	0m0.077s
+ Fin simulacion: 1000 0 1024 
+ Corrida 11
+real	0m0.089s
+ Fin simulacion: 1000 23 398 
+ Corrida 12
+real	0m0.091s
+ Fin simulacion: 1000 23 398 
+ Corrida 13
+real	0m0.091s
+ Fin simulacion: 1000 23 398 
+ Corrida 14
+real	0m0.092s
+ Fin simulacion: 1000 23 398 
+ Corrida 15
+real	0m0.092s
+ Fin simulacion: 1000 23 398 
+ Corrida 16
+real	0m0.092s
+ Fin simulacion: 1000 23 398 
+ Corrida 17
+real	0m0.092s
+ Fin simulacion: 1000 23 398 
+ Corrida 18
+real	0m0.092s
+ Fin simulacion: 1000 23 398 
+ Corrida 19
+real	0m0.091s
+ Fin simulacion: 1000 23 398 
+ Corrida 20
+real	0m0.083s
+ Fin simulacion: 1000 23 398 
+ Corrida 21
+real	0m0.087s
+ Fin simulacion: 1000 23 398 
+ Corrida 22
+real	0m0.069s
+ Fin simulacion: 1000 0 1024 
+ Corrida 23
+real	0m0.073s
+ Fin simulacion: 1000 0 1024 
+ Corrida 24
+real	0m0.069s
+ Fin simulacion: 1000 0 1024 
+ Corrida 25
+real	0m0.072s
+ Fin simulacion: 1000 0 1024 
+ Corrida 26
+real	0m0.076s
+ Fin simulacion: 1000 0 1024 
+ Corrida 27
+real	0m0.070s
+ Fin simulacion: 1000 0 1024 
+ Corrida 28
+real	0m0.077s
+ Fin simulacion: 1000 0 1024 
+ Corrida 29
+real	0m0.070s
+ Fin simulacion: 1000 0 1024 
+ Corrida 30
+real	0m0.077s
+ Fin simulacion: 1000 0 1024 
+ Corrida 31
+real	0m0.071s
+ Fin simulacion: 1000 0 1024 
+ Corrida 32
+real	0m0.059s
+ Fin simulacion: 1000 0 1024 
+ Corrida 33
+real	0m0.075s
+ Fin simulacion: 1000 0 1024 
+ Corrida 34
+real	0m0.070s
+ Fin simulacion: 1000 0 1024 
+ Corrida 35
+real	0m0.091s
+ Fin simulacion: 1000 23 476 
+ Corrida 36
+real	0m0.091s
+ Fin simulacion: 1000 23 476 
+ Corrida 37
+real	0m0.091s
+ Fin simulacion: 1000 23 476 
+ Corrida 38
+real	0m0.091s
+ Fin simulacion: 1000 23 476 
+ Corrida 39
+real	0m0.074s
+ Fin simulacion: 1000 23 476 
+ Corrida 40
+real	0m0.088s
+ Fin simulacion: 1000 23 476 
+ Corrida 41
+real	0m0.090s
+ Fin simulacion: 1000 23 476 
+ Corrida 42
+real	0m0.091s
+ Fin simulacion: 1000 23 476 
+ Corrida 43
+real	0m0.091s
+ Fin simulacion: 1000 23 476 
+ Corrida 44
+real	0m0.091s
+ Fin simulacion: 1000 23 476 
+ Corrida 45
+real	0m0.092s
+ Fin simulacion: 1000 23 476 
+ Corrida 46
+real	0m0.093s
+ Fin simulacion: 1000 88 579 
+ Corrida 47
+real	0m0.092s
+ Fin simulacion: 1000 88 579 
+ Corrida 48
+real	0m0.092s
+ Fin simulacion: 1000 88 579 
+ Corrida 49
+real	0m0.091s
+ Fin simulacion: 1000 88 579 
+ Corrida 50
+real	0m0.091s
+ Fin simulacion: 1000 88 579 
+ Corrida 51
+real	0m0.092s
+ Fin simulacion: 1000 88 579 
+ Corrida 52
+real	0m0.091s
+ Fin simulacion: 1000 88 579 
+ Corrida 53
+real	0m0.092s
+ Fin simulacion: 1000 88 579 
+ Corrida 54
+real	0m0.092s
+ Fin simulacion: 1000 88 579 
+ Corrida 55
+real	0m0.092s
+ Fin simulacion: 1000 88 579 
+ Corrida 56
+real	0m0.076s
+ Fin simulacion: 1000 0 1024 
+ Corrida 57
+real	0m0.071s
+ Fin simulacion: 1000 0 1024 
+ Corrida 58
+real	0m0.077s
+ Fin simulacion: 1000 0 1024 
+ Corrida 59
+real	0m0.070s
+ Fin simulacion: 1000 0 1024 
+ Corrida 60
+real	0m0.077s
+ Fin simulacion: 1000 0 1024 
+ Corrida 61
+real	0m0.070s
+ Fin simulacion: 1000 0 1024 
+ Corrida 62
+real	0m0.077s
+ Fin simulacion: 1000 0 1024 
+ Corrida 63
+real	0m0.070s
+ Fin simulacion: 1000 0 1024 
+ Corrida 64
+real	0m0.077s
+ Fin simulacion: 1000 0 1024 
+ Corrida 65
+real	0m0.071s
+ Fin simulacion: 1000 0 1024 
+ Corrida 66
+real	0m0.077s
+ Fin simulacion: 1000 0 1024 
+ Corrida 67
+real	0m0.071s
+ Fin simulacion: 1000 0 1024 
+ Corrida 68
+real	0m0.093s
+ Fin simulacion: 1000 0 1024 
+ Corrida 69
+real	0m0.091s
+ Fin simulacion: 1000 102 591 
+ Corrida 70
+real	0m0.083s
+ Fin simulacion: 1000 102 591 
+ Corrida 71
+real	0m0.089s
+ Fin simulacion: 1000 102 591 
+ Corrida 72
+real	0m0.090s
+ Fin simulacion: 1000 102 591 
+ Corrida 73
+real	0m0.083s
+ Fin simulacion: 1000 102 591 
+ Corrida 74
+real	0m0.086s
+ Fin simulacion: 1000 102 591 
+ Corrida 75
+real	0m0.092s
+ Fin simulacion: 1000 102 591 
+ Corrida 76
+real	0m0.092s
+ Fin simulacion: 1000 102 591 
+ Corrida 77
+real	0m0.092s
+ Fin simulacion: 1000 102 591 
+ Corrida 78
+real	0m0.083s
+ Fin simulacion: 1000 102 591 
+ Corrida 79
+real	0m0.089s
+ Fin simulacion: 1000 35 557 
+ Corrida 80
+real	0m0.090s
+ Fin simulacion: 1000 35 557 
+ Corrida 81
+real	0m0.083s
+ Fin simulacion: 1000 35 557 
+ Corrida 82
+real	0m0.089s
+ Fin simulacion: 1000 35 557 
+ Corrida 83
+real	0m0.082s
+ Fin simulacion: 1000 35 557 
+ Corrida 84
+real	0m0.088s
+ Fin simulacion: 1000 35 557 
+ Corrida 85
+real	0m0.091s
+ Fin simulacion: 1000 35 557 
+ Corrida 86
+real	0m0.091s
+ Fin simulacion: 1000 35 557 
+ Corrida 87
+real	0m0.091s
+ Fin simulacion: 1000 35 557 
+ Corrida 88
+real	0m0.092s
+ Fin simulacion: 1000 35 557 
+ Corrida 89
+real	0m0.091s
+ Fin simulacion: 1000 35 557 
+ Corrida 90
+real	0m0.078s
+ Fin simulacion: 1000 0 1024 
+ Corrida 91
+real	0m0.079s
+ Fin simulacion: 1000 0 1024 
+ Corrida 92
+real	0m0.071s
+ Fin simulacion: 1000 0 1024 
+ Corrida 93
+real	0m0.077s
+ Fin simulacion: 1000 0 1024 
+ Corrida 94
+real	0m0.079s
+ Fin simulacion: 1000 0 1024 
+ Corrida 95
+real	0m0.071s
+ Fin simulacion: 1000 0 1024 
+ Corrida 96
+real	0m0.076s
+ Fin simulacion: 1000 0 1024 
+ Corrida 97
+real	0m0.071s
+ Fin simulacion: 1000 0 1024 
+ Corrida 98
+real	0m0.069s
+ Fin simulacion: 1000 0 1024 
+ Corrida 99
+real	0m0.076s
+ Fin simulacion: 1000 0 1024 
+ Promedio real time: .0825 
 
 

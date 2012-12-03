@@ -1,19 +1,19 @@
 8wator  
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  us/call  us/call  name    
- 40.09      0.02     0.02   902747     0.02     0.04  move
- 40.09      0.04     0.02   870861     0.02     0.02  choose_empty
- 20.04      0.05     0.01     1001    10.01    10.01  show_wator
-  0.00      0.05     0.00   870861     0.00     0.02  move_to_empty
-  0.00      0.05     0.00   121840     0.00     0.00  ni
-  0.00      0.05     0.00   121840     0.00     0.00  nj
-  0.00      0.05     0.00    41453     0.00     0.00  choose_fish
-  0.00      0.05     0.00    41453     0.00     0.00  move_to_fish
-  0.00      0.05     0.00    32910     0.00     0.00  new_animal
-  0.00      0.05     0.00     1000     0.00    40.09  moveall
-  0.00      0.05     0.00        1     0.00     0.00  init_wator
+ 30.07      0.03     0.03     1000    30.07   100.23  moveall
+ 20.05      0.05     0.02   714217     0.03     0.10  move
+ 20.05      0.07     0.02   631338     0.03     0.03  choose_empty
+ 20.05      0.09     0.02   631338     0.03     0.08  move_to_empty
+ 10.02      0.10     0.01   318032     0.03     0.03  ni
+  0.00      0.10     0.00   319056     0.00     0.00  myrand
+  0.00      0.10     0.00   318032     0.00     0.00  nj
+  0.00      0.10     0.00   107542     0.00     0.00  choose_fish
+  0.00      0.10     0.00   107542     0.00     0.02  move_to_fish
+  0.00      0.10     0.00    83903     0.00     0.00  new_animal
+  0.00      0.10     0.00     1001     0.00     0.00  show_wator
+  0.00      0.10     0.00        1     0.00     0.00  init_wator
 
- %         the percentage of the total running time of the
 
 
 Fin simulacion: 1000 0 1024 
