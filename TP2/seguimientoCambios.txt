@@ -7,7 +7,6 @@
 	Unroll del for en choose.
 	vuelvo para atras el cambio de refactorizar choose, las MACRO EMPTY y FISH son mas rapidas que leer el parametro kind. El laburo lo ahce el compilador y no la ejecucion... my bad
 
-	NO poner todas las variables 'register': subió el MR 3% (promedio de 40 corridas)
 	Removidos bloques de códigos comentados porque molestaban
 	Al desenrollar el loop de la función move_all no cambió nada. Probablemente porque hay un if adentro y el branch predictor los reconoce como branchs distintas, a diferencia de la versión con for.
 
@@ -25,3 +24,4 @@ Hay un tradeoff entre el tamaño del .o, que puede exceder el cache y la velocid
    Cambio en choose_XXXX, elimino los llamados a "nij (i, dir)", como hicimos unroll del for, podemos ahorrarnos el case. Mejora apreciablemente el time
 
 6) Reemplazo % MAXI por & 0x1F
+7) Agregado 'register' en varias variables
