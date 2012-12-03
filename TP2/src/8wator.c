@@ -18,9 +18,9 @@ struct animal {
 
 #define MAXI 32
 #define MAXJ 32
-int HBRUT, FBRUT, FASTEN;
+static int HBRUT, FBRUT, FASTEN;
 
-struct animal wator[MAXI][MAXJ] ;
+static struct animal wator[MAXI][MAXJ] ;
 #define REST -1
 #define NORTH 0
 #define SOUTH 1
@@ -64,7 +64,7 @@ int newcount = 0;
 void new_animal (int i, int j, char kind)
 {
 	register struct animal *t = & wator[i][j] ;
-	assert (t->kind - EMPTY == 0);
+	assert (t->kind == EMPTY); 
 	assert ((kind - FISH == 0) || (kind - SHARK == 0));
 	t->kind = kind;
 	t->age = 0;
@@ -73,7 +73,7 @@ void new_animal (int i, int j, char kind)
 	++newcount;
 }
 
-inline int myrand (int max)
+inline __attribute__ ((always_inline)) int myrand (int max)
 {
 	return rand () % max;
 }
@@ -120,30 +120,31 @@ int choose_empty (int i, int j)
 	
 	//primer ciclo, dir = 0 => NORTH
 	register struct animal * t = &wator[((i+MAXI-1) & 0x1F )][j];
-	if (t->kind - EMPTY == 0)
+	if (t->kind == EMPTY )
 		dirs[k++] = dir;
 
 
 	//segundo ciclo, dir = 1 => SOUTH
 	++dir;
 	t = &wator[((i+1) & 0x1F )][j];
-	if (t->kind - EMPTY == 0)
+	if (t->kind == EMPTY )
 		dirs[k++] = dir;
 
 	//tercer ciclo, dir = 2 => EAST
 	++dir;
 	t = &wator[i][((j+MAXJ-1) & 0x1F )];
-	if (t->kind - EMPTY == 0)
+	if (t->kind == EMPTY )
 		dirs[k++] = dir;
 
 	//cuarto ciclo, dir = 3 => WEST
 	++dir;
 	t = &wator[i][((j+1) & 0x1F )];
-	if (t->kind - EMPTY == 0)
+	if (t->kind == EMPTY )
 		dirs[k++] = dir;
 
 	if (k == 0)
 		return REST;
+	
 	return dirs[myrand (k)];
 }
 
@@ -189,7 +190,7 @@ int move_to_empty (int i, int j)
 	
 	register struct animal * s = &wator[ ni(i, dir) ][ nj(j, dir) ];
 
-	assert (s->kind - EMPTY == 0);
+	assert (s->kind == 0 );
 	memcpy(s, t, sizeof(animal));
 	t->kind = EMPTY;
 	
@@ -236,7 +237,7 @@ void show_wator ()
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
 			kind = (v+row+j)->kind;
-			if (kind - EMPTY) {  // kind != EMPTY
+			if ( kind ) {  // kind != EMPTY
 				if (kind - SHARK == 0) {  // kind == SHARK
 					printf ("X");
 					++shark;
@@ -278,6 +279,7 @@ void init_wator (int maxi, int maxj, int hbrut, int fbrut, int fasten)
 	FASTEN = fasten;
 	assert (hbrut - FASTEN> 0);
 
+ 
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
 			res = myrand (30);
@@ -302,7 +304,7 @@ void moveall ()
 
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
-			if ( (v+row+j)->kind - EMPTY) {  // kind != EMPTY
+			if ( (v+row+j)->kind ) {  // kind != EMPTY
 				move (i,j);
 			}
 		}

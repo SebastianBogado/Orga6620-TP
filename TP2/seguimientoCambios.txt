@@ -25,3 +25,8 @@ Hay un tradeoff entre el tamaño del .o, que puede exceder el cache y la velocid
 
 6) Reemplazo % MAXI por & 0x1F
 7) Agregado 'register' en varias variables
+   reemplazo de % MAXI en lugares faltantes
+8) always_inline
+   paso a static variables globales 
+
+	AL PARECER NO MEJORA, aunque elimina llamados a myrand 

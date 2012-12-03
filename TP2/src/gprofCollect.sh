@@ -22,7 +22,7 @@ do
 #	echo -ne "\n $file "
 
 	exe="${file}_gprof"
-	`gcc -pg "$file.c" -o "$exe"`
+	`gcc -p "$file.c" -o "$exe"`
 
 	echo "$file" > $temp
 	echo "" >> $temp
