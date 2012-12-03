@@ -95,25 +95,25 @@ int choose_fish (int i, int j)
 	int dirs[4];
 	
 	//primer ciclo, dir = 0 => NORTH
-	struct animal * t = &wator[((i+MAXI-1) % MAXI)][j];
+	struct animal * t = &wator[((i+MAXI-1) & 0x1F )][j];
 	if (t->kind - FISH == 0)
 		dirs[k++] = dir;
 
 	//segundo ciclo, dir = 1 => SOUTH
 	++dir;
- 	t = &wator[((i+1) % MAXI)][j];
+ 	t = &wator[((i+1) & 0x1F )][j];
 	if (t->kind - FISH == 0) 
 		dirs[k++] = dir;
 
 	//tercer ciclo, dir = 2 => EAST
 	++dir;
-	t = &wator[i][((j+MAXJ-1) % MAXJ)];
+	t = &wator[i][((j+MAXJ-1) & 0x1F )];
 	if (t->kind - FISH == 0) 
 		dirs[k++] = dir;
 
 	//cuarto ciclo, dir = 3 => WEST
 	++dir;
-	t = &wator[i][((j+1) % MAXJ)];
+	t = &wator[i][((j+1) & 0x1F )];
 	if (t->kind - FISH == 0) 
 		dirs[k++] = dir;
 			
@@ -129,26 +129,26 @@ int choose_empty (int i, int j)
 	int dirs[4];
 	
 	//primer ciclo, dir = 0 => NORTH
-	struct animal * t = &wator[((i+MAXI-1) % MAXI)][j];
+	struct animal * t = &wator[((i+MAXI-1) & 0x1F )][j];
 	if (t->kind - EMPTY == 0)
 		dirs[k++] = dir;
 
 
 	//segundo ciclo, dir = 1 => SOUTH
 	++dir;
-	t = &wator[((i+1) % MAXI)][j];
+	t = &wator[((i+1) & 0x1F )][j];
 	if (t->kind - EMPTY == 0)
 		dirs[k++] = dir;
 
 	//tercer ciclo, dir = 2 => EAST
 	++dir;
-	t = &wator[i][((j+MAXJ-1) % MAXJ)];
+	t = &wator[i][((j+MAXJ-1) & 0x1F )];
 	if (t->kind - EMPTY == 0)
 		dirs[k++] = dir;
 
 	//cuarto ciclo, dir = 3 => WEST
 	++dir;
-	t = &wator[i][((j+1) % MAXJ)];
+	t = &wator[i][((j+1) & 0x1F )];
 	if (t->kind - EMPTY == 0)
 		dirs[k++] = dir;
 

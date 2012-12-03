@@ -22,8 +22,6 @@ Hay un tradeoff entre el tamaño del .o, que puede exceder el cache y la velocid
 
 5) show_wator, init_wator, move_all:
 	cambio de acceso por wator[][] a puntero+i*fila+j, sin multiplicar (acumulador)
-   Cambio en choose_XXXX, elimino los llamados a "nij (i, dir)", como hicimos unroll del for, podemos ahorrarnos el case.
-	RESPUESTA RARA: 
-		mejora apreciablemente el time
-		 SE DUPLICA EL MR. no entiendo todavía por que pasa esto.
+   Cambio en choose_XXXX, elimino los llamados a "nij (i, dir)", como hicimos unroll del for, podemos ahorrarnos el case. Mejora apreciablemente el time
 
+6) Reemplazo % MAXI por & 0x1F
