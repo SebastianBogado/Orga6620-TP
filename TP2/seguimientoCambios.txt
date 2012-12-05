@@ -26,8 +26,10 @@ Hay un tradeoff entre el tamaño del .o, que puede exceder el cache y la velocid
 6) Reemplazo % MAXI por & 0x1F
 7) Agregado 'register' en varias variables
    reemplazo de % MAXI en lugares faltantes
-8) cambio myrand para optimizar %2 y %4
+8)
    Pasaje de puntero en vez de recalcular w[][]
    Incremento de puntero directo en vez de sumar row+j
    cambio if x return a; return b por una version que fuerza el branch:
 	return x ? a :b ;
+9) cambio llamadas myrand por rand % max
+	

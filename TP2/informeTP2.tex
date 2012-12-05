@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Definici\'on del tipo de documento.                                           %
 % Posibles tipos de papel: a4paper, letterpaper, legalpapper                  %
-% Posibles tamaños de letra: 10pt, 11pt, 12pt                                 %
+% Posibles tamaï¿½os de letra: 10pt, 11pt, 12pt                                 %
 % Posibles clases de documentos: article, report, book, slides                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[a4paper,10pt]{article}
@@ -56,10 +56,6 @@
 % Resumen
 \begin{abstract}
 
-El presente trabajo busca crear un programa que permita el ordenamiento de archivos a trav\'es de dos implementaciones distintas, una utilizando el algoritmo Quicksort y la otra el algoritmo Stooge sort.\\
-Sobre este programa, luego, se realizar\'an una serie de mediciones con el fin de determinar los desempeños relativos de cada implementaci\'on y las posibles mejoras a realizar. 
-Para esto haremos uso de los programas \textbf{time} y \textbf{gprof}.
-
 \end{abstract}
 
 \newpage
@@ -67,16 +63,24 @@ Para esto haremos uso de los programas \textbf{time} y \textbf{gprof}.
 
 Muchas veces tanto para programas reci\'en terminados, como para aquellos que llevan un tiempo en funcionamiento, se desconoce realmente qu\'e partes del programa insumen la mayor cantidad de recursos, sean estos de tiempo, carga de cpu, etc.
 Poseer esta informaci\'on se torna en algo cr\'itico cuando se busca realizar una mejora de performance en dicho programa. Ser\'ia poco \'util intentar optimizar a ciegas, por no decir in\'util.\\
-Haremos uso entonces de dos herramientas distintas, el profiling del c\'odigo (por medio de \textit{gprof}) y la medici\'on de los tiempos de ejecuci\'on (por medio de \textit{time}). 
+Haremos uso entonces de tres herramientas distintas, el profiling del c\'odigo (por medio de \textit{gprof} y \texit{cachegrind}) y la medici\'on de los tiempos de ejecuci\'on (por medio de \textit{time}). 
 
 \begin{itemize}
- \item \textbf{Profiling}: El profiling permite aprender donde el programa pasa la mayor parte de su tiempo, y cuales funciones llaman a otras mientras se ejecuta.\\
+ \item \textbf{Profiling}: 
+
+\begin{itemize}
+	
+\item {\textbf{gprof:} } {El profiling permite aprender donde el programa pasa la mayor parte de su tiempo, y cuales funciones llaman a otras mientras se ejecuta.\\
  			   Esta informacion puede mostrar qu\'e piezas del programa son mas lentas de lo esperado, convirti\'endolas en candidatas para su reescritura en la etapa de optimizaci\'on.\\
  			   Tambi\'en puede ayudarnos a descubrir cuales funciones son llamadas m\'as o menos veces delo esperado, pudiendo as\'i encontrar nuevos bugs (aunque el descubrimiento de bugs no es el fin principal de esta etapa)
  			   
 			   El profiler utiliza informaci\'on recolectada en tiempo de ejecuci\'on, por lo que puede ser utilizado en programas demasiado grandes o complejos, donde un an\'alisis por lectura de fuentes ser\'ia impracticable.\\
 			   Como consecuencia del an\'alisis durante la ejecuci\'on, los datos con los que se corra el programa afectaran el resultado del profiler. 
-			   Es decir, distintos datos de entrada pueden provocar distintas ramas de ejecuci\'on, dando po resultado que, por ejemplo, no se llamen algunas funciones.
+			   Es decir, distintos datos de entrada pueden provocar distintas ramas de ejecuci\'on, dando por resultado que, por ejemplo, no se llamen algunas funciones.}
+
+\item{\textbf{CacheGrind:}}{}
+			
+\end{itemize}
 			   
 \item \textbf{Medici\'on de Tiempos}: Permite conocer con precisi\'on los tiempos de ejecuci\'on de un programa, discriminados entre tiempos de systema, de usario, tiempos totales, etc., as\'i como tambi\'en conocer los porcentajes para cada parte del programa, cantidad de entradas, y muchas otras opciones.\\
 				     La combinaci\'on con una herramienta de profiling permite exactitud a la hora de conocer la forma en que se ejecuta el programa bajo estudio, permitiendo optimizar \'unicamente las partes cr\'iticas del ciclo de ejecuci\'on.
@@ -93,9 +97,9 @@ Haremos uso entonces de dos herramientas distintas, el profiling del c\'odigo (p
 
 \subsection{Valores Obtenidos}
 
-En la tabla~\ref{tab001} se presentan las mediciones realizadas con \textbf{time} sobre ambos algoritmos de ordenamiento y con archivos de distintos tamaños.\\
+En la tabla~\ref{tab001} se presentan las mediciones realizadas con \textbf{time} sobre ambos algoritmos de ordenamiento y con archivos de distintos tamaï¿½os.\\
 
-Adem\'as de los archivos indicados en el enunciado, fueron agregadas mediciones sobre archivos con tamaños arbitrarios, mayores, con el fin de mostrar de mejor manera las diferencias entre algoritmos.
+Adem\'as de los archivos indicados en el enunciado, fueron agregadas mediciones sobre archivos con tamaï¿½os arbitrarios, mayores, con el fin de mostrar de mejor manera las diferencias entre algoritmos.
 
 \begin{table}[!htp]
 \begin{center}
@@ -171,12 +175,12 @@ En la figura se muestra el gr\'afico del tiempo insumido por el Stooge sort para
 
 Al momento de calcular el speedup de Quicksort contra Stooge sort, con la raz\'on entre los tiempos de cada uno, las cifras obtenidas no lo permiten. El primero no arroja resultados apreciables por \textbf{time} en ninguna instancia sin contar la \'ultima, donde el Stooge sort es inmanejable.\\
 
-Esto es porque la complejidad del Quicksort es, en promedio, \BigO{n \log(n)}, mientras que el Stooge sort es de \BigO{n^{2,7}}. Entonces, el speedup entre ambos algoritmos tiende a infinito exponencialmente, seg\'un crece el tamaño de la muestra.
+Esto es porque la complejidad del Quicksort es, en promedio, \BigO{n \log(n)}, mientras que el Stooge sort es de \BigO{n^{2,7}}. Entonces, el speedup entre ambos algoritmos tiende a infinito exponencialmente, seg\'un crece el tamaï¿½o de la muestra.
 
 
 \section{Profiling}
 
-Como se pudo apreciar en la tabla de tiempos de la p\'agina anterior, el algoritmo de quicksort resulta extremadamente veloz para tamaños de archivos relativamente grandes. Decidimos, entonces, forzar un poco m\'as al programa y hacer el profiling sobre un archivo desordenado de 32mb. Adem\'as, para que las funciones mismas de \textbf{gprof} tuvieran una incidencia despreciable en la prueba.\\
+Como se pudo apreciar en la tabla de tiempos de la p\'agina anterior, el algoritmo de quicksort resulta extremadamente veloz para tamaï¿½os de archivos relativamente grandes. Decidimos, entonces, forzar un poco m\'as al programa y hacer el profiling sobre un archivo desordenado de 32mb. Adem\'as, para que las funciones mismas de \textbf{gprof} tuvieran una incidencia despreciable en la prueba.\\
 Realizar esta misma prueba sobre el algoritmo Stooge sort, ser\'ia impracticable, ya que los tiempos demandados ser\'ian demasiado grandes.
 
 Un punto interesante a destacar son llamadas a m\'etodos de ordenamiento: como era de esperarse, no se realizan llamadas al m\'etodo stoogesort, lo cual confirma que el algoritmo no es utilizado.

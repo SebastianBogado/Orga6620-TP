@@ -40,19 +40,30 @@ do
 
 		i=$(( $i + 1 ))
 	done
-	
+	max=0
+	min=100000
 	MR=0
 	for rate in `sed <$temp -n 's/\s\+D1  miss rate:\s\+\([0-9]\+\.[0-9]\+\)%.\+/\1 /g p'`
 	do
+	        if [ $rate -gt $max ]; then
+                        max=$rate
+                fi
+                
+                if [ $rate -lt $min ]; then
+                        min=$rate
+                fi
+
 		MR=$(echo "scale=2; $MR + $rate" | bc)
 	done
 	
 	promedio=$( echo "scale=2; $MR / $corridas" | bc)
 
-	echo -e " Promedio: $promedio \n\n" >> $temp
+	echo -e " Promedio: $promedio\n\n" >> $temp
 	cat $temp >> $outFull
 
-	echo -ne "$file - Promedio MR: $promedio \n\n" >> $outSmall
+	echo -ne "$file - Promedio MR: $promedio \n
+		  Max: $max\n
+		  Min: $min\n\n" >> $outSmall
 done
 
 rm cachegrind*

@@ -43,17 +43,32 @@ do
 	
 	medTime=0
 	
+	max=0
+	min=10000
+	
 	for rate in `sed <$temp -n 's/[^0-9]\+0m\(.*\)s/\1/g p'`
 	do
+		if [ $(echo "scale=5; $max < $rate" | bc) -eq 1 ]; then
+			max=$rate
+		fi
+		
+		if [ $(echo "scale=5; $min > $rate" | bc) -eq 1 ]; then
+			min=$rate
+		fi
+
 		medTime=$(echo "scale=4; $medTime + $rate" | bc)
 	done
 	
 	promedio=$( echo "scale=4; $medTime / $corridas" | bc)
 		
-	echo -e " Promedio real time: $promedio \n\n" >> $temp
+	echo -e " Promedio real time: $promedio \n
+		  Max $max\n
+	          Min $min\n" >> $temp
 	cat $temp >> $outFull
 
-	echo -ne "\n\n$file - Promedio real time: $promedio \n\n" >> $outSmall
+	echo -ne "\n\n$file - Promedio real time: $promedio \n
+		  Max $max\n
+	          Min $min\n"  >> $outSmall
 done
 
 rm $temp
