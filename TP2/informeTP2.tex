@@ -79,7 +79,7 @@ Haremos uso entonces de dos m\'etodos distintos en el estudio del programa, el p
 	
 \item {\textbf{gprof:} } {Permite aprender donde el programa pasa la mayor parte de su tiempo, y cuales funciones llaman a otras mientras se ejecuta.\\
  			   Esta informacion puede mostrar qu\'e piezas del programa son mas lentas de lo esperado, convirti\'endolas en candidatas para su reescritura en la etapa de optimizaci\'on.\\
- 			   Tambi\'en puede ayudarnos a descubrir cuales funciones son llamadas m\'as o menos veces delo esperado, pudiendo encontrar nuevos bugs (aunque el descubrimiento de bugs no es el fin principal de esta etapa)
+ 			   Tambi\'en puede ayudarnos a descubrir cuales funciones son llamadas m\'as o menos veces de lo esperado, pudiendo encontrar nuevos bugs (aunque el descubrimiento de bugs no es el fin principal de esta etapa)
  			   }
 
 \item{\textbf{cachegrind:}}{ Simula el comportamiento del programa sobre una determinada jerarqu\'ia de cache, la cual puede ser establecida por medio de distintas opciones. 
@@ -90,7 +90,7 @@ Haremos uso entonces de dos m\'etodos distintos en el estudio del programa, el p
 			   
 \subsection{Medici\'on de Tiempos}
 
-Permite conocer con precisi\'on los tiempos de ejecuci\'on de un programa, discriminados entre tiempos de systema, de usario, tiempos totales, etc., as\'i como tambi\'en conocer los porcentajes para cada parte del programa, cantidad de entradas, y muchas otras opciones.\\
+Permite conocer con precisi\'on los tiempos de ejecuci\'on de un programa, discriminados entre tiempos de sistema, de usario, tiempos totales, etc., as\'i como tambi\'en conocer los porcentajes para cada parte del programa, cantidad de entradas, y muchas otras opciones.\\
 				     La combinaci\'on con una herramienta de profiling permite exactitud a la hora de conocer la forma en que se ejecuta el programa bajo estudio, permitiendo optimizar \'unicamente las partes cr\'iticas del ciclo de ejecuci\'on.
 
 \newpage
@@ -188,6 +188,20 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
 
 \section{An\'alisis de los Datos}
 
+    A continuaci\'on, una tabla que muestra el speedup obtenido entre las distintas versiones, parcial y acumulativo
+
+\begin{center}
+  \begin{tabular}{ c | c | c | c | c | c | c | c | c | c | c }
+    \hline
+                & wator & 1wator & 2wator & 3wator & 4wator & 5wator & 6wator & 7wator & 8wator & 9wator & 10wator  \\ \hline
+Tiempo promedio &       &        &        &        &        &        &        &        &        &        &          \\ \hline
+SU parcial      &       &        &        &        &        &        &        &        &        &        &          \\ \hline
+SU acumulado    &       &        &        &        &        &        &        &        &        &        &          \\ \hline
+  \end{tabular}
+\end{center}
+
+    Se puede ver que hubo varias mejoras que no afectaron mucho el tiempo de ejecuci\'on del programa, como las versiones x, y _y_ z. A su vez, la(s) versi\'on X (Y) aportaron un x\% al speed up. En esas versiones, los cambios fueron -blah-, y explicar con más detalle por qué aportó tanto.
+
 Ale, asumo que ac\'a no ir\'an datos de compilaci\'on con optimizaciones.
 
 
@@ -199,7 +213,7 @@ Ale, asumo que ac\'a no ir\'an datos de compilaci\'on con optimizaciones.
 
     El compilador, al optimizar, reordena las instrucciones Assembly que no dependan entre sí, aprovechando el pipeline y los ciclos de \textit{stall}. Retomando un poco las conclusiones del trabajo anterior, se ve de nuevo que no tendr\'ia sentido ponerse a trabajar a tan bajo nivel por el esfuerzo que demanda, y porque ya existen herramientas cuya función principal es producir un c\'odigo objeto muy eficiente, y ni siquiera es necesario mencionar todos los otros cambios que aplica para mejorar el resultado de la compilaci\'on.
 
-
+    Uno de los problemas al intentar mejorar el MR fue que el n\'ucleo de l\'ogica del programa era la aleatoriedad misma. Mmm... podr\'ia poner el dibujito de la cach\'e y la matriz? mencionando que si siempre da NORTH, va a estar cargado en cach\'e, pero si salen intercalados NORTH y SOUTH, el MR es inmejorable porque en cada lectura, se pide un bloque que reemplaza otro que tambi\'en era \'util
 
     
 % Citas bibliogr\'aficas.
