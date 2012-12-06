@@ -558,22 +558,24 @@ Each sample counts as 0.01 seconds.
     Del an\'alisis de los datos se desprende que obtuvimos un speed up de hasta X, luego de muchas ideas aplicadas. Sin embargo, al compilar el programa original con optimizaciones, se obtienen tiempos aún mejores, que implicar\'ian muchas más horas-hombre sobre el trabajo.
 		\begin{quote}
 			\begin{verbatim}
-				gcc -DNDEBUG -O fuente.c -o fuente
+				gcc -DNDEBUG -O3 fuente.c -o fuente
 			\end{verbatim}
 		\end{quote}
 
 \begin{center}
-  \begin{tabular}{| r | c |}
+  \begin{tabular}{| r | c | c |}
     \hline
-    Versi\'on	&   Time Promedio$^*$  \\ \hline \hline
-    wator	&	0.614		\\ \hline
-    9wator	&	0.567		\\ \hline
+    Versi\'on	&   Time Promedio$^*$  & 	SpeedUp$^{**}$ 	\\ \hline \hline
+    wator	&	0.614		&	2.1579		\\ \hline
+    9wator	&	0.567		&	2.3368		\\ \hline
   \end{tabular}
-
-
-    \small{$^*$ sobre 1000 corridas}
+   \\
+   \small{$^*$ sobre 1000 corridas; $^{**}$ respecto wator original} \\ 
+   
   \bigskip
-\end{center}    %# TABLA DEL 10WATOR CON O0 Y WATOR CON O1, O2 Y O3 (O3 si mejora) #
+\end{center}   
+
+    Del an\'alisis de los datos se desprende que obtuvimos un speed up de hasta 1.895, luego de muchas ideas aplicadas. Sin embargo, al compilar el programa original con optimizaciones, se obtienen tiempos a\'un mejores, que implicar\'ian muchas m\'as horas-hombre sobre el trabajo.
 
     El compilador, al optimizar, reordena las instrucciones Assembly que no dependan entre s\'i, aprovechando el pipeline y los ciclos de \textit{stall}. Retomando un poco las conclusiones del trabajo anterior, se ve de nuevo que no tendr\'ia sentido ponerse a trabajar a tan bajo nivel por el esfuerzo que demanda, y porque ya existen herramientas cuya funci\'on principal es producir un c\'odigo objeto muy eficiente, y ni siquiera es necesario mencionar todos los otros cambios que aplica para mejorar el resultado de la compilaci\'on.
 
