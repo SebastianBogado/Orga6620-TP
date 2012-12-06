@@ -127,6 +127,8 @@ Cada moviemiento depende del c\'alculo de la nueva posici\'on, reemplazando el e
 	En ning\'un momento (a menos que aclare lo contrario) se utilizan las opciones de optimizaci\'on del gcc. El \'unico caso donde se modifica este comando es para la compilaci\'on previa a la corrida con gprof.}
  \item {Los scripts con los que se realizaron las mediciones promediadas se encuentran disponibles en el cd bajo el nombre XXXXCollect.sh}
  
+ \item {Debido a la aleatoriedad del problema a estudiar, se torna complicado obtener datos confiables de elementos como el gprof, dado que una corrida puede ser diametralmente distinta de otra en su uso de las funciones. Utilizaremos en estos casos las corridas que consideremos m\'as significativas.}
+ 
 \end{itemize}
 	
 \newpage
@@ -201,16 +203,64 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
 \section{Corridas de prueba y Mediciones}
 
 \subsection{time}
+
 \begin{verbatim}
 ./timeCollect.sh 1000 <*wator>
 \end{verbatim}
 
+\begin{center}
+  \begin{tabular}{| c | c | c | c | }
+    \hline
+    Versi\'on 	&	Tiempo Promedio	& 	M\'aximo 	& 	M\'inimo	\\ \hline
+\hline
+    wator	&	0.1325		&       0.183		&	0,114		\\ \hline
+    1wator	&	0.1295		&   	0.215		&	0,114		\\ \hline
+    2wator	&	0.1274		&	0.191		&	0,108		\\ \hline
+    3wator	&	0.1252		&	0.183		&	0,106		\\ \hline
+    4wator	&	0.1013		&	0,136		&	0,075		\\ \hline
+    5wator	&	0.0945		&	0,134		&	0,069		\\ \hline
+    6wator	&	0.0819		&	0,152		&	0,056		\\ \hline
+    7wator	&	0.0784		&	0,325		&	0,052		\\ \hline
+    8wator	&	0.0783		&	0,109		&	0,054		\\ \hline
+    9wator	&	0.0699		&	0,102		&	0,045		\\ \hline
+  \end{tabular}
+\end{center}
 
 
 \subsection{cachegrind}
 
+\begin{verbatim}
+./cacheCollect.sh 10<*wator>
+\end{verbatim}
+
+\begin{center}
+  \begin{tabular}{| r | c | c | c |}
+    \hline
+    Versi\'on 	&	MR Promedio	& 	Max D refs	&	Max D1 misses	\\ \hline
+	wator	&	13.5	&	218,373,284	&	23,544,524	\\ \hline
+	1wator	&	13.0	&	198,950,293 	&	22,020,371	\\ \hline
+	2wator	&	13.8	&	183,212,076	&	25,054,976	\\ \hline
+	3wator	&	13.6	&	186,803,584	&	27,736,496	\\ \hline
+	4wator	&	19.9	&	123,791,963	&	23,311,673	\\ \hline
+	5wator	&	20.4	&	123,419,316	&	24,499,790	\\ \hline
+	6wator	&	24.5	&	105,538,390	&	24,450,433	\\ \hline
+	7wator	&	22.7	&	103,736,716	&	25,632,215	\\ \hline
+	8wator	&	23.2	&	101,005,413	&	25,245,703	\\ \hline
+	9wator	&	28.9	&	88,302,553	&	25,931,844	\\ \hline
+  \end{tabular}
+\end{center}
+
+\newpage
+
 \subsection{gprof}
-wator
+
+\begin{verbatim}
+./gprofCollect.sh <*wator>
+\end{verbatim}
+
+\begin{itemize}
+ 
+\item Wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -218,22 +268,24 @@ Each sample counts as 0.01 seconds.
   \begin{tabular}{| c | c | c | c | c | c | c |}
     \hline
   % &   cumulative &   self &   &              self &     total &    & \\           
- time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
- 33.40 &      0.01 &     0.01 &  2490207 &     0.00 &      0.00 &   ni \\ \hline
- 33.40 &      0.02 &     0.01 &   478382 &     0.02 &      0.04 &   move\_to\_empty \\ \hline
- 33.40 &      0.03 &     0.01 &     1000 &    10.02 &     30.06 &   moveall \\ \hline
-  0.00 &      0.03 &     0.00 &  2490207 &     0.00 &      0.00 &   nj \\ \hline
-  0.00 &      0.03 &     0.00 &   543731 &     0.00 &      0.04 &   move \\ \hline
-  0.00 &      0.03 &     0.00 &   478382 &     0.00 &      0.02 &   choose\_empty \\ \hline
-  0.00 &      0.03 &     0.00 &   245559 &     0.00 &      0.00 &   myrand \\ \hline
-  0.00 &      0.03 &     0.00 &    83036 &     0.00 &      0.02 &   choose\_fish \\ \hline
-  0.00 &      0.03 &     0.00 &    83036 &     0.00 &      0.02 &   move\_to\_fish \\ \hline
-  0.00 &      0.03 &     0.00 &    66316 &     0.00 &      0.00 &   new\_animal \\ \hline
-  0.00 &      0.03 &     0.00 &     1001 &     0.00 &      0.00 &   show\_wator \\ \hline
-  0.00 &      0.03 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 33.40 &      0.04 &     0.04 &   472344 &     0.08 &      0.15 &   choose\_empty \\ \hline
+ 25.05 &     0.07   &  0.03  &   1000  &  30.06  & 120.24 & moveall \\ \hline
+ 16.70 &      0.09 &     0.02 &  2491979 &     0.01 &      0.01 &   ni \\ \hline
+ 16.70 &      0.11 &     0.02 &  2491979 &     0.01 &      0.01 &   nj \\ \hline
+  8.35 &      0.12 &     0.01 &   472344 &     0.02 &      0.18 &   move\_to\_empty \\ \hline
+  0.00 &      0.12 &     0.00 &   540665 &     0.00 &      0.17 &   move \\ \hline
+  0.00 &      0.12 &     0.00 &   255139 &     0.00 &      0.00 &   myrand \\ \hline
+  0.00 &      0.12 &     0.00 &    87122 &     0.00 &      0.06 &   choose\_fish \\ \hline
+  0.00 &      0.12 &     0.00 &    87122 &     0.00 &      0.07 &   move\_to\_fish \\ \hline
+  0.00 &      0.12 &     0.00 &    68819 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.12 &     0.00 &     1001 &     0.00 &      0.00 &   show\_wator \\ \hline
+  0.00 &      0.12 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+
   \end{tabular}
 \end{center}
-1wator
+
+\item 1wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -256,7 +308,8 @@ Each sample counts as 0.01 seconds.
   0.00 &      0.11 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
   \end{tabular}
 \end{center}
-  2wator
+\newpage
+\item 2wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -280,7 +333,7 @@ Each sample counts as 0.01 seconds.
   \end{tabular}
 \end{center}
 
-3wator
+\item 3wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -303,8 +356,8 @@ Each sample counts as 0.01 seconds.
   0.00 &      0.10 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
   \end{tabular}
 \end{center}
-  
-  4wator
+  \newpage
+\item 4wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -328,7 +381,7 @@ Each sample counts as 0.01 seconds.
   \end{tabular}
 \end{center}
   
-5wator
+\item 5wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -351,8 +404,8 @@ Each sample counts as 0.01 seconds.
   0.00 &      0.07 &     0.00 &        1 &     0.00 &     25.56 &   init\_wator \\ \hline
   \end{tabular}
 \end{center}
-
-6wator
+\newpage
+\item 6wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -376,7 +429,7 @@ Each sample counts as 0.01 seconds.
   \end{tabular}
 \end{center}
 
-7wator
+\item 7wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -400,8 +453,8 @@ Each sample counts as 0.01 seconds.
   \end{tabular}
 \end{center}
 
-
-8wator
+\newpage
+\item 8wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -425,7 +478,7 @@ Each sample counts as 0.01 seconds.
 \end{center}
   
  %         the percentage of the total running time of the
-9wator
+\item 9wator
 
 Flat profile:
 Each sample counts as 0.01 seconds.
@@ -447,10 +500,13 @@ Each sample counts as 0.01 seconds.
   \end{tabular}
 \end{center}
  
+\end{itemize}
 
 \newpage
 
 \section{An\'alisis de los Datos}
+
+\subsection{Tiempos}
 
     A continuaci\'on, una tabla que muestra el speedup obtenido entre las distintas versiones, parcial y acumulativo
 
@@ -471,25 +527,53 @@ Each sample counts as 0.01 seconds.
     9wator	&	0.0699		&	1,1201		&	1,8955		\\ \hline
 
   \end{tabular}
-\end{center}
 	
 	\small{$^*$ Sobre 10000 ejecuciones}
-	
+	\end{center}
+
 \bigskip
 
-    Se puede ver que hubo varias mejoras que no afectaron mucho el tiempo de ejecuci\'on del programa, como las versiones x, y z. A su vez, la(s) versi\'on X (Y) aportaron un x\% al speed up. En esas versiones, los cambios fueron -blah-, y explicar con m\'as detalle por qu\'e aport\'o tanto.
-
+    Se puede ver que hubo varias mejoras que no afectaron mucho el tiempo de ejecuci\'on del programa, como las modificaciones entre versiones 1 y 2, o 7 y 8. A su vez, las versi\'ones 4, 6 y 9 aportaron un \% mayor al speed up total. En esas versiones los principales cambios fueron: el acceso a los datos a trav\'es de aritm\'etica de punteros, la optimizaci\'on en el c\'alculo del m\'odulo y la reducci\'on en cantidad de llamados a las funciones ni, nj (detalles en la secci\'on 4).
     
-    
-    
-Ale, asumo que ac\'a no ir\'an datos de compilaci\'on con optimizaciones.
+    En los \'ultimos tres casos mencionados, esperabamos este tipo de respuesta, ya que la cantidad de operaciones necesarias para un mismo resultado cae dr\'asticamente (como sabemos, el c\'alculo del m\'odulo \% resulta muy costoso, y en el acceso a los datos, una suma en un puntero es mucho m\'as veloz que la doble referencia en una matriz).  
 
+\subsection{Profiling}
 
+\subsubsection{Miss Rate}
+
+	Si bien en un principio puede resultar anti-intuitivo que el miss rate final sea tanto mayor que el inicial, siendo que el objetivo era optimizar, esto cobra sentido cuando se miran las cantidad de referencias al cache de datos. Se puede ver con claridad que la cantidad de referencias total se reduce a un 40\% de las originales, mientras que la tasa de miss se mantiene aproximadamente constante a lo largo de las distintas optimizaciones. Quiz\'as all\'i hay un punto a observar si se busca un speedup mayor todav\'ia pero las soluciones propuestas no resultaron efectivas en este par\'ametro.
+	
+	Como se dijo en un principio, el objetivo final era reducir los tiempos de ejecuci\'on, lo cual se consigui\'o, en gran parte, por la reducci\'on mencionada en las referencias totales al D1.
+	
+\subsubsection{Llamados y Tiempos de Funciones}
+
+	Hemos mencionado como parte de las aclaraciones, la dificultad de medir de manera confiable un problema tan aleatorio como el que resuelve este programa. Puedimos, sin embargo, confirmar algunas suposiciones a lo largo de varias corridas del profiler. 
+	
+	Nos result\'o evidente la necesidad de reducir los tiempos en funciones como \textit{moveall} o \textit{choose\_x}, dada la gran cantidad de invocaciones que estas presentaban. Las funciones \textit{ni} y \textit{nj} tambi\'en presentaban esta particularidad, por lo tanto se convirtieron tambi\'en en foco de nuestras optimizaciones.
+	
+	Ejemplos, de estas consideraciones son el buscar reducir al m\'aximo los tiempos en el c\'alculo del m\'odulo, o el esmero en reducir la carga en los ciclos de movimiento y recorrida de la matriz.
+	
 \section{Conclusiones}
 
     Del an\'alisis de los datos se desprende que obtuvimos un speed up de hasta X, luego de muchas ideas aplicadas. Sin embargo, al compilar el programa original con optimizaciones, se obtienen tiempos aún mejores, que implicar\'ian muchas más horas-hombre sobre el trabajo.
+		\begin{quote}
+			\begin{verbatim}
+				gcc -DNDEBUG -O fuente.c -o fuente
+			\end{verbatim}
+		\end{quote}
 
-    %# TABLA DEL 10WATOR CON O0 Y WATOR CON O1, O2 Y O3 (O3 si mejora) #
+\begin{center}
+  \begin{tabular}{| r | c |}
+    \hline
+    Versi\'on	&   Time Promedio$^*$  \\ \hline \hline
+    wator	&	0.614		\\ \hline
+    9wator	&	0.567		\\ \hline
+  \end{tabular}
+
+
+    \small{$^*$ sobre 1000 corridas}
+  \bigskip
+\end{center}    %# TABLA DEL 10WATOR CON O0 Y WATOR CON O1, O2 Y O3 (O3 si mejora) #
 
     El compilador, al optimizar, reordena las instrucciones Assembly que no dependan entre s\'i, aprovechando el pipeline y los ciclos de \textit{stall}. Retomando un poco las conclusiones del trabajo anterior, se ve de nuevo que no tendr\'ia sentido ponerse a trabajar a tan bajo nivel por el esfuerzo que demanda, y porque ya existen herramientas cuya funci\'on principal es producir un c\'odigo objeto muy eficiente, y ni siquiera es necesario mencionar todos los otros cambios que aplica para mejorar el resultado de la compilaci\'on.
 
