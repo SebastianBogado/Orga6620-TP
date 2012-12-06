@@ -35,7 +35,9 @@ do
 		echo -n "."
 		echo " Corrida $i" >> $temp
 
-		(time "./$file" WatorOut.txt) 2>&1 | grep "real.*" >> $temp
+		
+#		(time "./$file" WatorOut.txt) 2>&1 | grep "real.*" >> $temp
+		(time valgrind --tool=cachegrind --D1=256,2,64 "./$file" WatorOut.txt 2>&1 ) 2>&1 | grep "real.*" >> $temp
 		
 		echo -ne " Fin simulacion: $(tail -n 1 WatorOut.txt) \n" >> $temp
 		

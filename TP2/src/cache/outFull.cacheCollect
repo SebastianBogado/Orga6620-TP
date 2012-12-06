@@ -1,9 +1,9 @@
 2wator
  Corrida 0
-    D   refs:      171,392,119  (114,526,939 rd   + 56,865,180 wr)
-    D1  misses:     24,285,051  ( 20,878,077 rd   +  3,406,974 wr)
-    D1  miss rate:        14.1% (       18.2%     +        5.9%  )
+    D   refs:      184,590,070  (120,894,483 rd   + 63,695,587 wr)
+    D1  misses:     21,351,606  ( 18,514,638 rd   +  2,836,968 wr)
+    D1  miss rate:        11.5% (       15.3%     +        4.4%  )
  Fin simulacion: 1000 0 1024 
- Promedio: 14.100
+ Promedio: 11.500
 
 

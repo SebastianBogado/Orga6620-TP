@@ -200,8 +200,250 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
 
 \section{Corridas de prueba y Mediciones}
 
+\subsection{time}
 
 
+\subsection{cachegrind}
+
+\subsection{gprof}
+wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+  % &   cumulative &   self &   &              self &     total &    & \\           
+ time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 33.40 &      0.01 &     0.01 &  2490207 &     0.00 &      0.00 &   ni \\ \hline
+ 33.40 &      0.02 &     0.01 &   478382 &     0.02 &      0.04 &   move\_to\_empty \\ \hline
+ 33.40 &      0.03 &     0.01 &     1000 &    10.02 &     30.06 &   moveall \\ \hline
+  0.00 &      0.03 &     0.00 &  2490207 &     0.00 &      0.00 &   nj \\ \hline
+  0.00 &      0.03 &     0.00 &   543731 &     0.00 &      0.04 &   move \\ \hline
+  0.00 &      0.03 &     0.00 &   478382 &     0.00 &      0.02 &   choose\_empty \\ \hline
+  0.00 &      0.03 &     0.00 &   245559 &     0.00 &      0.00 &   myrand \\ \hline
+  0.00 &      0.03 &     0.00 &    83036 &     0.00 &      0.02 &   choose\_fish \\ \hline
+  0.00 &      0.03 &     0.00 &    83036 &     0.00 &      0.02 &   move\_to\_fish \\ \hline
+  0.00 &      0.03 &     0.00 &    66316 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.03 &     0.00 &     1001 &     0.00 &      0.00 &   show\_wator \\ \hline
+  0.00 &      0.03 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+  \end{tabular}
+\end{center}
+1wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+  % &   cumulative &   self &   &              self &     total &    & \\           
+ time  &   seconds  &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 27.33 &      0.03 &     0.03 &   478382 &     0.06 &      0.08 &   choose\_empty \\ \hline
+ 27.33 &      0.06 & 0.03    & 1000    & 30.06    & 100.21     &      moveall \\ \hline
+  9.11 &      0.07 &     0.01 &  2490207 &     0.00 &      0.00 &   ni \\ \hline
+  9.11 &      0.08 &     0.01 &   543731 &     0.02 &      0.13 &   move \\ \hline
+  9.11 &      0.09 &     0.01 &   478382 &     0.02 &      0.10 &   move\_to\_empty \\ \hline
+  9.11 &      0.10 &     0.01 &    83036 &     0.12 &      0.14 &   choose\_fish \\ \hline
+  9.11 &      0.11 &     0.01 &     1001 &    10.01 &     10.01 &   show\_wator \\ \hline
+  0.00 &      0.11 &     0.00 &  2490207 &     0.00 &      0.00 &   nj \\ \hline
+  0.00 &      0.11 &     0.00 &   245559 &     0.00 &      0.00 &   myrand \\ \hline
+  0.00 &      0.11 &     0.00 &    83036 &     0.00 &      0.14 &   move\_to\_fish \\ \hline
+  0.00 &      0.11 &     0.00 &    66316 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.11 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+  \end{tabular}
+\end{center}
+  2wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+  % &   cumulative &   self &   &              self &     total &    & \\           
+ time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 33.40 &      0.03 &     0.03 &   524731 &     0.06 &      0.08 &   choose\_empty \\ \hline
+ 22.26 &      0.05 &     0.02 &  3048807 &     0.01 &      0.01 &   nj \\ \hline
+ 22.26 &      0.07 &     0.02 &     1001 &    20.02 &     20.02 &   show\_wator \\ \hline
+ 11.13 &      0.08 &     0.01 &   630377 &     0.02 &      0.10 &   move \\ \hline
+ 11.13 &      0.09 &     0.01 &     1000 &    10.02 &     70.13 &   moveall \\ \hline
+  0.00 &      0.09 &     0.00 &  3048807 &     0.00 &      0.00 &   ni \\ \hline
+  0.00 &      0.09 &     0.00 &   524731 &     0.00 &      0.09 &   move\_to\_empty \\ \hline
+  0.00 &      0.09 &     0.00 &   402951 &     0.00 &      0.00 &   myrand \\ \hline
+  0.00 &      0.09 &     0.00 &   136989 &     0.00 &      0.03 &   choose\_fish \\ \hline
+  0.00 &      0.09 &     0.00 &   136989 &     0.00 &      0.03 &   move\_to\_fish \\ \hline
+  0.00 &      0.09 &     0.00 &   106018 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.09 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+  \end{tabular}
+\end{center}
+
+3wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+  % &   cumulative &   self &   &              self &     total &    & \\           
+ time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 30.06 &      0.03 &     0.03 &   524731 &     0.06 &      0.08 &   choose\_empty \\ \hline
+ 20.04 &      0.05 &     0.02 &     1000 &    20.04 &     90.18 &   moveall \\ \hline
+ 10.02 &      0.06 &     0.01 &  3048807 &     0.00 &      0.00 &   ni \\ \hline
+ 10.02 &      0.07 &     0.01 &  3048807 &     0.00 &      0.00 &   nj \\ \hline
+ 10.02 &      0.08 &     0.01 &   630377 &     0.02 &      0.11 &   move \\ \hline
+ 10.02 &      0.09 &     0.01 &   524731 &     0.02 &      0.11 &   move\_to\_empty \\ \hline
+ 10.02      0.10     0.01                             frame\_dummy
+  0.00 &      0.10 &     0.00 &   402951 &     0.00 &      0.00 &   myrand \\ \hline
+  0.00 &      0.10 &     0.00 &   136989 &     0.00 &      0.03 &   choose\_fish \\ \hline
+  0.00 &      0.10 &     0.00 &   136989 &     0.00 &      0.03 &   move\_to\_fish \\ \hline
+  0.00 &      0.10 &     0.00 &   106018 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.10 &     0.00 &     1001 &     0.00 &      0.00 &   show\_wator \\ \hline
+  0.00 &      0.10 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+  \end{tabular}
+\end{center}
+  
+  4wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+  % &   cumulative &   self &   &              self &     total &    & \\           
+ time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 27.33 &      0.03 &     0.03 &   524211 &     0.06 &      0.11 &   move\_to\_empty \\ \hline
+ 18.22 &      0.05 &     0.02 &   629720 &     0.03 &      0.13 &   move \\ \hline
+ 18.22 &      0.07 &     0.02 &   401497 &     0.05 &      0.05 &   myrand \\ \hline
+ 18.22 &      0.09 &     0.02 &     1001 &    20.02 &     20.02 &   show\_wator \\ \hline
+  9.11 &      0.10 &     0.01 &   524211 &     0.02 &      0.05 &   choose\_empty \\ \hline
+  9.11 &      0.11 &     0.01 &     1000 &    10.02 &     90.13 &   moveall \\ \hline
+  0.00 &      0.11 &     0.00 &   400473 &     0.00 &      0.00 &   ni \\ \hline
+  0.00 &      0.11 &     0.00 &   400473 &     0.00 &      0.00 &   nj \\ \hline
+  0.00 &      0.11 &     0.00 &   137011 &     0.00 &      0.03 &   choose\_fish \\ \hline
+  0.00 &      0.11 &     0.00 &   137011 &     0.00 &      0.03 &   move\_to\_fish \\ \hline
+  0.00 &      0.11 &     0.00 &   105987 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.11 &     0.00 &        1 &     0.00 &     51.11 &   init\_wator \\ \hline
+  \end{tabular}
+\end{center}
+  
+5wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+  % &   cumulative &   self &   &              self &     total &    & \\           
+ time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 28.63 &      0.02 &     0.02 &   524211 &     0.04 &      0.05 &   choose\_empty \\ \hline
+ 28.63 &      0.04 &     0.02 &     1001 &    20.02 &     20.02 &   show\_wator \\ \hline
+ 14.32 &      0.05 &     0.01 &   524211 &     0.02 &      0.07 &   move\_to\_empty \\ \hline
+ 14.32 &      0.06 &     0.01 &   401497 &     0.02 &      0.02 &   myrand \\ \hline
+ 14.32 &      0.07 &     0.01 &     1000 &    10.02 &     50.08 &   moveall \\ \hline
+  0.00 &      0.07 &     0.00 &   629720 &     0.00 &      0.06 &   move \\ \hline
+  0.00 &      0.07 &     0.00 &   400473 &     0.00 &      0.00 &   ni \\ \hline
+  0.00 &      0.07 &     0.00 &   400473 &     0.00 &      0.00 &   nj \\ \hline
+  0.00 &      0.07 &     0.00 &   137011 &     0.00 &      0.01 &   choose\_fish \\ \hline
+  0.00 &      0.07 &     0.00 &   137011 &     0.00 &      0.01 &   move\_to\_fish \\ \hline
+  0.00 &      0.07 &     0.00 &   105987 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.07 &     0.00 &        1 &     0.00 &     25.56 &   init\_wator \\ \hline
+  \end{tabular}
+\end{center}
+
+6wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+  % &   cumulative &   self &   &              self &     total &    & \\           
+ time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 33.41 &      0.02 &     0.02 &     1001 &    20.03 &     20.03 &   show\_wator \\ \hline
+ 33.41 &      0.04 &     0.02 &     1000 &    20.05 &     40.09 &   moveall \\ \hline
+ 16.70 &      0.05 &     0.01 &   629720 &     0.02 &      0.03 &   move \\ \hline
+ 16.70 &      0.06 &     0.01 &   524211 &     0.02 &      0.02 &   choose\_empty \\ \hline
+  0.00 &      0.06 &     0.00 &   524211 &     0.00 &      0.02 &   move\_to\_empty \\ \hline
+  0.00 &      0.06 &     0.00 &   401497 &     0.00 &      0.00 &   myrand \\ \hline
+  0.00 &      0.06 &     0.00 &   400473 &     0.00 &      0.00 &   ni \\ \hline
+  0.00 &      0.06 &     0.00 &   400473 &     0.00 &      0.00 &   nj \\ \hline
+  0.00 &      0.06 &     0.00 &   137011 &     0.00 &      0.00 &   choose\_fish \\ \hline
+  0.00 &      0.06 &     0.00 &   137011 &     0.00 &      0.00 &   move\_to\_fish \\ \hline
+  0.00 &      0.06 &     0.00 &   105987 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.06 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+  \end{tabular}
+\end{center}
+
+7wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+  % &   cumulative &   self &   &              self &     total &    & \\           
+ time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 60.14 &      0.03 &     0.03 &   629720 &     0.05 &      0.05 &   move \\ \hline
+ 40.09 &      0.05 &     0.02 &     1000 &    20.05 &     50.12 &   moveall \\ \hline
+  0.00 &      0.05 &     0.00 &   524211 &     0.00 &      0.00 &   choose\_empty \\ \hline
+  0.00 &      0.05 &     0.00 &   524211 &     0.00 &      0.00 &   move\_to\_empty \\ \hline
+  0.00 &      0.05 &     0.00 &   401497 &     0.00 &      0.00 &   myrand \\ \hline
+  0.00 &      0.05 &     0.00 &   400473 &     0.00 &      0.00 &   ni \\ \hline
+  0.00 &      0.05 &     0.00 &   400473 &     0.00 &      0.00 &   nj \\ \hline
+  0.00 &      0.05 &     0.00 &   137011 &     0.00 &      0.00 &   choose\_fish \\ \hline
+  0.00 &      0.05 &     0.00 &   137011 &     0.00 &      0.00 &   move\_to\_fish \\ \hline
+  0.00 &      0.05 &     0.00 &   105987 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.05 &     0.00 &     1001 &     0.00 &      0.00 &   show\_wator \\ \hline
+  0.00 &      0.05 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+  \end{tabular}
+\end{center}
+
+
+8wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+  % &   cumulative &   self &   &              self &     total &    & \\           
+ time &   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 50.12 &      0.02 &     0.02 &   527937 &     0.04 &      0.04 &   choose\_empty \\ \hline
+ 25.06 &      0.03 &     0.01 &   136304 &     0.07 &      0.07 &   move\_to\_fish \\ \hline
+ 25.06 &      0.04 &     0.01 &     1000 &    10.02 &     40.09 &   moveall \\ \hline
+  0.00 &      0.04 &     0.00 &   633168 &     0.00 &      0.05 &   move \\ \hline
+  0.00 &      0.04 &     0.00 &   527937 &     0.00 &      0.04 &   move\_to\_empty \\ \hline
+  0.00 &      0.04 &     0.00 &   400284 &     0.00 &      0.00 &   ni \\ \hline
+  0.00 &      0.04 &     0.00 &   400284 &     0.00 &      0.00 &   nj \\ \hline
+  0.00 &      0.04 &     0.00 &   136304 &     0.00 &      0.00 &   choose\_fish \\ \hline
+  0.00 &      0.04 &     0.00 &   105941 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.04 &     0.00 &     1001 &     0.00 &      0.00 &   show\_wator \\ \hline
+  0.00 &      0.04 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+  \end{tabular}
+\end{center}
+  
+ %         the percentage of the total running time of the
+9wator
+
+Flat profile:
+Each sample counts as 0.01 seconds.
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c | c |}
+    \hline
+	&   cumulative &   self &   &              self &     total &     \\           
+ time 	&   seconds &   seconds &    calls &  us/call &   us/call &   name \\ \hline    
+ 50.12 &      0.02 &     0.02 &   527937 &     0.04 &      0.04 &   choose\_empty \\ \hline
+ 25.06 &      0.03 &     0.01 &   527937 &     0.02 &      0.06 &   move\_to\_empty \\ \hline
+ 25.06 &      0.04 &     0.01 &   136304 &     0.07 &      0.07 &   move\_to\_fish \\ \hline
+  0.00 &      0.04 &     0.00 &   633168 &     0.00 &      0.06 &   move \\ \hline
+  0.00 &      0.04 &     0.00 &   136304 &     0.00 &      0.00 &   choose\_fish \\ \hline
+  0.00 &      0.04 &     0.00 &   105941 &     0.00 &      0.00 &   new\_animal \\ \hline
+  0.00 &      0.04 &     0.00 &     1001 &     0.00 &      0.00 &   show\_wator \\ \hline
+  0.00 &      0.04 &     0.00 &     1000 &     0.00 &     40.10 &   moveall \\ \hline
+  0.00 &      0.04 &     0.00 &        1 &     0.00 &      0.00 &   init\_wator \\ \hline
+  
+  \end{tabular}
+\end{center}
+ 
 
 \newpage
 
@@ -214,21 +456,21 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
   \begin{tabular}{| r | c | c | c |}
     \hline
     Versi\'on	&   Time Promedio$^*$  &	SU Parcial	& 	SU Acumulado	\\ \hline \hline
-    wator	&	0.1151		&       	&			\\ \hline
-    1wator	&	0.1149		&   1,0017	&			\\ \hline
-    2wator	&	0.1104		&	1,0408	&			\\ \hline
-    3wator	&	0.1100		&	1,0036	&			\\ \hline
-    4wator	&	0.0834		&	1,3189	&			\\ \hline
-    5wator	&	0.0792		&	1,0530	&			\\ \hline
-    6wator	&	0.0729		&	1,0864	&			\\ \hline
-    7wator	&	0.0685		&	1,0642	&			\\ \hline
-    8wator	&	0.0694		&			&			\\ \hline
-    9wator	&	0.0654		&			&			\\ \hline
+    wator	&	0.1325		&       		&			\\ \hline
+    1wator	&	0.1295		&   	1,0231		&	1,0231		\\ \hline
+    2wator	&	0.1274		&	1,0164		&	1,0400		\\ \hline
+    3wator	&	0.1252		&	1,0175		&	1,0583		\\ \hline
+    4wator	&	0.1013		&	1,2359		&	1,3079		\\ \hline
+    5wator	&	0.0945		&	1,0719		&	1,4021		\\ \hline
+    6wator	&	0.0819		&	1,1538		&	1,6178		\\ \hline
+    7wator	&	0.0784		&	1,0446		&	1,6900		\\ \hline
+    8wator	&	0.0783		&	1,0012		&	1,6922		\\ \hline
+    9wator	&	0.0699		&	1,1201		&	1,8955		\\ \hline
     
   \end{tabular}
 \end{center}
 	
-	\small{$^*$ Sobre 1000 ejecuciones}
+	\small{$^*$ Sobre 10000 ejecuciones}
 	
 \bigskip
 

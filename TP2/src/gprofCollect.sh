@@ -8,10 +8,12 @@ fi
 
 outFull="gprof/outFull.gprofCollect"
 outSmall="gprof/outSmall.gprofCollect"
+outLatex="gprof/latexOut.gprofCollect"
 temp="temp.gprofCollect"
 `> WatorOut.txt ` 
 `> $outFull`
-`>$outSmall`
+`> $outSmall`
+`> $outLatex`
 `> $temp`
 
 
@@ -37,7 +39,9 @@ do
 
 	echo -ne "\n\n$file - gprof Flat Profile \n" >> $outSmall
 	tail -n +6 $temp | head -n 15  >> $outSmall	
-	echo -ne "\n\nFin simulacion: $(tail -n 1 WatorOut.txt) \n" >>$outSmall 
+	echo -ne "\n\nFin simulacion: $(tail -n 1 WatorOut.txt) \n" >>$outSmall
+
+	./gprof/gprofToTex.sh $temp >> $outLatex
 done
 
 rm $temp
