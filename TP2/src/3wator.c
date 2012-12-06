@@ -22,6 +22,8 @@ struct animal {
 int HBRUT, FBRUT, FASTEN;
 
 struct animal wator[MAXI][MAXJ] ;
+//struct animal emptyCells[MAXI*MAXJ];
+
 
 #define REST -1
 #define NORTH 0
@@ -66,64 +68,113 @@ int newcount = 0;
 void new_animal (int i, int j, char kind)
 {
 	struct animal *t = & wator[i][j] ;
-	assert (wator[i][j].kind == EMPTY);
-	assert ((kind == FISH) || (kind == SHARK));
+	assert (t->kind - EMPTY == 0);
+	assert ((kind - FISH == 0) || (kind - SHARK == 0));
 	t->kind = kind;
 	t->age = 0;
 	t->hunger = 0;
 	t->todo = 0;
-	newcount++;
+	++newcount;
 }
 
-int myrand (int max)
+inline int myrand (int max)
 {
 	return rand () % max;
 }
 
-int choose (int i, int j, char kind)
+int choose_fish (int i, int j)
 {
 	int k = 0;
-	int dir;
+	int dir = 0;
 	int dirs[4];
-	for (dir=0; dir < 4; dir++) {
-		int npi = ni (i, dir);
-		int npj = nj (j, dir);
-		struct animal * t = &wator[npi][npj];
-		if (t->kind == kind) {
-			dirs[k] = dir;
-			k++;
-		}
-	}
+	
+	//primer ciclo
+	struct animal * t = &wator[ni (i, dir)][nj (j, dir)];
+	if (t->kind - FISH == 0)
+		dirs[k++] = dir;
+
+	//segundo ciclo
+	++dir;
+	t = &wator[ni (i, dir)][nj (j, dir)];
+	if (t->kind - FISH == 0) 
+		dirs[k++] = dir;
+
+	//tercer ciclo
+	++dir;
+	t = &wator[ni (i, dir)][nj (j, dir)];
+	if (t->kind - FISH == 0) 
+		dirs[k++] = dir;
+
+	//cuarto ciclo
+	++dir;
+	t = &wator[ni (i, dir)][nj (j, dir)];
+	if (t->kind - FISH == 0) 
+		dirs[k++] = dir;
+			
 	if (k == 0)
 		return REST;
 	return dirs[myrand (k)];
 }
+
+int choose_empty (int i, int j)
+{
+	int k = 0;
+	int dir = 0;
+	int dirs[4];
+	
+	//primer ciclo
+	struct animal * t = &wator[ni (i, dir)][nj (j, dir)];
+	if (t->kind - EMPTY == 0)
+		dirs[k++] = dir;
+
+
+	//segundo ciclo
+	++dir;
+	t = &wator[ni (i, dir)][nj (j, dir)];
+	if (t->kind - EMPTY == 0)
+		dirs[k++] = dir;
+
+	//tercer ciclo
+	++dir;
+	t = &wator[ni (i, dir)][nj (j, dir)];
+	if (t->kind - EMPTY == 0)
+		dirs[k++] = dir;
+
+	//cuarto ciclo
+	++dir;
+	t = &wator[ni (i, dir)][nj (j, dir)];
+	if (t->kind - EMPTY == 0)
+		dirs[k++] = dir;
+
+	if (k == 0)
+		return REST;
+	return dirs[myrand (k)];
+}
+
 int freecount = 0;
 
 int move_to_fish (int i, int j)
 {
-	int npi, npj;
 	int dir;
-	struct animal * t;
+	struct animal * t, * s;
 
 	t = &wator[i][j];
-	assert (t->kind == SHARK);
+	assert (t->kind - SHARK == 0);
 
-	dir = choose (i, j, FISH);
-	if (dir == REST)
+	dir = choose_fish(i, j);
+	if (dir - REST == 0)
 		return 0;
 
-	npi = ni (i, dir);
-	npj = nj (j, dir);
-	assert (wator[npi][npj].kind == FISH);
-	freecount++;
+    s = &wator[ ni(i, dir) ][ nj(j, dir) ];
+	assert (s->kind - FISH == 0);
+	++freecount;
 	
-	memcpy  (&wator[npi][npj], t,sizeof(animal));
-	wator[i][j].kind = EMPTY;
-	wator[npi][npj].hunger = 0;
+	memcpy  (s, t, sizeof(animal));
+	t->kind = EMPTY;
+	s->hunger = 0;
 	
-	if (wator[npi][npj].age >= HBRUT) {
-		wator[i][j].age = 0;
+	if (s->age - HBRUT >= 0) {
+		t->age = 0;
 		new_animal (i, j, SHARK);
 	}
 	return 1;
@@ -131,29 +182,28 @@ int move_to_fish (int i, int j)
 
 int move_to_empty (int i, int j)
 {
-	int npi, npj;
 	int dir;
-	struct animal * t;
+	struct animal * t, * s;
 
 	t = &wator[i][j];
-	assert ((t->kind == SHARK) || (t->kind == FISH)); 
+	assert ((t->kind - SHARK == 0) || (t->kind - FISH == 0)); 
 
-	dir = choose (i, j, EMPTY);
-	if (dir == REST)
+	dir = choose_empty(i, j);
+	if (dir - REST == 0)
 		return 0;
 	
-	npi = ni (i, dir);
-	npj = nj (j, dir);
-	assert (wator[npi][npj].kind == EMPTY);
-	memcpy(&wator[npi][npj], t, sizeof(animal));
-	wator[i][j].kind = EMPTY;
+    s = &wator[ ni(i, dir) ][ nj(j, dir) ];
+
+	assert (s->kind - EMPTY == 0);
+	memcpy(s, t, sizeof(animal));
+	t->kind = EMPTY;
 	
-	if ((wator[npi][npj].kind == FISH) && (wator[npi][npj].age >= FBRUT)) {
-		wator[npi][npj].age = 0;
+	if ((s->kind - FISH == 0) && (s->age - FBRUT >= 0)) {
+		s->age = 0;
 		new_animal (i, j, FISH);
 	}
-	if ((wator[npi][npj].kind == SHARK) && (wator[npi][npj].age >= HBRUT)) {
-		wator[npi][npj].age = 0;
+	if ((s->kind - SHARK == 0) && (s->age - HBRUT >= 0)) {
+		s->age = 0;
 		new_animal (i, j, SHARK);
 	}
 	return 1;
@@ -164,14 +214,14 @@ void move (int i, int j)
 	struct animal * t;
 
 	t = &wator[i][j];
-	assert ((t->kind == SHARK) || (t->kind == FISH));
+	assert ((t->kind - SHARK == 0) || (t->kind - FISH == 0));
 
 	t->age++;
-	if (t->kind == SHARK) {
+	if (t->kind - SHARK == 0) {
 		t->hunger++;
-		if (t->hunger >= FASTEN) {
-			wator[i][j].kind = EMPTY;
-			freecount++;
+		if (t->hunger - FASTEN >= 0) {
+			t->kind = EMPTY;
+			++freecount;
 			return;
 		}
 		if (move_to_fish (i, j))
@@ -188,13 +238,13 @@ void show_wator ()
 	int shark = 0, fish = 0;
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
-			if (wator[i][j].kind != EMPTY) {
-				if (wator[i][j].kind == SHARK) {
+			if (wator[i][j].kind - EMPTY) {  // kind != EMPTY
+				if (wator[i][j].kind - SHARK == 0) {  // kind == SHARK
 					printf ("X");
-					shark++;
+					++shark;
 				} else {
 					printf ("*");
-					fish++;
+					++fish;
 				}
 			} else {
 				printf (".");
@@ -208,7 +258,7 @@ void show_wator ()
 		int ret;
 		static int tick = 0;
 		sprintf (buf, "%d %d %d\n", tick, shark, fish);
-		tick++;
+		++tick;
 		ret = write (fd, buf, strlen (buf));
 		if (ret != strlen (buf)) {
 			fprintf (stderr, "Write to output file failed\n");
@@ -224,7 +274,7 @@ void init_wator (int maxi, int maxj, int hbrut, int fbrut, int fasten)
 	HBRUT = hbrut;
 	FBRUT = fbrut;
 	FASTEN = fasten;
-	assert (hbrut > FASTEN);
+	assert (hbrut - FASTEN> 0);
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
 			int res = myrand (30);
@@ -275,7 +325,7 @@ int main (int argc, char * argv[])
 	
 	init_wator (MAXI, MAXJ, 10, 3, 3);
 	show_wator ();
-	for (i=0;i<1000;i++) {
+	for (i=0;i<1000;++i) {
 		moveall ();
 		show_wator ();
 	}

@@ -11,10 +11,10 @@
 #define FISH  2
 
 struct animal {
-	int kind;     /* SHARK o FISH */
-	int age;      /* Edad del animal. */
-	int hunger;   /* Turnos que lleva sin comer un tiburón */
-	int todo;     /* ? */
+	char kind;     /* SHARK o FISH */
+	unsigned char age;      /* Edad del animal. */
+	unsigned char hunger;   /* Turnos que lleva sin comer un tiburón */
+	char todo;     /* ? */
 }animal;
 
 #define MAXI 32
@@ -80,7 +80,6 @@ int myrand (int max)
 	return rand () % max;
 }
 
-/*
 int choose_fish (int i, int j)
 {
 	int k = 0;
@@ -118,26 +117,7 @@ int choose_empty (int i, int j)
 		return REST;
 	return dirs[myrand (k)];
 }
-*/
 
-int choose (int i, int j, char kind)
-{
-	int k = 0;
-	int dir;
-	int dirs[4];
-	for (dir=0; dir < 4; dir++) {
-		int npi = ni (i, dir);
-		int npj = nj (j, dir);
-		struct animal * t = &wator[npi][npj];
-		if (t->kind == kind) {
-			dirs[k] = dir;
-			k++;
-		}
-	}
-	if (k == 0)
-		return REST;
-	return dirs[myrand (k)];
-}
 int freecount = 0;
 
 int move_to_fish (int i, int j)
@@ -149,7 +129,7 @@ int move_to_fish (int i, int j)
 	t = &wator[i][j];
 	assert (t->kind == SHARK);
 
-	dir = choose (i, j, FISH);
+	dir = choose_fish (i, j);
 	if (dir == REST)
 		return 0;
 	npi = ni (i, dir);
@@ -175,7 +155,7 @@ int move_to_empty (int i, int j)
 	t = &wator[i][j];
 	assert ((t->kind == SHARK) || (t->kind == FISH)); 
 
-	dir = choose (i, j, EMPTY);
+	dir = choose_empty (i, j);
 	if (dir == REST)
 		return 0;
 	npi = ni (i, dir);

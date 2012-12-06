@@ -110,7 +110,7 @@ int choose_fish (int i, int j)
 //	if (k == 0)
 //		return REST;
 //	return dirs[myrand (k)];
-	return ((k==0) ? REST : dirs[myrand(k)] );
+	return ((k==0) ? REST : dirs[rand() % k] );
 }
 
 int choose_empty (int i, int j)
@@ -145,7 +145,7 @@ int choose_empty (int i, int j)
 	//if (k == 0)
 	//	return REST;
 	//return dirs[myrand (k)];
-	return ((k==0) ? REST : dirs[myrand(k)]);
+	return ((k==0) ? REST : dirs[rand() % k]);
 }
 
 int freecount = 0;
@@ -276,7 +276,7 @@ void init_wator (int maxi, int maxj, int hbrut, int fbrut, int fasten)
 
  	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
-			res = myrand (30);
+			res = rand () % 30;
 			v->kind = EMPTY;
 			switch (res) {
 			case 0:
