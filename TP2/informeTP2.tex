@@ -131,7 +131,7 @@ Cada moviemiento depende del c\'alculo de la nueva posici\'on, reemplazando el e
 
 \section{Comparaci\'on de Versiones}
 
-Todas las modifiaciones se expresan en relaci\'on con la versi\'on anterior. Los cambios enunciados son acumulativos.
+Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Los cambios enunciados son acumulativos.
 
 \begin{enumerate}
 \setcounter{enumi}{-1}
@@ -188,10 +188,20 @@ Todas las modifiaciones se expresan en relaci\'on con la versi\'on anterior. Los
 
 \section{An\'alisis de los Datos}
 
+Ale, asumo que ac\'a no ir\'an datos de compilaci\'on con optimizaciones.
 
 
 \section{Conclusiones}
 
+    Del an\'alisis de los datos se desprende que obtuvimos un speed up de hasta X, luego de muchas ideas aplicadas. Sin embargo, al compilar el programa original con optimizaciones, se obtienen tiempos aún mejores, que implicar\'ian muchas más horas-hombre sobre el trabajo.
+
+    # TABLA DEL 10WATOR CON O0 Y WATOR CON O1, O2 Y O3 (O3 si mejora) #
+
+    El compilador, al optimizar, reordena las instrucciones Assembly que no dependan entre sí, aprovechando el pipeline y los ciclos de \textit{stall}. Retomando un poco las conclusiones del trabajo anterior, se ve de nuevo que no tendr\'ia sentido ponerse a trabajar a tan bajo nivel por el esfuerzo que demanda, y porque ya existen herramientas cuya función principal es producir un c\'odigo objeto muy eficiente, y ni siquiera es necesario mencionar todos los otros cambios que aplica para mejorar el resultado de la compilaci\'on.
+
+
+
+    
 % Citas bibliogr\'aficas.
 \begin{thebibliography}{99}
 
