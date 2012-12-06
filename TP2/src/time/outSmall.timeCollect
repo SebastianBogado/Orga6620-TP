@@ -1,7 +1,14 @@
 
 
-8wator - Promedio real time: .0707 
+wator - Promedio real time: .1189 
 
-		  Max 0.166
+		  Max 0.249
 
-	          Min 0.051
+	          Min 0.111
+
+
+wator_asrt - Promedio real time: .1157 
+
+		  Max 0.159
+
+	          Min 0.106

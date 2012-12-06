@@ -30,7 +30,7 @@
 %\usepackage{multicolumn} 
 
 % T\'itulo principal del documento.
-\title{		\textbf{Trabajo pr\'actico 0: Infraestructura b\'asica}}
+\title{		\textbf{Trabajo pr\'actico 2: Profiling y Optimizaci\'on }}
 
 % Informaci\'on sobre los autores.
 \author{	Alejandro Garc\'ia Marra, \textit{Padr\'on Nro. 91.516}                     \\
@@ -63,174 +63,71 @@
 
 Muchas veces tanto para programas reci\'en terminados, como para aquellos que llevan un tiempo en funcionamiento, se desconoce realmente qu\'e partes del programa insumen la mayor cantidad de recursos, sean estos de tiempo, carga de cpu, etc.
 Poseer esta informaci\'on se torna en algo cr\'itico cuando se busca realizar una mejora de performance en dicho programa. Ser\'ia poco \'util intentar optimizar a ciegas, por no decir in\'util.\\
-Haremos uso entonces de tres herramientas distintas, el profiling del c\'odigo (por medio de \textit{gprof} y \texit{cachegrind}) y la medici\'on de los tiempos de ejecuci\'on (por medio de \textit{time}). 
+Haremos uso entonces de dos m\'etodos distintos en el estudio del programa, el profiling (por medio de \textit{gprof} y \textit{cachegrind}) y la medici\'on de los tiempos de ejecuci\'on (por medio de \textit{time}). 
 
-\begin{itemize}
- \item \textbf{Profiling}: 
+\subsection{Profiling}
 
-\begin{itemize}
+	Se denomina as\'i al an\'alisis din\'amico de un programa, con el fin de estudiar su comportamiento.\\
+	Al recolectar informaci\'on en tiempo de ejecuci\'on, puede utilizarse en aquellos programas demasiado grandes o complejos, donde un an\'alisis
+ por lectura de fuentes ser\'ia impracticable.\\
+	Como consecuencia del an\'alisis durante la ejecuci\'on, los datos con los que se corra el programa afectaran el resultado del profiler. 
+ Es decir, distintos datos de entrada pueden provocar distintas ramas de ejecuci\'on, dando por resultado que, por ejemplo, no se llamen algunas funciones.
+
+ \begin{itemize}
 	
-\item {\textbf{gprof:} } {El profiling permite aprender donde el programa pasa la mayor parte de su tiempo, y cuales funciones llaman a otras mientras se ejecuta.\\
+\item {\textbf{gprof:} } {Permite aprender donde el programa pasa la mayor parte de su tiempo, y cuales funciones llaman a otras mientras se ejecuta.\\
  			   Esta informacion puede mostrar qu\'e piezas del programa son mas lentas de lo esperado, convirti\'endolas en candidatas para su reescritura en la etapa de optimizaci\'on.\\
- 			   Tambi\'en puede ayudarnos a descubrir cuales funciones son llamadas m\'as o menos veces delo esperado, pudiendo as\'i encontrar nuevos bugs (aunque el descubrimiento de bugs no es el fin principal de esta etapa)
- 			   
-			   El profiler utiliza informaci\'on recolectada en tiempo de ejecuci\'on, por lo que puede ser utilizado en programas demasiado grandes o complejos, donde un an\'alisis por lectura de fuentes ser\'ia impracticable.\\
-			   Como consecuencia del an\'alisis durante la ejecuci\'on, los datos con los que se corra el programa afectaran el resultado del profiler. 
-			   Es decir, distintos datos de entrada pueden provocar distintas ramas de ejecuci\'on, dando por resultado que, por ejemplo, no se llamen algunas funciones.}
+ 			   Tambi\'en puede ayudarnos a descubrir cuales funciones son llamadas m\'as o menos veces delo esperado, pudiendo encontrar nuevos bugs (aunque el descubrimiento de bugs no es el fin principal de esta etapa)
+ 			   }
 
-\item{\textbf{CacheGrind:}}{}
+\item{\textbf{cachegrind:}}{ Simula el comportamiento del programa sobre una determinada jerarqu\'ia de cache, la cual puede ser establecida por medio de distintas opciones. 
+			Como resultado, se obtiene una visi\'on muy precisa de la cantidad de referencias a elementos del cache de instrucciones y al cache de datos, la cantidad de misses para ambos y el miss rate correspondiente.\\
+			En particular nos interesan los resultados para la cache de datos D1, y el miss rate de la misma.}
 			
 \end{itemize}
 			   
-\item \textbf{Medici\'on de Tiempos}: Permite conocer con precisi\'on los tiempos de ejecuci\'on de un programa, discriminados entre tiempos de systema, de usario, tiempos totales, etc., as\'i como tambi\'en conocer los porcentajes para cada parte del programa, cantidad de entradas, y muchas otras opciones.\\
-				     La combinaci\'on con una herramienta de profiling permite exactitud a la hora de conocer la forma en que se ejecuta el programa bajo estudio, permitiendo optimizar \'unicamente las partes cr\'iticas del ciclo de ejecuci\'on.
-\end{itemize}
+\subsection{Medici\'on de Tiempos}
 
+Permite conocer con precisi\'on los tiempos de ejecuci\'on de un programa, discriminados entre tiempos de systema, de usario, tiempos totales, etc., as\'i como tambi\'en conocer los porcentajes para cada parte del programa, cantidad de entradas, y muchas otras opciones.\\
+				     La combinaci\'on con una herramienta de profiling permite exactitud a la hora de conocer la forma en que se ejecuta el programa bajo estudio, permitiendo optimizar \'unicamente las partes cr\'iticas del ciclo de ejecuci\'on.
 
 \newpage
 
 
 \section{Flujo del programa}
+Se trata de una versi\'on en lenguaje C de la simulaci\'on del planeta WATOR. El programa recibe un nombre de archivo en el que se van dejando
+las cantidades de peces y tiburones en cada turno, y simula 1000 turnos en un planeta de 32x32 celdas.\\
 
+Comienza por la inicializaci\'on de la matriz, recorriendo la misma en su totalidad y ubicando de forma aleatoria espacios vac\'ios, peces o tiburones. \\ 
+Luego, se muestra completa por pantalla, acci\'on que se realiza en cada uno de los ciclos.\\
 
-\section{Mediciones}
+Una vez completada la inicializaci\'on, comienza el ciclo de simulaci\'on. Por cada ciclo se busca mover todos los elementos no vacios de la matriz. El comportamiento para
+peces o tiburones es distinto, por lo que en cada caso se eval\'ua el curso de acci\'on, dependiendo tambi\'en de los elementos que rodean la posici\'on actual.\\
 
-\subsection{Valores Obtenidos}
+Cada moviemiento depende del c\'alculo de la nueva posici\'on, reemplazando el elemento previo si es necesario y teniendo en cuenta la tasa de natalidad y mortalidad de cada uno de los factores.
 
-En la tabla~\ref{tab001} se presentan las mediciones realizadas con \textbf{time} sobre ambos algoritmos de ordenamiento y con archivos de distintos tama�os.\\
+\section{Hip\'otesis y Aclaraciones}
 
-Adem\'as de los archivos indicados en el enunciado, fueron agregadas mediciones sobre archivos con tama�os arbitrarios, mayores, con el fin de mostrar de mejor manera las diferencias entre algoritmos.
-
-\begin{table}[!htp]
-\begin{center}
-\begin{tabular}{cc|c|c|c|c|c|c|} 
-\cline{3-8}
-& & \multicolumn{3}{ c|}{Quicksort} & \multicolumn{3}{c|}{Stooge sort}\\ \cline{3-8}
-&   & Ordenado & Invertido & Aleatorio & Ordenado & Invertido & Aleatorio \\ \cline{1-8}
-\multicolumn{1}{|c}{\multirow{3}{*}{1kb}} &
-\multicolumn{1}{|c|}{real$^{*}$} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user$^{*}$} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys$^{*}$} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
-\multicolumn{1}{|c}{\multirow{3}{*}{8kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.02 & 0.02 & 0.01 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.01 & 0.01 & 0.01 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
-\multicolumn{1}{|c}{\multirow{3}{*}{16kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.00 & 0.02 & 0.02 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.00 & 0.01 & 0.02 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
-\multicolumn{1}{|c}{\multirow{3}{*}{32kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 0.17 & 0.17 & 0.17 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 0.17 & 0.17 & 0.17 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
-\multicolumn{1}{|c}{\multirow{3}{*}{64kb}} &
-\multicolumn{1}{|c|}{real} & 0.00 & 0.00 &0.00 & 1.44 & 1.44 & 1.44 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.00 & 0.00 &0.00 & 1.44 & 1.43 & 1.44 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
-\multicolumn{1}{|c}{\multirow{3}{*}{1024kb}} &
-\multicolumn{1}{|c|}{real} & 0.04 & 0.03 &0.03 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{user} & 0.03 & 0.02 &0.03 & $>$1500 & $>$1500 & $>$1500 \\ \cline{2-8}
-\multicolumn{1}{|c}{}                        &
-\multicolumn{1}{|c|}{sys} & 0.00 & 0.00 &0.00 & 0.00 & 0.00 & 0.00 \\ \cline{1-8}
-\end{tabular}
-\caption{Resultados comando Time } \label{tab001}
-\end{center}
-\end{table}
-
-$^{*}$ Referencia: 
 \begin{itemize}
- \item real: \%e, tiempo total real usado por el proceso.
- \item user: \%U, total de segundos-CPU usados por el proceso directamente.
- \item sys : \%S, total de segundos-CPU utilizados por el systema en nombre del proceso.
+ \item {Todas las mediciones se realizan redireccionando la salida por pantalla a \/dev\/null. Esto nos permite ahorrar tiempo en las pruebas sin afectar las mediciones, ya que el tiempo de impresi\'on se puede considerar constante para todas las mediciones.}
+ 
+ \item {Consideramos las dimesiones de la matriz (como indica el enunciado, 32x32) como un elemento invariante. Esto nos permite, como veremos m\'as adelante, realizar optimizaciones interesantes que de otra forma no ser\'ian posibles.}
+ 
+ \item {Todas las mediciones que resulten de un promedio de corridas ser\'an acompa\~nadas del n\'umero de corridas correspondiente, as\'i como el m\'aximo y m\'inimo de la serie.}
+ \item {La compilaci\'on de los c\'odigos fuente se realiza con el comando: 
+		\begin{quote}
+			\begin{verbatim}
+				gcc -DNDEBUG fuente.c -o fuente
+			\end{verbatim}
+		\end{quote}
+	En ning\'un momento (a menos que aclare lo contrario) se utilizan las opciones de optimizaci\'on del gcc. El \'unico caso donde se modifica este comando es para la compilaci\'on previa a la corrida con gprof.}
+ \item {Los scripts con los que se realizaron las mediciones promediadas se encuentran disponibles en el cd bajo el nombre XXXXCollect.sh}
+ 
 \end{itemize}
 
+\newpage
 
-
-\subsection{An\'alisis de los datos}
-
-La marcada diferencia entre la complejidad de los algoritmos se refleja en muestras tan chicas como la de 8kb. 
-A partir de ah\'i, el Stooge sort ya hace suficiente uso del procesador como para ser notado por time, mientras que el Quicksort hace lo propio reci\'en en la muestra m\'as grande, de 1024kb. En este caso, el Stooge sort se torn\'o intolerable.
-
-En la figura se muestra el gr\'afico del tiempo insumido por el Stooge sort para las distintas muestras, a excepci\'on de la de 1024kb, porque demanda una escala que har\'ia inapreciable la situaci\'on de las otras muestras.
-
-
-\begin{figure}[!htp]
-\begin{center}
-\includegraphics[width=1.1\textwidth]{stoogesort.png}
-\end{center}
-\caption{.} \label{fig002}
-\end{figure}
-
-
-Al momento de calcular el speedup de Quicksort contra Stooge sort, con la raz\'on entre los tiempos de cada uno, las cifras obtenidas no lo permiten. El primero no arroja resultados apreciables por \textbf{time} en ninguna instancia sin contar la \'ultima, donde el Stooge sort es inmanejable.\\
-
-Esto es porque la complejidad del Quicksort es, en promedio, \BigO{n \log(n)}, mientras que el Stooge sort es de \BigO{n^{2,7}}. Entonces, el speedup entre ambos algoritmos tiende a infinito exponencialmente, seg\'un crece el tama�o de la muestra.
-
-
-\section{Profiling}
-
-Como se pudo apreciar en la tabla de tiempos de la p\'agina anterior, el algoritmo de quicksort resulta extremadamente veloz para tama�os de archivos relativamente grandes. Decidimos, entonces, forzar un poco m\'as al programa y hacer el profiling sobre un archivo desordenado de 32mb. Adem\'as, para que las funciones mismas de \textbf{gprof} tuvieran una incidencia despreciable en la prueba.\\
-Realizar esta misma prueba sobre el algoritmo Stooge sort, ser\'ia impracticable, ya que los tiempos demandados ser\'ian demasiado grandes.
-
-Un punto interesante a destacar son llamadas a m\'etodos de ordenamiento: como era de esperarse, no se realizan llamadas al m\'etodo stoogesort, lo cual confirma que el algoritmo no es utilizado.
-										
-										   Por otra parte, para el m\'etodo quicksort\_r que implementa dicho algoritmo, tenemos cientos de miles de llamados. Esto era de esperarse debido a las dimensiones del archivo y la naturaleza recursiva del algoritmo utilizado.
-
-La tabla~\ref{tab002} es la salida del \textbf{gprof}, en particular aquella conocida como "flat profile". Muestra el uso de las funciones invocadas, ordenadas de mayor a menor seg\'un el porcentaje de tiempo de ejecuci\'on de cada una.
-
-\begin{table}[!htp]
-\begin{center}
-\begin{tabular}{|r|r|r|r|r|r|r|}
-\hline
-	\%		&	cumulative  &	self	&			&	self	&	total	& \\
-\hline          
-	time	&	seconds		&	seconds	&	calls	&	s/call	&	s/call	&	name \\    
-\hline
- 	91.87	&	1.53		&	1.53	&	448399	&	0.00	&	 0.00	&	particionar \\
-\hline
-	2.40	&	1.57		&	0.04	&	448801	&	0.00	&	0.00	&	cargarBuffer \\
-\hline
-	1.80	&	1.60		&	0.03	&	3565398	&	0.00	&	0.00	&	swap \\
-\hline
-	1.80	&	1.63		&	0.03	&	1		&	0.03	&	0.07	&	parseLineas \\
-\hline
-	1.80	&	1.66		&	0.03	&	1		&	0.03	&	1.67	&	sort \\
-\hline
-	0.60	&	1.67		&	0.01	&	1		&	0.01	&	1.57	&	quickSort\_r \\
-\hline
-	0.00	&	1.67		&	0.00	&	1		&	0.00	&	0.00	&	check\_param \\
-\hline
-	0.00	&	1.67		&	0.00	&	1		&	0.00	&	1.57	&	quick\_sort \\
-\hline
-\end{tabular}
-\caption{Ejemplo de tabla.} \label{tab002}
-\end{center}
-\end{table}
- 
-Se aprecia en la tabla que la funci\'on particionar ocupa el 91,87\% del tiempo de ejecuci\'on de programa, convirti\'endola en la candidata para mejorar.\par
-\medskip
-Para calcular el speedup m\'aximo, usamos la f\'ormula:
-
-\begin{center}
-$ speedup total = 1/(1-f + f/SM)$\\
-\vspace{0.5cm}
-$ f = 0,9187 $; SM tiende a infinito por ser arbitrariamente mejorable\\
-
-\vspace{0.5cm}
-
-$ Speedup maximo = 1/0,08123 = 12,3$
-\end{center}
+\section{Mediciones}
 
 
 \newpage
@@ -240,15 +137,13 @@ $ Speedup maximo = 1/0,08123 = 12,3$
 Comandos de Compilaci\'on:
 
 \begin{itemize}
- \item make all: genera el programa, modo release"
- \item make debug: genera el programa con flags para debugging
- \item make gprof: genera el programa con flags para \textbf{gprof}
  \item make clean: remueve los archivos generados
 \end{itemize}
 
 Comandos de Ejecuci\'on:
 
 \begin{itemize}
+\item bla
 \end{itemize}
 
 
