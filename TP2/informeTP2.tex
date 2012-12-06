@@ -111,6 +111,8 @@ Cada moviemiento depende del c\'alculo de la nueva posici\'on, reemplazando el e
 \section{Hip\'otesis y Aclaraciones}
 
 \begin{itemize}
+ \item {El objetivo principal es lograr un programa m\'as eficiente, por lo que es innevitable realizar sacrificios respecto de la legibilidad del c\'odigo y la flexibilidad del mismo. Muchas de las modificaciones realizadas ir\'ian en contra de las buenas pr\'acticas de programaci\'on utilizadas en un caso normal. }
+	
  \item {Todas las mediciones se realizan redireccionando la salida por pantalla a \/dev\/null. Esto nos permite ahorrar tiempo en las pruebas sin afectar las mediciones, ya que el tiempo de impresi\'on se puede considerar constante para todas las mediciones.}
  
  \item {Consideramos las dimesiones de la matriz (como indica el enunciado, 32x32) como un elemento invariante. Esto nos permite, como veremos m\'as adelante, realizar optimizaciones interesantes que de otra forma no ser\'ian posibles.}
@@ -136,7 +138,7 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
 \begin{enumerate}
 \setcounter{enumi}{-1}
 
- \item \textbf {Verisi\'on original dada por la c\'atedra.}
+ \item \textbf {Versi\'on original dada por la c\'atedra.}
  
  \item \textbf {Cambio en la definici\'on del struct animal, reemplazando los tipo int por tipo char.}
 		\subitem {Reduce considerablemente el tama\~no de cada elemento de la matriz, y por ende, el tama\~no total de la misma. Esto permite que dentro de un mismo bloque de cache se almacenen mas posiciones, reduciendo el missrate.}
@@ -161,13 +163,16 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
 	\textbf {Funciones \textit{move\_to\_empty} y \textit{move\_to\_fish} agregado un \texttt{struct animal*} para evitar las varias llamadas a \texttt{wator[npi][npj]}}
 		\subitem{Al guardar la direcci\'on con el puntero, se evita recalcularla cada vez a partir de los \'indices de la matriz}
 		
- \item  show\_wator, init\_wator, move\_all:
-	cambio de acceso por wator[][] a $puntero+i*fila+j$, sin multiplicar (acumulador)
-   Cambio en choose\_XXXX, elimino los llamados a "nij (i, dir)", como hicimos unroll del for, podemos ahorrarnos el case.
-   
- \item Reemplazo \% MAXI por   \& 0x1F
+ \item  \textbf{Reemplazar los accesos de tipo \texttt{wator[i][j]} en los ciclos por aritm\'etica de punteros. Se guarda un puntero a la primer posici\'on y se incrementa de forma tal de recorrer toda la matriz (\textit{show\_wator, init\_wator, move\_all})}
+		\subitem{Las direcciones que antes se computaban con una doble desreferencia, ahora se obtienen por una suma simple que se realiza sobre la propia variable.}
+	
+	\textbf{Aprovechando el desenrrollado del \texttt{for} realizado en la versi\'on anterior, reemplazamos el llamado a \textit{ni(), nj()} por la expresi\'on resultante si se evaluase el \texttt{switch}}
+		\subitem{Originalmente no se conoc\'ia el valor de dir en el momento de invocar \texttt{ni() o nj()}, por lo que era necesario pasar por el \texttt{switch}. Ahora, como sabemos de antemano el valor que va a tomar esa expresi\'on, nos podemos ahorrar el llamado a las funciones, as\'i como tambi\'en los branch del switch.}
+    
+ \item \textbf{Reemplazo en \textit{choose\_fish(), choose\_empty()} el c\'omputo del m\'odulo\ \  \texttt{\% MAXI} y \texttt{\% MAXJ} por la operaci\'on bitwise equivalente \texttt{\& 0x1F} }
+	\subitem{Como por hip\'otesis, MAXI = MAXJ = 32, la operaci\'on m\'odulo puede realizarse de una manera mucho menos costosa a trav\'es de la operaci\'on \texttt{and} bitwise con (MAXI$-$1). Esto solo sirve cuando MAXI y MAXJ son potencias de 2, y en particular, como tambi\'en nos ahorramos la resta al forzar un 31 (0x1F), s\'olo sirve para MAXI=MAXJ=32}
  
- \item Agregado 'register' en varias variables
+ \item \textbf{Declaraci\'on de variables como \texttt{register}}
    reemplazo de \% MAXI en lugares faltantes
    
  \item  Pasaje de puntero en vez de recalcular w[][]
