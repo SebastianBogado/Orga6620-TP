@@ -3,19 +3,124 @@
 2wator - gprof Flat Profile 
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  us/call  us/call  name    
- 38.96      0.07     0.07   700188     0.10     0.15  choose_empty
- 16.70      0.10     0.03   700188     0.04     0.19  move_to_empty
- 11.13      0.12     0.02  3408152     0.01     0.01  nj
-  5.57      0.13     0.01  3408152     0.00     0.00  ni
-  5.57      0.14     0.01   767373     0.01     0.21  move
-  5.57      0.15     0.01   258932     0.04     0.04  myrand
-  5.57      0.16     0.01    87373     0.11     0.17  choose_fish
-  5.57      0.17     0.01     1001    10.01    10.01  show_wator
-  5.57      0.18     0.01     1000    10.02   170.29  moveall
-  0.00      0.18     0.00    87373     0.00     0.18  move_to_fish
-  0.00      0.18     0.00    68209     0.00     0.00  new_animal
-  0.00      0.18     0.00        1     0.00    39.62  init_wator
+ 33.40      0.03     0.03   524731     0.06     0.08  choose_empty
+ 22.26      0.05     0.02  3048807     0.01     0.01  nj
+ 22.26      0.07     0.02     1001    20.02    20.02  show_wator
+ 11.13      0.08     0.01   630377     0.02     0.10  move
+ 11.13      0.09     0.01     1000    10.02    70.13  moveall
+  0.00      0.09     0.00  3048807     0.00     0.00  ni
+  0.00      0.09     0.00   524731     0.00     0.09  move_to_empty
+  0.00      0.09     0.00   402951     0.00     0.00  myrand
+  0.00      0.09     0.00   136989     0.00     0.03  choose_fish
+  0.00      0.09     0.00   136989     0.00     0.03  move_to_fish
+  0.00      0.09     0.00   106018     0.00     0.00  new_animal
+  0.00      0.09     0.00        1     0.00     0.00  init_wator
 
 
 
-Fin simulacion: 1000 0 1024 
+Fin simulacion: 1000 78 294 
+
+
+3wator - gprof Flat Profile 
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 30.06      0.03     0.03   524731     0.06     0.08  choose_empty
+ 20.04      0.05     0.02     1000    20.04    90.18  moveall
+ 10.02      0.06     0.01  3048807     0.00     0.00  ni
+ 10.02      0.07     0.01  3048807     0.00     0.00  nj
+ 10.02      0.08     0.01   630377     0.02     0.11  move
+ 10.02      0.09     0.01   524731     0.02     0.11  move_to_empty
+ 10.02      0.10     0.01                             frame_dummy
+  0.00      0.10     0.00   402951     0.00     0.00  myrand
+  0.00      0.10     0.00   136989     0.00     0.03  choose_fish
+  0.00      0.10     0.00   136989     0.00     0.03  move_to_fish
+  0.00      0.10     0.00   106018     0.00     0.00  new_animal
+  0.00      0.10     0.00     1001     0.00     0.00  show_wator
+  0.00      0.10     0.00        1     0.00     0.00  init_wator
+
+
+Fin simulacion: 1000 78 294 
+
+
+4wator - gprof Flat Profile 
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 27.33      0.03     0.03   524211     0.06     0.11  move_to_empty
+ 18.22      0.05     0.02   629720     0.03     0.13  move
+ 18.22      0.07     0.02   401497     0.05     0.05  myrand
+ 18.22      0.09     0.02     1001    20.02    20.02  show_wator
+  9.11      0.10     0.01   524211     0.02     0.05  choose_empty
+  9.11      0.11     0.01     1000    10.02    90.13  moveall
+  0.00      0.11     0.00   400473     0.00     0.00  ni
+  0.00      0.11     0.00   400473     0.00     0.00  nj
+  0.00      0.11     0.00   137011     0.00     0.03  choose_fish
+  0.00      0.11     0.00   137011     0.00     0.03  move_to_fish
+  0.00      0.11     0.00   105987     0.00     0.00  new_animal
+  0.00      0.11     0.00        1     0.00    51.11  init_wator
+
+
+
+Fin simulacion: 1000 55 423 
+
+
+5wator - gprof Flat Profile 
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 28.63      0.02     0.02   524211     0.04     0.05  choose_empty
+ 28.63      0.04     0.02     1001    20.02    20.02  show_wator
+ 14.32      0.05     0.01   524211     0.02     0.07  move_to_empty
+ 14.32      0.06     0.01   401497     0.02     0.02  myrand
+ 14.32      0.07     0.01     1000    10.02    50.08  moveall
+  0.00      0.07     0.00   629720     0.00     0.06  move
+  0.00      0.07     0.00   400473     0.00     0.00  ni
+  0.00      0.07     0.00   400473     0.00     0.00  nj
+  0.00      0.07     0.00   137011     0.00     0.01  choose_fish
+  0.00      0.07     0.00   137011     0.00     0.01  move_to_fish
+  0.00      0.07     0.00   105987     0.00     0.00  new_animal
+  0.00      0.07     0.00        1     0.00    25.56  init_wator
+
+
+
+Fin simulacion: 1000 55 423 
+
+
+6wator - gprof Flat Profile 
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 33.41      0.02     0.02     1001    20.03    20.03  show_wator
+ 33.41      0.04     0.02     1000    20.05    40.09  moveall
+ 16.70      0.05     0.01   629720     0.02     0.03  move
+ 16.70      0.06     0.01   524211     0.02     0.02  choose_empty
+  0.00      0.06     0.00   524211     0.00     0.02  move_to_empty
+  0.00      0.06     0.00   401497     0.00     0.00  myrand
+  0.00      0.06     0.00   400473     0.00     0.00  ni
+  0.00      0.06     0.00   400473     0.00     0.00  nj
+  0.00      0.06     0.00   137011     0.00     0.00  choose_fish
+  0.00      0.06     0.00   137011     0.00     0.00  move_to_fish
+  0.00      0.06     0.00   105987     0.00     0.00  new_animal
+  0.00      0.06     0.00        1     0.00     0.00  init_wator
+
+
+
+Fin simulacion: 1000 55 423 
+
+
+7wator - gprof Flat Profile 
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  us/call  us/call  name    
+ 60.14      0.03     0.03   629720     0.05     0.05  move
+ 40.09      0.05     0.02     1000    20.05    50.12  moveall
+  0.00      0.05     0.00   524211     0.00     0.00  choose_empty
+  0.00      0.05     0.00   524211     0.00     0.00  move_to_empty
+  0.00      0.05     0.00   401497     0.00     0.00  myrand
+  0.00      0.05     0.00   400473     0.00     0.00  ni
+  0.00      0.05     0.00   400473     0.00     0.00  nj
+  0.00      0.05     0.00   137011     0.00     0.00  choose_fish
+  0.00      0.05     0.00   137011     0.00     0.00  move_to_fish
+  0.00      0.05     0.00   105987     0.00     0.00  new_animal
+  0.00      0.05     0.00     1001     0.00     0.00  show_wator
+  0.00      0.05     0.00        1     0.00     0.00  init_wator
+
+
+
+Fin simulacion: 1000 55 423 
