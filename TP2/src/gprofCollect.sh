@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -lt 1 ]; then
-	echo "dataCollect <repeticiones> [FUENTE/S...]" 
+	echo "gprofCollect [EJECUTABLE/S..]" 
 	exit 1
 fi
 
@@ -15,11 +15,11 @@ temp="temp.gprofCollect"
 `> $temp`
 
 
-#echo -n "Procesando:"
+echo -n "Procesando:"
 
 for file in $@
 do
-#	echo -ne "\n $file "
+	echo -ne "\n $file "
 
 	exe="${file}_gprof"
 	`gcc -p "$file.c" -o "$exe"`
@@ -35,9 +35,8 @@ do
 	
 	cat $temp >> $outFull
 
-	echo -ne "$file  \n" >> $outSmall
+	echo -ne "\n\n$file - gprof Flat Profile \n" >> $outSmall
 	tail -n +6 $temp | head -n 15  >> $outSmall	
-	echo -e "\n"
 	echo -ne "\n\nFin simulacion: $(tail -n 1 WatorOut.txt) \n" >>$outSmall 
 done
 

@@ -1,13 +1,15 @@
 #!/bin/bash
 
 if [ $# -lt 2 ]; then
-	echo "dataCollect <repeticiones> [EJECUTABLE/S...]" 
+	echo "cacheCollect <repeticiones> [EJECUTABLE/S...]" 
 	exit 1
 fi
 
-if [ $1 -lt 1 ]; then
-	echo "Boludo, el nro de  corridas "
-	exit 1
+
+if [[ ! ("$1" =~ ^[0-9]+$) || "$1" -eq 0 ]]; then
+        echo "Indique la cantidad de corridas a realizar"
+        echo "cacheCollect <repeticiones> [EJECUTABLE/S...]" 
+        exit 1
 fi
 
 corridas=$1
@@ -21,17 +23,17 @@ temp="temp.cacheCollect"
 `>$outSmall`
 `> $temp`
 
-# echo -n "Procesando:"
+ echo -n "Procesando:"
 
 for file in $@
 do
-#	echo -ne "\n $file "
+	echo -ne "\n $file "
 	echo "$file" > $temp
 	i=0
 
 	while [ $i -lt $corridas ] 
 	do
-#		echo -n "."
+		echo -n "."
 		echo " Corrida $i" >> $temp
 
 		valgrind --tool=cachegrind --D1=256,2,64 "./$file" WatorOut.txt 2>&1 | grep ".*D.*" | sed "s/==[0-9]*==/   /g" >> $temp
@@ -45,25 +47,25 @@ do
 	MR=0
 	for rate in `sed <$temp -n 's/\s\+D1  miss rate:\s\+\([0-9]\+\.[0-9]\+\)%.\+/\1 /g p'`
 	do
-	        if [ $rate -gt $max ]; then
+	        if [  $(echo "scale=5; $max < $rate" | bc) -eq 1 ]; then
                         max=$rate
                 fi
                 
-                if [ $rate -lt $min ]; then
+                if [  $(echo "scale=5; $min > $rate" | bc) -eq 1 ]; then
                         min=$rate
                 fi
 
-		MR=$(echo "scale=2; $MR + $rate" | bc)
+		MR=$(echo "scale=3; $MR + $rate" | bc)
 	done
 	
-	promedio=$( echo "scale=2; $MR / $corridas" | bc)
+	promedio=$( echo "scale=3; $MR / $corridas" | bc)
 
 	echo -e " Promedio: $promedio\n\n" >> $temp
 	cat $temp >> $outFull
 
-	echo -ne "$file - Promedio MR: $promedio \n
+	echo -ne "\n\n$file - Promedio MR: $promedio \n
 		  Max: $max\n
-		  Min: $min\n\n" >> $outSmall
+		  Min: $min\n" >> $outSmall
 done
 
 rm cachegrind*

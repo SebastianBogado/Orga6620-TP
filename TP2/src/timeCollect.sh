@@ -1,12 +1,13 @@
 #!/bin/bash
 
 if [ $# -lt 2 ]; then
-	echo "dataCollect <repeticiones> [EJECUTABLE/S...]" 
+	echo "timeCollect <repeticiones> [EJECUTABLE/S...]" 
 	exit 1
 fi
 
-if [ $1 -lt 1 ]; then
-	echo "Boludo, el nro de  corridas "
+if [[ ! ("$1" =~ ^[0-9]+$) || "$1" -eq 0 ]]; then
+	echo "Indique la cantidad de corridas a realizar"
+	echo "timeCollect <repeticiones> [EJECUTABLE/S...]" 
 	exit 1
 fi
 
@@ -21,17 +22,17 @@ temp="temp.timeCollect"
 `>$outSmall`
 `> $temp`
 
-#echo -n "Procesando:"
+echo -n "Procesando:"
 
 for file in $@
 do
-#	echo -ne "\n $file "
+	echo -ne "\n $file "
 	echo "$file" > $temp
 	i=0
 	
 	while [ $i -lt $corridas ] 
 	do
-#		echo -n "."
+		echo -n "."
 		echo " Corrida $i" >> $temp
 
 		(time "./$file" WatorOut.txt) 2>&1 | grep "real.*" >> $temp
@@ -63,7 +64,7 @@ do
 		
 	echo -e " Promedio real time: $promedio \n
 		  Max $max\n
-	          Min $min\n" >> $temp
+	          Min $min" >> $temp
 	cat $temp >> $outFull
 
 	echo -ne "\n\n$file - Promedio real time: $promedio \n

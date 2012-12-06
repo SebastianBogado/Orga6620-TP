@@ -1,13 +1,15 @@
 #!/bin/bash
 
+
 if [ $# -lt 2 ]; then
-	echo "fullCollect [repeticiones] <Ejecutable/s>"
-	exit 1
+        echo "fullCollect <repeticiones> [EJECUTABLE/S...]" 
+        exit 1
 fi
 
-if [ $1 -lt 0 ]; then
-	echo "mal repeticiones"
-	exit 1
+if [[ ! ("$1" =~ ^[0-9]+$) || "$1" -eq 0 ]]; then
+        echo "Indique la cantidad de corridas a realizar"
+        echo "fullCollect <repeticiones> [EJECUTABLE/S...]" 
+        exit 1
 fi
 
 corridas=$1
@@ -17,16 +19,20 @@ outFull="outFull.fullCollect"
 outSmall="outSmall.fullCollect"
 
 `> $outFull`
-`>$outSmall`
+`> $outSmall`
  
 echo "Procesando:"
 for file in $@
 do
 	echo "  $file"
-	./cacheCollect.sh $corridas $file >> $outSmall
-	./timeCollect.sh $corridas $file >> $outSmall
-	./gprofCollect.sh $file >> $outSmall
+	./cacheCollect.sh $corridas $file >> /dev/null
+	cat "cache/outSmall.cacheCollect" >> $outSmall
+	./timeCollect.sh $corridas $file >> /dev/null
+	cat "time/outSmall.timeCollect" >> $outSmall
+	./gprofCollect.sh $file >> /dev/null
+	cat "gprof/outSmall.gprofCollect" >> $outSmall
 	
+
 	cat "cache/outFull.cacheCollect" >> $outFull
 	echo -ne "====================\n" >> $outFull
 	cat "time/outFull.timeCollect" >> $outFull
