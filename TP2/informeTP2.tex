@@ -163,30 +163,44 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
 	\textbf {Funciones \textit{move\_to\_empty} y \textit{move\_to\_fish} agregado un \texttt{struct animal*} para evitar las varias llamadas a \texttt{wator[npi][npj]}}
 		\subitem{Al guardar la direcci\'on con el puntero, se evita recalcularla cada vez a partir de los \'indices de la matriz}
 		
- \item  \textbf{Reemplazar los accesos de tipo \texttt{wator[i][j]} en los ciclos por aritm\'etica de punteros. Se guarda un puntero a la primer posici\'on y se incrementa de forma tal de recorrer toda la matriz (\textit{show\_wator, init\_wator, move\_all})}
+ \item  \textbf{Reemplazar los accesos de tipo \texttt{wator[i][j]} en los ciclos por aritm\'etica de punteros. Se guarda un puntero a la primer posici\'on, accediendo por la suma $(v + row +j)$, donde \texttt{row} es un acumulador equivalente a $i*32$ (\textit{show\_wator, init\_wator, move\_all})}
 		\subitem{Las direcciones que antes se computaban con una doble desreferencia, ahora se obtienen por una suma simple que se realiza sobre la propia variable.}
 	
 	\textbf{Aprovechando el desenrrollado del \texttt{for} realizado en la versi\'on anterior, reemplazamos el llamado a \textit{ni(), nj()} por la expresi\'on resultante si se evaluase el \texttt{switch}}
 		\subitem{Originalmente no se conoc\'ia el valor de dir en el momento de invocar \texttt{ni() o nj()}, por lo que era necesario pasar por el \texttt{switch}. Ahora, como sabemos de antemano el valor que va a tomar esa expresi\'on, nos podemos ahorrar el llamado a las funciones, as\'i como tambi\'en los branch del switch.}
     
  \item \textbf{Reemplazo en \textit{choose\_fish(), choose\_empty()} el c\'omputo del m\'odulo\ \  \texttt{\% MAXI} y \texttt{\% MAXJ} por la operaci\'on bitwise equivalente \texttt{\& 0x1F} }
-	\subitem{Como por hip\'otesis, MAXI = MAXJ = 32, la operaci\'on m\'odulo puede realizarse de una manera mucho menos costosa a trav\'es de la operaci\'on \texttt{and} bitwise con (MAXI$-$1). Esto solo sirve cuando MAXI y MAXJ son potencias de 2, y en particular, como tambi\'en nos ahorramos la resta al forzar un 31 (0x1F), s\'olo sirve para MAXI=MAXJ=32}
+		\subitem{Como por hip\'otesis, MAXI = MAXJ = 32, la operaci\'on m\'odulo puede realizarse de una manera mucho menos costosa a trav\'es de la operaci\'on \texttt{and} bitwise con (MAXI$-$1). Esto solo sirve cuando MAXI y MAXJ son potencias de 2, y en particular, como tambi\'en nos ahorramos la resta al forzar un 31 (0x1F), s\'olo sirve para MAXI=MAXJ=32}
  
  \item \textbf{Declaraci\'on de variables como \texttt{register}}
-   reemplazo de \% MAXI en lugares faltantes
-   
- \item  Pasaje de puntero en vez de recalcular w[][]
-   Incremento de puntero directo en vez de sumar $row+j$
-   cambio if x return a; return b por una version que fuerza el branch:
-	return x ? a :b ;
+		 \subitem{En caso de que el compilador haga caso de la sugerencia, se ahorrar\'an todos los accesos a memoria relacionados con la lectura y escritura de la variable en cuesti\'on.}
 	
- \item  cambio llamadas myrand por rand \% max
+	\textbf{Reemplazo de \texttt{\% MAXI } en lugares faltantes}
+   
+   
+ \item  \textbf{Pasaje de puntero en vez de recalcular w[][] en distintas funciones}
+
+	\textbf{Incremento de puntero directo en vez de sumar $row+j$}
+		\subitem{Evaluamos que incrementar el puntero en cada ciclo del ciclo interno era m\'as eficiente que realizar la suma en cada acceso, siendo el resultado el mismo.}
+		
+	\textbf{Cambio de la condici\'on \texttt{if (x) return a; return b} por la versi\'on equivalente \texttt{return x ? a :b ;}}
+		\subitem{La idea surge de leer el manual del gcc y sus optimizaciones [6], donde propone el cambio para lograr una escritura incondicional. En este caso, se espera ver el efecto de un branch incondicional, o al menos explicitarle al compilador que la siguiente instrucci\'on ser\'a un branch siempre.}
+   
+ \item  \textbf{Cambio llamadas \textit{myrand()} por la forma inline \texttt{rand() \% max}}
+ 
+ \item \textbf{Reemplazados los llamados a ni y nj por un vector de resultados calculados}
+		\subitem{La intenci\'on es reducir el overhead provocado por el constante llamado a las funciones en lo relacionado a la memoria y el stack, al utilizar valores pre calculados}
+
+	\textbf{En \textit{choose\_fish(), choose\_empty()}, cambiados \texttt{MAXI|J-1} por 31 }
+    
+
 \end{enumerate}
 
-
-
+\newpage
 
 \section{Corridas de prueba y Mediciones}
+
+
 
 
 \newpage
@@ -195,18 +209,34 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
 
     A continuaci\'on, una tabla que muestra el speedup obtenido entre las distintas versiones, parcial y acumulativo
 
+
 \begin{center}
-  \begin{tabular}{ c | c | c | c | c | c | c | c | c | c | c }
+  \begin{tabular}{| r | c | c | c |}
     \hline
-                & wator & 1wator & 2wator & 3wator & 4wator & 5wator & 6wator & 7wator & 8wator & 9wator & 10wator  \\ \hline
-Tiempo promedio &       &        &        &        &        &        &        &        &        &        &          \\ \hline
-SU parcial      &       &        &        &        &        &        &        &        &        &        &          \\ \hline
-SU acumulado    &       &        &        &        &        &        &        &        &        &        &          \\ \hline
+    Versi\'on	&   Time Promedio$^*$  &	SU Parcial	& 	SU Acumulado	\\ \hline \hline
+    wator	&	0.1151		&			&			\\ \hline
+    1wator	&	0.1149		&			&			\\ \hline
+    2wator	&	0.1104		&			&			\\ \hline
+    3wator	&	0.1100		&			&			\\ \hline
+    4wator	&	0.0834		&			&			\\ \hline
+    5wator	&	0.0792		&			&			\\ \hline
+    6wator	&	0.0729		&			&			\\ \hline
+    7wator	&	0.0685		&			&			\\ \hline
+    8wator	&	0.0694		&			&			\\ \hline
+    9wator	&	0.0654		&			&			\\ \hline
+    
   \end{tabular}
 \end{center}
+	
+	\small{$^*$ Sobre 1000 ejecuciones}
+	
+\bigskip
 
-    Se puede ver que hubo varias mejoras que no afectaron mucho el tiempo de ejecuci\'on del programa, como las versiones x, y _y_ z. A su vez, la(s) versi\'on X (Y) aportaron un x\% al speed up. En esas versiones, los cambios fueron -blah-, y explicar con más detalle por qué aportó tanto.
+    Se puede ver que hubo varias mejoras que no afectaron mucho el tiempo de ejecuci\'on del programa, como las versiones x, y z. A su vez, la(s) versi\'on X (Y) aportaron un x\% al speed up. En esas versiones, los cambios fueron -blah-, y explicar con m\'as detalle por qu\'e aport\'o tanto.
 
+    
+    
+    
 Ale, asumo que ac\'a no ir\'an datos de compilaci\'on con optimizaciones.
 
 
@@ -214,9 +244,9 @@ Ale, asumo que ac\'a no ir\'an datos de compilaci\'on con optimizaciones.
 
     Del an\'alisis de los datos se desprende que obtuvimos un speed up de hasta X, luego de muchas ideas aplicadas. Sin embargo, al compilar el programa original con optimizaciones, se obtienen tiempos aún mejores, que implicar\'ian muchas más horas-hombre sobre el trabajo.
 
-    # TABLA DEL 10WATOR CON O0 Y WATOR CON O1, O2 Y O3 (O3 si mejora) #
+    %# TABLA DEL 10WATOR CON O0 Y WATOR CON O1, O2 Y O3 (O3 si mejora) #
 
-    El compilador, al optimizar, reordena las instrucciones Assembly que no dependan entre sí, aprovechando el pipeline y los ciclos de \textit{stall}. Retomando un poco las conclusiones del trabajo anterior, se ve de nuevo que no tendr\'ia sentido ponerse a trabajar a tan bajo nivel por el esfuerzo que demanda, y porque ya existen herramientas cuya función principal es producir un c\'odigo objeto muy eficiente, y ni siquiera es necesario mencionar todos los otros cambios que aplica para mejorar el resultado de la compilaci\'on.
+    El compilador, al optimizar, reordena las instrucciones Assembly que no dependan entre s\'i, aprovechando el pipeline y los ciclos de \textit{stall}. Retomando un poco las conclusiones del trabajo anterior, se ve de nuevo que no tendr\'ia sentido ponerse a trabajar a tan bajo nivel por el esfuerzo que demanda, y porque ya existen herramientas cuya funci\'on principal es producir un c\'odigo objeto muy eficiente, y ni siquiera es necesario mencionar todos los otros cambios que aplica para mejorar el resultado de la compilaci\'on.
 
     Uno de los problemas al intentar mejorar el MR fue que el n\'ucleo de l\'ogica del programa era la aleatoriedad misma. Mmm... podr\'ia poner el dibujito de la cach\'e y la matriz? mencionando que si siempre da NORTH, va a estar cargado en cach\'e, pero si salen intercalados NORTH y SOUTH, el MR es inmejorable porque en cada lectura, se pide un bloque que reemplaza otro que tambi\'en era \'util
 

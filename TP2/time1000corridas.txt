@@ -1,0 +1,71 @@
+
+
+wator - Promedio real time: .1151 
+
+		  Max 0.182
+
+	          Min 0.107
+
+
+1wator - Promedio real time: .1149 
+
+		  Max 0.176
+
+	          Min 0.105
+
+
+2wator - Promedio real time: .1104 
+
+		  Max 0.160
+
+	          Min 0.094
+
+
+3wator - Promedio real time: .1100 
+
+		  Max 0.206
+
+	          Min 0.089
+
+
+4wator - Promedio real time: .0834 
+
+		  Max 0.135
+
+	          Min 0.061
+
+
+5wator - Promedio real time: .0792 
+
+		  Max 0.142
+
+	          Min 0.055
+
+
+6wator - Promedio real time: .0729 
+
+		  Max 0.132
+
+	          Min 0.050
+
+
+7wator - Promedio real time: .0685 
+
+		  Max 0.155
+
+	          Min 0.049
+
+
+8wator - Promedio real time: .0694 
+
+		  Max 0.116
+
+	          Min 0.049
+
+10wator - Promedio real time: .0654 
+
+		  Max 0.120
+
+	          Min 0.044
+
+

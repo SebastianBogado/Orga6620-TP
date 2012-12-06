@@ -20,60 +20,28 @@ struct animal {
 #define MAXJ 32
 int HBRUT, FBRUT, FASTEN;
 
-struct animal wator[MAXI][MAXJ] ;
+static struct animal wator[MAXI][MAXJ] ;
 #define REST -1
 #define NORTH 0
 #define SOUTH 1
 #define EAST 2
 #define WEST 3
 
-unsigned int ni[4][MAXI] = {
+static const unsigned int ni[4][MAXI] = {
     {31, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30},
     {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0},
     {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31},
     {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31}
 };
 
-unsigned int nj[4][MAXJ] = {
+
+static const unsigned int nj[4][MAXJ] = {
     {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31},
     {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31},
     {31, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30},
     {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0}
 };
 
-/*
-int ni (int i, int dir)
-{
-	switch (dir) {
-	case NORTH:
-		return ((i+MAXI-1) & 0x1F);  // X % 32
-	case SOUTH:
-		return ((i+1) & 0x1F); // x % 32
-	case EAST:
-	case WEST:
-		return i;
-	default:
-		assert (0);
-	}
-	return -1;
-}
-
-int nj (int j, int dir)
-{
-	switch (dir) {
-	case NORTH:
-	case SOUTH:
-		return j;
-	case EAST:
-		return ((j+MAXJ-1) & 0x1F ); // x % 32
-	case WEST:
-		return ((j+1) & 0x1F ); // x % 32
-	default:
-		assert (0);
-	}
-	return -1;
-}
-*/
 int newcount = 0;
 
 void new_animal (struct animal* t , char kind)
@@ -86,13 +54,7 @@ void new_animal (struct animal* t , char kind)
 	t->todo = 0;
 	++newcount;
 }
-/*
-inline int myrand (int max)
-{
-	return rand () % max;
-	//return ( (max & 0x01) ? (rand() % max)  : (rand() & (max-1)) );
-}
-*/
+
 int choose_fish (int i, int j)
 {
 	register int k = 0;
@@ -173,11 +135,8 @@ int move_to_fish (struct animal* t, int i, int j)
 	dir = choose_fish(i, j);
 	if (dir - REST == 0)
 		return 0;
-/*
-    register int op1 = 31 - (30 & (((dir & 0x1) << 31) >> 31));
-    register int op2 = ((dir & 0x2) << 30) >> 31;
-    register struct animal * s = &wator[ (i +( op1 & ~op2)) & 0x1F ][ (j +( op1 &  op2)) & 0x1F ];*/
-    register struct animal * s = &wator[ ni[dir][i] ][ nj[dir][j] ];
+    
+	register struct animal * s = &wator[ ni[dir][i] ][ nj[dir][j] ];
 	assert (s->kind - FISH == 0);
 	++freecount;
 	
@@ -202,11 +161,7 @@ int move_to_empty (struct animal* t ,int i, int j)
 	if (dir - REST == 0)
 		return 0;
 	
-/*
-    register int op1 = 31 - (30 & (((dir & 0x1) << 31) >> 31));
-    register int op2 = ((dir & 0x2) << 30) >> 31;
-    register struct animal * s = &wator[ (i +( op1 & ~op2)) & 0x1F ][ (j +( op1 &  op2)) & 0x1F ];*/
-    register struct animal * s = &wator[ ni[dir][i] ][ nj[dir][j] ];
+	register struct animal * s = &wator[ ni[dir][i] ][ nj[dir][j] ];
 
 	assert (s->kind == 0 );
 	memcpy(s, t, sizeof(animal));
@@ -316,8 +271,8 @@ void init_wator (int maxi, int maxj, int hbrut, int fbrut, int fasten)
 
 void moveall ()
 {
-	int i, j;
-	struct animal * v = &(wator[0][0]);
+	register int i, j;
+	register struct animal * v = &(wator[0][0]);
 
 	for (i=0; i<MAXI; ++i) {
 		for (j=0; j<MAXJ; ++j) {
@@ -346,7 +301,6 @@ int main (int argc, char * argv[])
 			exit (1);
 		}
 	}
-//	init_wator (MAXI, MAXJ, 10, 3, 5);
 	
 	init_wator (MAXI, MAXJ, 10, 3, 3);
 	show_wator ();
