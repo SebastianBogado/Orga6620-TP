@@ -32,4 +32,6 @@ Hay un tradeoff entre el tamaño del .o, que puede exceder el cache y la velocid
    cambio if x return a; return b por una version que fuerza el branch:
 	return x ? a :b ;
 9) cambio llamadas myrand por rand % max
+10) En choose_x, cambiados MAXI|J-1 por 31 (por enunciado, la matriz es de 32)
+    Reemplazados los llamados a ni y nj por un vector de resultado calculado
 	
