@@ -14,6 +14,8 @@
 % Paquete para inclusi\'on de gr\'aficos.
 \usepackage{graphicx}
 
+\usepackage{enumerate}
+
 % Paquete para definir la codificaci\'on del conjunto de caracteres usado
 % (latin1 es ISO 8859-1).
 \usepackage[latin1]{inputenc}
@@ -124,12 +126,58 @@ Cada moviemiento depende del c\'alculo de la nueva posici\'on, reemplazando el e
  \item {Los scripts con los que se realizaron las mediciones promediadas se encuentran disponibles en el cd bajo el nombre XXXXCollect.sh}
  
 \end{itemize}
- 
+	
 \newpage
 
 \section{Comparaci\'on de Versiones}
 
 Todas las modifiaciones se expresan en relaci\'on con la versi\'on anterior. Los cambios enunciados son acumulativos.
+
+\begin{enumerate}
+\setcounter{enumi}{-1}
+
+ \item \textbf {Verisi\'on original dada por la c\'atedra.}
+ 
+ \item \textbf {Cambio en la definici\'on del struct animal, reemplazando los tipo int por tipo char.}
+		\subitem {Reduce considerablemente el tama\~no de cada elemento de la matriz, y por ende, el tama\~no total de la misma. Esto permite que dentro de un mismo bloque de cache se almacenen mas posiciones, reduciendo el missrate.}
+ 
+ \item \textbf {Modificar la funci\'on \textit{moveall}, quitando instrucciones innecesarias y redundates como las asignaciones a \texttt{todo}.}
+		\subitem {Se pasa de tener dos ciclos distintos a uno \'unico, as\'i como tambi\'en se reducen las lecturas y escrituras de memoria. En ning\'un momento del programa se utilizaban los campos \texttt{todo} del struct}
+ 
+ \item \textbf {Desenrollar el \texttt{for} de la funci\'on \textit{choose}} 
+		\subitem{Optimizaci\'on recomendada en la bibliograf\'ia consultada [6][7]}
+	
+	\textbf {Removidas las variables auxiliares npi y npj}
+	
+	\textbf {Sacada afuera del loop la declaraci\'on de la variable t}
+		\subitem{Ahorran accesos a memoria}
+	
+	\textbf {Cambiados los var$++$ por $++$var}
+		\subitem{Reduce la cantidad de instrucciones necesarias para la misma operaci\'on}
+	
+	\textbf {Las comparaciones del estilo \texttt{(var1 op var2 (ej $i > j$))} fueron reemplazadas por \texttt{(var1 $-$ var2 op 0 ($i - j > 0$))}}
+		\subitem{Es m\'as eficiente comparar contra 0, seg\'un la bibliograf\'ia consultada}
+	
+	\textbf {Funciones \textit{move\_to\_empty} y \textit{move\_to\_fish} agregado un \texttt{struct animal*} para evitar las varias llamadas a \texttt{wator[npi][npj]}}
+		\subitem{Al guardar la direcci\'on con el puntero, se evita recalcularla cada vez a partir de los \'indices de la matriz}
+		
+ \item  show\_wator, init\_wator, move\_all:
+	cambio de acceso por wator[][] a $puntero+i*fila+j$, sin multiplicar (acumulador)
+   Cambio en choose\_XXXX, elimino los llamados a "nij (i, dir)", como hicimos unroll del for, podemos ahorrarnos el case.
+   
+ \item Reemplazo \% MAXI por   \& 0x1F
+ 
+ \item Agregado 'register' en varias variables
+   reemplazo de \% MAXI en lugares faltantes
+   
+ \item  Pasaje de puntero en vez de recalcular w[][]
+   Incremento de puntero directo en vez de sumar $row+j$
+   cambio if x return a; return b por una version que fuerza el branch:
+	return x ? a :b ;
+	
+ \item  cambio llamadas myrand por rand \% max
+\end{enumerate}
+
 
 
 
@@ -138,7 +186,7 @@ Todas las modifiaciones se expresan en relaci\'on con la versi\'on anterior. Los
 
 \newpage
 
-\section{Análisis de los Datos}
+\section{An\'alisis de los Datos}
 
 
 
@@ -147,6 +195,21 @@ Todas las modifiaciones se expresan en relaci\'on con la versi\'on anterior. Los
 % Citas bibliogr\'aficas.
 \begin{thebibliography}{99}
 
+\bibitem{HEN00} J. L. Hennessy and D. A. Patterson, ``Computer Architecture. A Quantitative
+Approach,'' 3ra Edici\'on, Morgan Kaufmann Publishers, 2000.
+
+\bibitem{HEN01} ``Sharks and fish wage an ecological war on toroidal planet WATOR'', A.K.Dewdney, Scientific American,\\
+http://home.cc.gatech.edu/biocs1/uploads/2/wator\_dewdney.pdf.
+
+\bibitem{HEN02} WA-TOR, Wikipedia, http://en.wikipedia.org/wiki/Wa-Tor.
+
+\bibitem{HEN03} GNU profiler, http://sourceware.org/binutils/.
+
+\bibitem{HEN04} Cachegrind, http://valgrind.org/docs/.
+
+\bibitem{HEN05} GCC Options that Control Optimization - http://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
+
+\bibitem{HEN06} Steve McConnell, ``Code Complete'' 2nd Edition 2004 - Chapter 26 ``Code-Tunning Techniques''
 
 \end{thebibliography}
 

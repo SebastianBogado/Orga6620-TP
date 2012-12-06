@@ -75,7 +75,6 @@ void new_animal (struct animal* t , char kind)
 inline int myrand (int max)
 {
 	return rand () % max;
-	//return ( (max & 0x01) ? (rand() % max)  : (rand() & (max-1)) );
 }
 
 int choose_fish (int i, int j)
