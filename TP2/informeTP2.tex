@@ -189,7 +189,7 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
  \item  \textbf{Cambio llamadas \textit{myrand()} por la forma inline \texttt{rand() \% max}}
  
  \item \textbf{Reemplazados los llamados a ni y nj por un vector de resultados calculados}
-		\subitem{La intenci\'on es reducir el overhead provocado por el constante llamado a las funciones en lo relacionado a la memoria y el stack, al utilizar valores pre calculados}
+		\subitem{La intenci\'on es reducir el overhead provocado por el constante llamado a las funciones en lo relacionado a la memoria y el stack, al utilizar valores pre calculados, que demanda s\'olo un acceso a memoria}
 
 	\textbf{En \textit{choose\_fish(), choose\_empty()}, cambiados \texttt{MAX(I|J)-1} por 31 }
     
@@ -214,16 +214,16 @@ Todas las modificaciones se expresan en relaci\'on con la versi\'on anterior. Lo
   \begin{tabular}{| r | c | c | c |}
     \hline
     Versi\'on	&   Time Promedio$^*$  &	SU Parcial	& 	SU Acumulado	\\ \hline \hline
-    wator	&	0.1151		&       	&			\\ \hline
-    1wator	&	0.1149		&   1,0017	&			\\ \hline
-    2wator	&	0.1104		&	1,0408	&			\\ \hline
-    3wator	&	0.1100		&	1,0036	&			\\ \hline
-    4wator	&	0.0834		&	1,3189	&			\\ \hline
-    5wator	&	0.0792		&	1,0530	&			\\ \hline
-    6wator	&	0.0729		&	1,0864	&			\\ \hline
-    7wator	&	0.0685		&	1,0642	&			\\ \hline
-    8wator	&	0.0694		&			&			\\ \hline
-    9wator	&	0.0654		&			&			\\ \hline
+    wator	&	0.1151		&   -   	&			\\ \hline
+    1wator	&	0.1149		&   1,	&			\\ \hline
+    2wator	&	0.1104		&	1,	&			\\ \hline
+    3wator	&	0.1100		&	1,	&			\\ \hline
+    4wator	&	0.0834		&	1,	&			\\ \hline
+    5wator	&	0.0792		&	1,	&			\\ \hline
+    6wator	&	0.0729		&	1,	&			\\ \hline
+    7wator	&	0.0685		&	1,	&			\\ \hline
+    8wator	&	0.0694		&	1,	&			\\ \hline
+    9wator	&	0.0654		&	1,	&			\\ \hline
     
   \end{tabular}
 \end{center}
@@ -248,8 +248,20 @@ Ale, asumo que ac\'a no ir\'an datos de compilaci\'on con optimizaciones.
 
     El compilador, al optimizar, reordena las instrucciones Assembly que no dependan entre s\'i, aprovechando el pipeline y los ciclos de \textit{stall}. Retomando un poco las conclusiones del trabajo anterior, se ve de nuevo que no tendr\'ia sentido ponerse a trabajar a tan bajo nivel por el esfuerzo que demanda, y porque ya existen herramientas cuya funci\'on principal es producir un c\'odigo objeto muy eficiente, y ni siquiera es necesario mencionar todos los otros cambios que aplica para mejorar el resultado de la compilaci\'on.
 
-    Uno de los problemas al intentar mejorar el MR fue que el n\'ucleo de l\'ogica del programa era la aleatoriedad misma. Mmm... podr\'ia poner el dibujito de la cach\'e y la matriz? mencionando que si siempre da NORTH, va a estar cargado en cach\'e, pero si salen intercalados NORTH y SOUTH, el MR es inmejorable porque en cada lectura, se pide un bloque que reemplaza otro que tambi\'en era \'util
+    Uno de los problemas al intentar mejorar el MR fue que el n\'ucleo de l\'ogica del programa era la aleatoriedad misma.
 
+El siguiente es un gr\'afico de una situaci\'on ideal del cach\'e simulado, con el programa ya entrado en su loop principal:
+
+\begin{figure}[!htp]
+\begin{center}
+\includegraphics[width=1\textwidth]{Cache.png}
+\end{center}
+\caption{Situaci\'on ideal del cach\'e.} \label{fig001234}
+\end{figure}
+
+La matriz podr\'ia no estar alineada, pero la idea se mantiene. Suponiendo que la ejecuci\'on en ese punto del programa est\'a pasando por la celda [0][1], las direcciones posibles ('NORTH', 'SOUTH', 'WEST', 'EAST') ya est\'an cargadas en cach\'e.
+
+Si este estado se mantuviera, ser\'ia el mejor uso posible para esta cach\'e, que implicar\'ia, a grandes rasgos, un MR de 1/16 (una lectura de una celda del Wator en memoria trae consigo 15 celdas que ser\'an utilizadas pr\'oximamente). Pero entre las llamadas a funciones es necesario acceder a otras direcciones de memoria que remueven un bloque valioso del cach\'e. Si hubiera forma de evitar que algo se cargue en cach\'e desde software, lo hubi\'eramos utilizado
     
 % Citas bibliogr\'aficas.
 \begin{thebibliography}{99}
