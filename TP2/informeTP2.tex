@@ -533,7 +533,7 @@ Each sample counts as 0.01 seconds.
 
 \bigskip
 
-    Se puede ver que hubo varias mejoras que no afectaron mucho el tiempo de ejecuci\'on del programa, como las modificaciones entre versiones 1 y 2, o 7 y 8. A su vez, las versi\'ones 4, 6 y 9 aportaron un \% mayor al speed up total. En esas versiones los principales cambios fueron: el acceso a los datos a trav\'es de aritm\'etica de punteros, la optimizaci\'on en el c\'alculo del m\'odulo y la reducci\'on en cantidad de llamados a las funciones ni, nj (detalles en la secci\'on 4).
+    Se puede ver que hubo varias mejoras que no afectaron mucho el tiempo de ejecuci\'on del programa, como las modificaciones entre versiones 1 y 2, o 7 y 8. A su vez, las versiones 4, 6 y 9 aportaron un \% mayor al speed up total. En esas versiones los principales cambios fueron: el acceso a los datos a trav\'es de aritm\'etica de punteros, la optimizaci\'on en el c\'alculo del m\'odulo y la reducci\'on en cantidad de llamados a las funciones ni, nj (detalles en la secci\'on 4).
     
     En los \'ultimos tres casos mencionados, esperabamos este tipo de respuesta, ya que la cantidad de operaciones necesarias para un mismo resultado cae dr\'asticamente (como sabemos, el c\'alculo del m\'odulo \% resulta muy costoso, y en el acceso a los datos, una suma en un puntero es mucho m\'as veloz que la doble referencia en una matriz).  
 
@@ -547,7 +547,7 @@ Each sample counts as 0.01 seconds.
 	
 \subsubsection{Llamados y Tiempos de Funciones}
 
-	Hemos mencionado como parte de las aclaraciones, la dificultad de medir de manera confiable un problema tan aleatorio como el que resuelve este programa. Puedimos, sin embargo, confirmar algunas suposiciones a lo largo de varias corridas del profiler. 
+	Hemos mencionado como parte de las aclaraciones, la dificultad de medir de manera confiable un problema tan aleatorio como el que resuelve este programa. Pudimos, sin embargo, confirmar algunas suposiciones a lo largo de varias corridas del profiler. 
 	
 	Nos result\'o evidente la necesidad de reducir los tiempos en funciones como \textit{moveall} o \textit{choose\_x}, dada la gran cantidad de invocaciones que estas presentaban. Las funciones \textit{ni} y \textit{nj} tambi\'en presentaban esta particularidad, por lo tanto se convirtieron tambi\'en en foco de nuestras optimizaciones.
 	
@@ -555,7 +555,7 @@ Each sample counts as 0.01 seconds.
 	
 \section{Conclusiones}
 
-    Del an\'alisis de los datos se desprende que obtuvimos un speed up de hasta X, luego de muchas ideas aplicadas. Sin embargo, al compilar el programa original con optimizaciones, se obtienen tiempos aún mejores, que implicar\'ian muchas más horas-hombre sobre el trabajo.
+    Del an\'alisis de los datos se desprende que obtuvimos un speed up de hasta X, luego de muchas ideas aplicadas. Sin embargo, al compilar el programa original con optimizaciones, se obtienen tiempos a\'un mejores, que implicar\'ian muchas m\'as horas-hombre sobre el trabajo.
 		\begin{quote}
 			\begin{verbatim}
 				gcc -DNDEBUG -O3 fuente.c -o fuente
@@ -579,7 +579,7 @@ Each sample counts as 0.01 seconds.
 
     El compilador, al optimizar, reordena las instrucciones Assembly que no dependan entre s\'i, aprovechando el pipeline y los ciclos de \textit{stall}. Retomando un poco las conclusiones del trabajo anterior, se ve de nuevo que no tendr\'ia sentido ponerse a trabajar a tan bajo nivel por el esfuerzo que demanda, y porque ya existen herramientas cuya funci\'on principal es producir un c\'odigo objeto muy eficiente, y ni siquiera es necesario mencionar todos los otros cambios que aplica para mejorar el resultado de la compilaci\'on.
 
-    Uno de los problemas al intentar mejorar el MR fue que el n\'ucleo de l\'ogica del programa era la aleatoriedad misma.
+    Uno de los problemas al intentar mejorar el MR fue que el n\'ucleo de l\'ogica del programa era la aleatoriedad misma y que el aprovechamiento de la cach\'e es muy ajustado.
 
 El siguiente es un gr\'afico de una situaci\'on ideal del cach\'e simulado, con el programa ya entrado en su loop principal:
 
